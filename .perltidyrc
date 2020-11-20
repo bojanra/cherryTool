@@ -1,0 +1,37 @@
+--standard-error-output
+# --backup-and-modify-in-place
+--character-encoding=none
+
+--iterations=2
+
+--maximum-line-length=130
+--indent-columns=4
+--continuation-indentation=4
+--cuddled-else
+--maximum-consecutive-blank-lines=2
+--opening-brace-always-on-right
+--noopening-sub-brace-on-new-line
+--vertical-tightness=0
+--vertical-tightness-closing=0
+--closing-token-indentation=1
+--stack-opening-tokens
+--brace-tightness=1
+--paren-tightness=1
+--block-brace-tightness=1
+--square-bracket-tightness=1
+--nooutdent-long-lines
+
+--minimum-space-to-comment=4
+--indent-block-comments
+--indent-spaced-block-comments
+--hanging-side-comments
+--closing-side-comments
+# --delete-closing-side-comments
+
+#-----------  Some other Perltidy options, intentionally not used   ----------
+# The following Perltidy options are NOT consistent with PBP and should NOT be used:
+# -lp, -icb, -fws, -nwls, -nwrs, -sfp, -sak/-nsak, -csc/dcsc, -fnl,
+# -ce, -bl, -sbl, -bli, -blil, -bbvt, -otr, -sct, -boc, -kis,
+# -pbp (because the -wbb list typo in the PBP book carried over to Perltidy (!))
+# The following Perltidy options are not used, for other reasons:
+# -sot, -mft, -cab, -bol, -bok/-nbok, -bot/-nbot, -iob, -isbc

@@ -1,0 +1,16 @@
+[PerlTidy]
+select = {lib,t}/**/*.{pl,pm,t}
+select = bin/*
+ignore = bin/cherryUpdate
+argv = --profile=$ROOT/.perltidyrc
+
+[SortLines]
+select = .gitignore
+
+[JSBeautify]
+select = public/js/cherry.js
+argv = --config=$ROOT/.jsbeautifyrc
+
+[JSBeautify html]
+select = views/*.tt
+argv = --html -s 2

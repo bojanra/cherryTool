@@ -1,0 +1,9 @@
+*.ts
+*.un~
+*.yaml
+.tidyall.d/
+.~*
+nytprof
+nytprof.out
+sessions/*
+t/export.yaml
