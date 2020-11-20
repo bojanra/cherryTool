@@ -1,0 +1,3 @@
+<% INCLUDE header.tt %>
+<% content %>
+<% INCLUDE footer.tt %>

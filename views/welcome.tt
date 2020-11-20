@@ -1,0 +1,12 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="welcome" class="jumbotron center-block">
+    <center>
+      <h2>Welcome to cherryEPG tool suite!</h2>
+      <img src="/img/diagram.png" class="img-responsive" alt="diagram">
+      <p>Please take a look at the functional stages of cherryEPG and decide regarding your next step. Understanding the workflow is essential for efficent handling of the system!</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Dashboard &raquo;</a></p>
+    </center>
+  </div>
+</div>
+<% INCLUDE js.tt %>

@@ -1,0 +1,72 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+cherryWeb - cherryEpg web app launcher based on plackup
+
+=head1 SYNOPSIS
+
+ cherryWeb
+
+=head1 DESCRIPTION
+
+C<cherryWeb> is the Dancer2 webapplication for cherryEpg tool suite.
+
+cherryEpg will look for a configuration file before reading its command
+line parameters. The default location is C<$USER_HOME/config.yml>.
+
+=head1 AUTHOR
+
+This software is copyright (c) 2019 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Pod::Usage;
+use Plack::Runner;
+use IPC::ConcurrencyLimit;
+use open qw ( :std :encoding(UTF-8));
+
+my $port = 5000;
+
+run();
+
+sub run {
+    my $target = shift;
+
+    my $limit = IPC::ConcurrencyLimit->new(
+        type      => 'Flock',
+        max_procs => 1,
+        path      => '/tmp/cherryWeb.flock',
+    );
+
+    my $id = $limit->get_lock;
+    if ( not $id ) {
+        warn "cherryWeb is already running. No lock. Bye";
+        exit(0);
+    } else {
+        chdir;
+
+        my $runner = Plack::Runner->new;
+        $runner->parse_options(
+
+            "-p", $port,
+            "cherryTool/bin/app.psgi",
+            "--server",      "Starlet",
+            "--max_workers", 5,
+            "--host",        "127.0.0.1",
+            "--access-log",  "/var/lib/cherryepg/log/access.log",
+        );
+        $runner->run();
+    } ## end else [ if ( not $id ) ]
+} ## end sub run
+
+exit;

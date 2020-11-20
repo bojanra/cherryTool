@@ -1,0 +1,34 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://epg.cherryhill.eu"><img src="/img/logo.png" alt="cherryEpg"></a>
+      <span id="hostname" class="label label-primary"><% hostname %></span>
+      <span id="desc" class="label label-default"><% description %></span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="mDashboard" <% IF menu == 'dashboard' %>class="active" <% END %>><a href="/">Dashboard</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li <% IF menu == 'system' %>class="active" <% END %>><a href="/system">System status</a></li>
+            <li <% IF menu == 'log' %>class="active" <% END %>><a href="/log">Log browser</a></li>
+            <li role="separator" class="divider"></li>
+            <li <% IF menu == 'setup' %>class="active" <% END %>><a href="/setup">EPG Setup</a></li>
+            <li <% IF menu == 'announce' %>class="active" <% END %>><a href="/announce">Announcements</a></li>
+            <li role="separator" class="divider"></li>
+            <li <% IF menu == 'manage' %>class="active" <% END %>><a href="/manage">Manager</a></li>
+          </ul>
+        </li>
+        <li><a href="http://epg.cherryhill.eu/docs/index.html" title="Manual" target="_blank"><i class="glyphicon glyphicon-education"></i></a></li>
+        <li><a href="/logout"><i class="glyphicon glyphicon-off"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,280 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="cPanel" class="">
+    <div class="panel panel-default">
+      <div class="panel-heading ">
+        <h3 class="panel-title">Current scheme</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div>
+              <h3 class="well well-sm" id="filename"></h3>
+              <p>Loaded on:</p>
+              <div id="date"></div>
+            </div>
+            <div class="comment-text" id="comment"></div>
+          </div>
+          <div class="col-md-2">
+            <h3 id="channel"></h3>
+            <p>Services</p>
+          </div>
+          <div class="col-md-2">
+            <h3 id="eit"></h3>
+            <p>EIT</p>
+          </div>
+          <div class="col-md-2">
+            <h3 id="rule"></h3>
+            <p>Rules</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="list-group wizard-menu">
+          <button class="list-group-item" id="wMenuUpload">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span> Upload new scheme</h4>
+            <p class="list-group-item-text">Load excel scheme file from local machine.</p>
+          </button>
+          <button class="list-group-item" id="wMenuBrowse">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Browse scheme</h4>
+            <p class="list-group-item-text">List previously uploaded scheme</p>
+          </button>
+          <button class="list-group-item" id="wMenuRestore">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-repeat"></span> Manage cherryEPG</h4>
+            <p class="list-group-item-text">Tools for handling the system</p>
+          </button>
+          <button class="list-group-item disabled" id="wMenuActive">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-send"></span> Open PSI/SI editor</h4>
+            <p class="list-group-item-text">Reconfigure PSI/SI builder and carousel.</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="form-group wizard hidden" id="configWizard">
+          <ul class="nav nav-pills nav-justified thumbnail">
+            <li class="">
+              <button class="list-group-item active" id="step1">
+                <h4 class="list-group-item-heading">Step 1</h4>
+                <p class="list-group-item-text">Upload Excel file</p>
+              </button>
+            </li>
+            <li class="disabled">
+              <button class="list-group-item disabled" id="step2">
+                <h4 class="list-group-item-heading">Step 2</h4>
+                <p class="list-group-item-text">Validate scheme</p>
+              </button>
+            </li>
+            <li class="disabled">
+              <button class="list-group-item disabled" id="step3">
+                <h4 class="list-group-item-heading">Step 3</h4>
+                <p class="list-group-item-text">Activate scheme</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel panel-default hidden" id="uploadForm">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-7">
+                <div class=""><i><b>cherryEPG</b> uses a spreadsheet file in <b>.xls</b> format as scheme source.<br />
+                    You can get a sample scheme <a href="/setup/reference"><u>template</u></a>.<br />
+                    Update the file with your scheme data and upload it with this form. <br />
+                    After uploading the file will be validated and can be saved on the server.<br />
+                    <p class="text-danger">Only 100% valid files can be saved and later used in production!</p>
+                  </i>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <form id="addFileForm" action="" class="">
+                  <div class="form-group ">
+                    <label class="control-label">Spreadsheet file (.xls)</label>
+                    <div class="input-group">
+                      <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                          Browse&hellip; <input id="sourceFile" type="file" style="display: none;">
+                        </span>
+                      </label>
+                      <input type="text" id="sourceFileShow" name="sourceFileShow" placeholder="sample.xls" class="form-control" readonly>
+                    </div>
+                  </div>
+                  <div class="">
+                    <button type="button" name="upload" class="btn btn-success pull-right"><i class="glyphicon glyphicon-upload"></i><strong> Upload</strong> scheme</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="validateForm">
+          <div class="panel-body">
+            <h4>Result of <b>xls</b> to <b>yaml</b> conversion:</h4>
+            <div class="report" id="parseReport"></div>
+            <form action="" class="">
+              <div class="form-group">
+                <label for="description" class="control-label">Description of this scheme</label>
+                <input type="text" class="form-control" name="description" />
+              </div>
+              <div class="commands">
+                <button type="button" name="upload" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-upload"></i> Upload <strong>different</strong> scheme</button>
+                <button type="button" name="continue" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Continue</strong></button>
+                <span class="text-danger pull-right">&nbsp;</span>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="activateForm">
+          <div class="panel-body">
+            <h4>Activate scheme:</h4>
+            <h3 class="well well-sm">&nbsp;</h3>
+            <form action="" class="">
+              <h4>with following steps:</h4>
+              <div class="custom-checkbox">
+                <input type="checkbox" id="play">
+                <label for="play" class="text-danger">Reset playout (remove all dynamic content from <i>ringelspiel</i>)</label>
+              </div>
+              <div class="custom-checkbox">
+                <input type="checkbox" id="empty">
+                <label for="empty" class="text-danger">Erase (empty) database before scheme import</label>
+              </div>
+              <div class="custom-checkbox">
+                <input type="checkbox" id="files">
+                <label for="files" class="text-warning">Delete ingest files from disk</label>
+              </div>
+              <div class="custom-checkbox">
+                <input type="checkbox" disabled checked id="import">
+                <label for="import">Import scheme</label>
+              </div>
+              <div class="custom-checkbox">
+                <input type="checkbox" id="grab">
+                <label for="grab" class="text-info">Instantly grab and ingest schedule data</label>
+              </div>
+            </form>
+            <div class="alert alert-warning hidden">
+              <img src="/img/spinner.gif" class="" alt="spinner">
+              <span>Activation of scheme in progress. Please wait. <i>(This may take up to 2 minutes.)</i></span>
+            </div>
+            <div class="alert alert-danger hidden">
+              <h4><b>Failed!</b> Exceptions occurred during scheme activation. Please check <a href="/log">log</a>.</h4>
+            </div>
+            <div class="alert alert-success hidden">
+              <h4><b>Done!</b> Scheme activated. Check status on <a href="/">dashboard</a>.</h4>
+            </div>
+            <div class="form-group">
+              <button type="button" name="activate" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Activate</strong> scheme</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="manageForm">
+          <div class="panel-body">
+            <h4>cherryEPG management tools</h4>
+            <form action="" class="">
+              <div class="form-group">
+                <button type="button" name="reset" class="btn btn-warning disabled"><i class="glyphicon glyphicon-play"></i>
+                  <strong>Reset</strong> playout</button>
+                <label for="description" class="control-label">Remove all dynamic content from <i>ringelspiel</i></label>
+              </div>
+              <div class="form-group">
+                <button type="button" name="clear" class="btn btn-danger disabled"><i class="glyphicon glyphicon-play"></i>
+                  <strong>Erase</strong> database</button>
+                <label for="description" class="control-label">Clear all database tables</label>
+              </div>
+              <div class="form-group">
+                <button type="button" name="remove" class="btn btn-warning disabled"><i class="glyphicon glyphicon-play"></i>
+                  <strong>Delete</strong> ingest</button>
+                <label for="description" class="control-label">Remove all grabbed service schedule files</label>
+              </div>
+              <div class="form-group">
+                <button type="button" name="grab" class="btn btn-primary disabled"><i class="glyphicon glyphicon-play"></i>
+                  <strong>Grab & ingest</strong></button>
+                <label for="description" class="control-label">Forced grab & ingest of service schedule files</label>
+              </div>
+              <div class="form-group">
+                <button type="button" name="grab" class="btn btn-primary disabled"><i class="glyphicon glyphicon-play"></i>
+                  <strong>Build EIT output</strong></button>
+                <label for="description" class="control-label">Build all EPG output tables and push to <b>ringelspiel</b></label>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="browseForm">
+          <div class="panel-heading">
+            <h3 class="panel-title">Scheme archive</h3>
+          </div>
+          <div class="panel-body" id="browseReport">
+            <table class="table table-striped custab">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Description <b>Service/EIT/Rules</b></th>
+                  <th>Source</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tr class="scheme">
+                <td>3</td>
+                <td>Blogs</td>
+                <td>Pare</td>
+                <td class="text-right">
+                  <a class='btn btn-primary btn-xs' href="">
+                    <span class="glyphicon glyphicon-download-alt"></span> Download
+                  </a>
+                  <button class='btn btn-success btn-xs' name="act">
+                    <span class="glyphicon glyphicon-play"></span> Activate
+                  </button>
+                  <button class="btn btn-danger btn-xs" name="del">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete</h4>
+        </div>
+        <div class="modal-body">
+          The selected scheme will be removed from your archive. This action cannot be
+          undone. Are you sure?</div>
+        <div class="modal-footer">
+          <button style='margin-left:10px;' type="button" class="btn btn-danger pull-right" id="btnConfirm">Delete!</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formFailed" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Error</h4>
+        </div>
+        <div class="modal-body">
+          The selected scheme could not be prepared for activation.</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const configPanel = new ConfigPanel();
+    configPanel.init();
+  });
+</script>

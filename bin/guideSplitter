@@ -1,0 +1,211 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+guideSplitter - tool for splitting multichannel TVXML files into multiple singlechannel files
+
+=head1 SYNOPSIS
+
+ guideSplitter file
+
+=head1 OPTIONS
+
+ -h         show this help
+ -l         list channels
+ -e         export schedule data to STDOUT
+
+=head1 DESCRIPTION
+
+C<guideSplitter> is a tool which splits WG+ guide.xml file in multiple single channel files.
+
+=head1 AUTHOR
+
+This software is copyright (c) 2019 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Pod::Usage;
+use Getopt::Std;
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '0.62';
+
+my %args;
+
+getopts( "hle", \%args );
+
+say("guideSplitter - ver. $VERSION Copyright 2019-2020 Bojan Ramsak");
+
+my $sourceFile = shift @ARGV;
+
+pod2usage(
+    -verbose  => 99,
+    -exitval  => 0,
+    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+    )
+    if exists $args{h} or !-e $sourceFile;
+
+my $schedule = parseOrigin($sourceFile);
+
+if ( exists $args{l} ) {
+    listChannels($schedule);
+} elsif ( exists $args{e} ) {
+    exportSchedule( $schedule, 1 );
+} else {
+    exportSchedule($schedule);
+}
+
+=head3 optimize( $ref)
+
+Optimize the referenced string.
+
+=cut
+
+sub optimize {
+    my ($ref) = @_;
+
+#    $$ref =~ s/&lt;.+?&gt;//sg;
+    $$ref =~ s/&lt;script.+&lt;\/script&gt;//sg;
+    $$ref =~ s/(\n\s*){2,}/\n/sg;
+    $$ref =~ s/(&lt;img .*?lazyload&gt;)//sg;
+
+} ## end sub optimize
+
+=head3 exportSchedule( $src, $dump)
+
+Write each channel schedule to separate file in current dir.
+When $dump write to STDOUT.
+
+=cut
+
+sub exportSchedule {
+    my ( $src, $dump ) = @_;
+    my $header = join( '', @{ $src->{header} } );
+
+    foreach my $id ( sort keys %{ $src->{channel} } ) {
+        my $content = join( '', @{ $src->{channel}{$id} } );
+
+        optimize( \$content );
+        $content .= "</tv>";
+        my $size  = length($content);
+        my $title = formatTitle( $id, $src->{name}{$id}, $size );
+        if ($dump) {
+            say( "=[$title]", "=" x 80 );
+            say( $header,     $content );
+        } else {
+            say($title);
+            my $file = $id . ".xml";
+            open( my $out, ">", $file ) or die "Error writing to $file: $!";
+            print( $out $header );
+            print( $out $content );
+            close($out);
+        } ## end else [ if ($dump) ]
+    } ## end foreach my $id ( sort keys ...)
+} ## end sub exportSchedule
+
+=head3 parseOrigin( $file)
+
+Do the file processing and return a reference to hash with
+channels as keys and array with file lines as value.
+
+=cut
+
+sub parseOrigin {
+    my ($file) = @_;
+    my $result = {
+        header  => [],
+        channel => {},
+        name    => {}
+    };
+    my @header;
+    my @data;
+    my $currentId;
+    open( my $input, "<", $file ) or die "Error opening file: $!";
+    while (<$input>) {
+        s/^\N{BOM}//;
+        if (/^<\?xml.*/) {
+
+            # save the header
+            push( @{ $result->{header} }, $_ );
+        } elsif (/<tv (generator|xmlns)/) {
+
+            # save the header
+            push( @{ $result->{header} }, $_ );
+        } elsif (/<channel.+id="(.+?)"/) {
+
+            # collect channel info
+            @data      = ($_);
+            $currentId = $1;
+        } elsif (/<display-name.+>(.+)<\/display-name/) {
+
+            # map name to id
+            $result->{name}{$currentId} = $1 if $currentId;
+            push( @data, $_ );
+
+        } elsif (/<programme.+channel="(.+?)"/) {
+            @data      = ($_);
+            $currentId = $1;
+        } elsif ( m|</programme>| or m|</channel>| ) {
+            push( @data, $_ );
+
+            my $filtered = join( '', @data );
+
+            # save to buffered data to appropriate channel
+            if ($currentId) {
+                if ( exists $result->{channel}{$currentId} ) {
+                    push( @{ $result->{channel}{$currentId} }, $filtered );
+                } else {
+                    @{ $result->{channel}{$currentId} } = $filtered;
+                }
+            } ## end if ($currentId)
+
+            # clear buffer
+            @data      = ();
+            $currentId = undef;
+        } else {
+
+            # just add line to buffer
+            push( @data, $_ );
+        }
+    } ## end while (<$input>)
+    close($input);
+
+    return $result;
+} ## end sub parseOrigin
+
+=head3 listChannels( $src)
+
+Just list channels in the $src structure.
+
+=cut
+
+sub listChannels {
+    my ($src) = @_;
+    my $header = join( '', @{ $src->{header} } );
+
+    foreach my $id ( sort keys %{ $src->{channel} } ) {
+        my $size = length( $header . join( '', @{ $src->{channel}{$id} } ) );
+        say( formatTitle( $id, $src->{name}{$id}, $size ) );
+    }
+} ## end sub listChannels
+
+=head3 formatTitle( $id, $name,  $size)
+
+Build a report string.
+
+=cut
+
+sub formatTitle {
+    my ( $id, $name, $size ) = @_;
+
+    return sprintf( "%-25s %-25s: %7i%s", $id, $name, $size, $size < 1000 ? " !!!!" : "" );
+}
