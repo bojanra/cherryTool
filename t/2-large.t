@@ -21,7 +21,7 @@ $cherry->ingestDelete();
 
 my $scheme = new_ok('cherryEpg::Scheme');
 
-ok( $scheme->readXLS('t/xsid.xls'), 'Read .xls' );
+ok( $scheme->readXLS('t/large.xls'), 'Read .xls' );
 
 my $s = $scheme->build();
 
@@ -37,4 +37,8 @@ ok( scalar(@$success) && !scalar(@$error), "Scheme import to database" );
 
 my $grab = $cherry->channelGrabIngestMulti('all');
 
-ok( scalar(@$grab) == 4, "Doing multi-grab with ingest" );
+ok( scalar(@$grab) == 200, "Mlti-grab with ingest" );
+
+my $return = $cherry->eitBuild($eit);
+
+ok( $return && -e $return, "Building EIT" );

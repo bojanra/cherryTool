@@ -1005,18 +1005,18 @@ function Announcement() {
   };
 
   this.update = () => {
-    if( this.data.success ) {
-        $('#present').prop('checked', this.data.announce.present.publish);
-        $('#aPanel input[name=present]').val(this.data.announce.present.text);
-        $('#following').prop('checked', this.data.announce.following.publish);
-        $('#aPanel input[name=following]').val(this.data.announce.following.text);
-        $('#aPanel input,button').attr('disabled', false);
+    if (this.data.success) {
+      $('#present').prop('checked', this.data.announce.present.publish);
+      $('#aPanel input[name=present]').val(this.data.announce.present.text);
+      $('#following').prop('checked', this.data.announce.following.publish);
+      $('#aPanel input[name=following]').val(this.data.announce.following.text);
+      $('#aPanel input,button').attr('disabled', false);
     } else {
-        $('#present').prop('checked', false);
-        $('#aPanel input[name=present]').val("");
-        $('#following').prop('checked', false);
-        $('#aPanel input[name=following]').val("");
-        $('#aPanel').attr('disabled', true);
+      $('#present').prop('checked', false);
+      $('#aPanel input[name=present]').val("");
+      $('#following').prop('checked', false);
+      $('#aPanel input[name=following]').val("");
+      $('#aPanel').attr('disabled', true);
     }
   };
 
@@ -1028,10 +1028,10 @@ function Announcement() {
       contentType: 'application/x-www-form-urlencoded',
       timeout: 5000
     }).done((data) => {
-        this.data = data;
-        this.update();
+      this.data = data;
+      this.update();
     }).fail(() => {
-        $('#aPanel').attr('disabled', true);
+      $('#aPanel').attr('disabled', true);
     });
   };
 
@@ -1058,9 +1058,9 @@ function Announcement() {
         $('#aPanel div.alert-warning').addClass('hidden');
         $('#aPanel div.alert-danger').removeClass('hidden');
       }
-    }).fail( () => {
-        $('#aPanel div.alert-warning').addClass('hidden');
-        $('#aPanel div.alert-danger').removeClass('hidden');
+    }).fail(() => {
+      $('#aPanel div.alert-warning').addClass('hidden');
+      $('#aPanel div.alert-danger').removeClass('hidden');
     });
   });
 }

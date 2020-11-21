@@ -438,7 +438,7 @@ $serviceCount
                 foreach $sid ( sort { $a <=> $b } keys %{ $pidData->{service}{$tsid}{$onid} } ) {
 
                     $serviceCount += 1;
-                    $serviceData = $pidData->{service}{$tsid}{$onid}{$sid};
+                    $serviceData         = $pidData->{service}{$tsid}{$onid}{$sid};
                     $serviceData->{pfa}  = '-' if !$serviceData->{pfa};
                     $serviceData->{pfo}  = '-' if !$serviceData->{pfo};
                     $serviceData->{scha} = '-' if !$serviceData->{scha};
@@ -471,7 +471,7 @@ $serviceCount
     select(STDOUT);
 
     return $output;
-} ## end sub format
+} ## end sub reportBuild
 
 =head3 EITdistrChart( $filename, $pid)
 
@@ -488,32 +488,30 @@ sub EITdistrChart {
 
     my $p = $self->{pid}{$pid};
 
-    die( "No data defined for EITdistrChart [$pid]!") if( ! defined $p);
+    die("No data defined for EITdistrChart [$pid]!") if ( !defined $p );
 
     my $height = 580;
     my $width  = $p->{packet_count};
 
-    my $image = GD::Image->new( $width, $height);
+    my $image = GD::Image->new( $width, $height );
     $image->interlaced('true');
 
-    my $black  = $image->colorAllocate( 0,   0,   0);
-    my $white  = $image->colorAllocate( 255, 255, 255);    # define background
-    my $red    = $image->colorAllocate( 255, 0,   0);
-    my $blue   = $image->colorAllocate( 0,   0,   255);
-    my $green  = $image->colorAllocate( 50,  200, 0);
-    my $orange = $image->colorAllocate( 255, 200, 0);
-    my $grey   = $image->colorAllocate( 15,  15,  15);
+    my $black  = $image->colorAllocate( 0,   0,   0 );
+    my $white  = $image->colorAllocate( 255, 255, 255 );    # define background
+    my $red    = $image->colorAllocate( 255, 0,   0 );
+    my $blue   = $image->colorAllocate( 0,   0,   255 );
+    my $green  = $image->colorAllocate( 50,  200, 0 );
+    my $orange = $image->colorAllocate( 255, 200, 0 );
+    my $grey   = $image->colorAllocate( 15,  15,  15 );
     my @colors = (
-        0xCCC791, 0xD1DAF5, 0xB27171, 0x7177B2, 0xAEADB2, 0xB28E71,
-        0xD1EAF5, 0xF5D1D6, 0x8AA4B0, 0xB2B0AD, 0x71B2B2, 0x71B2A8,
-        0xCC91C8, 0x7E71B2, 0xEEE676, 0xCCC771, 0xD1DAD5, 0xB27151,
-        0x717792, 0xAEAD92, 0xB28E51, 0xD1EAD5, 0xF5D1B6, 0x8AA490,
-        0xB2B08D, 0x71B292, 0x71B288, 0xCC91A8, 0x7E7192, 0xEEE656
+        0xCCC791, 0xD1DAF5, 0xB27171, 0x7177B2, 0xAEADB2, 0xB28E71, 0xD1EAF5, 0xF5D1D6, 0x8AA4B0, 0xB2B0AD,
+        0x71B2B2, 0x71B2A8, 0xCC91C8, 0x7E71B2, 0xEEE676, 0xCCC771, 0xD1DAD5, 0xB27151, 0x717792, 0xAEAD92,
+        0xB28E51, 0xD1EAD5, 0xF5D1B6, 0x8AA490, 0xB2B08D, 0x71B292, 0x71B288, 0xCC91A8, 0x7E7192, 0xEEE656
     );
 
     # convert/allocate colors from the hex definition above
-    foreach ( @colors) {
-        my $c = $image->colorAllocate( ($_ >> 16), ($_ >> 8) & 0xff, $_ & 0xff);
+    foreach (@colors) {
+        my $c = $image->colorAllocate( ( $_ >> 16 ), ( $_ >> 8 ) & 0xff, $_ & 0xff );
         $_ = $c;
     }
 
@@ -521,66 +519,69 @@ sub EITdistrChart {
     my $raster = 0;
 
     # vertical gridlines
-    while ( $raster < $width) {
+    while ( $raster < $width ) {
+
 #        $image->line( $raster, 0, $raster, $height, $grey);
         $raster += 10;
     }
 
-    $raster = int( $width/17);
+    $raster = int( $width / 17 );
+
     # vertical gridlines
-    while ( $raster < $width) {
-        $image->line( $raster, 0, $raster, $height, $grey);
-        $raster += int( $width/17);
+    while ( $raster < $width ) {
+        $image->line( $raster, 0, $raster, $height, $grey );
+        $raster += int( $width / 17 );
     }
 
     # horizontal gridlines
     $raster = 0;
-    while ( $raster < $height) {
-        $image->line( 0, $raster, $width, $raster, $grey);
+    while ( $raster < $height ) {
+        $image->line( 0, $raster, $width, $raster, $grey );
         $raster += 10;
     }
 
     my $x            = 0;
     my $chunkCounter = 0;
-    foreach my $chunk ( @{$p->{seq}}) {
+    foreach my $chunk ( @{ $p->{seq} } ) {
         my $chunkSize = $chunk->{packet_in_chunk};
         $chunkCounter += $chunkSize;
-        while( $chunkSize-- > 0) {
-            if( $chunk->{valid} ) { $image->setPixel( $x, 58, $green);}
-            if( ! $chunk->{crcOk} ) {
-                $image->setPixel( $x, 2, $red);
-                $image->setPixel( $x, 3, $red);
-            }
-            else {
+        while ( $chunkSize-- > 0 ) {
+            if ( $chunk->{valid} ) { $image->setPixel( $x, 58, $green ); }
+            if ( !$chunk->{crcOk} ) {
+                $image->setPixel( $x, 2, $red );
+                $image->setPixel( $x, 3, $red );
+            } else {
 
                 # show struct length
-                $image->setPixel( $x, 4 + ( $chunkCounter % 2) * 2, $black);
-                $image->setPixel( $x, 5 + ( $chunkCounter % 2) * 2, $black);
+                $image->setPixel( $x, 4 + ( $chunkCounter % 2 ) * 2, $black );
+                $image->setPixel( $x, 5 + ( $chunkCounter % 2 ) * 2, $black );
+
                 # show service_id
-                $image->setPixel( $x, 8 + 2*$chunk->{service_id}, $colors[$chunk->{service_id} % scalar @colors]);
-                $image->setPixel( $x, 9 + 2*$chunk->{service_id}, $colors[$chunk->{service_id} % scalar @colors]);
+                $image->setPixel( $x, 8 + 2 * $chunk->{service_id}, $colors[ $chunk->{service_id} % scalar @colors ] );
+                $image->setPixel( $x, 9 + 2 * $chunk->{service_id}, $colors[ $chunk->{service_id} % scalar @colors ] );
+
                 # make some offset because of multiple tables
                 my $corr = 0;
-                if( $chunk->{table_id} == 0x4e) {
+                if ( $chunk->{table_id} == 0x4e ) {
                     $corr = -4;
+                } elsif ( $chunk->{table_id} >= 0x50 ) {
+                    $corr = ( 256 * ( $chunk->{table_id} - 0x50 ) ) % 512;
                 }
-                elsif( $chunk->{table_id} >= 0x50) {
-                    $corr = (256*($chunk->{table_id}-0x50)) % 512;
-                }
-                $image->setPixel( $x, 60 + $chunk->{current_section}+$corr, $colors[$chunk->{service_id} % scalar @colors]);
-                $image->setPixel( $x, 61 + $chunk->{current_section}+$corr, $colors[$chunk->{service_id} % scalar @colors]);
-            }
+                $image->setPixel( $x, 60 + $chunk->{current_section} + $corr, $colors[ $chunk->{service_id} % scalar @colors ] );
+                $image->setPixel( $x, 61 + $chunk->{current_section} + $corr, $colors[ $chunk->{service_id} % scalar @colors ] );
+            } ## end else [ if ( !$chunk->{crcOk} )]
             ++$x;
-        }
-    }
+        } ## end while ( $chunkSize-- > 0 )
+    } ## end foreach my $chunk ( @{ $p->...})
 
     # write png-format to file
-    open( my $fh, ">$filename") or die "Error writing [$filename]: $!";
-    binmode( $fh);
-    print( $fh $image->png);
-    close( $fh);
+    open( my $fh, ">$filename" ) or die "Error writing [$filename]: $!";
+    binmode($fh);
+    print( $fh $image->png );
+    close($fh);
     return 1;
-}
+} ## end sub EITdistrChart
+
 =head1 AUTHOR
 
 This software is copyright (c) 2020 by Bojan Ramšak

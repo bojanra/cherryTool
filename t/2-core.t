@@ -23,7 +23,7 @@ $cherry->ingestDelete() && say "Delete ingest directory";
 
 my $scheme = new_ok('cherryEpg::Scheme');
 
-ok( $scheme->readXLS('t/sample.xls'), 'Read .xls' );
+ok( $scheme->readXLS('t/core.xls'), 'Read .xls' );
 
 my $s = $scheme->build();
 
@@ -45,15 +45,15 @@ my $export = YAML::XS::Load($yaml);
 is_deeply( $origin, $export, "Exported identical to imported YAML configuration" );
 
 # test parser
-foreach my $ch (qw( 45 70 )) {
+foreach my $ch (qw( 45 90 )) {
     my $channel = ${ $cherry->epg->listChannel($ch) }[0];
     my $grab    = $cherry->channelGrab($channel);
     my $ingest  = $cherry->channelIngest($channel);
     if ( scalar @{ $$ingest[0]->{errorList} } ) {
         say( join( "\n", @{ $$ingest[0]->{errorList} } ) );
     }
-    ok( scalar(@$grab) && scalar(@$ingest) && !scalar @{ $$ingest[0]->{errorList} }, "$channel->{parser} parser o.k." );
-} ## end foreach my $ch (qw( 45 70 ))
+    ok( scalar(@$grab) && scalar(@$ingest) && !scalar @{ $$ingest[0]->{errorList} }, "$channel->{parser} parser" );
+} ## end foreach my $ch (qw( 45 90 ))
 
 # version check
 my $version = $cherry->epg->version();
@@ -65,7 +65,7 @@ ok( scalar(@$report) == 7, "Database stats reporting" );
 
 # check of multigrabber in cherryEpg
 my $grab = $cherry->channelGrabIngestMulti('all');
-ok( scalar(@$grab) == 25, "Doing multi-grab with ingest" );
+ok( scalar(@$grab) == 24, "Multi-grab with ingest" );
 
 my $ch      = 4;
 my $channel = ${ $cherry->epg->listChannel($ch) }[0];
@@ -85,7 +85,7 @@ ok( $eit, "Prepare building for eit with target $eit->{output}" );
 my $forced = 1;
 my $return = $cherry->eitBuild( $eit, $forced );
 
-ok( $return && -e $return, "Building of EIT output o.k." );
+ok( $return && -e $return, "Building EIT" );
 
 # export channel schedule to XML
 $channel = ${ $cherry->epg->listChannel($ch) }[0];
