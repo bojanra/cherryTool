@@ -3,7 +3,7 @@ use 5.010;
 use utf8;
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More tests => 16;
 use YAML::XS;
 use open ':std', ':encoding(utf8)';
 
@@ -38,3 +38,9 @@ ok( scalar(@$success) && !scalar(@$error), "Scheme import to database" );
 my $grab = $cherry->channelGrabIngestMulti('all');
 
 ok( scalar(@$grab) == 4, "Doing multi-grab with ingest" );
+
+foreach my $eit ( @{ $cherry->epg->listEit() } ) {
+
+    my $return = $cherry->eitBuild($eit);
+    ok( $return && -e $return, "Building EIT $eit->{output}" );
+}

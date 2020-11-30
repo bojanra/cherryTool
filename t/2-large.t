@@ -3,7 +3,7 @@ use 5.010;
 use utf8;
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More tests => 15;
 use YAML::XS;
 use open ':std', ':encoding(utf8)';
 
@@ -27,7 +27,7 @@ my $s = $scheme->build();
 
 ok( $s->{isValid}, 'Build scheme from .xls' );
 
-ok( scalar( @{ $s->{rule} } ) == 4, 'Build rule' );
+ok( scalar( @{ $s->{rule} } ) == 600, 'Build rule' );
 
 ok( scalar @{ $scheme->error } == 0, 'Build success' );
 
@@ -37,8 +37,9 @@ ok( scalar(@$success) && !scalar(@$error), "Scheme import to database" );
 
 my $grab = $cherry->channelGrabIngestMulti('all');
 
-ok( scalar(@$grab) == 200, "Mlti-grab with ingest" );
+ok( scalar(@$grab) == 200, "Multi-grab with ingest" );
 
-my $return = $cherry->eitBuild($eit);
-
-ok( $return && -e $return, "Building EIT" );
+foreach my $eit ( @{ $cherry->epg->listEit() } ) {
+    my $return = $cherry->eitBuild($eit);
+    ok( $return && -e $return, "Building EIT $eit->{output}" );
+}

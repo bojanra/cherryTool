@@ -234,19 +234,7 @@ Report installed version numbers
 sub version {
     my ($self) = @_;
 
-    #debian
-    my $deb = try {
-        `dpkg -s cherryepg 2>&1`;
-    };
-
-    if ( $deb =~ m|Version: (.*)$|m ) {
-        $deb = $1;
-    } else {
-        $deb = undef;
-    }
-
     my $report = {
-        package      => $deb,
         cherryEpg    => $cherryEpg::VERSION,
         cherryTaster => $cherryEpg::Taster::VERSION,
         cherryWeb    => $cherryWeb::VERSION,
