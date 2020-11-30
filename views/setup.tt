@@ -35,7 +35,7 @@
         <div class="list-group wizard-menu">
           <button class="list-group-item" id="wMenuUpload">
             <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span> Upload new scheme</h4>
-            <p class="list-group-item-text">Load excel scheme file from local machine.</p>
+            <p class="list-group-item-text">Load file from local machine.</p>
           </button>
           <button class="list-group-item" id="wMenuBrowse">
             <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Browse scheme</h4>
@@ -44,10 +44,6 @@
           <button class="list-group-item" id="wMenuRestore">
             <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-repeat"></span> Manage cherryEPG</h4>
             <p class="list-group-item-text">Tools for handling the system</p>
-          </button>
-          <button class="list-group-item disabled" id="wMenuActive">
-            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-send"></span> Open PSI/SI editor</h4>
-            <p class="list-group-item-text">Reconfigure PSI/SI builder and carousel.</p>
           </button>
         </div>
       </div>
@@ -157,7 +153,7 @@
             </form>
             <div class="alert alert-warning hidden">
               <img src="/img/spinner.gif" class="" alt="spinner">
-              <span>Activation of scheme in progress. Please wait. <i>(This may take up to 2 minutes.)</i></span>
+              <span>Activation of scheme in progress. Please wait. <i>(This may take up to a few minutes.)</i></span>
             </div>
             <div class="alert alert-danger hidden">
               <h4><b>Failed!</b> Exceptions occurred during scheme activation. Please check <a href="/log">log</a>.</h4>

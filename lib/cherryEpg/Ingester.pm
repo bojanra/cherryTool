@@ -342,9 +342,17 @@ sub ingest {
             "ingest ["
                 . ( $result->{added} + 0 ) . "/"
                 . ( $result->{defined} - $overlapCount )
-                . "] events with ["
-                . ( scalar @{ $result->{errorList} } )
-                . "] error",
+                . "] events with errors ["
+                . ( scalar @{ $result->{errorList} } ) . "]"
+                . ( $overlapCount ? " and overlapping [$overlapCount]" : "" ),
+            $self->{channel_id}, undef, $result
+        );
+    } elsif ($overlapCount) {
+        $logger->warn(
+            "ingest ["
+                . ( $result->{added} + 0 ) . "/"
+                . ( $result->{defined} - $overlapCount )
+                . "] events with overlapping [$overlapCount]",
             $self->{channel_id}, undef, $result
         );
     } else {

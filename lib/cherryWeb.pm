@@ -12,7 +12,7 @@ use Time::Piece;
 use Sys::Hostname;
 use Try::Tiny;
 
-our $VERSION = '1.48';
+our $VERSION = '1.49';
 
 my $cherry = cherryEpg->instance();
 
