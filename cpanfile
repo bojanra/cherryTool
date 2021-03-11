@@ -1,4 +1,4 @@
-# cpanfile The most uptodate file V2.3 - 227 packages
+# cpanfile The most uptodate file V2.4
 requires 'Algorithm::Diff', '>=1.201';
 requires 'Apache::LogFormat::Compiler', '>=0.36';
 requires 'App::Cmd', '>=0.331';
@@ -137,14 +137,11 @@ requires 'Net::SSLeay', '>=1.90';
 requires 'OLE::Storage_Lite', '>=0.20';
 requires 'Package::Stash', '>=0.39';
 requires 'Package::Stash::XS', '>=0.29';
-requires 'PAR', '>=1.017';
 requires 'Parallel::ForkManager', '>=2.02';
 requires 'Parallel::Prefork', '>=0.18';
 requires 'Params::Util', '>=1.102';
 requires 'Params::Validate', '>=1.30';
 requires 'Params::ValidationCompiler', '>=0.30';
-requires 'PAR::Dist', '>=0.51';
-requires 'PAR::Packer', '>=1.052';
 requires 'Parse::RecDescent', '>=1.967015';
 requires 'Path::Class', '>=0.37';
 requires 'Path::Tiny', '>=0.118';
