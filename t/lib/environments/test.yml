@@ -1,0 +1,67 @@
+--- #YAML:1.0
+# cherryEPG configuration file JUST FOR TESTING
+appname: "cherryWeb-testing"
+description: "Testing Environment"
+layout: "system"
+charset: "UTF-8"
+template: "template_toolkit"
+session: "YAML"
+startup_info: 1
+# development environment specific settings
+logger: "console"
+show_errors: 1
+# common
+engines:
+  session:
+    YAML:
+      cookie_name: cherry.session
+      cookie_duration: '24 hours'
+      cookie_same_site: Lax
+      is_http_only: 1
+  template:
+    template_toolkit:
+      start_tag: '<%'
+      end_tag: '%>'
+      encoding: 'utf8'
+  logger:
+    console:
+      log_level: error
+      log_format: "Failure during execution [%f----%l] %m"
+plugins:
+  Ajax:
+    content_type: 'application/json'
+  Auth::Extensible:
+    login_without_redirect: 1
+    no_login_handler: 1
+    login_page_handler: 'cherryWeb::loginPageHandler'
+    permission_denied_page_handler: 'cherryWeb::permissionDeniedPageHandler'
+    realms:
+      config_emb:
+        provider: Config
+        users:
+          - user: cherry
+            pass: amarena
+            roles:
+              - cherryweb
+core:
+  basedir: /var/lib/cherryepg/
+  datasource: dbi:mysql:dbname=cherry_db;host=localhost
+  user: cherryepg
+  pass: visnja
+  lang: en
+  exportIP: 127.1.1.18
+  parallelTasks: 8    # number of parallel tasks when grabbing/ingesting and building
+  taster:
+    webgrab:
+    eventbudget:
+      days: 7
+      threshold:
+        warning: 3
+        critical: 2
+log4perl:  |-
+  log4perl.logger                    = TRACE, Screen
+  log4perl.oneMessagePerAppender     = 1
+  log4perl.appender.Screen           = Log::Log4perl::Appender::ScreenColoredLevels
+  log4perl.appender.Screen.stderr    = 0
+  log4perl.appender.Screen.layout    = Log::Log4perl::Layout::PatternLayout
+  log4perl.appender.Screen.layout.ConversionPattern = %p %c : %m %n

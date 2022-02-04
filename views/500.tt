@@ -1,0 +1,17 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><% title %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-4">
+        <img src="/img/error.jpg" class="pull-left img-responsive" alt="cherry blossom">
+      </div>
+      <div class="col-md-8">
+        <h4>I'm sorry! It seems that something went wrong!</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<% INCLUDE js.tt %>

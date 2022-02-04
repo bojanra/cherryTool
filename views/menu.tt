@@ -1,0 +1,37 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://epg.cherryhill.eu"><img src="/img/logo.png" alt="cherryEpg"></a>
+      <p class="navbar-text"><% description %></p>
+      <span class="label label-primary" style="float:right;margin-top: 12px;"><strong><% hostname %></strong></span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="mDashboard" <% IF menu == 'dashboard' %>class="active" <% END %>><a href="/" title="Dashboard"><i class="glyphicon glyphicon-dashboard"></i></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Configuration"><i class="glyphicon glyphicon-cog"></i><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li <% IF menu == 'scheme' %>class="active" <% END %>><a href="/scheme">EPG scheme</a></li>
+            <li <% IF menu == 'carousel' %>class="active" <% END %>><a href="/carousel">Carousel</a></li>
+            <li <% IF menu == 'announce' %>class="active" <% END %>><a href="/announce">Announcements</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Information"><i class="glyphicon glyphicon-exclamation-sign"></i><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li <% IF menu == 'system' %>class="active" <% END %>><a href="/system">System status</a></li>
+            <li <% IF menu == 'log' %>class="active" <% END %>><a href="/log">Log browser</a></li>
+          </ul>
+        </li>
+        <li><a href="http://epg.cherryhill.eu/docs/index.html" title="Online manual" target="_blank"><i class="glyphicon glyphicon-education"></i></a></li>
+        <li><a href="/logout"><i class="glyphicon glyphicon-off"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

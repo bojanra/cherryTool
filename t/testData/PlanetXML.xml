@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tv source-info-name="siol_tv" generator-info-name="epg">
+  <programme start="20190712222500 +0000" stop="20190712232000 +0000" channel="PLANETTV" id="420377833">
+    <title><![CDATA[Bratje in sestre]]></title>
+    <sub-title><![CDATA[Brothers & Sisters]]></sub-title>
+    <date>2007</date>
+    <episode-num>0.9</episode-num>
+    <category>Nadaljevanka</category>
+    <metacategory>Drama (nadaljevanka)</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/4/446426.jpg</icon>
+    <credits>
+      <director><![CDATA[Ken Olin]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.3. V seriji spremljamo prigode in nezgode odraslih otrok družine Walker. Justin pristane na sodišču, podjetje Ojai postane odvisno od Hollyjine dobre volje, Kitty dobi ponudbo za službo, vnukinja Paige pa Noro prepriča, da je treba praznovati hanuko. Razburljiva serija producenta Kena Olina in scenarista Jona Robina Baitza o družini Walker iz Kalifornije. Bratje in sestre v družini so zelo navezani drug na drugega. Sarah se vrača v družinsko podjetje, Thomas je šarmanten ženskar, Kevin je homoseksualec in odvetnik, Justin je najmlajši otrok v družini in se bori z odvisnostjo, Kitty pa je radijska voditeljica. Serija raziskuje, kaj pomeni biti družina v 21. stoletju.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42037783.ts</url>
+  </programme>
+  <programme start="20190712232000 +0000" stop="20190712232200 +0000" channel="PLANETTV" id="420377843">
+    <title><![CDATA[Vreme]]></title>
+    <sub-title><![CDATA[Vreme]]></sub-title>
+    <date>2019</date>
+    <category>Informativno</category>
+    <metacategory>Vreme</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/7/1/712429.jpg</icon>
+    <credits />
+    <desc><![CDATA[Vremenska napoved.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42037784.ts</url>
+  </programme>
+  <programme start="20190712232200 +0000" stop="20190713002500 +0000" channel="PLANETTV" id="420377853">
+    <title><![CDATA[Danes]]></title>
+    <sub-title><![CDATA[Danes]]></sub-title>
+    <date>2019</date>
+    <category>Informativno</category>
+    <metacategory>Dnevnoinformativna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/7/1/710814.jpg</icon>
+    <credits />
+    <desc><![CDATA[Informativna oddaja s celovitim pregledom dneva, vremensko napovedjo in športom.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42037785.ts</url>
+  </programme>
+  <programme start="20190713002500 +0000" stop="20190713003000 +0000" channel="PLANETTV" id="420377863">
+    <title><![CDATA[Vreme]]></title>
+    <sub-title><![CDATA[Vreme]]></sub-title>
+    <date>2019</date>
+    <category>Informativno</category>
+    <metacategory>Vreme</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/7/1/712429.jpg</icon>
+    <credits />
+    <desc><![CDATA[Vremenska napoved.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42037786.ts</url>
+  </programme>
+  <programme start="20190713003000 +0000" stop="20190713045500 +0000" channel="PLANETTV" id="420377873">
+    <title><![CDATA[Nočni program]]></title>
+    <sub-title><![CDATA[Nočni program]]></sub-title>
+    <date>2019</date>
+    <category>Informativno</category>
+    <metacategory>Informativna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/0/509159.jpg</icon>
+    <credits />
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42037787.ts</url>
+  </programme>
+  <programme start="20190713045500 +0000" stop="20190713055000 +0000" channel="PLANETTV" id="421373703">
+    <title><![CDATA[Dan.]]></title>
+    <sub-title><![CDATA[Dan.]]></sub-title>
+    <date>2018</date>
+    <category>Razvedrilo</category>
+    <metacategory>Magazin</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/8/581038.jpg</icon>
+    <credits />
+    <desc><![CDATA[V magazinski oddaji Dan. se bomo posvečali temam, težavam in rešitvam, ki nam jih nastavlja vsakdan. Gre za teme, ki obvladujejo naša življenja, našo zasebnost; od vzgoje, popotništva, ljubiteljskega športa do kuhanja in trendov, ki jih zasledimo na družbenih omrežjih. Vse teme, o katerih bomo poročali, bomo uporabili kot izhodišče za iskanje uporabnih spoznanj. Spoznanj, ki nam bodo omogočila, da se bomo lažje soočali z neštetimi izzivi, ki nam jih nastavi en sam Dan.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137370.ts</url>
+  </programme>
+  <programme start="20190713055000 +0000" stop="20190713062000 +0000" channel="PLANETTV" id="421373713">
+    <title><![CDATA[TV prodaja]]></title>
+    <sub-title><![CDATA[TV prodaja]]></sub-title>
+    <date>2019</date>
+    <category>Oddaja</category>
+    <metacategory>Oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/2/1/212173.jpg</icon>
+    <credits />
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137371.ts</url>
+  </programme>
+  <programme start="20190713062000 +0000" stop="20190713065000 +0000" channel="PLANETTV" id="421373723">
+    <title><![CDATA[Klub Mikija Miške]]></title>
+    <sub-title><![CDATA[Mickey Mouse Clubhouse]]></sub-title>
+    <date>2012</date>
+    <episode-num>3.19</episode-num>
+    <category>Za mlade</category>
+    <metacategory>Risanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/7/477711.jpg</icon>
+    <credits>
+      <director><![CDATA[Sherie Pollack]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 5.9. Serija se osredotoča na reševanje različnih težav, s katerimi se soočajo otroci. Mikijev rokerski klub – Prijatelji iz Kluba Mikija Miške priredijo bitko glasbenih skupin. Zabavali nas bodo Miki Miška, Jaka Racman, Pluton in ostali risani junaki.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137372.ts</url>
+  </programme>
+  <programme start="20190713065000 +0000" stop="20190713071500 +0000" channel="PLANETTV" id="421373733">
+    <title><![CDATA[Sofia Prva]]></title>
+    <sub-title><![CDATA[Sofia the First]]></sub-title>
+    <date>2017</date>
+    <episode-num>3.26</episode-num>
+    <category>Za mlade</category>
+    <metacategory>Risanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/6/464481.jpg</icon>
+    <credits>
+      <director><![CDATA[Jamie Mitchell]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.1. Risanka o prikupni deklici Sofii, ki je živela običajno življenje na vasi, a se je preselila na dvor po poroki svoje mame s kraljem. Škratje težave – Sofija, Amber in Jaka ostanejo sami na gradu. Ko prideta na mirovno srečanje predstavnici rečnih in drevesnih škratov, ju poskušajo pobotati. Sofia se znajde v veličastnem, a včasih tudi begajočem kraljevskem svetu, kjer se pridruži polbratu Jaku in polsestri Amber. S preostalimi princi in princesami obiskuje kraljevo šolo, ki jo vodijo tri dobre vile (iz Disneyjeve risanke Trnuljčica). Sofia se ves čas spopada z novimi izzivi, v katerih dokazuje, da je prijazna, ljubeča, iskrena, pogumna in dostojanstvena, kot mora biti vsaka prava princesa. V posameznih epizodah se pojavijo tudi junakinje iz Disneyjevih risank, kot so Pepelka, Trnuljčica, Jasmina, Zalika ...]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137373.ts</url>
+  </programme>
+  <programme start="20190713071500 +0000" stop="20190713074000 +0000" channel="PLANETTV" id="421373743">
+    <title><![CDATA[Sofia Prva]]></title>
+    <sub-title><![CDATA[Sofia the First]]></sub-title>
+    <date>2017</date>
+    <episode-num>3.27</episode-num>
+    <category>Za mlade</category>
+    <metacategory>Risanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/6/464481.jpg</icon>
+    <credits>
+      <director><![CDATA[Jamie Mitchell]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.1. Risanka o prikupni deklici Sofii, ki je živela običajno življenje na vasi, a se je preselila na dvor po poroki svoje mame s kraljem. Kraljevski za vedno (1. del) – Ko se pripravlja na zaključek Kraljeve šole, Sofijo pokličejo zaščitniki, da bi enkrat za vselej ujela Prizmo. Sofia se znajde v veličastnem, a včasih tudi begajočem kraljevskem svetu, kjer se pridruži polbratu Jaku in polsestri Amber. S preostalimi princi in princesami obiskuje kraljevo šolo, ki jo vodijo tri dobre vile (iz Disneyjeve risanke Trnuljčica). Sofia se ves čas spopada z novimi izzivi, v katerih dokazuje, da je prijazna, ljubeča, iskrena, pogumna in dostojanstvena, kot mora biti vsaka prava princesa. V posameznih epizodah se pojavijo tudi junakinje iz Disneyjevih risank, kot so Pepelka, Trnuljčica, Jasmina, Zalika ...]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137374.ts</url>
+  </programme>
+  <programme start="20190713074000 +0000" stop="20190713080500 +0000" channel="PLANETTV" id="421373753">
+    <title><![CDATA[Združeni maščevalci]]></title>
+    <sub-title><![CDATA[Avengers Assemble]]></sub-title>
+    <date>2016</date>
+    <episode-num>2.14</episode-num>
+    <category>Nanizanka</category>
+    <metacategory>Animirana nanizanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/1/516159.jpg</icon>
+    <credits>
+      <director><![CDATA[Tim Eldred]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.0. Avanture Marvelovih superjunakov. Prijatelj v stiski – Thor želi Vidca poučiti o prijateljstvu, zato ga odpelje v Asgard, tam pa se morata spopasti z Ultronom, ki se naseli v oklep Uničevalca. Lahko najmogočnejša ekipa superjunakov pozabi na medsebojna nesoglasja in zdrži pod eno streho dovolj dolgo, da reši svet pred popolnim uničenjem? Odgovor se bo razkril, ko Rdeča lobanja in M.O.D.O.K. napovesta vojno Maščevalcem. V pustolovski risani seriji Združeni Maščevalci se najbolj znani superjunaki na svetu – Iron Man, Hulk, Stotnik Amerika, Thor, Sokolje oko, Črna vdova in novinec Sokol – združijo v boju, ki bi bil za vsakega posameznika pretrd oreh. Zdaj ko živijo in trenirajo skupaj v stolpu Maščevalcev, ki je njihov novi štab, morajo junaki kljub medsebojnim razlikam sodelovati, da bi obvarovali naš planet. Dr. Poguba bo skušal osvojiti Asgard, Attuma bo s svojo atlantidsko vojsko napadel New York, Drakula bo nad junake poslal hordo vampirjev, a niti najhujši hudobec ne bo kos Združenim Maščevalcem.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137375.ts</url>
+  </programme>
+  <programme start="20190713080500 +0000" stop="20190713083500 +0000" channel="PLANETTV" id="421373763">
+    <title><![CDATA[Združeni maščevalci]]></title>
+    <sub-title><![CDATA[Avengers Assemble]]></sub-title>
+    <date>2016</date>
+    <episode-num>2.15</episode-num>
+    <category>Nanizanka</category>
+    <metacategory>Animirana nanizanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/1/516159.jpg</icon>
+    <credits>
+      <director><![CDATA[Tim Eldred]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.0. Avanture Marvelovih superjunakov. Stotnica Marvel – Maščevalci se združijo s Stotnico Marvel v boju proti mogočni vesoljski ladji, ki naj bi uničila Zemljo. Lahko najmogočnejša ekipa superjunakov pozabi na medsebojna nesoglasja in zdrži pod eno streho dovolj dolgo, da reši svet pred popolnim uničenjem? Odgovor se bo razkril, ko Rdeča lobanja in M.O.D.O.K. napovesta vojno Maščevalcem. V pustolovski risani seriji Združeni Maščevalci se najbolj znani superjunaki na svetu – Iron Man, Hulk, Stotnik Amerika, Thor, Sokolje oko, Črna vdova in novinec Sokol – združijo v boju, ki bi bil za vsakega posameznika pretrd oreh. Zdaj ko živijo in trenirajo skupaj v stolpu Maščevalcev, ki je njihov novi štab, morajo junaki kljub medsebojnim razlikam sodelovati, da bi obvarovali naš planet. Dr. Poguba bo skušal osvojiti Asgard, Attuma bo s svojo atlantidsko vojsko napadel New York, Drakula bo nad junake poslal hordo vampirjev, a niti najhujši hudobec ne bo kos Združenim Maščevalcem.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137376.ts</url>
+  </programme>
+  <programme start="20190713083500 +0000" stop="20190713090000 +0000" channel="PLANETTV" id="421373773">
+    <title><![CDATA[Najboljši domači video posnetki]]></title>
+    <sub-title><![CDATA[America's Funniest Home Videos]]></sub-title>
+    <date>2008</date>
+    <episode-num>18.15</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Razvedrilna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/6/464388.jpg</icon>
+    <credits>
+      <director><![CDATA[Vin Di Bona]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.2. Pripravite se na smeh, saj vas bo zabavala vrsta smešnih domačih posnetkov. Gostitelj oddaje Tom Bergeron vabi gledalce, naj pošljejo najbolj smešne domače posnetke. Pogosto vidimo poročne posnetke ali posnetke športnih dogodkov, kjer se pripeti kaj smešnega. Prav nič redki niso tudi posnetki otrok, ki se igrajo s svojimi domačimi ljubljenčki, ki nas znajo presenetiti. Najboljši posnetki so vsak teden tudi bogato nagrajeni. Vsi pa se potegujejo tudi za glavno nagrado v višini 100 tisoč dolarjev.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137377.ts</url>
+  </programme>
+  <programme start="20190713090000 +0000" stop="20190713093000 +0000" channel="PLANETTV" id="421373783">
+    <title><![CDATA[Najboljši domači video posnetki]]></title>
+    <sub-title><![CDATA[America's Funniest Home Videos]]></sub-title>
+    <date>2008</date>
+    <episode-num>18.16</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Razvedrilna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/6/464388.jpg</icon>
+    <credits>
+      <director><![CDATA[Vin Di Bona]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.2. Pripravite se na smeh, saj vas bo zabavala vrsta smešnih domačih posnetkov. Gostitelj oddaje Tom Bergeron vabi gledalce, naj pošljejo najbolj smešne domače posnetke. Pogosto vidimo poročne posnetke ali posnetke športnih dogodkov, kjer se pripeti kaj smešnega. Prav nič redki niso tudi posnetki otrok, ki se igrajo s svojimi domačimi ljubljenčki, ki nas znajo presenetiti. Najboljši posnetki so vsak teden tudi bogato nagrajeni. Vsi pa se potegujejo tudi za glavno nagrado v višini 100 tisoč dolarjev.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137378.ts</url>
+  </programme>
+  <programme start="20190713093000 +0000" stop="20190713102500 +0000" channel="PLANETTV" id="421373793">
+    <title><![CDATA[Kralja akvarijev]]></title>
+    <sub-title><![CDATA[Tanked]]></sub-title>
+    <date>2012</date>
+    <episode-num>1.17</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Resničnostna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/5/659828.jpg</icon>
+    <credits>
+      <director><![CDATA[Cyndi Haas]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.7. Serija odstira pogled v družinsko podjetje Acrylic Tank Manufacturing, ki je v Ameriki eno najuspešnejših na področju gradnje akvarijev. Podjetje Acrylic Tank Manufacturing vodita Brett Raymer in Wayde King, ki sta hkrati svaka, najboljša prijatelja, poslovna partnerja in tekmeca. Njuni akvariji za bogate stranke so ogromna konceptualna umetniška dela, ki se nahajajo v restavracijah, igralnicah, bankah, hotelih, cerkvah, gradovih, muzejih in še kje.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137379.ts</url>
+  </programme>
+  <programme start="20190713102500 +0000" stop="20190713111500 +0000" channel="PLANETTV" id="421373803">
+    <title><![CDATA[Ameriški top model]]></title>
+    <sub-title><![CDATA[America's Next Top Model]]></sub-title>
+    <date>2017</date>
+    <episode-num>22.12</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Resničnostna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/6/567592.jpg</icon>
+    <credits>
+      <director><![CDATA[Tony Croll]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 5.6. 23. sezono Ameriškega top modela vodi angleška pevka Rita Ora, sodniki pa so Ashley Graham, Drew Elliott in Law Roach. Tokrat bomo videli najpomembnejše trenutke sezone, pa tudi nekaj še neobjavljenih posnetkov. V tej sezoni se tekmovanje ponovno vrne k izvirnemu formatu, v katerem tekmujejo samo dekleta, Tyro Banks pa v vlogi voditeljice zamenja britanska pevka Rita Ora.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137380.ts</url>
+  </programme>
+  <programme start="20190713111500 +0000" stop="20190713120500 +0000" channel="PLANETTV" id="421373813">
+    <title><![CDATA[Mladi kuharski mojster]]></title>
+    <sub-title><![CDATA[MasterChef Junior]]></sub-title>
+    <date>2017</date>
+    <episode-num>5.6</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Resničnostna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/7/671791.jpg</icon>
+    <credits>
+      <director><![CDATA[Brian Smith]]></director>
+      <actor><![CDATA[Joe Bastianich]]></actor>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.7. Mladi ameriški ljubiteljski kuharji, stari od 8 do 13 let, tekmujejo za naziv mladega kuharskega mojstra. Tokrat so pred mladimi kuharji prav posebni izzivi. Razdeljeni v pare morajo delovati čim hitreje, težava pa je v tem, da so pari med seboj zvezani v gležnjih.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137381.ts</url>
+  </programme>
+  <programme start="20190713120500 +0000" stop="20190713130000 +0000" channel="PLANETTV" id="421373823">
+    <title><![CDATA[Največja ljubezen]]></title>
+    <sub-title><![CDATA[Amor Maior]]></sub-title>
+    <date>2016</date>
+    <episode-num>0.2</episode-num>
+    <category>Nadaljevanka</category>
+    <metacategory>Romantična nadaljevanka</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/2/620343.jpg</icon>
+    <credits>
+      <director><![CDATA[Iva Areias]]></director>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.9. Ljubezenska zgodba, ki govori o boju med dobrim in zlim. Clara zaloti teto Francisco, ko skuša zastrupiti Eduarda. Vendar Eduardo hčerki ne verjame, raje verjame svoji ženi in Claro celo prežene od doma. Clara je hči Laure, ki jo je ubila polsestra Francisca. Francisca se zaradi želje po maščevanju po uboju polsestre celo poroči z njenim možem in Clarinim očetom. Clara skrbi za svoje mlajše brate in sestre, nenadoma pa se mora odreči ljubezni do mladega policista Manela, saj sta se po naključju znašla vsak na svoji strani zakona: ko je hotela Clara pomagati mlajšemu bratu, je namreč sodelovala pri kraji. Francisca se je seveda s Clarinim očetom poročila, da bi po njegovi smrti lahko obdržala vse njegovo bogastvo samo zase. Clara skuša na to opozarjati vse okoli sebe, a ji zaradi kartoteke nihče ne verjame. Celo lastni oče jo nazadnje spodi od doma. Naša junakinja se bo ves čas borila, da bi si očistila ime, rešila pogrešano sestro in pridobila nazaj Manela, ki ji ga je vmes prevzela Francisca.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137382.ts</url>
+  </programme>
+  <programme start="20190713130000 +0000" stop="20190713144000 +0000" channel="PLANETTV" id="421373833">
+    <title><![CDATA[Božične želje]]></title>
+    <sub-title><![CDATA[Wishin' and Hopin']]></sub-title>
+    <date>2014</date>
+    <category>Film</category>
+    <metacategory>Komedija</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/1/615475.jpg</icon>
+    <credits>
+      <director><![CDATA[Colin Theys]]></director>
+      <actor><![CDATA[Chevy Chase]]></actor>
+      <actor><![CDATA[Molly Ringwald]]></actor>
+      <actor><![CDATA[Annabella Sciorra]]></actor>
+      <actor><![CDATA[Conchata Ferrell]]></actor>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 6.9. Življenje petošolca se obrne na glavo, ko na šolo prideta nova nadomestna učiteljica in učenka iz Rusije. Petošolec Felix in njegova sestrična Annette, ki je najstniška filmska zvezdnica, živita v majhnem mestu v Connecticutu. V šolo prideta nova učiteljica, ga. Frechette, in Ženja, nova učenka iz Rusije. Ženja Felixu zmeša glavo, ga. Frechette pa uvede nov koncept šolske božične igre in potegovanje za glavne vloge se prične ...]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137383.ts</url>
+  </programme>
+  <programme start="20190713144000 +0000" stop="20190713163000 +0000" channel="PLANETTV" id="421373843">
+    <title><![CDATA[Domov]]></title>
+    <sub-title><![CDATA[Home]]></sub-title>
+    <date>2015</date>
+    <category>Film</category>
+    <metacategory>Animirani film</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/7/6/764186.jpg</icon>
+    <credits>
+      <director><![CDATA[Tim Johnson]]></director>
+      <actor><![CDATA[Jim Parsons]]></actor>
+      <actor><![CDATA[Rihanna]]></actor>
+      <actor><![CDATA[Steve Martin]]></actor>
+    </credits>
+    <desc><![CDATA[Po invaziji vesoljčkov na Zemljo se deklica Tip in vesoljski ubežnik Oh v letečem avtomobilu podata na iskanje dekličine mame. Ko prikupen Nezemljan Oh pristane na Zemlji in se znajde na begu pred lastnim ljudstvom, sklene nepričakovano prijateljstvo z najstniško Zemljanko Tip, ki se je podala na lastno pustolovščino. Skozi vrsto komičnih dogodivščin Oh spozna, da biti drugačen in kdaj narediti kaj narobe pomeni biti človek. Čeprav Oh spremeni Tipin planet, ona pa njegov svet, skupaj odkrijeta pravi pomen besede dom. Znanstvenofantastična animirana komedija, posneta po otroški knjigi Adama Rexa "The True Meaning of Smekday". Glasove v sinhronizirani različici so posodili: Gašper Jarni, Saša Pavlin Stosić, Jožef Ropoša, Jure Mastnak, Nina Ivanič in Jernej Kuntner.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137384.ts</url>
+  </programme>
+  <programme start="20190713163000 +0000" stop="20190713170500 +0000" channel="PLANETTV" id="421373853">
+    <title><![CDATA[Ta teden z Juretom Godlerjem]]></title>
+    <sub-title><![CDATA[Ta teden z Juretom Godlerjem]]></sub-title>
+    <date>2019</date>
+    <episode-num>8.4</episode-num>
+    <category>Razvedrilo</category>
+    <metacategory>Razvedrilna oddaja</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/4/3/431249.jpg</icon>
+    <credits />
+    <desc><![CDATA[IMDb ocena: 7.8. Jure Godler, najbolj nabrušen jezik televizije, v nagrajeni satirični oddaji povzame dogodke preteklega tedna in pove to, kar si vsi mislimo. Oddaja Ta teden z Juretom Godlerjem, ki je v preteklih sezonah dvignila nemalo prahu in prejela že nagradi viktor in žaromet za najboljšo zabavno oddajo, bo kot običajno poskrbela za dobro zloščena ogledala, ki jih bo nastavila politikom in drugim vidnejšim akterjem dogodkov, ki odmevajo v Sloveniji. Satirična oddaja pod drobnogled postavlja tudi aktualne dogodke v državi in dokazuje, da je slovensko politično prizorišče v bistvu prava telenovela.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137385.ts</url>
+  </programme>
+  <programme start="20190713170500 +0000" stop="20190713180000 +0000" channel="PLANETTV" id="421373863">
+    <title><![CDATA[Galileo]]></title>
+    <sub-title><![CDATA[Galileo]]></sub-title>
+    <date>2018</date>
+    <episode-num>5.4</episode-num>
+    <category>Dokumentarec</category>
+    <metacategory>Poljudnoznanstveni dokumentarec</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/7/679426.jpg</icon>
+    <credits />
+    <desc><![CDATA[Ustvarjalci oddaje Galileo se iz sezone v sezono bolj ambiciozno lotevajo raziskovanja fenomenov iz naše okolice. Skupina raziskovalnih novinarjev se bo na poljuden in zabaven način lotila raziskovanja zelo raznolikih in zahtevnih tem. Tako bodo pokukali v ozadje zahtevnih sistemov, razbijali mite, odstirali tabuje, preizkušali in razkrivali ljudi z nenavadnimi sposobnostmi in ekstremnimi dosežki. Oddajo vodi Marko Potrč.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137386.ts</url>
+  </programme>
+  <programme start="20190713180000 +0000" stop="20190713202000 +0000" channel="PLANETTV" id="421373873">
+    <title><![CDATA[Prva liga TS: Maribor – Triglav Kranj]]></title>
+    <sub-title><![CDATA[Prva liga Telekom Slovenije 2019/2020: Maribor – Triglav Kranj]]></sub-title>
+    <date>2019</date>
+    <category>Šport</category>
+    <metacategory>Nogomet</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/6/5/659449.jpg</icon>
+    <credits />
+    <desc><![CDATA[Prenos nogometne tekme. Na Ljudskem vrtu v Mariboru se bosta v 1. krogu nove sezone Prve lige Telekom Slovenije pomerili ekipi Maribora in Triglava. Prva slovenska nogometna liga (trenutno uradno ime Prva liga Telekom Slovenije) je najpomembnejše klubsko nogometno tekmovanje v Sloveniji. Prvič je bilo odigrano v sezoni 1991/92. Tekmovanje poteka pod okriljem Nogometne zveze Slovenije. V ligi sodeluje 10 klubov. Prvouvrščeno moštvo si poleg naslova državnega prvaka zagotovi tudi nastopanje v kvalifikacijah za Ligo prvakov, drugi in tretji ter zmagovalec pokala pa imajo pravico do nastopanja v kvalifikacijah za Ligo Evropa. Zadnjeuvrščeni avtomatično izpade v nižji rang tekmovanja, nadomesti ga prvo uvrščeni drugoligaš, medtem ko se predzadnji bori za prvoligaški status v dodatnem dvoboju z drugo uvrščenim iz druge slovenske nogometne lige. NK Celje, ND Gorica in NK Maribor so edini trije klubi, ki nikoli niso izpadli iz lige, odkar je bila ta ustanovljena. Trenutni prvak je NK Maribor.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137387.ts</url>
+  </programme>
+  <programme start="20190713202000 +0000" stop="20190713221500 +0000" channel="PLANETTV" id="421373883">
+    <title><![CDATA[Usodni]]></title>
+    <sub-title><![CDATA[The Adjustment Bureau]]></sub-title>
+    <date>2011</date>
+    <category>Film</category>
+    <metacategory>Triler</metacategory>
+    <icon>http://vimg.siol.tv/epg/208/PLANETTV/19/5/0/507303.jpg</icon>
+    <credits>
+      <director><![CDATA[George Nolfi]]></director>
+      <actor><![CDATA[Matt Damon]]></actor>
+      <actor><![CDATA[Emily Blunt]]></actor>
+      <actor><![CDATA[Lisa Thoreson]]></actor>
+      <actor><![CDATA[Florence Kastriner]]></actor>
+    </credits>
+    <desc><![CDATA[IMDb ocena: 7.1. Ljubezensko razmerje med politikom in plesalko ovirajo skrivnostne sile, ki skušajo zaljubljenca ločiti. Karizmatični politik David po naključju spozna lepo plesalko Elise, toda njuna ljubezen se zdi obsojena na propad. Davida začne zasledovati nenavadna skupina, ki uravnava potek usode ljudi. Ker v njihovih načrtih zveza med Davidom in Elise ni predvidena, želijo Davida zlepa ali zgrda prepričati, naj se ji odpove. David se kljub temu odloči izzvati usodo, kar povzroči nenadzorovano verigo vratolomnih pregonov in usodnih obračunov. Ali si sami krojimo usodo ali z nami upravljajo neznane sile? S tem vprašanjem se spopadajo ustvarjalci znanstvenofantastičnega romantičnega trilerja, v katerem se posameznik postavi po robu agentom Usode in skuša skreniti s svoje začrtane poti.]]></desc>
+      <url>rtsp://cup-top.siol.tv:554/cup_planettv_42137388.ts</url>
+  </programme>
+</tv>

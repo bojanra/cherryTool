@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ProgramGuide>
+  <Service id="110" name="PIEMONTE +" tsid="5032" onid="8572" theme="" weburl="">
+    <Event id="1100001" related_to_day_id="1100001" db_id="2996970">
+      <IdName>VIDEO DISTRETTO LAGHI</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>14:49:49</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>5</DurationMin>
+      <DurationSec>35</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO DISTRETTO LAGHI</Name>
+        <Description>VIDEO DISTRETTO LAGHI</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO DISTRETTO LAGHI</Name>
+        <Description>VIDEO DISTRETTO LAGHI</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="1100002" related_to_day_id="1100002" db_id="2996312">
+      <IdName>ECONDOMINIO TV - DIRETTA ASSEMBLEA CONDOMINIALE</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>19:00:00</StartTime>
+      <DurationHour>2</DurationHour>
+      <DurationMin>0</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Pr.Accessori</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ECONDOMINIO TV - DIRETTA ASSEMBLEA CONDOMINIALE</Name>
+        <Description>ECONDOMINIO TV - DIRETTA ASSEMBLEA CONDOMINIALE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ECONDOMINIO TV - DIRETTA ASSEMBLEA CONDOMINIALE</Name>
+        <Description>ECONDOMINIO TV - DIRETTA ASSEMBLEA CONDOMINIALE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="1100003" related_to_day_id="1100003" db_id="2973152">
+      <IdName>PIEMONTE + METEO</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>09:00:00</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>19</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Attualità</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>PIEMONTE + METEO</Name>
+        <Description>METEO A CURA DI ARPA PIEMONTE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>PIEMONTE + METEO</Name>
+        <Description>PREVISIONI METEO A CURA DI ARPA PIEMONTE</Description>
+      </LongEventDescription>
+    </Event>
+  </Service>
+  <Service id="3" name="RETE 7" tsid="5032" onid="8572" theme="" weburl="">
+    <Event id="30001" related_to_day_id="30001" db_id="2996204">
+      <IdName>DIRETTA - BUONGIORNO DOTTORE</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>14:46:47</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>38</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>DIRETTA - BUONGIORNO DOTTORE</Name>
+        <Description>DIRETTA - BUONGIORNO DOTTORE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>DIRETTA - BUONGIORNO DOTTORE</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+    <Event id="30002" related_to_day_id="30002" db_id="2996209">
+      <IdName>ROSARIO FATIMA</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>17:23:29</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>32</DurationMin>
+      <DurationSec>25</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>EVENTI RELIGIOSI</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ROSARIO FATIMA</Name>
+        <Description>ROSARIO FATIMA</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ROSARIO FATIMA</Name>
+        <Description>ROSARIO FATIMA</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30003" related_to_day_id="30003" db_id="2996211">
+      <IdName>AUTOCCASIONI</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>17:56:07</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>51</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>PUBBLICITA' - MESS. PROM.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI </Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30004" related_to_day_id="30004" db_id="2882060">
+      <IdName>TELEGIORNALE  RETE 7 NEWS</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>19:00:27</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>26</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30005" related_to_day_id="30005" db_id="2882206">
+      <IdName>ALMANACCO DEL GIORNO</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>19:28:57</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>30</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Attualità</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30006" related_to_day_id="30006" db_id="2882061">
+      <IdName>TELEGIORNALE  RETE 7 NEWS</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>19:32:29</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>26</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30007" related_to_day_id="30007" db_id="2996228">
+      <IdName>ALMANACCO DEL GIORNO</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>20:00:59</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>30</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Attualità</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30008" related_to_day_id="30008" db_id="2996397">
+      <IdName>SOS GAIA - Il pianeta vivo</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>20:04:44</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>28</DurationMin>
+      <DurationSec>56</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Attualità</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>SOS GAIA - Il pianeta vivo</Name>
+        <Description>SOS GAIA - Il pianeta vivo</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>SOS GAIA - Il pianeta vivo</Name>
+        <Description>SOS GAIA - Il pianeta vivo</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30009" related_to_day_id="30009" db_id="2996229">
+      <IdName>CASA PEYRETTI - DIRETTA</IdName>
+      <StartDate>2021-01-15</StartDate>
+      <StartTime>20:59:31</StartTime>
+      <DurationHour>2</DurationHour>
+      <DurationMin>0</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Intrattenimento</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>CASA PEYRETTI - DIRETTA</Name>
+        <Description>CASA PEYRETTI - DIRETTA</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>CASA PEYRETTI - DIRETTA</Name>
+        <Description>CASA PEYRETTI - DIRETTA</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30010" related_to_day_id="30010" db_id="2996816">
+      <IdName>AUTOCCASIONI</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>00:32:08</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>57</DurationMin>
+      <DurationSec>57</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>PUBBLICITA' - MESS. PROM.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI FASCIA 2 - R7</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI FASCIA 2 - R7</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30011" related_to_day_id="30011" db_id="2996824">
+      <IdName>FILM - CHARLIE BRAVO</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>01:34:29</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>37</DurationMin>
+      <DurationSec>32</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Film</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FILM - CHARLIE BRAVO</Name>
+        <Description>FILM - CHARLIE BRAVO</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FILM - CHARLIE BRAVO</Name>
+        <Description>FILM - CHARLIE BRAVO</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30012" related_to_day_id="30012" db_id="2975440">
+      <IdName>REGIONI ALL NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>04:17:46</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>30</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30013" related_to_day_id="30013" db_id="2996842">
+      <IdName>REGIONI ALL NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>04:51:44</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>20</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30014" related_to_day_id="30014" db_id="2996844">
+      <IdName>REGIONI ALL NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>05:15:04</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>20</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30015" related_to_day_id="30015" db_id="2996846">
+      <IdName>REGIONI ALL NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>05:38:03</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>18</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>REGIONI ALL NEWS</Name>
+        <Description>REGIONI ALL NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30016" related_to_day_id="30016" db_id="2879878">
+      <IdName>TG - INFORMA7</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>07:00:45</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>28</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TG - INFORMA7</Name>
+        <Description>TG - INFORMA7</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TG - INFORMA7</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+    <Event id="30017" related_to_day_id="30017" db_id="2879879">
+      <IdName>TG - INFORMA7</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>07:32:04</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>23</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TG - INFORMA7</Name>
+        <Description>TG - INFORMA7</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TG - INFORMA7</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+    <Event id="30018" related_to_day_id="30018" db_id="2996853">
+      <IdName>FIABE</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>08:44:27</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>15</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30019" related_to_day_id="30019" db_id="2975508">
+      <IdName>SANTA MESSA IN DIRETTA</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>08:59:27</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>51</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>EVENTI RELIGIOSI</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>SANTA MESSA IN DIRETTA</Name>
+        <Description />
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>SANTA MESSA IN DIRETTA</Name>
+        <Description>SANTA MESSA IN DIRETTA</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30020" related_to_day_id="30020" db_id="2996947">
+      <IdName>FIABE</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>15:50:12</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>13</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30021" related_to_day_id="30021" db_id="2996949">
+      <IdName>ROSARIO FATIMA</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>17:21:33</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>34</DurationMin>
+      <DurationSec>37</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>EVENTI RELIGIOSI</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ROSARIO FATIMA</Name>
+        <Description>ROSARIO FATIMA</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ROSARIO FATIMA</Name>
+        <Description>ROSARIO FATIMA</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30022" related_to_day_id="30022" db_id="2996950">
+      <IdName>AUTOCCASIONI</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>17:56:10</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>51</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>PUBBLICITA' - MESS. PROM.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>AUTOCCASIONI</Name>
+        <Description>AUTOCCASIONI </Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30023" related_to_day_id="30023" db_id="2882062">
+      <IdName>TELEGIORNALE  RETE 7 NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>19:00:37</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>26</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30024" related_to_day_id="30024" db_id="2882207">
+      <IdName>ALMANACCO DEL GIORNO</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>19:29:07</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>1</DurationMin>
+      <DurationSec>30</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Attualità</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>ALMANACCO DEL GIORNO</Name>
+        <Description>ALMANACCO DEL GIORNO</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30025" related_to_day_id="30025" db_id="2882063">
+      <IdName>TELEGIORNALE  RETE 7 NEWS</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>19:32:38</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>26</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Notiziario</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>TELEGIORNALE  RETE 7 NEWS</Name>
+        <Description>TELEGIORNALE  RETE 7 NEWS</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30026" related_to_day_id="30026" db_id="2882256">
+      <IdName>CASA PEYRETTI - DIRETTA</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>20:01:34</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>0</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Intrattenimento</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>CASA PEYRETTI - DIRETTA</Name>
+        <Description>CASA PEYRETTI - DIRETTA</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>CASA PEYRETTI - DIRETTA</Name>
+        <Description>CASA PEYRETTI - DIRETTA</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30027" related_to_day_id="30027" db_id="2996962">
+      <IdName>FIABE</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>21:02:54</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>13</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30028" related_to_day_id="30028" db_id="2996965">
+      <IdName>FILM - DETECTIVE STONE</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>21:31:31</StartTime>
+      <DurationHour>1</DurationHour>
+      <DurationMin>30</DurationMin>
+      <DurationSec>2</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Film</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FILM - DETECTIVE STONE</Name>
+        <Description>FILM - DETECTIVE STONE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FILM - DETECTIVE STONE</Name>
+        <Description>FILM - DETECTIVE STONE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30029" related_to_day_id="30029" db_id="2996969">
+      <IdName>FIABE</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>23:04:21</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>13</DurationMin>
+      <DurationSec>0</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Progr.Info/Approf.</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>FIABE</Name>
+        <Description>FIABE</Description>
+      </LongEventDescription>
+    </Event>
+    <Event id="30030" related_to_day_id="30030" db_id="2996972">
+      <IdName>VIDEO MUSICALI - LISCIO SIMPATIA - CANZONI DA BALERA</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>23:20:19</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>3</DurationMin>
+      <DurationSec>52</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Intrattenimento</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - LISCIO SIMPATIA - CANZONI DA BALERA</Name>
+        <Description />
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - LISCIO SIMPATIA - CANZONI DA BALERA</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+    <Event id="30031" related_to_day_id="30031" db_id="2996973">
+      <IdName>VIDEO MUSICALI - CASTELLINA PASI - ADRIANO</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>23:24:12</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>3</DurationMin>
+      <DurationSec>24</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Intrattenimento</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - CASTELLINA PASI - ADRIANO</Name>
+        <Description />
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - CASTELLINA PASI - ADRIANO</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+    <Event id="30032" related_to_day_id="30032" db_id="2996974">
+      <IdName>VIDEO MUSICALI - CASTELLINA PASI - INNAMORARSI</IdName>
+      <StartDate>2021-01-16</StartDate>
+      <StartTime>23:27:36</StartTime>
+      <DurationHour>0</DurationHour>
+      <DurationMin>3</DurationMin>
+      <DurationSec>47</DurationSec>
+      <LogoFile />
+      <WebUrl />
+      <GenreName>Intrattenimento</GenreName>
+      <ShortEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - CASTELLINA PASI - INNAMORARSI</Name>
+        <Description />
+      </ShortEventDescription>
+      <LongEventDescription>
+        <LanguageCode>ita</LanguageCode>
+        <LanguageName>Italian</LanguageName>
+        <Name>VIDEO MUSICALI - CASTELLINA PASI - INNAMORARSI</Name>
+        <Description />
+      </LongEventDescription>
+    </Event>
+  </Service>
+</ProgramGuide>

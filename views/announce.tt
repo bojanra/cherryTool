@@ -1,0 +1,51 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="aPanel" class="">
+    <div class="panel panel-default">
+      <div class="panel-heading ">
+        <h3 class="panel-title">Announcement configuration</h3>
+      </div>
+      <div class="panel-body">
+        <h4>Overwrite <b>text</b> field in <i>short_event_descriptor</i>:</h4>
+        <div class="report" id="parseReport"></div>
+        <form action="" class="">
+          <input type="hidden" name="config" value="1">
+          <div class="custom-checkbox">
+            <input type="checkbox" id="present" name="present_check" disabled="disabled">
+            <label for="present" class="text-info">Overwrite <i>present</i> events with </label>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="present" disabled="disabled" />
+          </div>
+          <div class="custom-checkbox">
+            <input type="checkbox" id="following" name="following_check" disabled="disabled">
+            <label for="following" class="text-info">Overwrite <i>following</i> events with</label>
+          </div>
+          <div class="form-group" disabled="disabled">
+            <input type="text" class="form-control" name="following" disabled="disabled" />
+          </div>
+          <div class="alert alert-warning hidden">
+            <h4><b>Save in progress!</b></h4>
+          </div>
+          <div class="alert alert-danger hidden">
+            <h4><b>Failed!</b> Announcement not updated.</h4>
+          </div>
+          <div class="alert alert-success hidden">
+            <h4><b>Done!</b> Announcement configuration updated. Changes apply after next build.</h4>
+          </div>
+          <div class="commands">
+            <button type="button" name="save" class="btn btn-success pull-right" disabled="disabled"><i class="glyphicon glyphicon glyphicon-floppy-disk" disabled="disabled"></i> <strong>Save</strong></button>
+            <span class="text-danger pull-right">&nbsp;</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const announce = new Announcement();
+    announce.init();
+  });
+</script>

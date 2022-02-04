@@ -1,0 +1,19 @@
+<script src="/js/jquery.js"></script>
+<script>
+  window.jQuery || document.write('<script src="/js/jquery.js"><\/script>')
+</script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- IE modal disable other area10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/additional-methods.min.js"></script>
+<script src="/js/jquery.timeago.js"></script>
+<script src="/js/jquery.timeago.en-short.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/dataTables.scroller.min.js"></script>
+<script src="/js/dataTables.select.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/jquery.sparkline.min.js"></script>
+<script src="/js/jquery.json-viewer.js"></script>
+<script src="/js/app.js"></script>

@@ -1,0 +1,273 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+guideSplitter - tool for splitting multichannel TVXML files into multiple singlechannel files
+
+=head1 SYNOPSIS
+
+ guideSplitter [-hle] file
+
+=head1 OPTIONS
+
+ -h         show this help
+ -l         list channels
+ -e         export schedule data to STDOUT
+
+=head1 DESCRIPTION
+
+C<guideSplitter> is a tool for splitting multichannel TVXML (WG+ guide.xml) file in multiple single channel files.
+By default multiple files are created.
+
+=head1 AUTHOR
+
+This software is copyright (c) 2021 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+package guideSplitter;
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Moo;
+use Pod::Usage;
+use Try::Tiny;
+use Getopt::Std;
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '1.05';
+
+has 'source' => ( is => 'ro' );
+has 'stdout' => ( is => 'ro', default => 0 );
+
+__PACKAGE__->run() unless caller();
+
+sub run {
+    my %args;
+
+    getopts( "hle", \%args );
+
+    say("guideSplitter - ver. $VERSION Copyright 1 Bojan Ramsak");
+
+    pod2usage(
+        -verbose  => 99,
+        -exitval  => 0,
+        -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+        )
+        if exists $args{h};
+
+    my $sourceFile = shift @ARGV;
+
+    my $app = guideSplitter->new( source => $sourceFile, stdout => $args{e} );
+
+    $app->read();
+
+    if ( $args{l} ) {
+        $app->list();
+    } else {
+        $app->export();
+    }
+
+    return;
+} ## end sub run
+
+sub BUILD {
+    my ($self) = @_;
+
+    $self->{header}  = [];
+    $self->{channel} = {};
+    $self->{name}    = {};
+    $self->{current} = undef;
+    $self->{buffer}  = [];
+} ## end sub BUILD
+
+=head3 optimize( $ref)
+
+Optimize the referenced string.
+
+=cut
+
+sub optimize {
+    my ( $self, $ref ) = @_;
+
+#    $$ref =~ s/&lt;.+?&gt;//sg;
+    $$ref =~ s/&lt;script.+&lt;\/script&gt;//sg;
+    $$ref =~ s/(\n\s*){2,}/\n/sg;
+    $$ref =~ s/(&lt;img .*?lazyload&gt;)//sg;
+
+} ## end sub optimize
+
+=head3 list ( )
+
+ List found channels
+
+=cut
+
+sub list {
+    my ($self) = @_;
+
+    my $header = join( '', @{ $self->{header} } );
+
+    foreach my $id ( sort keys %{ $self->{channel} } ) {
+        my $size = length( $header . join( '', @{ $self->{channel}{$id} } ) );
+        my $name = $self->{name}{$id};
+        say $self->formatTitle( $id, $name, $size );
+    }
+} ## end sub list
+
+=head3 formatTitle ( $id, $name, $size)
+
+ Format output.
+
+=cut
+
+sub formatTitle {
+    my ( $self, $id, $name, $size ) = @_;
+
+    return sprintf( "%-25s %-25s: %7i%s", $id, $name // '', $size, $size < 1000 ? " !!!!" : "" );
+}
+
+
+=head3 export ( )
+
+ Write each channel schedule to separate file in current dir or to STDOUT.
+
+=cut
+
+sub export {
+    my ($self) = @_;
+
+    my $header = join( '', @{ $self->{header} } );
+
+    foreach my $id ( sort keys %{ $self->{channel} } ) {
+        my $content = join( '', @{ $self->{channel}{$id} } );
+        $content .= "</tv>";
+
+        $self->optimize( \$content );
+
+        my $size = length($content);
+        $id =~ s|/|_|;
+        my $title = $self->formatTitle( $id, $self->{name}{$id}, $size );
+        if ( $self->{stdout} ) {
+            say( "=[$title]", "=" x 80 );
+            say( $header,     $content );
+        } else {
+            say($title);
+            my $file = $id . ".xml";
+            open( my $out, ">", $file ) or die "Error writing to $file: $!";
+            print( $out $header );
+            print( $out $content );
+            close($out);
+        } ## end else [ if ( $self->{stdout} )]
+    } ## end foreach my $id ( sort keys ...)
+} ## end sub export
+
+=head3 displayName ( $name)
+
+ Set displayname for channel
+
+=cut
+
+sub displayName {
+    my ( $self, $name ) = @_;
+
+    return if !$self->{current};
+    $self->{name}{ $self->{current} } = $name;
+} ## end sub displayName
+
+
+=head3 read ( )
+
+ Read the sourcefile and parse line by line.
+
+=cut
+
+sub read {
+    my ($self) = @_;
+
+    my $input;
+    if ( !open( $input, '<', $self->{source} ) ) {
+        say("Error opening $self->{source}: $?");
+        return;
+    }
+
+    my $currentId;
+    my @data;
+
+    while (<$input>) {
+        s/^\N{BOM}//;
+        if (/^<\?xml.*/) {
+
+            # save the header
+            push( @{ $self->{header} }, $_ );
+        } elsif (/<tv/) {
+
+            # save the header
+            push( @{ $self->{header} }, $_ );
+        } elsif (m|<channel.+id="(.+?)"><display-name>(.+?)</display-name>.*</channel>|) {
+
+            $self->{buffer}  = [$_];
+            $self->{current} = $1;
+            $self->displayName($2);
+        } elsif (/<channel.+id="(.+?)">/) {
+
+            $self->{buffer}  = [$_];
+            $self->{current} = $1;
+        } elsif (/<display-name.*>(.+)<\/display-name/) {
+
+            push( @{ $self->{buffer} }, $_ );
+            $self->displayName($1);
+        } elsif (m|<programme.+channel="(.+?)">.*</programme>|) {
+
+            my $current = $1;
+            if ($current) {
+                if ( exists $self->{channel}{$current} ) {
+                    push( @{ $self->{channel}{$current} }, $_ );
+                } else {
+                    @{ $self->{channel}{$current} } = $_;
+                }
+            } ## end if ($current)
+
+            # clean buffer
+            $self->{buffer}  = [];
+            $self->{current} = undef;
+        } elsif (/<programme.+channel="(.+?)"/) {
+
+            $self->{buffer}  = [$_];
+            $self->{current} = $1;
+        } elsif ( m|</programme>| or m|</channel>| ) {
+            push( @{ $self->{buffer} }, $_ );
+
+            my $filtered = join( '', @{ $self->{buffer} } );
+
+            # save to buffered data to appropriate channel
+            if ( $self->{current} ) {
+                my $current = $self->{current};
+                if ( exists $self->{channel}{$current} ) {
+                    push( @{ $self->{channel}{$current} }, $filtered );
+                } else {
+                    @{ $self->{channel}{$current} } = $filtered;
+                }
+            } ## end if ( $self->{current} )
+
+            # clean buffer
+            $self->{buffer}  = [];
+            $self->{current} = undef;
+        } else {
+
+            # just add line to buffer
+            push( @{ $self->{buffer} }, $_ );
+        }
+    } ## end while (<$input>)
+
+    close($input);
+    return;
+} ## end sub read
+
+1;

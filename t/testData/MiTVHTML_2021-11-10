@@ -1,0 +1,447 @@
+<div class="guide-controls thin">
+  <ul class="date-selection-bar">
+    <li class="option  ">
+      <a href="/ar/canales/c5n/2021-11-07">2021-11-07</a>
+    </li>
+    <li class="option  mobile">
+      <a href="/ar/canales/c5n/ayer">Ayer</a>
+    </li>
+    <li class="option selected mobile">
+      <a href="/ar/canales/c5n">Hoy</a>
+    </li>
+    <li class="option  mobile">
+      <a href="/ar/canales/c5n/manana">Mañana</a>
+    </li>
+    <li class="option  ">
+      <a href="/ar/canales/c5n/jueves">Jueves</a>
+    </li>
+  </ul>
+</div>
+
+<div id="listings">
+  <div class="channel-info">
+    <img src="https://cdn.mitvstatic.com/channels/ar_c5n_m.png" alt="Programación C5N" title="C5N" width="75" height="75" />
+    <h1>Programación C5N <span>Martes 9 de noviembre</span></h1>
+  </div>
+
+
+  <ul class="broadcasts time24">
+    <li>
+      <a href="/ar/programas/minutouno" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_minutouno_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">05:00</span>
+          <h2>
+            Minutouno </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Programa dedicado a analizar y comprender la realidad nacional e internacional. Entrevistas, informes especiales e investigaciones. Debates económicos y políticos con los principales actores del ámbito nacional. </p>
+
+        </div>
+      </a>
+    </li>
+
+    <li class="native">
+      <!-- /267432356/www_mi_tv/www_mi_tv_channel_native -->
+      <div id='div-gpt-ad-1586617865827-0'></div>
+    </li>
+
+    <li>
+      <a href="/ar/programas/recalculando" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_recalculando_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">06:30</span>
+          <h2>
+            Recalculando </h2>
+          <span class="sub-title">Político</span>
+
+
+
+          <p class="synopsis">
+
+
+            Un espacio que acerca las noticias sociales y políticas de la actualidad, con el debate de todo el acontecer del país. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/resumen-de-medianoche" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_resumen-de-medianoche_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">07:30am</span>
+          <h2>
+            Resumen de medianoche </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Todas las noticias del día y de la actualidad. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/bien-temprano" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_bien-temprano_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">08:00</span>
+          <h2>
+            Bien temprano </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Las noticias más destacadas de la jornada y los adelantos del día que comienza para empezar bien informado. Las tapas de los diarios y el pronóstico del tiempo. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/mananas-argentinas" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_mananas-argentinas_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">09:00</span>
+          <h2>
+            Mañanas argentinas </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Para informarse mejor. Los destacados de los principales diarios. La más detallada información del día que recién comienza, con móviles en vivo y notas exclusivas. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/argentina-en-vivo" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_argentina-en-vivo_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">12:00</span>
+          <h2>
+            Argentina en vivo </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Actualidad, información, móviles al instante en el lugar exacto en donde sucede la noticia. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/nos-vemos" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_nos-vemos_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">15:00</span>
+          <h2>
+            Nos vemos </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Espacio en el cual se presentarán los acontecimientos más destacados del día, el tránsito, el clima y un panorama de lo que se viene, con notas de interés, informes, reportes y mucho más. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/minuto-a-minuto" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_minuto-a-minuto_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">17:00</span>
+          <h2>
+            Minuto a minuto </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Un espacio renovado que ofrece el repaso por los hechos que han transcendido internacionalmente y en la Nación. La información de los acontecimientos más destacados hasta el momento. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/el-diario" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_el-diario_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">7:00pm</span>
+          <h2>
+            El diario </h2>
+          <span class="sub-title">Noticiero</span>
+
+
+
+          <p class="synopsis">
+
+
+            Un espacio que cuenta con diferentes opiniones, actualidad y despliegue periodístico. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/la-hora-de-victor-hugo" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/fallback_other_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">21:00</span>
+          <h2>
+            La hora de Víctor Hugo </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Un ciclo de actualidad y análisis. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li class="ongoing">
+      <a href="/ar/programas/minutouno" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_minutouno_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">23:00</span>
+          <h2>
+            Minutouno </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Programa dedicado a analizar y comprender la realidad nacional e internacional. Entrevistas, informes especiales e investigaciones. Debates económicos y políticos con los principales actores del ámbito nacional. </p>
+
+          <div class="progress-container">
+            Quedan 39 min <div class="progress"><span style="width: 56%"></span></div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/desafio-20-21" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_desafio-20-21_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">00:30</span>
+          <h2>
+            Desafío 20.21 </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Toda la coyuntura política con un amplio despliegue de la información de actualidad. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/brotes-verdes" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_brotes-verdes_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">02:00</span>
+          <h2>
+            Brotes verdes </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Un programa de investigación periodística que trae un nuevo enfoque político y económico. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/resumen-de-medianoche" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_resumen-de-medianoche_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">03:00</span>
+          <h2>
+            Resumen de medianoche </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Todas las noticias del día y de la actualidad. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/hacete-cargo" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_hacete-cargo_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">03:30</span>
+          <h2>
+            Hacete cargo </h2>
+          <span class="sub-title">Religioso</span>
+
+
+
+          <p class="synopsis">
+
+
+            Encuentra tu paz interior a través de la palabra de Claudio María Domínguez, quien se referirá a la existencia de Dios, el ego, el conocimiento, entre otros temas relacionados con la espiritualidad. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/right-now" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_right-now_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">04:30</span>
+          <h2>
+            Right Now </h2>
+          <span class="sub-title">Entrevista</span>
+
+
+
+          <p class="synopsis">
+
+
+            Programa que cuenta con entrevistas a distintos artistas, segmentos de moda, gastronomía, fitness y espectáculos. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+    <li>
+      <a href="/ar/programas/minutouno" class="program-link">
+        <div class="image-parent">
+          <div class="image" style="background-image: url('https://cdn.mitvstatic.com/programs/ar_minutouno_l_m.jpg')"></div>
+        </div>
+
+        <div class="content">
+          <span class="time">05:00</span>
+          <h2>
+            Minutouno </h2>
+          <span class="sub-title">Periodístico</span>
+
+
+
+          <p class="synopsis">
+
+
+            Programa dedicado a analizar y comprender la realidad nacional e internacional. Entrevistas, informes especiales e investigaciones. Debates económicos y políticos con los principales actores del ámbito nacional. </p>
+
+        </div>
+      </a>
+    </li>
+
+
+  </ul>
+
+  <div style="clear: both"></div>
+</div>

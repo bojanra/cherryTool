@@ -1,0 +1,188 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div class="hidden" id="cPanel">
+    <div class="row">
+      <div class="col-md-3" id="sidebar">
+        <div class="list-group wizard-menu">
+          <button class="list-group-item" id="wMenuBrowse">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Browse carousel</h4>
+            <p class="list-group-item-text">List available TS chunks</p>
+          </button>
+          <a href="https://api.cherryhill.eu/psigen/" target="_blank">
+            <button class="list-group-item" id="wMenuNew">
+              <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp; Generate new chunk</h4>
+              <p class="list-group-item-text">Open psiGen - online PSI/SI builder in new window</p>
+            </button>
+          </a>
+          <button class="list-group-item" id="wMenuUpload">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span> Carousel upload wizard</h4>
+            <p class="list-group-item-text">Load enhanced TS chunk from local machine</p>
+          </button>
+          <div class="list-group-item" id="wMenuDropzone">
+            <div class="upload-area">
+              <h1>Drag and Drop<br />for<br />Upload and Save</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9" id="workArea">
+        <div class="form-group wizard hidden" id="configWizard">
+          <ul class="nav nav-pills nav-justified thumbnail">
+            <li class="">
+              <button class="list-group-item active" id="step1">
+                <h4 class="list-group-item-heading">Step 1</h4>
+                <p class="list-group-item-text">Upload enhanced TS chunk</p>
+              </button>
+            </li>
+            <li class="disabled">
+              <button class="list-group-item disabled" id="step2">
+                <h4 class="list-group-item-heading">Step 2</h4>
+                <p class="list-group-item-text">Validate TS chunk</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel panel-default hidden" id="uploadForm">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-7">
+                <div class=""><i><b>cherryEPG</b> uses a compressed file in <b>.gz</b> format to store
+                    transport stream chunks with meta data.<br />
+                    The file contains the TS chunk itself, the PSI/SI table definition from which it was generated
+                    the destination address to which it will be played and description title.
+                    Please use the online service <a href="https://api.cherryhill.eu/psigen/"><u>psiGen</u></a>
+                    to build custom TS chunks.<br />
+                  </i>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <form id="addFileForm" action="" class="">
+                  <div class="form-group ">
+                    <label class="control-label">Enhanced Transport Stream chunk file (.gz)</label>
+                    <div class="input-group">
+                      <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                          Browse&hellip; <input id="sourceFile" type="file" style="display: none;">
+                        </span>
+                      </label>
+                      <input type="text" id="sourceFileShow" name="sourceFileShow" placeholder="sample.gz" class="form-control" readonly>
+                    </div>
+                  </div>
+                  <div class="">
+                    <button type="button" name="upload" class="btn btn-success pull-right"><i class="glyphicon glyphicon-upload"></i><strong> Upload</strong> chunk</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="saveForm">
+          <div class="panel-body">
+            <h4>Content of compressed <b>Enhanced Transport Stream</b> file </h4>
+            <div class="report" id="parseReport"></div>
+            <div class="commands">
+              <span class="text-danger pull-right">&nbsp;</span>
+            </div>
+            <div class="alert alert-success hidden">
+              <h4><b>Done!</b> Enhanced TS file saved to carousel. Yout need to <b>start it</b> in the <a href="/carousel">Carousel browser</a>.</h4>
+            </div>
+            <div class="alert alert-danger hidden">
+              <h4><b>Failed!</b> Enhanced TS file was not saved to carousel. Please check <a href="/log">log</a>.</h4>
+            </div>
+            <div class="form-group">
+              <button type="button" name="upload" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-upload"></i> Upload <strong>different</strong> chunk</button>
+              <button type="button" name="continue" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Save in carousel</strong></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default hidden" id="browseForm">
+          <div class="panel-heading">
+            <h3 class="panel-title">Carousel content</h3>
+          </div>
+          <div class="panel-body" id="browseReport">
+            <table class="table custab">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Title</th>
+                  <th>Address:port</th>
+                  <th>PID</th>
+                  <th>Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tr class="chunk">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>
+                  <span class="badge badge-success hidden">Playing</span>
+                </td>
+                <td class="text-right">
+                  <button class="btn btn-info btn-sm" name="preview">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                  </button>
+                  <button class="btn btn-default btn-sm" name="download" disabled>
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                  </button>
+                  <button class="btn btn-default btn-sm" name="play" disabled>
+                    <span class="glyphicon glyphicon-play"></span>
+                  </button>
+                  <button class="btn btn-default btn-sm" name="pause" disabled>
+                    <span class="glyphicon glyphicon-pause"></span>
+                  </button>
+                  <button class="btn btn-danger btn-sm" name="delete">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-center">Delete</h3>
+        </div>
+        <div class="modal-body text-center">
+          The chunk will be removed from carousel.<br />This action cannot be undone. Are you sure?</div>
+        <div class="modal-footer">
+          <button style='margin-left:10px;' type="button" class="btn btn-danger pull-right" id="btnConfirm">Delete!</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modPreview" tabindex="-1" role="dialog" aria-labelledby="modPreviewLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title" id="modPreviewLabel">Analyzer output</h4>
+        </div>
+        <div class="modal-body">
+          <pre id="preview"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const carousel = new CarouselPanel();
+    carousel.init();
+  });
+</script>

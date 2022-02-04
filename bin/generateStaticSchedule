@@ -1,0 +1,117 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+generateStaticSchedule - tool for generating static schedule information
+
+=head1 SYNOPSIS
+
+ generateStaticSchedule [options]
+
+=head1 OPTIONS
+ -h         show this help
+ -P rating  add parental rating [rating]
+ -t title   use title as event title
+ -n name    use name as channelName (default "StaticChannel")
+ -d days    number of days to generate schedule (default 8)
+ -s hours   event lenght - segmentation (default 24h)
+ -o file    write output to file (default stdout)
+
+=head1 DESCRIPTION
+
+C<generateStaticSchedule> is a command-line tool for generating schedule data in L<ProPlusXML> format.
+
+=head1 AUTHOR
+
+This software is copyright (c) 2019 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Pod::Usage;
+use Getopt::Std;
+use Try::Tiny;
+use Time::Piece;
+use Time::Seconds;
+use XML::Simple;
+use Encode qw( decode);
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '0.14';
+
+my %args;
+
+getopts( "hP:t:d:s:o:n:", \%args ) or $args{h} = 1;
+
+if ( exists $args{h} ) {
+    say("generateStaticSchedule - ver. $VERSION Copyright 2022 Bojan Ramsak");
+    pod2usage(
+        -verbose  => 99,
+        -exitval  => 0,
+        -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+    );
+} ## end if ( exists $args{h} )
+
+my $maxDays          = exists $args{d} ? $args{d} : 8;
+my $stdEventDuration = exists $args{s} ? $args{s} : 24;
+
+# decode arguments to utf8
+my $channelName =
+    exists $args{n} ? decode( "utf8", $args{n} ) : "StaticChannel";
+my $title = decode( "utf8", $args{t} );
+
+my $data = generate();
+
+if ( exists $args{o} ) {
+    my $target = decode( "utf8", $args{o} );
+    if ( open( my $file, '>', $target ) ) {
+        my $dump = XMLout( $data, KeepRoot => 1, XMLDecl => 1 );
+        print( $file $dump );
+        close($file);
+        say( length($dump) . " bytes written to file" );
+        exit 0;
+    } else {
+        say("Saveing [$target] failed");
+        exit 1;
+    }
+} else {
+    say( XMLout( $data, KeepRoot => 1, XMLDecl => 1 ) );
+    exit 0;
+}
+
+sub generate {
+
+    my $data  = { epg => { event => [] } };
+    my $start = localtime();
+    $start = $start->truncate( to => 'day' );
+
+    # iterate over set segmentation
+    for ( my $eventCounter = 0 ; $eventCounter < $maxDays * 24 / $stdEventDuration ; $eventCounter++ ) {
+        my $t     = $start + ONE_HOUR * $stdEventDuration * $eventCounter;
+        my $event = {
+            ChannelName => [$channelName],
+            Start       => [ $t->datetime ],
+            Duration    => [ $stdEventDuration * 60 * 60 ]
+        };
+
+        if ( exists $args{t} ) {
+            $event->{Title} = [$title];
+        } else {
+            $event->{Title} = [ sprintf( "Event %03i", $eventCounter ) ];
+        }
+
+        $event->{Parental} = [ $args{P} ] if exists $args{P};
+
+        push( @{ $data->{epg}{event} }, $event );
+    } ## end for ( my $eventCounter ...)
+
+    return $data;
+} ## end sub generate

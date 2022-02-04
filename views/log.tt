@@ -1,0 +1,56 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="logBrowser" class="panel panel-default">
+    <div class="panel-heading">
+      <div class="btn-group pull-right">
+        <a href="#"><span id="logUpdate" class="label label-default align"></span></a>
+      </div>
+      <h3 class="panel-title"><strong>Log browser</strong></h3>
+    </div>
+    <div id="logBrowserTabs" class="panel-body">
+      <div class="row ">
+        <div class="col-md-5">
+          <strong>source:</strong>&nbsp;
+          <button id="logBrowser-0" type="button" class="btn btn-blue btn-xs active" data-toggle="button" aria-pressed="false" autocomplete="off">grabber</button>
+          <button id="logBrowser-1" type="button" class="btn btn-blue btn-xs active" data-toggle="button" aria-pressed="false" autocomplete="off">ingester</button>
+          <button id="logBrowser-2" type="button" class="btn btn-blue btn-xs active" data-toggle="button" aria-pressed="false" autocomplete="off">builder</button>
+          <button id="logBrowser-3" type="button" class="btn btn-blue btn-xs active" data-toggle="button" aria-pressed="false" autocomplete="off">player</button>
+          <button id="logBrowser-4" type="button" class="btn btn-blue btn-xs active" data-toggle="button" aria-pressed="false" autocomplete="off">system</button>
+        </div>
+        <div class="col-md-2">
+          <strong>min. level:&nbsp;<span id="logBrowserMinLevel">?</span></strong>&nbsp;
+        </div>
+        <div class="col-md-3">
+          <input id="logBrowserSlider" class="span2" type="text" value="5" style="">
+        </div>
+      </div>
+      <table id="logTable" class="table table-log" cellspacing="0" width="100%">
+        <thead class="tablehead">
+          <tr>
+            <th></th>
+            <th>timestamp</th>
+            <th>source</th>
+            <th>level</th>
+            <th>message</th>
+            <th>service</th>
+            <th>details</th>
+          </tr>
+        </thead>
+        <tfoot class="tablehead">
+        </tfoot>
+      </table>
+    </div>
+  </div><!-- logBrowser panel -->
+</div>
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const log = new LogBrowser(true);
+
+    const refresh = () => {
+      log.refresh();
+    };
+
+    $('.panel-heading a').on('click', () => refresh());
+  });
+</script>

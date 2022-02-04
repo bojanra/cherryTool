@@ -1,0 +1,257 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="cPanel" class="hidden">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="list-group wizard-menu">
+          <button class="list-group-item" id="wMenuBrowse">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Browse scheme</h4>
+            <p class="list-group-item-text">List previously uploaded scheme</p>
+          </button>
+          <button class="list-group-item list-group-item-warning" id="wMenuAction">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-repeat"></span> Maintenance</h4>
+            <p class="list-group-item-text">Actions on current scheme</p>
+          </button>
+          <button class="list-group-item" id="wMenuWizard">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span> Scheme upload wizard</h4>
+            <p class="list-group-item-text">Load excel scheme file from local computer</p>
+          </button>
+          <div class="list-group-item" id="wMenuDropzone">
+            <div class="upload-area">
+              <h1>Drag and Drop<br />for<br />Upload</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+
+        <div class="panel panel-default hidden" id="browsePanel">
+          <div class="panel-body">
+            <h4>Current <b>scheme</b> activated on <b><span></span></b></h4>
+            <div class="report"></div>
+            <form action="" class="">
+              <div class="form-group">
+                <label for="description" class="control-label">Description</label>
+                <input type="text" class="form-control" name="description" disabled />
+              </div>
+            </form>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info">
+              <div class="panel-heading ">
+                <h3 class="panel-title">Archive</h3>
+              </div>
+            </li>
+            <li class="list-group-item" id="browseReport">
+              <table class="table custab">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Description <b>Service/EIT/Rules</b></th>
+                    <th>Source</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tr class="scheme">
+                  <td>?</td>
+                  <td>?</td>
+                  <td>?</td>
+                  <td class="text-right">
+                    <a class='btn btn-primary btn-sm' href="">
+                      <span class="glyphicon glyphicon-download-alt"></span>
+                    </a>
+                    <button class='btn btn-success btn-sm' name="act">
+                      <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" name="del">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-group wizard hidden" id="configWizard">
+          <ul class="nav nav-pills nav-justified thumbnail">
+            <li class="">
+              <button class="list-group-item active" id="step1">
+                <h4 class="list-group-item-heading">Step 1</h4>
+                <p class="list-group-item-text">Upload Excel file</p>
+              </button>
+            </li>
+            <li class="disabled">
+              <button class="list-group-item disabled" id="step2">
+                <h4 class="list-group-item-heading">Step 2</h4>
+                <p class="list-group-item-text">Validate scheme</p>
+              </button>
+            </li>
+            <li class="disabled">
+              <button class="list-group-item disabled" id="step3">
+                <h4 class="list-group-item-heading">Step 3</h4>
+                <p class="list-group-item-text">Activate scheme</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel panel-default hidden" id="actionPanel">
+          <ul class="list-group">
+            <li class="list-group-item" id="uploadBody">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class=""><i><b>cherryEPG</b> uses a spreadsheet file in <b>.xls</b> format as scheme source.<br />
+                      You can get a sample scheme <a href="/scheme/reference"><u>template</u></a>.<br />
+                      Update the file with your scheme data and upload it with this form. <br />
+                      After uploading the file will be validated and can be saved on the server.<br />
+                      <p class="text-danger">Only 100% valid files can be saved and later used in production!</p>
+                    </i>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <form id="addFileForm" action="" class="">
+                    <div class="form-group ">
+                      <label class="control-label">Spreadsheet file (.xls)</label>
+                      <div class="input-group">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary">
+                            Browse&hellip; <input id="sourceFile" type="file" style="display: none;">
+                          </span>
+                        </label>
+                        <input type="text" id="sourceFileShow" name="sourceFileShow" placeholder="sample.xls" class="form-control" readonly>
+                      </div>
+                    </div>
+                    <span class="clearfix">
+                      <button type="button" name="upload" class="btn btn-success pull-right"><i class="glyphicon glyphicon-upload"></i><strong> Upload</strong> scheme</button>
+                    </span>
+                  </form>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-group-item" id="validateBody">
+              <h4>?</h4>
+              <div class="report" id="parseReport"></div>
+              <form action="" class="">
+                <div class="form-group">
+                  <label for="description" class="control-label">Description of scheme</label>
+                  <input type="text" class="form-control" name="description" />
+                </div>
+                <span class="clearfix">
+                  <button type="button" name="upload" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-upload"></i> Upload <strong>different</strong> scheme</button>
+                  <button type="button" name="continue" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Continue</strong></button>
+                  <span class="text-danger pull-right" id="reportSpan">&nbsp;</span>
+                </span>
+              </form>
+            </li>
+
+            <li class="list-group-item" id="actionBody">
+              <h4>Perform these actions:</h4>
+              <form action="" class="">
+                <div class="custom-checkbox">
+                  <input type="checkbox" disabled checked id="stopEIT">
+                  <label for="stopEIT">Stop present EIT in carousel</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="stopCarousel">
+                  <label for="stopCarousel" class="text-warning">Stop carousel (stop playing <u>all</u> chunks)</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="deleteCarousel">
+                  <label for="deleteCarousel" class="text-danger">Delete carousel (remove and stop playing <u>all</u> chunks)</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="resetDatabase">
+                  <label for="resetDatabase" class="text-danger">Reset all tables in database to empty state (drop+init)</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="deleteIngest">
+                  <label for="deleteIngest" class="text-warning">Delete ALL from ingest directory</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="reIngest">
+                  <label for="reIngest" class="text-info">Reset ingest directory</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" disabled checked id="importScheme">
+                  <label for="importScheme">Load scheme to database</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="grab">
+                  <label for="grab" class="text-info">Grab ALL</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="ingest">
+                  <label for="ingest" class="text-info">Ingest ALL</label>
+                </div>
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="build">
+                  <label for="build" class="text-info">Build output EIT</label>
+                </div>
+              </form>
+
+              <div class="alert alert-warning ">
+                <img src="/img/spinner.gif" class="" alt="spinner">
+                <span>Action in progress. Please wait. <i>(This may take a couple of minutes.)</i></span>
+              </div>
+              <div class="alert alert-danger ">
+                <h4><b>Failed!</b> Exceptions occurred. Please check the <a href="/log">log</a>.</h4>
+              </div>
+              <div class="alert alert-success ">
+                <h4><b>Done!</b> Check current status on the <a href="/">dashboard</a>.</h4>
+              </div>
+              <div class="alert alert-default">
+              </div>
+              <div class="input-group ">
+              </div>
+              <span class="clearfix">
+                <button type="button" name="loadScheme" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Activate</strong> scheme</button>
+                <button type="button" name="maintain" class="btn btn-success pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> <strong>Go</strong> for it</button>
+              </span>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-center">Delete</h3>
+        </div>
+        <div class="modal-body text-center">
+          The scheme will be removed from archive.<br />This action cannot be undone. Are you sure?</div>
+        <div class="modal-footer">
+          <button style='margin-left:10px;' type="button" class="btn btn-danger pull-right" id="btnConfirm">Delete!</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formFailed" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Error</h4>
+        </div>
+        <div class="modal-body">
+          The selected scheme could not be prepared for activation.</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const scheme = new SchemePanel();
+    scheme.init();
+  });
+</script>

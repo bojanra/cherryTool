@@ -1,0 +1,604 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+cherryTool - tool for managing cherryEpg environment
+
+=head1 SYNOPSIS
+
+ cherryTool [options] -[gdiprwx zero or multiple channel_id]
+
+=head1 OPTIONS
+
+ -v         use verbose output mode
+
+ -h         show this help
+ -V         show version and configuration info
+ -R         systemcheck and report
+ -N         systemcheck and notify to log
+ -Q         show detailed database statistics
+ -M chunk   inspect chunk and generate mosaic.png
+ -Z message send ERROR record to log for testing
+
+ -L scheme  initialize EPG database and load scheme
+ -l scheme  load scheme to existing database (do not remove existing services and events)
+            every imported scheme is copied to archive
+ -n         show last(newest) scheme in archive
+ -F         list scheme in archive
+ -e file    export scheme to file
+ -H host    set host as target when converting xls to scheme (used to select sheet)
+ -c xls     convert xls scheme file to yaml scheme
+
+ -C         list content of carousel
+ -u file    add/upload .gz file to carousel
+ -p chunk   play TS chunk
+ -s chunk   stop TS chunk
+ -S         stop - ALL
+ -y chunk   delete TS chunk from carousel TODO
+ -Y         delete ALL from carousel directory - stop carousel
+
+ -G target  grab&ingest by target: all, daily, hourly, weekly
+ -B         build all output EIT chunks
+
+ -f         reset section and version table (force next build)
+ -A         delete ALL from stock directory
+ -P         reset rule table
+ -O         cleanup database - delete old events and log entries
+ -T         reset all tables in database to empty state (drop+init)
+
+ Do operations on service using {channel_id} as id. When no id-s given, go for all!
+ -g id      grab service schedule data
+ -d id      delete ingest files for service
+ -i id      parse/ingest files for service
+ -I id      parse/ingest files for service and dump event data (debugging of parser)
+ -r id      reset ingest state (delete *.md5.parsed)
+ -w id      wipe/remove service definition and data
+ -x id      export events for service in XMLTV format to file {service_id.xml}
+
+ -W         run the web server
+
+=head1 DESCRIPTION
+
+C<cherryTool> is a command-line interface for L<cherryEpg>.
+
+cherryEpg will look for a configuration file before reading its command
+line parameters. The default location is C<$USER_HOME/config.yml>.
+
+=head1 AUTHOR
+
+This software is copyright (c) 2022 by Bojan Ramsak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Pod::Usage;
+use Getopt::Std;
+use cherryEpg;
+use cherryEpg::Scheme;
+use cherryEpg::Taster;
+use Log::Log4perl qw(get_logger);
+use File::Basename;
+use Time::Piece;
+use YAML::XS;
+use Time::HiRes qw( time );
+use Plack::Runner;
+use IPC::ConcurrencyLimit;
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '2.1.2';
+
+my %args;
+
+my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:iIl:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
+
+say("cherryTool - ver. $VERSION Copyright 2022 Bojan Ramšak");
+
+pod2usage(
+    -verbose  => 99,
+    -exitval  => 0,
+    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+    )
+    if exists $args{h} or !$getoptsSuccess;
+
+my $verbose;
+
+my $multiCommand;
+
+$args{v}                 && do { $verbose = 1 };
+$args{A}                 && cleanStockDirectory();
+$args{O}                 && cleanupDatabase();
+$args{f}                 && resetSectionVersionTable();
+$args{P}                 && resetRules();
+$args{T}                 && resetDatabase();
+$args{n}                 && schemeList(1);
+$args{F}                 && schemeList();
+$args{c}                 && schemeCompile();
+( $args{l} or $args{L} ) && schemeImport();
+$args{e}                 && schemeExport();
+$args{G}                 && multiGrabIngest();
+$args{B}                 && multiBuild();
+$args{Q}                 && infoDatabase();
+$args{V}                 && infoEnvironment();
+$args{M}                 && inspect();
+$args{Z}                 && loggerTest();
+( $args{R} or $args{N} ) && checkSystem();
+$args{Y}                 && carouselClean();
+$args{C}                 && carouselList();
+$args{u}                 && carouselAdd();
+$args{p}                 && carouselPlay();
+( $args{S} or $args{s} ) && carouselStop();
+$args{W}                 && webServer();
+
+( $args{g} || $args{i} || $args{I} || $args{r} || $args{w} || $args{d} || $args{x} ) && do { $multiCommand = 1 };
+
+serviceManipulator() if $multiCommand;
+
+exit;
+
+sub carouselList {
+    my $player = cherryEpg::Player->new( verbose => $verbose );
+
+    my $list = $player->list();
+    my @item;
+
+    format PLAYER_TOP =
+    (flags: *-active playing, s-source .ets available, t-tmp file)           Bitrate  Size
+Flags Chunk           Title                         PID  Destination          [bps]   [byte]
+---------------------------------------------------------------------------------------------
+.
+    format PLAYER =
+ @ @@ @<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<< @>>>  @<<<<<<<<<<<<<<<<< @>>>>>>> @>>>>>>>
+@item
+.
+
+    format PLAYER_END =
+=============================================================================================
+ @>>> active chunks
+@item
+.
+
+    $~ = "PLAYER";
+    $^ = "PLAYER_TOP";
+    $= = 60;
+
+    my $countActive = 0;
+
+    foreach (@$list) {
+        @item = ();
+        $countActive += 1 if $_->{playing};
+        push( @item, $_->{playing} ? '*' : '' );
+        push( @item, $_->{ets}     ? 's' : '' );
+        push( @item, $_->{tmp}     ? 't' : '' );
+        push( @item, $_->{target} );
+        push( @item, $_->{meta}{title} // '?' );
+        push( @item, $_->{pid}         // '?' );
+        push( @item, $_->{meta}{dst}   // '?' );
+
+        if ( $_->{meta}{bitrate} ) {
+            push( @item, $_->{meta}{bitrate} );
+        } elsif ( $_->{meta}{interval} ) {
+            push( @item, int( $_->{size} / $_->{meta}{interval} * 1000 ) );
+        } else {
+            push( @item, '?' );
+        }
+        push( @item, $_->{size} // '?' );
+        write;
+    } ## end foreach (@$list)
+    @item = ($countActive);
+    $~    = "PLAYER_END";
+    write;
+} ## end sub carouselList
+
+sub carouselAdd {
+    say("TBD");
+}
+
+sub carouselPlay {
+    say("TBD");
+}
+
+sub carouselStop {
+    my $player = cherryEpg::Player->new();
+    if ( $args{Y} ) {
+        say("Stop playing ALL files in carousel");
+        exit 2 unless confirmed();
+        $player->stop();
+    } else {
+        say("TBD");
+    }
+} ## end sub carouselStop
+
+sub carouselClean {
+    my $player = cherryEpg::Player->new();
+    say("Delete ALL files from carousel");
+    exit 2 unless confirmed();
+    $player->delete();
+} ## end sub carouselClean
+
+sub checkSystem {
+    my $taster = cherryEpg::Taster->new();
+    my $report = $taster->report();
+
+    if ( $args{R} ) {
+        my $output = $taster->format($report);
+        utf8::decode($output);
+        say $output;
+    }
+
+    if ( $args{N} ) {
+        my $logger = get_logger('system');
+
+        my @warning  = ();
+        my @critical = ();
+        foreach my $channel ( @{ $report->{modules}{epg}{report} } ) {
+            my $t = Time::Piece->localtime( $channel->{update} );
+            $channel->{message} =
+                "$channel->{name} [SID=$channel->{id}] last update " . ( $channel->{update} ? $t->strftime() : "NEVER" );
+
+            if ( $channel->{status} == 1 ) {
+                push( @warning, $channel->{message} );
+            } elsif ( $channel->{status} == 2 ) {
+                push( @critical, $channel->{message} );
+            }
+        } ## end foreach my $channel ( @{ $report...})
+
+        $logger->warn( "eventbudget WARNING for service", undef, undef, \@warning ) if scalar @warning;
+        $logger->error( "eventbudget ERROR for service", undef, undef, \@critical ) if scalar @critical;
+    } ## end if ( $args{N} )
+} ## end sub checkSystem
+
+sub cleanupDatabase {
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    say("Cleanup database");
+
+    # delete old events up to yesterday
+    # delete log entries till start of previous month
+    $cherry->cleanup();
+} ## end sub cleanupDatabase
+
+sub cleanStockDirectory {
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    say("Delete ALL files from stock");
+    exit 2 unless confirmed();
+    $cherry->stockDelete();
+} ## end sub cleanStockDirectory
+
+sub confirmed {
+    print(" Please confirm with <yes>: ");
+    my $input = <STDIN>;
+    chomp $input;
+    return $input eq 'yes';
+} ## end sub confirmed
+
+sub infoEnvironment {
+    say( "cherryEpg: ", $cherryEpg::VERSION );
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+
+    say( YAML::XS::Dump( $cherry->config ) );
+} ## end sub infoEnvironment
+
+sub infoDatabase {
+    my $cherry  = cherryEpg->instance( verbose => $verbose );
+    my $version = $cherry->epg->version();
+    my $report  = $cherry->epg->healthCheck();
+
+    say( "Database: ", $version );
+    my @fields;
+    format STAT_TOP =
+Table    Engine  Rows    Size         Create      Update      Check       Collation
+---------------------------------------------------------------------------------------------
+.
+    format STAT =
+@<<<<<<  @>>>>>  @>>>>>  @>>>>>>>>>>  @<<<<<<<<<  @<<<<<<<<<  @<<<<<<<<<  @<<<<<<<<<<<<<<<<<<
+@fields
+.
+
+    $^ = "STAT_TOP";
+    $~ = "STAT";
+    $= = 60;
+
+    foreach my $row ( @{$report} ) {
+        @fields = @$row;
+        $fields[6] = "-" if !$fields[6];
+        write;
+    }
+} ## end sub infoDatabase
+
+sub inspect {
+    say("TBD");
+}
+
+sub loggerTest {
+    my $message = $args{Z};
+    my $cherry  = cherryEpg->instance( verbose => $verbose );
+
+    my $logger = get_logger('system');
+    $logger->error( "test log record", undef, undef, [$message] );
+} ## end sub loggerTest
+
+sub multiGrabIngest {
+    my $target = $args{G};
+
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    say("Starting multi-grab/ingest on target: $target");
+    my $start  = time();
+    my $report = $cherry->channelMulti( $target, 1, 1 );
+    my $end    = time();
+    say( sprintf( "Done: %i Spent: %0.02f s", scalar $report->@*, $end - $start ) );
+} ## end sub multiGrabIngest
+
+sub multiBuild {
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    say "Building";
+    my $start = time();
+    $cherry->eitMulti();
+    my $end = time();
+    say( sprintf( "spent: %0.02f s", $end - $start ) );
+} ## end sub multiBuild
+
+sub resetDatabase {
+    say("Empty all tables");
+    exit 2 unless confirmed();
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+
+    $cherry->databaseReset();
+} ## end sub resetDatabase
+
+sub resetRules {
+    say("Delete all output rules");
+    exit 2 unless confirmed();
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    $cherry->ruleDelete();
+} ## end sub resetRules
+
+sub resetSectionVersionTable {
+    say("Clean section and version tables");
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    $cherry->sectionDelete();
+}
+
+sub schemeCompile {
+    my $source = $args{c};
+    my $doBackup;
+
+    say("Convert xls to yaml scheme:");
+    my ( $filename, $dirs, $suffix ) = fileparse( $source, qr/\.[^.]*/ );
+
+    if ( $filename and $suffix =~ m/^\.(xls|xlsx|ods)$/i and -e $source ) {
+        my $scheme = cherryEpg::Scheme->new();
+        $scheme->readXLS($source);
+
+        my $raw = $scheme->build( $args{H} );
+
+        # check if the scheme was compiled for a selected host, defined by sheet name
+        my $target;
+        if ( $args{H} ) {
+            if ( $raw->{target} eq $args{H} ) {
+                $target = $args{H};
+            } else {
+                say("  Scheme for target host not found!");
+                exit 1;
+            }
+        } else {
+            $target = $raw->{target};
+        }
+
+        my $targetFile = $filename . ( $target ? "_" . $target : "" );
+        $targetFile .= ".yaml";
+
+        if ( scalar( @{ $scheme->error } ) ) {
+            say("  Errors during building and validation:");
+            say( join( "\n", map { $_ = "    " . $_; } @{ $scheme->error } ) );
+        }
+
+        format COMPILE_TOP =
+Source file  Target file            Host         Channels  Outputs   Rules   Ignored   Errors
+---------------------------------------------------------------------------------------------
+.
+        format COMPILE =
+@<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>   @>>>>>>   @>>>>>
+$filename.$suffix, $targetFile, $target // "-", scalar @{$raw->{channel}}, scalar @{$raw->{eit}}, scalar @{$raw->{rule}}, $scheme->{raw}{countIgnored}, scalar( @{ $scheme->error })
+.
+        $^ = "COMPILE_TOP";
+        $~ = "COMPILE";
+        $= = 3;               # pagination for format
+        write;
+
+        if ( !$raw->{isValid} ) {
+            say("  Do you really want to generate scheme file? (Incorrect rows will be ignored)");
+            exit 2 unless confirmed();
+        }
+
+        my $report = $scheme->export($targetFile);
+    } else {
+        die("Incorrect input filename [$source] or file not found.\n");
+    }
+} ## end sub schemeCompile
+
+sub schemeImport {
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+    my $filename;
+    if ( $args{L} ) {
+        $filename = $args{L};
+    } else {
+        $filename = $args{l};
+    }
+    if ( !-f $filename ) {
+        say("File not found!");
+        exit 1;
+    }
+
+    my $scheme = cherryEpg::Scheme->new();
+    my $s      = $scheme->Import($filename);
+
+    if ( !$s ) {
+        say("Incorrect file format!");
+        exit 1;
+    }
+
+    format YAML_TOP =
+Import from file                                 Services  Outputs   Rules
+---------------------------------------------------------------------------------------------
+.
+    format YAML =
+@<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>
+$filename, scalar @{$s->{channel}}, scalar @{$s->{eit}}, scalar @{$s->{rule}}
+.
+    $~ = "YAML";
+    $^ = "YAML_TOP";
+    $= = 3;
+    write;
+
+    if ( $args{L} ) {
+        say "Clean database and import scheme from $args{L}";
+        say "All existing events will be lost";
+    } else {
+        say "Load scheme from $args{l}";
+        say "DELETE all rules. Service event data will NOT be modified!";
+    }
+    exit 2 unless confirmed();
+    $cherry->epg->initdb()  if $args{L};
+    $cherry->ingestDelete() if $args{L};
+
+    my ( $success, $error ) = $scheme->push();
+    $scheme->backup();
+
+} ## end sub schemeImport
+
+sub schemeExport {
+    my $target = $args{e};
+    say("Export scheme to $target");
+    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
+    $scheme->pull();
+    $scheme->export($target);
+} ## end sub schemeExport
+
+
+sub schemeList {
+    my ($last) = @_;
+
+    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
+
+    my $list = $scheme->list();
+    my @item;
+
+    format SCHEME_TOP =
+Scheme          Description                           Source        Services  Outputs   Rules
+---------------------------------------------------------------------------------------------
+.
+    format SCHEME =
+@<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>
+@item
+.
+    $~ = "SCHEME";
+    $^ = "SCHEME_TOP";
+    $= = 60;
+
+    foreach (@$list) {
+        @item = @{$_}{qw|target description source channel eit rule|};
+        write;
+        return if $last;
+    }
+} ## end sub schemeList
+
+sub serviceManipulator {
+
+    # Do something on one or multiple channels
+    my $cherry = cherryEpg->instance( verbose => $verbose );
+
+    my $myChannelList;
+    if ( scalar(@ARGV) > 0 ) {
+        my $errorFlag = 0;
+        foreach my $channel_id (@ARGV) {
+            if ( $channel_id =~ /^\d+$/ ) {
+                my $channel = ${ $cherry->epg->listChannel($channel_id) }[0];
+                if ($channel) {
+                    push( @$myChannelList, $channel );
+                } else {
+                    say("channel $channel_id not defined");
+                    $errorFlag += 1;
+                }
+            } else {
+                say("$channel_id is not a valid channel id");
+                $errorFlag += 1;
+            }
+        } ## end foreach my $channel_id (@ARGV)
+        exit if $errorFlag;
+    } else {
+        if ( $args{w} ) {
+            say("You are going to wipe all services from the system!");
+            exit 2 unless confirmed();
+        }
+        $myChannelList = $cherry->epg->listChannel();
+    } ## end else [ if ( scalar(@ARGV) > 0)]
+
+    # walk over all channels
+    foreach my $channel (@$myChannelList) {
+        my $channel_id = $channel->{channel_id};
+
+        say("$channel->{name} [$channel_id]:");
+
+        $cherry->channelPurge($channel)       if $args{d};
+        $cherry->channelReset($channel)       if $args{r};
+        $cherry->channelGrab($channel)        if $args{g};
+        $cherry->channelIngest($channel)      if $args{i};
+        $cherry->channelIngest( $channel, 1 ) if $args{I};
+
+        if ( $args{x} ) {
+            my $content =
+                $cherry->epg->channelListExport( [$channel], $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
+            my $filename = "service_" . $channel_id . ".xml";
+
+            #TODO error handling
+            open( my $file, ">", $filename ) or die("Failed to open $filename for writing: $?");
+            print( $file $content );
+            close($file);
+            say("  $filename");
+        } ## end if ( $args{x} )
+
+        if ( $args{w} ) {
+            say(" wipe (All service data will be lost):");
+            if ( confirmed() ) {
+                $cherry->channelDelete($channel_id);
+            }
+        } ## end if ( $args{w} )
+    } ## end foreach my $channel (@$myChannelList)
+} ## end sub serviceManipulator
+
+sub webServer {
+    my $port = 5000;
+
+    my $limit = IPC::ConcurrencyLimit->new(
+        type      => 'Flock',
+        max_procs => 1,
+        path      => '/tmp/cherryWeb.flock',
+    );
+
+    my $id = $limit->get_lock;
+    if ( not $id ) {
+        warn "cherryEPG web UI is already running. No lock. Bye";
+        exit(0);
+    } else {
+        chdir;
+
+        my $runner = Plack::Runner->new;
+        $runner->parse_options(
+
+            "-p", $port,
+            "cherryTool/bin/app.psgi",
+            "--server", "Starlet",
+            "--no-default-middleware",
+            "--max_workers", 5,
+            "--host",        "127.0.0.1",
+        );
+        $runner->run();
+    } ## end else [ if ( not $id ) ]
+} ## end sub webServer

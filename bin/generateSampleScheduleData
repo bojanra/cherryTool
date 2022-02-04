@@ -1,0 +1,237 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+generateSampleScheduleData - tool for generating static schedule information
+
+=head1 SYNOPSIS
+
+ genStaticSchedule [options] directoryPath
+
+=head1 OPTIONS
+
+  -h         show this help
+  -v         verbose output
+
+=head1 DESCRIPTION
+
+C<generateSampleScheduleData> is a command-line tool for generating schedule data in L<XMLTV> format.
+The output files are written to directoryPath or $HOME/stock
+
+=head1 AUTHOR
+
+This software is copyright (c) 2019 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use Pod::Usage;
+use Getopt::Std;
+use Encode qw(decode);
+use Path::Class;
+use Time::Piece;
+use Try::Tiny;
+use Spreadsheet::Write;
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '1.04';
+
+my %args;
+my $verbose = 0;
+
+getopts( "hv", \%args ) or $args{h} = 1;
+
+say("generateSampleScheduleData - ver. $VERSION Copyright 2018 Bojan Ramsak");
+
+pod2usage(
+    -verbose  => 99,
+    -exitval  => 0,
+    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+    )
+    if exists $args{h};
+
+$verbose = 1 if exists $args{v};
+
+# define and check output directory
+my $path;
+if ( $#ARGV > -1 ) {
+    $path = shift @ARGV;
+} else {
+    $path = dir( $ENV{'HOME'}, 'stock' );
+}
+die "Directory [$path] does not exist!" if !-d $path;
+
+# global variables
+my $maxDays      = 7;
+my $xlsFile      = "/home/vagrant/SimpleSchedule.xls";
+my $sampleEvents = readSampleData();
+
+# Generate the Excel schedule
+say("Generating [$xlsFile] with schedule data") if $verbose;
+my $schedule = buildSchedule( 88, $maxDays );
+
+my $filePath = file( $path, "SimpleSchedule.xls" ) . '';    # stringify
+say($filePath);
+my $sp = Spreadsheet::Write->new( file => $filePath );
+
+my @columnName = qw| Date Time Duration Title Short Synopsis |;
+$sp->addrow(@columnName);
+
+foreach my $event ( @{ $schedule->{tv}{programme} } ) {
+    my $start = localtime->strptime( $event->{start}, "%Y%m%d%H%M%S %z" );
+    my $stop  = localtime->strptime( $event->{stop},  "%Y%m%d%H%M%S %z" );
+    my @row   = (
+        $start->strftime("%d/%m/%y"),   $start->strftime("%H:%M:%S"),
+        $stop - $start,                 $event->{title}{content},
+        $event->{'sub-title'}{content}, $event->{desc}{content},
+    );
+    $sp->addrow(@row);
+} ## end foreach my $event ( @{ $schedule...})
+
+$sp->close();
+
+# Generate the TVXML schedule
+for ( my $sid = 1 ; $sid <= 45 ; $sid++ ) {
+    say("Generating [$sid] service data") if $verbose;
+    my $schedule = buildSchedule( $sid, $maxDays );
+    my $output   = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+    $output .= '<!DOCTYPE tv SYSTEM "http://127.0.0.1/xmltv.dtd">' . "\n";
+    my $xmlParser = MyXMLSimple->new( RootName => 'xml', KeepRoot => 1 );
+    $output .= $xmlParser->XMLout($schedule);
+
+    my $filePath = file( $path, sprintf( "schedule%02i.xml", $sid ) );
+    say($filePath);
+    open( my $file, ">", $filePath ) or die "Cannot open file [$filePath] for writing!";
+    print $file $output;
+    close($output);
+} ## end for ( my $sid = 1 ; $sid...)
+
+=head1 SUBROUTINES/METHODS
+
+=head3 buildSchedule( $serviceId)
+
+Generate schedule data for channel with SID = $serviceId for next $days.
+
+=cut
+
+sub buildSchedule {
+    my ( $serviceId, $maxDays ) = @_;
+
+    my $now       = time;
+    my $eventSize = $serviceId;
+
+    while ( $eventSize < 600 ) { $eventSize = $eventSize * 10; }
+    say("  $serviceId => $eventSize") if $verbose;
+
+    my $start      = ( int( $now / $eventSize ) ) * $eventSize;
+    my $eventCount = 0;
+    my $schedule   = {
+        'tv' => {
+            'generator-info-name' => 'cherryEpg - sample data http://demo.cherryhill.eu',
+            'channel'             => {
+                'id'           => $serviceId,
+                'display-name' => { content => "Service $serviceId" }
+            },
+            'programme' => []
+        }
+    };
+
+    while ( ( $start + $eventCount * $eventSize ) < ( $now + $maxDays * 24 * 60 * 60 ) ) {
+        my $current       = gmtime( $start + $eventCount++ * $eventSize );
+        my $currentToHour = $current->epoch % ( 6 * 60 * 60 );
+        my $next          = gmtime( $start + $eventCount * $eventSize );
+        my $nextToHour    = $next->epoch % ( 6 * 60 * 60 );
+
+        my $sampleDataIndex = ( $current->epoch / $eventSize ) % $#{$sampleEvents} + 1;
+
+        if ( $currentToHour < $eventSize ) {
+            $current -= $currentToHour;
+            $sampleDataIndex = 0;
+        }
+        if ( $nextToHour < $eventSize ) {
+            $next -= $nextToHour;
+        }
+        say( "  sampleDataIndex = $sampleDataIndex ", ( $sampleDataIndex == 0 ? "News" : "" ) ) if $verbose;
+        say( "    ",                                  $current->strftime("%Y%m%d%H%M%S %z") )   if $verbose;
+
+        my $sample = ${$sampleEvents}[$sampleDataIndex];
+        my $e      = {
+            'title' => {
+                'lang'    => 'en',
+                'content' => ${$sample}[0],
+            },
+            'channel'   => $serviceId,
+            'start'     => $current->strftime("%Y%m%d%H%M%S %z"),
+            'stop'      => $next->strftime("%Y%m%d%H%M%S %z"),
+            'sub-title' => {
+                'lang'    => 'en',
+                'content' => ${$sample}[1],
+            },
+            'desc' => {
+                'lang'    => 'en',
+                'content' => ${$sample}[2],
+            },
+        };
+        push( @{ $schedule->{tv}{programme} }, $e );
+    } ## end while ( ( $start + $eventCount...))
+
+    return $schedule;
+} ## end sub buildSchedule
+
+=head1 SUBROUTINES/METHODS
+
+=head3 readSampleData()
+
+Read sample events data from end of file.
+Return reference to list containing event data.
+First element is 'News'.
+
+=cut
+
+sub readSampleData {
+    my @data;
+
+    while (<DATA>) {
+        chomp;
+        my @splitted = split( /;/, $_ );
+        push( @data, \@splitted );
+    }
+
+    return \@data;
+} ## end sub readSampleData
+
+package MyXMLSimple;
+use base 'XML::Simple';
+
+# Overriding the method here
+sub sorted_keys {
+    my ( $self, $name, $hashref ) = @_;
+    if ( $name eq 'programme' ) {
+        my @ordered      = ( 'title', 'sub-title', 'desc' );
+        my %ordered_hash = map { $_ => 1 } @ordered;
+
+        #set ordered tags in front of others
+        return @ordered, grep { not $ordered_hash{$_} } $self->SUPER::sorted_keys( $name, $hashref );
+    } ## end if ( $name eq 'programme')
+    return $self->SUPER::sorted_keys( $name, $hashref );    # for the rest, I don't care!
+
+} ## end sub sorted_keys
+
+1;
+__END__
+News;What's going on;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Aventine;Aventinus;The Aventine Hill is the southernmost of Rome's seven hills. It has two distinct heights, one greater to the northwest and one lesser to the southeast, divided by a steep cleft that provides the base for an ancient roadway between the heights. During the Republican era, the two hills may have been recognized as a single entity.
+Caelian;Cælius;In Republican-era Rome the Caelian Hill was a fashionable residential district and the site of residences of the wealthy. Archaeological work under the Baths of Caracalla have uncovered the remains of lavish villas complete with murals and mosaics. The Caelian is also the site of the Basilica of Santi Giovanni e Paolo and the ancient basilica of Santo Stefano Rotondo, known for its centralized, circular plan. A significant area of the hill is taken up by Villa Celimontana and its gardens.
+Capitoline;Capitolinus;The hill was earlier known as Mons Saturnius, dedicated to the god Saturn. The word Capitolium first meant the temple of Jupiter Optimus Maximus later built here, and afterwards it was used for the whole hill (and even other temples of Jupiter on other hills), thus Mons Capitolinus (the adjective noun of Capitolium). Ancient sources refer the name to caput ("head", "summit") and the tale was that, when laying the foundations for the temple, the head of a man was found,[3] some sources even saying it was the head of some Tolus or Olus. The Capitolium was regarded by the Romans as indestructible, and was adopted as a symbol of eternity.
+Esquiline;Esquilinus;The origin of the name Esquilino is still under much debate. One view is that the Hill was named after the abundance of Italian oaks, aesculi, that resided there. Another view is that, during Rome's infancy, the Capitolium, the Palatinum, and the northern fringes of the Caelian were the most-populated areas of the city, whose inhabitants were considered inquilini, in-towners, those who inhabited the external regions - Aurelian, Oppius, Cispius, Fagutal - were considered exquilini, suburbanites.
+Palatine;Palatinus;Rome has its origins on the Palatine. Excavations show that people have lived in the area since the 10th century BC.[citation needed] Excavations performed on the hill in 1907 and again in 1948 unearthed a collection of huts believed to have been used for funerary purposes between the 9th and 7th century BC approximating the time period when the city of Rome was founded.
+Quirinal;Quirinalis;The Quirinal Hill is one of the Seven Hills of Rome, at the north-east of the city center. It is the location of the official residence of the Italian head of state, who resides in the Quirinal Palace, by metonymy "the Quirinal" has come to stand for the Italian president. The Quirinal Palace has an extension of 1.2 million square feet.
+Viminal;Viminalis;The Viminal Hill is the smallest of the famous Seven Hills of Rome. A finger-shape cusp pointing toward central Rome between the Quirinal Hill to the northwest and the Esquiline Hill to the southeast, it is home to the Teatro dell'Opera and the Termini Railway Station. At the top of Viminal Hill there is the palace of Viminale that hosts the headquarters of the Ministry of the Interior, currently the term Il Viminale means the Ministry of the Interior.

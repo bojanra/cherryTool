@@ -1,0 +1,78 @@
+<% INCLUDE menu.tt %>
+<div class="container">
+  <div id="dashBoard" class="panel panel-default">
+    <div class="panel-heading ">
+      <div class="btn-group pull-right">
+        <a href="#"><span id="eBudget" class="label label-default align"></span></a>
+      </div>
+      <h3 class="panel-title"><strong>Event budget matrix</strong></h3>
+    </div>
+    <div id="serviceDash" class="panel-body">
+    </div>
+  </div>
+
+  <div id="ringelSpiel" class="panel panel-default">
+    <div class="panel-heading">
+      <div class="btn-group pull-right">
+        <a href="#"><span id="oStats" class="label label-danger align"></span><span id="oLast" class="label label-info align"></span><span id="oStreams" class="label label-default align"></span></a>
+      </div>
+      <h3 class="panel-title"><strong>Output streams</strong></h3>
+    </div>
+    <div id="streamDash" class="panel-body">
+    </div>
+  </div>
+
+  <div id="logBrowser" class="panel panel-default">
+    <div class="panel-heading">
+      <div class="btn-group pull-right">
+        <a href="#"><span id="logUpdate" class="label label-default align"></span></a>
+      </div>
+      <h3 class="panel-title"><strong>Log browser </strong></h3>
+    </div>
+    <div id="logBrowserTabs" class="panel-body">
+      <div class="row ">
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-12">
+          <table id="logTable" class="table table-log" cellspacing="0" width="100%">
+            <thead class="tablehead">
+              <tr>
+                <th></th>
+                <th>timestamp</th>
+                <th>source</th>
+                <th>level</th>
+                <th>message</th>
+                <th>service</th>
+                <th>details</th>
+              </tr>
+            </thead>
+            <tfoot class="tablehead">
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% INCLUDE js.tt %>
+<script type="text/javascript">
+  $(document).ready(() => {
+    const log = new LogBrowser();
+    const matrix = new ServiceMatrix();
+    const spiel = new RingelSpiel();
+
+    const refresh = new Timer(() => {
+      matrix.refresh();
+      spiel.refresh();
+      log.refresh();
+    });
+
+    $('.panel-heading a').on('click', () => refresh.now());
+  });
+</script>

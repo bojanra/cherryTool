@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tv source-data-url="https://tvprofil.net/api/xmltv/" source-info-name="TvProfil API v2.0 - XMLTV" source-info-url="https://tvprofil.com">
+  <channel id="bbc1">
+    <display-name>BBC1</display-name>
+    <url>http://www.bbc.co.uk/bbcone/</url>
+    <icon src="https://cdn-0.tvprofil.com/cdn/400x200/4/img/kanali-logo/bbc-one-logo.png"/>
+  </channel>
+  <programme channel="bbc1" start="20210220012000 +0000" stop="20210220012500 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220012500 +0000" stop="20210220013000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220013000 +0000" stop="20210220020000 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+    <desc lang="en">The programme for everyone interested in the Internet and new media. Whether it’s e-commerce, new developments and products, or gadgets and games, Click looks at the tools that will revolutionise business and personal life.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220020000 +0000" stop="20210220023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220023000 +0000" stop="20210220030000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210220030000 +0000" stop="20210220033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220033000 +0000" stop="20210220034500 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+    <desc lang="en">The programme for everyone interested in the Internet and new media. Whether it’s e-commerce, new developments and products, or gadgets and games, Click looks at the tools that will revolutionise business and personal life.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220034500 +0000" stop="20210220040000 +0000">
+    <title lang="hr">The Film Review</title>
+    <category>show</category>
+    <desc lang="en">Mark Kermode gives his unique take on the best and worst of the week’s film and DVD releases.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220040000 +0000" stop="20210220043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220043000 +0000" stop="20210220050000 +0000">
+    <title lang="hr">Our World, Morocco’s Youtube Migrants</title>
+    <category>news</category>
+    <desc lang="en">Over the last few years, Moroccan migrants who are trying to reach the EU have become Youtube celebrities by blogging about the journey online.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220050000 +0000" stop="20210220053000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220053000 +0000" stop="20210220060000 +0000">
+    <title lang="hr">The Travel Show</title>
+    <category>news</category>
+    <desc lang="en">Lucy Hedges takes a look back at some of the show’s best journeys to South Asia, including when Henry Golding tried to collect coconuts in Kerala and when Lucy took on the tuk-tuks in Sri Lanka.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220060000 +0000" stop="20210220100000 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+    <desc lang="en">The BBC’s Breakfast programme features the latest news, sport, business, weather and other items on a daily basis.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220100000 +0000" stop="20210220113000 +0000">
+    <title lang="hr">Saturday Kitchen</title>
+    <category>series</category>
+    <category>cooking</category>
+    <category>entertainment</category>
+    <desc lang="en">Matt Tebbutt and chef Yotam Ottolenghi are joined by special guests Naga Munchetty and Charlie Stayt. There are great moments from the BBC food archive, including clips from Rick Stein, Keith Floyd, Nadiya Hussain, Sam Evans and Shauna Guinn, and drinks expert Helen McGinn joins via video link to pick the wines to go with the studio dishes.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220113000 +0000" stop="20210220120000 +0000">
+    <title lang="hr">Rick Stein’s Cornwall 1, ep. 13.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>travel</category>
+    <desc lang="en">Rick is at Tintagel, Cornwall’s most mythical location, where he discovers that it was an important trading port with Europe and the birthplace of perhaps Britain’s greatest legend, the tale of King Arthur.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220120000 +0000" stop="20210220130000 +0000">
+    <title lang="hr">Football Focus</title>
+    <category>sport</category>
+    <category>sports</category>
+    <category>talk-show</category>
+    <desc lang="en">Dan Walker and guests preview the weekend’s action, including the Merseyside derby between Liverpool and Everton at Anfield.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220130000 +0000" stop="20210220131500 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220131500 +0000" stop="20210220141500 +0000">
+    <title lang="hr">WA World Indoor Tour Athletics, Torun</title>
+    <category>sport</category>
+    <desc lang="en">Many of the world’s best track and field athletes continue to fine-tune their Olympics preparations as the World Indoor Tour gathers momentum in Poland. Already we have seen great performances this year by sprinter Dina Asher Smith, pole vaulter Holly Bradshaw and middle-distance runners Jemma Reekie, Laura Muir and Elliot Giles, and more of Britain’s best are expected to take to the boards again at this prestigious Copernicus Cup meeting in Torun.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220141500 +0000" stop="20210220154500 +0000">
+    <title lang="hr">Australian Open Tennis, Women’s Singles Final: Jennifer Brady v Naomi Osaka</title>
+    <category>sport</category>
+    <category>tennis</category>
+    <desc lang="en">Sue Barker introduces all the action and analyses the main talking points to see who can succeed Sofia Kenin as women’s singles champion.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220154500 +0000" stop="20210220163000 +0000">
+    <title lang="hr">Spašavanje vrta 5, ep. 10.</title>
+    <sub-title lang="en">Garden Rescue</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+    <desc lang="en">Retired couple David and Joyce’s back garden outside Gloucester looks more like an allotment than a garden. David is a dedicated veg grower, so much of the area is given over to that. But it has become a problem for them both. For Joyce, there’s nowhere shady or pretty to sit and relax, while David, who has back and knee problems, struggles to keep working it. So Charlie and the Rich brothers must make the garden both prettier and more user friendly, all for £3,000.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220163000 +0000" stop="20210220172000 +0000">
+    <title lang="hr">Final Score</title>
+    <category>sport</category>
+    <category>sports</category>
+    <desc lang="en">Jason Mohammed presents the fast-paced football results service, with goal flashes, reports and interviews from across Britain as well as analysis by the studio guests.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220172000 +0000" stop="20210220173000 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220173000 +0000" stop="20210220173500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210220173500 +0000" stop="20210220181000 +0000">
+    <title lang="hr">Celebrity Mastermind 19, ep. 7.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+    <desc lang="en">John Humphrys asks the questions as four more famous faces brave the black chair in another episode of the classic quiz where celebrities donate to their chosen charities. Impressionist Jon Culshaw, Richie Anderson from BBC Radio 2, broadcaster Rachel Johnson and actor Denis Lawson answer questions on Doctor Who, The Saturdays, the Laconia incident and Miles Davis.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220181000 +0000" stop="20210220184000 +0000">
+    <title lang="hr">Catchpoint 3, ep. 4.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+    <desc lang="en">The gloves are off as England goalkeepers David James and Siobhan Chamberlain take on rugby union legend James Haskell and fitness coach Chloe Madeley, all aiming to win money for charity. Join Paddy McGuinness to see which team scores the catch of the day!</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220184000 +0000" stop="20210220193000 +0000">
+    <title lang="hr">The Wall</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+    <desc lang="en">Danny Dyer hosts as friends and football legends John Barnes and Chris Kamara take aim at the Wall for charity.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220193000 +0000" stop="20210220202000 +0000">
+    <title lang="hr">Pointless Celebrities 13, ep. 27.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+    <desc lang="en">A classic kid’s TV edition of the general knowledge quiz in which four teams try to come up with the answers that no-one else could think of. Presented by Alexander Armstrong and co-host Richard Osman, with contestants Peter Purves, Lesley Judd, Jane Tucker, Freddy Marks, Dave Benson Phillips, Mike Read, Kirsten O’Brien and Terrence Hardiman.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220202000 +0000" stop="20210220210000 +0000">
+    <title lang="hr">Casualty 35, ep. 8.</title>
+    <category>series</category>
+    <category>drama</category>
+    <desc lang="en">Grace turns out not to be the little girl Connie expected, and Rosa encourages Ollie to try his luck.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220210000 +0000" stop="20210220220000 +0000">
+    <title lang="hr">Na dužnosti 2, ep. 3.</title>
+    <sub-title lang="en">Line of Duty</sub-title>
+    <category>series</category>
+    <category>crime</category>
+    <category>drama</category>
+    <desc lang="hr">Lindsay je odbijena jamčevina te završi u zatvoru. Postaje sve očajnija i kaže Kate o svojoj vezi s visokopozicioniranim službenikom te joj izloži svoju teoriju zašto joj smještaju.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220220000 +0000" stop="20210220222000 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210220222000 +0000" stop="20210220232500 +0000">
+    <title lang="hr">Match of the Day</title>
+    <category>sport</category>
+    <category>sports</category>
+    <desc lang="en">Gary Lineker introduces all the goals, highlights and talking points on another day of Premier League intrigue, including the 289th Merseyside derby between Liverpool and Everton. Champions Liverpool drew 2-2 at Goodison Park earlier this season, with Everton twice coming from behind to rescue a point. Liverpool are on a 23-game unbeaten run against their Merseyside neighbours in all competitions dating back to October 2010.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210220232500 +0000" stop="20210221011500 +0000">
+    <title lang="hr">Snaga je u meni</title>
+    <sub-title lang="en">Stronger</sub-title>
+    <category>film</category>
+    <category>biographical</category>
+    <category>drama</category>
+    <desc lang="hr">Temeljeno na knjizi Stronger autora Jeffa Baumana, žrtve bombaškog napada za vrijeme Bostonskog maratona 2013. godine.
+Gyllenhaal glumi preživjelog Jeffa Baumana, koji je u eksploziji izgubio obje noge, ali ne i volju za životom. Bauman se probudio 16. travnja 2013. godine bez nogu. Samo trideset sati prije, bio je okružen masom ljudi na cilju Bostonskog maratona. Prva bomba mu je otišla pod noge dok je čekao da njegova djevojka utrči u cilj. Kada se probudio nekoliko sati nakon operacije,...</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221011500 +0000" stop="20210221012000 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221012000 +0000" stop="20210221013000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221013000 +0000" stop="20210221020000 +0000">
+    <title lang="hr">The Travel Show</title>
+    <category>news</category>
+    <desc lang="en">Lucy Hedges takes a look back at some of the show’s best journeys to South Asia, including when Henry Golding tried to collect coconuts in Kerala and when Lucy took on the tuk-tuks in Sri Lanka.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221020000 +0000" stop="20210221023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221023000 +0000" stop="20210221030000 +0000">
+    <title lang="hr">Dateline London</title>
+    <category>news</category>
+    <desc lang="en">Foreign correspondents from London look at and analyse events in the UK through the eyes of outsiders.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221030000 +0000" stop="20210221033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221033000 +0000" stop="20210221040000 +0000">
+    <title lang="hr">Our World, Morocco’s Youtube Migrants</title>
+    <category>news</category>
+    <desc lang="en">Over the last few years, Moroccan migrants who are trying to reach the EU have become Youtube celebrities by blogging about the journey online.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221040000 +0000" stop="20210221043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221043000 +0000" stop="20210221050000 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+    <desc lang="en">The programme for everyone interested in the Internet and new media. Whether it’s e-commerce, new developments and products, or gadgets and games, Click looks at the tools that will revolutionise business and personal life.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221050000 +0000" stop="20210221053000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221053000 +0000" stop="20210221060000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210221060000 +0000" stop="20210221075000 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+    <desc lang="en">The BBC’s Breakfast programme features the latest news, sport, business, weather and other items on a daily basis.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221075000 +0000" stop="20210221090000 +0000">
+    <title lang="hr">Match of the Day</title>
+    <category>sport</category>
+    <category>sports</category>
+    <desc lang="en">Gary Lineker introduces all the goals, highlights and talking points on another day of Premier League intrigue, including the 289th Merseyside derby between Liverpool and Everton. Champions Liverpool drew 2-2 at Goodison Park earlier this season, with Everton twice coming from behind to rescue a point. Liverpool are on a 23-game unbeaten run against their Merseyside neighbours in all competitions dating back to October 2010.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221090000 +0000" stop="20210221100000 +0000">
+    <title lang="hr">The Andrew Marr Show</title>
+    <category>show</category>
+    <category>news</category>
+    <desc lang="en">Andrew Marr interviews key newsmakers and reviews the weekend’s stories.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221100000 +0000" stop="20210221110000 +0000">
+    <title lang="hr">The Big Questions 14, ep. 6.</title>
+    <category>series</category>
+    <category>religious</category>
+    <desc lang="en">Nicky Campbell leads a debate on topical moral, ethical and religious issues.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221110000 +0000" stop="20210221113000 +0000">
+    <title lang="hr">Sunday Worship, 2021: Lent Worship 1</title>
+    <category>series</category>
+    <category>religious</category>
+    <category>mini series</category>
+    <desc lang="en">The Rev Kate Bottley introduces the first in a series of church services for the season of Lent. This week’s service comes from St Cuthbert’s Church, Fulwood, Preston, led by the Rev Mark Bradford. Hymns and songs for the season include "In Christ Alone’, `Standing in the Need of Prayer’ and `When I Survey the Wondrous Cross", sung by Faye Simpson, Katie Ritson and the Adventist Vocal Ensemble.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221113000 +0000" stop="20210221121500 +0000">
+    <title lang="hr">Wanted Down Under 14, ep. 10.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>travel</category>
+    <desc lang="en">Julia Rosin’s dream is to move her family to Australia in the hope of a better lifestyle for their children. Husband Hussein’s not so sure, he has been through a move before and found moving from one country to another difficult. Julia hopes that seeing the houses, work opportunities and lifestyle Brisbane has to offer will change his mind.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221121500 +0000" stop="20210221130000 +0000">
+    <title lang="hr">Bargain Hunt 48, ep. 21.</title>
+    <category>series</category>
+    <category>game show</category>
+    <desc lang="en">Charlie Ross presents from Sawbridgeworth, Hertfordshire. Jonathan Pratt and Colin Young help the teams find three items to take to the auction in Norfolk, and Charlie also pays a visit to the Norfolk Tank Museum.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221130000 +0000" stop="20210221131500 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221131500 +0000" stop="20210221135000 +0000">
+    <title lang="hr">Songs of Praise, Faith and Hospitality</title>
+    <category>series</category>
+    <category>music</category>
+    <category>religious</category>
+    <desc lang="en">Katherine Jenkins visits L’Abri fellowship in Hampshire to explore Christian faith and hospitality. She finds out about L’Abri’s history and meets a family from Australia who have settled there. Radzi Chinyanganya meets a former stockbroker who found faith and changed career to help house the homeless. Music comes from congregations across the UK, including O Worship the Lord in the Beauty of Holiness and Table of the Lord.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221135000 +0000" stop="20210221151000 +0000">
+    <title lang="hr">Australian Open Tennis, Men’s Final</title>
+    <category>sport</category>
+    <category>tennis</category>
+    <desc lang="en">Sue Barker introduces highlights and analyses the main talking points.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221151000 +0000" stop="20210221155500 +0000">
+    <title lang="hr">Spašavanje vrta 5, ep. 11.</title>
+    <sub-title lang="en">Garden Rescue</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+    <desc lang="en">Jacqui, 26 and Yung, 27, moved into their Trowbridge home a year ago. While they have managed to decorate the house, with their busy jobs they have never had time to fix up the tired garden. It’s dull and featureless, with lots of random brickwork. As they admit that they have no idea about gardening, they’ve called in Charlie and the Rich brothers and given them a budget of £3,500 to create a contemporary space with bright coloured flowers, a relaxation area and lots of room for their dog.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221155500 +0000" stop="20210221173500 +0000">
+    <title lang="hr">Pepeljuga</title>
+    <sub-title lang="en">Cinderella</sub-title>
+    <category>film</category>
+    <category>romantic</category>
+    <category>fantasy</category>
+    <desc lang="hr">Iako je maćeha (Cate Blanchett) i polusestre maltretiraju, srčana Ella (Lily James) odluči preuzeti odgovornost za svoju sudbinu. Dodajte tomu kraljevski bal, dobru vilu te staklenu cipelicu i odjednom – magija postaje stvarnost!
+Priča o Pepeljugi prati sudbinu mlade Elle čiji se otac trgovac ponovno oženi nakon smrti njezine majke. Željna pružiti potporu svom voljenom ocu, Ella dočekuje svoju novu maćehu i njezine kćeri Anastasiju i Drisellu u obiteljskoj kući. Ali kad Ellin otac...</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221173500 +0000" stop="20210221183500 +0000">
+    <title lang="hr">Sedam svjetova jedan planet, Azija, ep. 2.</title>
+    <sub-title lang="en">Seven Worlds One Planet</sub-title>
+    <category>series</category>
+    <category>documentary</category>
+    <desc lang="hr">Azija je najveći kontinent na našem planetu, kontinent najvećih krajnosti. Proteže se od arktičkoga kruga na sjeveru do tropskih šuma na ekvatoru. Životinje su ovdje suočene s najtoplijim pustinjama, najvišim džunglama i najvrletnijim planinama od svih na planetu. Ali ovaj kontinent nije uvijek izgledao tako. Ovi ekstremni svjetovi nastali su kad se Indija prije 30 milijuna godina sudarila s ostatkom Azije i oblikovala kontinent kakav danas poznajemo. Ovdašnje su se životinje prilagodile...</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221183500 +0000" stop="20210221185000 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221185000 +0000" stop="20210221190000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210221190000 +0000" stop="20210221200000 +0000">
+    <title lang="hr">Countryfile, Nene Valley</title>
+    <category>news</category>
+    <desc lang="en">Tom Heap explores Northamptonshire’s Nene Valley, discovering how a farmer fighting flooding has embraced wetland wildlife to make his land pay. Tom also meets a sheepdog turned search-and-rescue hero and gets hands-on with a project that has unearthed evidence of riverside residents dating back to Neolithic times. Adam is hoping for good news from his ewes as, thanks to scanning, he discovers how many are in lamb.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221200000 +0000" stop="20210221210000 +0000">
+    <title lang="hr">Antiques Roadshow, Windermere Jetty 1</title>
+    <category>series</category>
+    <category>art</category>
+    <desc lang="en">Fiona Bruce and the team are at Windermere Jetty Museum in the Lake District, where finds include a valuable collection of silver trophies awarded to a pioneering woman sailor, a James Bond poster scraped off a wall, a guitar rescued from a skip, a wooden dinghy from the film Swallows and Amazons, and a pair of ’lost’ necklaces with surprising values. Fiona finds out about the daredevils who have attempted to set speed records on the lakes.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221210000 +0000" stop="20210221220000 +0000">
+    <title lang="hr">Bloodlands 1, ep. 1.</title>
+    <category>series</category>
+    <category>reality show</category>
+    <desc lang="en">The death of Texas student Kerry Kujawa, who left his campus to visit online girlfriend Kelley McCauley in San Antonio. His dumped body was found two weeks later, in April 2000, on a prairie 130 miles away and it later transpired Kelley was a fictional character invented by Kerry’s 32-year-old assailant.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221220000 +0000" stop="20210221222000 +0000">
+    <title lang="hr">BBC Weekend News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210221222000 +0000" stop="20210221223000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210221223000 +0000" stop="20210221234000 +0000">
+    <title lang="hr">Match of the Day 2</title>
+    <category>sport</category>
+    <category>sports</category>
+    <desc lang="en">Highlights and analysis of Sunday’s Premier League games, including Arsenal v Man City, Aston Villa v Leicester and Manchester United v Newcastle.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210221234000 +0000" stop="20210222004000 +0000">
+    <title lang="hr">Olly Alexander: Growing Up Gay</title>
+    <category>Documentary</category>
+    <desc lang="en">Figures show that more than 40 percent of LGBT Plus people will experience a significant mental health problem, compared to around 25 percent of the whole population. Olly Alexander explores why the gay community is more vulnerable to mental health issues.</desc>
+  </programme>
+  <programme channel="bbc1" start="20210222004000 +0000" stop="20210222004500 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222004500 +0000" stop="20210222010000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222010000 +0000" stop="20210222013000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222013000 +0000" stop="20210222020000 +0000">
+    <title lang="hr">Our World, Morocco’s Youtube Migrants</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222020000 +0000" stop="20210222023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222023000 +0000" stop="20210222030000 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222030000 +0000" stop="20210222033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222033000 +0000" stop="20210222040000 +0000">
+    <title lang="hr">Dateline London</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222040000 +0000" stop="20210222043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222043000 +0000" stop="20210222050000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210222050000 +0000" stop="20210222053000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222053000 +0000" stop="20210222060000 +0000">
+    <title lang="hr">World Business Report</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222060000 +0000" stop="20210222091500 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210222091500 +0000" stop="20210222100000 +0000">
+    <title lang="hr">Morning Live 2, ep. 21.</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210222100000 +0000" stop="20210222110000 +0000">
+    <title lang="hr">Homes Under the Hammer 20, ep. 67.</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222110000 +0000" stop="20210222114500 +0000">
+    <title lang="hr">For Love or Money 2, ep. 1.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210222114500 +0000" stop="20210222121500 +0000">
+    <title lang="hr">Critical Incident</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210222121500 +0000" stop="20210222130000 +0000">
+    <title lang="hr">Bargain Hunt</title>
+    <category>series</category>
+    <category>game show</category>
+  </programme>
+  <programme channel="bbc1" start="20210222130000 +0000" stop="20210222133000 +0000">
+    <title lang="hr">BBC One O’Clock News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222133000 +0000" stop="20210222134500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222134500 +0000" stop="20210222141500 +0000">
+    <title lang="hr">Doctors 22, ep. 4.</title>
+    <category>series</category>
+    <category>soap opera</category>
+    <category>drama</category>
+  </programme>
+  <programme channel="bbc1" start="20210222141500 +0000" stop="20210222150000 +0000">
+    <title lang="hr">Shakespeare i Hathaway 3, ep. 1.</title>
+    <sub-title lang="en">Shakespeare &amp; Hathaway: Private Investigators</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210222150000 +0000" stop="20210222154500 +0000">
+    <title lang="hr">Bijeg na selo 19, ep. 67.</title>
+    <sub-title lang="en">Escape to the Country</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210222154500 +0000" stop="20210222163000 +0000">
+    <title lang="hr">Jay and Dom’s Home Fix 1, ep. 3.</title>
+    <category>series</category>
+    <category>mini series</category>
+  </programme>
+  <programme channel="bbc1" start="20210222163000 +0000" stop="20210222171500 +0000">
+    <title lang="hr">The Bidding Room 2, ep. 2.</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210222171500 +0000" stop="20210222180000 +0000">
+    <title lang="hr">Pointless 24, ep. 55.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210222180000 +0000" stop="20210222183000 +0000">
+    <title lang="hr">BBC News at Six</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222183000 +0000" stop="20210222190000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222190000 +0000" stop="20210222193500 +0000">
+    <title lang="hr">The One Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222193500 +0000" stop="20210222200500 +0000">
+    <title lang="hr">"Panorama" Rubbish Dump Britain</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222200500 +0000" stop="20210222203000 +0000">
+    <title lang="hr">EastEnders 1, ep. 30.</title>
+    <category>series</category>
+    <category>drama</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210222203000 +0000" stop="20210222210000 +0000">
+    <title lang="hr">Would I Lie to You? 14, ep. 8.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>comedy</category>
+  </programme>
+  <programme channel="bbc1" start="20210222210000 +0000" stop="20210222220000 +0000">
+    <title lang="hr">DIY SOS</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222220000 +0000" stop="20210222223000 +0000">
+    <title lang="hr">BBC News at Ten</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210222223000 +0000" stop="20210222224500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210222224500 +0000" stop="20210222235500 +0000">
+    <title lang="hr">RuPaul’s Drag Race UK 2, ep. 6.</title>
+    <category>series</category>
+    <category>reality show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210222235500 +0000" stop="20210223004500 +0000">
+    <title lang="hr">Graham Norton i gosti 28, ep. 18.</title>
+    <sub-title lang="en">The Graham Norton Show</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>music</category>
+  </programme>
+  <programme channel="bbc1" start="20210223004500 +0000" stop="20210223005000 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223005000 +0000" stop="20210223010000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223010000 +0000" stop="20210223013000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223013000 +0000" stop="20210223020000 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223020000 +0000" stop="20210223023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223023000 +0000" stop="20210223030000 +0000">
+    <title lang="hr">Monday in Parliament, Highlights of Monday 22 February in Parliament with Alicia McCarthy.</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223030000 +0000" stop="20210223033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223033000 +0000" stop="20210223040000 +0000">
+    <title lang="hr">The Travel Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223040000 +0000" stop="20210223043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223043000 +0000" stop="20210223050000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210223050000 +0000" stop="20210223053000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223053000 +0000" stop="20210223060000 +0000">
+    <title lang="hr">World Business Report</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223060000 +0000" stop="20210223091500 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210223091500 +0000" stop="20210223100000 +0000">
+    <title lang="hr">Morning Live 2, ep. 22.</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210223100000 +0000" stop="20210223110000 +0000">
+    <title lang="hr">Homes Under the Hammer 20, ep. 70.</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223110000 +0000" stop="20210223114500 +0000">
+    <title lang="hr">For Love or Money 2, ep. 2.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210223114500 +0000" stop="20210223121500 +0000">
+    <title lang="hr">Critical Incident</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210223121500 +0000" stop="20210223130000 +0000">
+    <title lang="hr">Bargain Hunt 49, ep. 25.</title>
+    <category>series</category>
+    <category>game show</category>
+  </programme>
+  <programme channel="bbc1" start="20210223130000 +0000" stop="20210223133000 +0000">
+    <title lang="hr">BBC One O’Clock News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223133000 +0000" stop="20210223134500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223134500 +0000" stop="20210223141500 +0000">
+    <title lang="hr">Doctors 22, ep. 5.</title>
+    <category>series</category>
+    <category>soap opera</category>
+    <category>drama</category>
+  </programme>
+  <programme channel="bbc1" start="20210223141500 +0000" stop="20210223150000 +0000">
+    <title lang="hr">Shakespeare i Hathaway 3, ep. 2.</title>
+    <sub-title lang="en">Shakespeare &amp; Hathaway: Private Investigators</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210223150000 +0000" stop="20210223154500 +0000">
+    <title lang="hr">Bijeg na selo 19, ep. 68.</title>
+    <sub-title lang="en">Escape to the Country</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210223154500 +0000" stop="20210223163000 +0000">
+    <title lang="hr">Jay and Dom’s Home Fix 1, ep. 7.</title>
+    <category>series</category>
+    <category>mini series</category>
+  </programme>
+  <programme channel="bbc1" start="20210223163000 +0000" stop="20210223171500 +0000">
+    <title lang="hr">The Bidding Room 2, ep. 20.</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210223171500 +0000" stop="20210223180000 +0000">
+    <title lang="hr">Pointless 23, ep. 10.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210223180000 +0000" stop="20210223183000 +0000">
+    <title lang="hr">BBC News at Six</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223183000 +0000" stop="20210223190000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223190000 +0000" stop="20210223193000 +0000">
+    <title lang="hr">The One Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223193000 +0000" stop="20210223195000 +0000">
+    <title lang="hr">EastEnders 1, ep. 31.</title>
+    <category>series</category>
+    <category>drama</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210223195000 +0000" stop="20210223203000 +0000">
+    <title lang="hr">Holby City 22, ep. 39.</title>
+    <category>series</category>
+    <category>drama</category>
+  </programme>
+  <programme channel="bbc1" start="20210223203000 +0000" stop="20210223220000 +0000">
+    <title lang="hr">Blitz Spirit with Lucy Worsley</title>
+    <category>Documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223220000 +0000" stop="20210223223000 +0000">
+    <title lang="hr">BBC News at Ten</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210223223000 +0000" stop="20210223224500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210223224500 +0000" stop="20210223233000 +0000">
+    <title lang="hr">Motel Bates 1, ep. 1.</title>
+    <sub-title lang="en">Bates Motel</sub-title>
+    <category>series</category>
+    <category>drama</category>
+    <category>thriller</category>
+  </programme>
+  <programme channel="bbc1" start="20210223233000 +0000" stop="20210224001500 +0000">
+    <title lang="hr">Motel Bates 1, ep. 2.</title>
+    <sub-title lang="en">Bates Motel</sub-title>
+    <category>series</category>
+    <category>drama</category>
+    <category>thriller</category>
+  </programme>
+  <programme channel="bbc1" start="20210224001500 +0000" stop="20210224002000 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224002000 +0000" stop="20210224003000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224003000 +0000" stop="20210224010000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224010000 +0000" stop="20210224013000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224013000 +0000" stop="20210224020000 +0000">
+    <title lang="hr">Talking Business</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224020000 +0000" stop="20210224023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224023000 +0000" stop="20210224030000 +0000">
+    <title lang="hr">Tuesday in Parliament, Highlights of Tuesday 23 February in Parliament with Alicia McCarthy.</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224030000 +0000" stop="20210224033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224033000 +0000" stop="20210224040000 +0000">
+    <title lang="hr">"Panorama" Rubbish Dump Britain</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224040000 +0000" stop="20210224043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224043000 +0000" stop="20210224050000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224050000 +0000" stop="20210224053000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224053000 +0000" stop="20210224060000 +0000">
+    <title lang="hr">World Business Report</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224060000 +0000" stop="20210224091500 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224091500 +0000" stop="20210224100000 +0000">
+    <title lang="hr">Morning Live 2, ep. 23.</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224100000 +0000" stop="20210224110000 +0000">
+    <title lang="hr">Homes Under the Hammer 20, ep. 68.</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224110000 +0000" stop="20210224114500 +0000">
+    <title lang="hr">For Love or Money 2, ep. 3.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210224114500 +0000" stop="20210224121500 +0000">
+    <title lang="hr">Critical Incident</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210224121500 +0000" stop="20210224130000 +0000">
+    <title lang="hr">Bargain Hunt 49, ep. 26.</title>
+    <category>series</category>
+    <category>game show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224130000 +0000" stop="20210224133000 +0000">
+    <title lang="hr">BBC One O’Clock News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224133000 +0000" stop="20210224134500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224134500 +0000" stop="20210224141500 +0000">
+    <title lang="hr">Doctors 22, ep. 6.</title>
+    <category>series</category>
+    <category>soap opera</category>
+    <category>drama</category>
+  </programme>
+  <programme channel="bbc1" start="20210224141500 +0000" stop="20210224150000 +0000">
+    <title lang="hr">Shakespeare i Hathaway 3, ep. 3.</title>
+    <sub-title lang="en">Shakespeare &amp; Hathaway: Private Investigators</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210224150000 +0000" stop="20210224154500 +0000">
+    <title lang="hr">Bijeg na selo 19, ep. 69.</title>
+    <sub-title lang="en">Escape to the Country</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224154500 +0000" stop="20210224163000 +0000">
+    <title lang="hr">Jay and Dom’s Home Fix 1, ep. 8.</title>
+    <category>series</category>
+    <category>mini series</category>
+  </programme>
+  <programme channel="bbc1" start="20210224163000 +0000" stop="20210224171500 +0000">
+    <title lang="hr">The Bidding Room 2, ep. 22.</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210224171500 +0000" stop="20210224180000 +0000">
+    <title lang="hr">Pointless 23, ep. 11.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210224180000 +0000" stop="20210224183000 +0000">
+    <title lang="hr">BBC News at Six</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224183000 +0000" stop="20210224185500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224185500 +0000" stop="20210224190000 +0000">
+    <title lang="hr">Party Political Broadcast, Conservative Party</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224190000 +0000" stop="20210224193000 +0000">
+    <title lang="hr">The One Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224193000 +0000" stop="20210224200000 +0000">
+    <title lang="hr">The Bidding Room</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210224200000 +0000" stop="20210224210000 +0000">
+    <title lang="hr">The Repair Shop 6, ep. 13.</title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210224210000 +0000" stop="20210224220000 +0000">
+    <title lang="hr">Gordon Ramsay’s Bank Balance 1, ep. 1.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210224220000 +0000" stop="20210224223000 +0000">
+    <title lang="hr">BBC News at Ten</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210224223000 +0000" stop="20210224224500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210224224500 +0000" stop="20210225002000 +0000">
+    <title lang="hr">Rose Matafeo: Horndog</title>
+    <category>comedy</category>
+  </programme>
+  <programme channel="bbc1" start="20210225002000 +0000" stop="20210225005000 +0000">
+    <title lang="hr">A Question of Sport 50, ep. 29.</title>
+    <category>sport</category>
+    <category>game show</category>
+    <category>comedy</category>
+  </programme>
+  <programme channel="bbc1" start="20210225005000 +0000" stop="20210225005500 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225005500 +0000" stop="20210225010000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225010000 +0000" stop="20210225013000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225013000 +0000" stop="20210225020000 +0000">
+    <title lang="hr">The Travel Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225020000 +0000" stop="20210225023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225023000 +0000" stop="20210225030000 +0000">
+    <title lang="hr">Wednesday in Parliament</title>
+    <category>news</category>
+    <category>political</category>
+  </programme>
+  <programme channel="bbc1" start="20210225030000 +0000" stop="20210225033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225033000 +0000" stop="20210225040000 +0000">
+    <title lang="hr">Click</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225040000 +0000" stop="20210225043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225043000 +0000" stop="20210225050000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225050000 +0000" stop="20210225053000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225053000 +0000" stop="20210225060000 +0000">
+    <title lang="hr">World Business Report</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225060000 +0000" stop="20210225091500 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225091500 +0000" stop="20210225100000 +0000">
+    <title lang="hr">Morning Live 2, ep. 24.</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225100000 +0000" stop="20210225110000 +0000">
+    <title lang="hr">Homes Under the Hammer 20, ep. 71.</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225110000 +0000" stop="20210225114500 +0000">
+    <title lang="hr">For Love or Money 2, ep. 4.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210225114500 +0000" stop="20210225121500 +0000">
+    <title lang="hr">Critical Incident</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210225121500 +0000" stop="20210225130000 +0000">
+    <title lang="hr">Bargain Hunt</title>
+    <category>series</category>
+    <category>game show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225130000 +0000" stop="20210225133000 +0000">
+    <title lang="hr">BBC One O’Clock News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225133000 +0000" stop="20210225134500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225134500 +0000" stop="20210225141500 +0000">
+    <title lang="hr">Doctors 22, ep. 7.</title>
+    <category>series</category>
+    <category>soap opera</category>
+    <category>drama</category>
+  </programme>
+  <programme channel="bbc1" start="20210225141500 +0000" stop="20210225150000 +0000">
+    <title lang="hr">Shakespeare i Hathaway 3, ep. 4.</title>
+    <sub-title lang="en">Shakespeare &amp; Hathaway: Private Investigators</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210225150000 +0000" stop="20210225154500 +0000">
+    <title lang="hr">Bijeg na selo 19, ep. 70.</title>
+    <sub-title lang="en">Escape to the Country</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225154500 +0000" stop="20210225163000 +0000">
+    <title lang="hr">Jay and Dom’s Home Fix 1, ep. 9.</title>
+    <category>series</category>
+    <category>mini series</category>
+  </programme>
+  <programme channel="bbc1" start="20210225163000 +0000" stop="20210225171500 +0000">
+    <title lang="hr">The Bidding Room 2, ep. 11.</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210225171500 +0000" stop="20210225180000 +0000">
+    <title lang="hr">Pointless 23, ep. 12.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210225180000 +0000" stop="20210225183000 +0000">
+    <title lang="hr">BBC News at Six</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225183000 +0000" stop="20210225190000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225190000 +0000" stop="20210225193500 +0000">
+    <title lang="hr">The One Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225193500 +0000" stop="20210225200000 +0000">
+    <title lang="hr">EastEnders 1, ep. 32.</title>
+    <category>series</category>
+    <category>drama</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210225200000 +0000" stop="20210225210000 +0000">
+    <title lang="hr">Pooch Perfect 1, ep. 7.</title>
+    <category>series</category>
+    <category>reality show</category>
+    <category>animals</category>
+  </programme>
+  <programme channel="bbc1" start="20210225210000 +0000" stop="20210225220000 +0000">
+    <title lang="hr">Gordon Ramsay’s Bank Balance 1, ep. 2.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210225220000 +0000" stop="20210225223000 +0000">
+    <title lang="hr">BBC News at Ten</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210225223000 +0000" stop="20210225224500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210225224500 +0000" stop="20210225234500 +0000">
+    <title lang="hr">Question Time, Fiona Bruce presents an hour of topical debate.</title>
+    <category>show</category>
+  </programme>
+  <programme channel="bbc1" start="20210225234500 +0000" stop="20210226004500 +0000">
+    <title lang="hr">DIY SOS</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226004500 +0000" stop="20210226005000 +0000">
+    <title lang="hr">Weather for the Week Ahead</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226005000 +0000" stop="20210226010000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226010000 +0000" stop="20210226013000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226013000 +0000" stop="20210226020000 +0000">
+    <title lang="hr">Our World, Morocco’s Youtube Migrants</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226020000 +0000" stop="20210226023000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226023000 +0000" stop="20210226030000 +0000">
+    <title lang="hr">The Week in Parliament</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226030000 +0000" stop="20210226033000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226033000 +0000" stop="20210226040000 +0000">
+    <title lang="hr">"Panorama" Rubbish Dump Britain</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226040000 +0000" stop="20210226043000 +0000">
+    <title lang="hr">BBC News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226043000 +0000" stop="20210226050000 +0000">
+    <title lang="hr">HARDtalk</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210226050000 +0000" stop="20210226053000 +0000">
+    <title lang="hr">BBC World News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226053000 +0000" stop="20210226060000 +0000">
+    <title lang="hr">World Business Report</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226060000 +0000" stop="20210226091500 +0000">
+    <title lang="hr">Breakfast</title>
+    <category>news</category>
+    <category>family</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210226091500 +0000" stop="20210226100000 +0000">
+    <title lang="hr">Morning Live 2, ep. 25.</title>
+    <category>news</category>
+    <category>talk-show</category>
+  </programme>
+  <programme channel="bbc1" start="20210226100000 +0000" stop="20210226110000 +0000">
+    <title lang="hr">Homes Under the Hammer 20, ep. 69.</title>
+    <category>series</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226110000 +0000" stop="20210226114500 +0000">
+    <title lang="hr">For Love or Money 2, ep. 5.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210226114500 +0000" stop="20210226121500 +0000">
+    <title lang="hr">Critical Incident</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210226121500 +0000" stop="20210226130000 +0000">
+    <title lang="hr">Bargain Hunt</title>
+    <category>series</category>
+    <category>game show</category>
+  </programme>
+  <programme channel="bbc1" start="20210226130000 +0000" stop="20210226133000 +0000">
+    <title lang="hr">BBC One O’Clock News</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226133000 +0000" stop="20210226134500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226134500 +0000" stop="20210226143000 +0000">
+    <title lang="hr">Shakespeare i Hathaway 3, ep. 5.</title>
+    <sub-title lang="en">Shakespeare &amp; Hathaway: Private Investigators</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>crime</category>
+  </programme>
+  <programme channel="bbc1" start="20210226143000 +0000" stop="20210226150000 +0000">
+    <title lang="hr">Azijska pustolovina kosmatih bajkera</title>
+    <sub-title lang="en">The Hairy Bikers’ Asian Adventure</sub-title>
+    <category>series</category>
+    <category>cooking</category>
+    <category>travel</category>
+  </programme>
+  <programme channel="bbc1" start="20210226150000 +0000" stop="20210226154500 +0000">
+    <title lang="hr">Bijeg na selo 20, ep. 4.</title>
+    <sub-title lang="en">Escape to the Country</sub-title>
+    <category>series</category>
+    <category>reality show</category>
+  </programme>
+  <programme channel="bbc1" start="20210226154500 +0000" stop="20210226163000 +0000">
+    <title lang="hr">Jay and Dom’s Home Fix 1, ep. 10.</title>
+    <category>series</category>
+    <category>mini series</category>
+  </programme>
+  <programme channel="bbc1" start="20210226163000 +0000" stop="20210226171500 +0000">
+    <title lang="hr">The Bidding Room 2, ep. 25.</title>
+    <category>series</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210226171500 +0000" stop="20210226180000 +0000">
+    <title lang="hr">Pointless 23, ep. 13.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210226180000 +0000" stop="20210226183000 +0000">
+    <title lang="hr">BBC News at Six</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226183000 +0000" stop="20210226190000 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226190000 +0000" stop="20210226193500 +0000">
+    <title lang="hr">The One Show</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226193500 +0000" stop="20210226200500 +0000">
+    <title lang="hr">A Question of Sport 50, ep. 30.</title>
+    <category>sport</category>
+    <category>game show</category>
+    <category>comedy</category>
+  </programme>
+  <programme channel="bbc1" start="20210226200500 +0000" stop="20210226203500 +0000">
+    <title lang="hr">Gavin i Stacey 2, ep. 4.</title>
+    <sub-title lang="en">GAVIN &amp; STACEY</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+  </programme>
+  <programme channel="bbc1" start="20210226203500 +0000" stop="20210226210000 +0000">
+    <title lang="hr">EastEnders 1, ep. 33.</title>
+    <category>series</category>
+    <category>drama</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210226210000 +0000" stop="20210226220000 +0000">
+    <title lang="hr">Gordon Ramsay’s Bank Balance 1, ep. 3.</title>
+    <category>series</category>
+    <category>game show</category>
+    <category>entertainment</category>
+  </programme>
+  <programme channel="bbc1" start="20210226220000 +0000" stop="20210226223000 +0000">
+    <title lang="hr">BBC News at Ten</title>
+    <category>news</category>
+  </programme>
+  <programme channel="bbc1" start="20210226223000 +0000" stop="20210226224500 +0000">
+    <title lang="hr">BBC London News</title>
+    <category>news</category>
+    <category>documentary</category>
+  </programme>
+  <programme channel="bbc1" start="20210226224500 +0000" stop="20210226233500 +0000">
+    <title lang="hr">Graham Norton i gosti 28, ep. 19.</title>
+    <sub-title lang="en">The Graham Norton Show</sub-title>
+    <category>series</category>
+    <category>comedy</category>
+    <category>music</category>
+  </programme>
+  <programme channel="bbc1" start="20210226233500 +0000" stop="20210227000500 +0000">
+    <title lang="hr">Eating with My Ex, Celebrity Specials: Nathan Henry and Tommy / Tallia Storm and Seb Morris 3, ep. 3.</title>
+    <category>series</category>
+    <category>documentary</category>
+    <category>romantic</category>
+  </programme>
+</tv>

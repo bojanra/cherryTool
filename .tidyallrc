@@ -8,9 +8,13 @@ argv = --profile=$ROOT/.perltidyrc
 select = .gitignore
 
 [JSBeautify]
-select = public/js/cherry.js
+select = public/js/app.js
 argv = --config=$ROOT/.jsbeautifyrc
 
 [JSBeautify html]
 select = views/*.tt
 argv = --html -s 2
+
+[JSBeautify css]
+select = public/css/app.css
+argv = --css -s 2
