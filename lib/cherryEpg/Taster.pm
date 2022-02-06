@@ -709,19 +709,21 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         write;
     } ## end foreach my $key ( sort keys...)
 
-    $~ = "REPORT_CAROUSEL_HEADER";
-    write if @{ $data->{streams} };
-
-    $~ = "REPORT_CAROUSEL";
-    foreach my $stream ( sort { $a->{addr} cmp $b->{addr} } @{ $data->{streams} } ) {
-
-        @fields = (
-            $stream->{addr}, $stream->{port}, $stream->{bitrate},
-            scalar $stream->{files}->@*,
-            localtime( $stream->{last} )->strftime()
-        );
+    if ( ref $data->{streams} eq 'ARRAY' && @{ $data->{streams} } ) {
+        $~ = "REPORT_CAROUSEL_HEADER";
         write;
-    } ## end foreach my $stream ( sort {...})
+
+        $~ = "REPORT_CAROUSEL";
+        foreach my $stream ( sort { $a->{addr} cmp $b->{addr} } @{ $data->{streams} } ) {
+
+            @fields = (
+                $stream->{addr}, $stream->{port}, $stream->{bitrate},
+                scalar $stream->{files}->@*,
+                localtime( $stream->{last} )->strftime()
+            );
+            write;
+        } ## end foreach my $stream ( sort {...})
+    } ## end if ( ref $data->{streams...})
 
     if ( exists $modules->{announcer} ) {
         $group = "announcer";

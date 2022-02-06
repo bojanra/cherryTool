@@ -105,13 +105,6 @@ sub readXLS {
     $self->error("Missing [SERVICE] sheet") if !$isServiceSheet;
     $self->error("Missing [EIT] sheet")     if !$isEitSheet;
 
-    # read input file as binary and insert in report
-    my $blob = try {
-        local $/;
-        open( my $fh, '<:raw', $file ) || return;
-        <$fh>;
-    };
-
     # extract just filename
     my ($filename) = fileparse($file);
 
@@ -119,7 +112,6 @@ sub readXLS {
 
     $raw->{source} = {
         filename    => $filename,
-        blob        => $blob,
         mtime       => $t->datetime,
         description => $self->{raw}{description} // '',
     };

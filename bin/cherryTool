@@ -19,6 +19,8 @@ cherryTool - tool for managing cherryEpg environment
  -Q         show detailed database statistics
  -M chunk   inspect chunk and generate mosaic.png
  -Z message send ERROR record to log for testing
+ -j package apply maintenance package to system
+ -J script  convert script to maintenance package
 
  -L scheme  initialize EPG database and load scheme
  -l scheme  load scheme to existing database (do not remove existing services and events)
@@ -66,7 +68,9 @@ line parameters. The default location is C<$USER_HOME/config.yml>.
 
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramsak
+=encoding utf8
+
+This software is copyright (c) 2022 by Bojan Ramšak
 
 =head1 LICENSE
 
@@ -82,8 +86,8 @@ use utf8;
 use Pod::Usage;
 use Getopt::Std;
 use cherryEpg;
-use cherryEpg::Scheme;
 use cherryEpg::Taster;
+use cherryEpg::Maintainer;
 use Log::Log4perl qw(get_logger);
 use File::Basename;
 use Time::Piece;
@@ -93,13 +97,11 @@ use Plack::Runner;
 use IPC::ConcurrencyLimit;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.2';
-
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:iIl:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:ij:J:Il:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
 
-say("cherryTool - ver. $VERSION Copyright 2022 Bojan Ramšak");
+say("cherryTool - ver. $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
 
 pod2usage(
     -verbose  => 99,
@@ -118,6 +120,8 @@ $args{O}                 && cleanupDatabase();
 $args{f}                 && resetSectionVersionTable();
 $args{P}                 && resetRules();
 $args{T}                 && resetDatabase();
+$args{j}                 && maintainerApply();
+$args{J}                 && maintainerConvert();
 $args{n}                 && schemeList(1);
 $args{F}                 && schemeList();
 $args{c}                 && schemeCompile();
@@ -206,7 +210,7 @@ sub carouselPlay {
 }
 
 sub carouselStop {
-    my $player = cherryEpg::Player->new();
+    my $player = cherryEpg::Player->new( verbose => $verbose );
     if ( $args{Y} ) {
         say("Stop playing ALL files in carousel");
         exit 2 unless confirmed();
@@ -217,7 +221,7 @@ sub carouselStop {
 } ## end sub carouselStop
 
 sub carouselClean {
-    my $player = cherryEpg::Player->new();
+    my $player = cherryEpg::Player->new( verbose => $verbose );
     say("Delete ALL files from carousel");
     exit 2 unless confirmed();
     $player->delete();
@@ -324,6 +328,35 @@ sub loggerTest {
     $logger->error( "test log record", undef, undef, [$message] );
 } ## end sub loggerTest
 
+sub maintainerApply {
+    my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
+
+    if ( $mtainer->load( $args{j} ) ) {
+        say( $mtainer->pod );
+        exit 2 unless confirmed();
+        my $success = $mtainer->apply();
+        say $mtainer->output;
+        say $success ? "Success" : "Failed";
+        exit( $success ? 0 : 1 );
+
+    } ## end if ( $mtainer->load( $args...))
+} ## end sub maintainerApply
+
+sub maintainerConvert {
+    my $mtainer  = cherryEpg::Maintainer->new( verbose => $verbose );
+    my $filename = $args{J};
+
+    if ( my $content = $mtainer->convert($filename) ) {
+        my $binFile = basename($filename) . '.bin';
+        open( my $file, '>:raw', $binFile ) || die "Error writing to $binFile: $?";
+        print( $file $content );
+        close($file);
+        say( "  " . length($content) . " bytes written to $binFile" );
+    } else {
+        say("  Conversion failed");
+    }
+} ## end sub maintainerConvert
+
 sub multiGrabIngest {
     my $target = $args{G};
 
@@ -373,7 +406,7 @@ sub schemeCompile {
     my ( $filename, $dirs, $suffix ) = fileparse( $source, qr/\.[^.]*/ );
 
     if ( $filename and $suffix =~ m/^\.(xls|xlsx|ods)$/i and -e $source ) {
-        my $scheme = cherryEpg::Scheme->new();
+        my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
         $scheme->readXLS($source);
 
         my $raw = $scheme->build( $args{H} );
@@ -436,7 +469,7 @@ sub schemeImport {
         exit 1;
     }
 
-    my $scheme = cherryEpg::Scheme->new();
+    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
     my $s      = $scheme->Import($filename);
 
     if ( !$s ) {
@@ -585,7 +618,7 @@ sub webServer {
     my $id = $limit->get_lock;
     if ( not $id ) {
         warn "cherryEPG web UI is already running. No lock. Bye";
-        exit(0);
+        exit 0;
     } else {
         chdir;
 

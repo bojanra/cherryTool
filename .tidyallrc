@@ -1,7 +1,6 @@
 [PerlTidy]
 select = {lib,t}/**/*.{pl,pm,t}
 select = bin/*
-ignore = bin/cherryUpdate
 argv = --profile=$ROOT/.perltidyrc
 
 [SortLines]

@@ -4,7 +4,7 @@ use Test::Cmd;
 use Cwd 'abs_path';
 use File::Basename;
 
-use Test::More tests => 28;
+use Test::More tests => 32;
 
 BEGIN {
     `generateSampleScheduleData`;
@@ -95,6 +95,21 @@ is( $?, 0, 'cleanup database - delete old entries' );
 
 $test->run( args => '-T', stdin => "yes\n" );
 is( $?, 0, 'reset db to empty state' );
+
+SKIP: {
+    skip 'maintenance compiling and applying', 4 if $ENV{'DANCER_ENVIRONMENT'} eq 'production';
+
+    my $m = 'maintenanceTest';
+    unlink( $m . '.bin' );
+    $test->run( args => "-J bin/$m" );
+    ok( $test->stdout =~ /bytes written/m, 'compile maintenance package' );
+    ok( -e "$m.bin",                       'maintenance file exist' );
+
+    $test->run( args => "-j $m.bin", stdin => "yes\n" );
+    ok( $? == 0,                            'maintenance package apply' );
+    ok( $test->stdout =~ /debian_version/m, 'maintenanceTest success' );
+    unlink( $m . '.bin' );
+} ## end SKIP:
 
 # TODO
 # -v         use verbose output mode

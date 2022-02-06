@@ -7,6 +7,7 @@ use cherryEpg;
 use cherryEpg::Taster;
 use cherryEpg::Scheme;
 use cherryEpg::Git;
+use cherryEpg::Maintainer;
 use DBI qw(:sql_types);
 use File::Temp qw(tempfile);
 use Time::Piece;
@@ -787,6 +788,47 @@ ajax '/git' => require_role cherryweb => sub {
             }
         );
     } ## end else [ if ( $status == 0 ) ]
+};
+
+# working with the repo
+ajax '/maintenance' => require_role cherryweb => sub {
+    my $upload = request->upload('file');
+
+    if ( !$upload ) {
+        return send_as(
+            JSON => {
+                success => 0,
+                message => "Upload failed!",
+            }
+        );
+    } ## end if ( !$upload )
+
+    my $tempname = $upload->tempname;
+
+    my $mtainer = cherryEpg::Maintainer->new();
+
+    if ( $mtainer->load($tempname) ) {
+        my $success = $mtainer->apply() // 0;
+        my $output  = $mtainer->output;
+        my $pod     = $mtainer->pod;
+
+        return send_as(
+            JSON => {
+                success => $success,
+                message => "[" . $mtainer->name . "] applied",
+                pod     => $pod,
+                content => $output,
+                test    => "ŠČŽščž"
+            }
+        );
+    } ## end if ( $mtainer->load($tempname...))
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "Loading faile!",
+        }
+    );
 };
 
 # read single log entry

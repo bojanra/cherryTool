@@ -287,17 +287,12 @@ tr.shown td.details-control {
   background: url('/img/details_close.png') no-repeat center center;
 }
 
-.cmd div {
-  list-style: none;
-  float: left;
-  margin: 0 5px 0 5px;
-}
-
-.cmd div i {
+.cmd i {
   font-size: 30px;
+  vertical-align: top;
 }
 
-.cmd div span {
+.cmd span {
   padding-left: 15px;
   padding-right: 5px;
   width: 100%;
@@ -305,7 +300,7 @@ tr.shown td.details-control {
   text-align: left;
 }
 
-.cmd div span small {
+.cmd span small {
   width: 100%;
   display: inline-block;
   text-align: left;

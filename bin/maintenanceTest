@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+
+=head1 NAME
+
+maintenanceTest
+
+=head1 DESCRIPTION
+
+Return content of the debian version file in /etc
+
+=head1 AUTHOR
+
+=encoding utf8
+
+This software is copyright (c) 2022 by Bojan Ramšak
+
+=cut
+
+use 5.010;
+use warnings;
+use strict;
+use utf8;
+use IPC::Run3 qw(run3);
+use open qw ( :std :encoding(UTF-8));
+
+my $output;
+
+run3( "cat /etc/debian_version", \undef, \$output, \undef );
+
+print "debian_version: $output";

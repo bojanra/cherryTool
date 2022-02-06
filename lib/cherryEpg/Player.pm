@@ -498,7 +498,7 @@ sub dump {
     my ( $self, $target ) = @_;
 
     my $response;
-    my $err;
+    my $error;
 
     # try to get .cts
     my ( undef, $ts ) = $self->decode($target);
@@ -518,7 +518,7 @@ sub dump {
             $truncated = 1;
         }
         try {
-            run3( "dvbsnoop -s ts -if - -tssubdecode -nohexdumpbuffer", $ts, \$response, \$err );
+            run3( "dvbsnoop -s ts -if - -tssubdecode -nohexdumpbuffer", $ts, \$response, \$error );
             if ($truncated) {
                 $response .= '=' x 58 . "\nFile larger than 1350 packets. Truncated for dump!\n";
             }
@@ -547,6 +547,8 @@ sub _getPID {
 
 
 =head1 AUTHOR
+
+=encoding utf8
 
 This software is copyright (c) 2021 by Bojan Ramšak
 

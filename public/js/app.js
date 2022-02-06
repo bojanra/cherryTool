@@ -1,7 +1,6 @@
 function ServiceMatrix() {
   var count = 0;
   var day = 5;
-  var cachedData = Array();
   var loading = 0;
 
   this.refresh = () => {
@@ -9,7 +8,7 @@ function ServiceMatrix() {
       return;
     }
     loading = 1;
-    $('#eBudget').html("loading...");
+    $('#eBudget').html('loading...');
     $.ajax({
       context: this,
       url: "/ebudget",
@@ -25,7 +24,7 @@ function ServiceMatrix() {
         }
         setPanelState('#dashBoard', 'danger');
         $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
-        $('#eBudget').html("failed");
+        $('#eBudget').html('failed');
         count = 0;
         loading = 0;
       },
@@ -67,7 +66,7 @@ function ServiceMatrix() {
         state = 'warning';
       }
       $('#ch' + channel.id).removeClass().addClass(state);
-      $('#ch' + channel.id + " time").timeago("update", channel.update);
+      $('#ch' + channel.id + " time").timeago('update', channel.update);
       $('#ch' + channel.id + " span").sparkline(channel.budget, {
         type: 'bar',
         barColor: '#007fff',
@@ -80,7 +79,7 @@ function ServiceMatrix() {
 
   this.build = (report) => {
     // clean the area
-    $('#serviceDash').html("");
+    $('#serviceDash').html('');
     // generate a matrix 6 columns width max and starting with 10 rows
     count = report.data.length;
     var maxCols = 6;
@@ -177,7 +176,7 @@ function LogBrowser(large) {
     $('#logBrowserMinLevel').text(levels[logBrowserSlider.value]);
 
     $('#logBrowser .btn').click((e) => {
-      $(e.currentTarget).toggleClass("active");
+      $(e.currentTarget).toggleClass('active');
       this.table.draw();
       return false;
     });
@@ -238,7 +237,7 @@ function LogBrowser(large) {
         }
       },
       error: () => {
-        $('#logUpdate').html("failed");
+        $('#logUpdate').html('failed');
       }
     },
     scrollY: large ? (window.innerHeight - 239) : 300,
@@ -334,9 +333,9 @@ function RingelSpiel() {
       return;
     }
     loading = 1;
-    $('#oStreams').html("loading...");
-    $('#oLast').html("");
-    $('#oStats').html("");
+    $('#oStreams').html('loading...');
+    $('#oLast').html('');
+    $('#oStats').html('');
     $.ajax({
       context: this,
       url: "/carousel",
@@ -346,11 +345,11 @@ function RingelSpiel() {
       success: this.newdata,
       error: function(jqXHR, tStatus, err) {
         if (tStatus === 'parsererror') {
-          $(location).attr("href", "/ringelspiel");
+          $(location).attr('href', '/ringelspiel');
           return;
         }
         setPanelState('#ringelSpiel', 'danger');
-        $('#oStreams').html("failed");
+        $('#oStreams').html('failed');
         $('#streamDash').html('<div class="alert alert-warning" role="alert">Error getting analysis data. Please refresh!</div>');
         count = 0;
         loading = 0;
@@ -460,8 +459,49 @@ function RingelSpiel() {
 function SystemInfo() {
   var updateStatus = 0;
 
+  this.maintenance = () => {
+    $('#maintenance').css('opacity', 0.4);
+    $('#maintenance small').html("In progress...");
+    $('#pod pre').text('');
+    var formData = new FormData();
+    var file = $('#upload')[0].files[0];
+    formData.append('file', file);
+
+    $.ajax({
+      url: "/maintenance",
+      dataType: 'json',
+      data: formData,
+      type: 'POST',
+      processData: false,
+      mimeTypes: 'multipart/form-data',
+      contentType: false,
+      cache: false,
+      timeout: 10000
+    }).always((item) => {
+      if (item.success == 1) {
+        $('#maintenance').removeClass('btn-primary btn-danger').addClass('btn-success').css('opacity', 1);
+        $('#maintenance small').html(item.message);
+        $('#pod').removeClass('hidden');
+        $('#pod pre').text(item.pod);
+
+        const link = document.createElement('a');
+        link.setAttribute('href', 'data:application/xml;charset=utf-8,' + encodeURIComponent(item.content));
+        link.setAttribute('download', 'report');
+        document.body.appendChild(link);
+        link.click();
+      } else {
+        $('#maintenance').removeClass('btn-primary btn-success').addClass('btn-danger').css('opacity', 1);
+        if (item.message) {
+          $('#maintenance small').html(item.message);
+        } else {
+          $('#maintenance small').html('Task failed');
+        }
+      }
+    });
+  };
+
   this.check = () => {
-    $('#update').css("opacity", 0.4);
+    $('#update').css('opacity', 0.4);
     $.ajax({
       url: '/git',
       dataType: 'json',
@@ -472,7 +512,7 @@ function SystemInfo() {
       },
       timeout: 5000
     }).done((data) => {
-      $('#update').css("opacity", 1);
+      $('#update').css('opacity', 1);
       $('#update').removeClass('btn-warning').removeClass('btn-success').removeClass('btn-danger').removeClass('btn-info');
       $('#update small').html(data.message);
       if (data.success == 1) {
@@ -487,14 +527,14 @@ function SystemInfo() {
       }
     }).fail(() => {
       this.updateStatus = 0;
-      $('#update').css("opacity", 1);
+      $('#update').css('opacity', 1);
       $('#update').removeClass('btn-warning').removeClass('btn-info').removeClass('btn-success').addClass('btn-danger');
       $('#update small').html('Connection error');
     });
   };
 
   this.refresh = () => {
-    $('#systemStatus').html("loading...");
+    $('#systemStatus').html('loading...');
     $('#systemUptime').addClass('hidden');
     $.ajax({
       context: this,
@@ -508,8 +548,8 @@ function SystemInfo() {
           $(location).attr("href", "/system");
           return;
         }
-        $('#systemStatus').html("Failed. Please reload!");
-        $('#systemStatus').removeClass("label-default").addClass("label-danger");
+        $('#systemStatus').html('Failed. Please reload!');
+        $('#systemStatus').removeClass('label-default').addClass('label-danger');
         $('#systemVersion').html('');
         $('#systemEPG').html('');
         $('#systemPlayout').html('');
@@ -525,7 +565,7 @@ function SystemInfo() {
   this.update = (report) => {
     $('#systemStatus').removeClass('label-danger').addClass('label-default');
     $('#systemStatus').html(report.timestamp);
-    $("#systemUptime time").timeago('update', report.systemStart);
+    $('#systemUptime time').timeago('update', report.systemStart);
     $('#systemUptime').removeClass('hidden').addClass('label-info');
     $('time.timeago').timeago();
 
@@ -586,6 +626,14 @@ function SystemInfo() {
 
   $('#update').on('click', () => {
     this.check();
+  });
+
+  $('#maintenance').on('click', () => {
+    $('#upload').click();
+  });
+
+  $('#upload').on('change', () => {
+    this.maintenance();
   });
 
   this.refresh();
@@ -922,7 +970,7 @@ function CarouselPanel() {
   });
 
   $('#sourceFile').change((event) => {
-    var fileName = $(event.currentTarget).val().match(/[^\\/]*$/)[0];;
+    var fileName = $(event.currentTarget).val().match(/[^\\/]*$/)[0];
     $('#sourceFileShow').val(fileName);
   });
 
@@ -1038,9 +1086,9 @@ function Announcement() {
       $('#aPanel input,button').attr('disabled', false);
     } else {
       $('#present').prop('checked', false);
-      $('#aPanel input[name=present]').val("");
+      $('#aPanel input[name=present]').val('');
       $('#following').prop('checked', false);
-      $('#aPanel input[name=following]').val("");
+      $('#aPanel input[name=following]').val('');
       $('#aPanel').attr('disabled', true);
     }
   };
@@ -1107,7 +1155,7 @@ function SchemePanel() {
 
   this.refresh = () => {
     $('#browsePanel .report').empty();
-    $('#browsePanel input').val("");
+    $('#browsePanel input').val('');
     $.ajax({
       url: "/scheme",
       dataType: 'json',
@@ -1120,7 +1168,7 @@ function SchemePanel() {
       $('#browsePanel input').val(item.description);
       $('#browsePanel h4 span').html(item.timestamp);
     }).fail(() => {
-      $('#browsePanel h3').html("ERROR");
+      $('#browsePanel h3').html('ERROR');
     });
   };
 
@@ -1150,8 +1198,6 @@ function SchemePanel() {
         }, 'slow', () => {
           $row.remove();
         });
-      } else {
-
       }
     });
   };
@@ -1174,7 +1220,7 @@ function SchemePanel() {
         $('#actionPanel').removeClass('hidden');
         $('#actionBody').removeClass('hidden');
         $('#validateBody').removeClass('hidden');
-        $('#validateBody h4').html("Activate scheme:");
+        $('#validateBody h4').html('Activate scheme:');
         $('#validateBody .clearfix').addClass('hidden');
 
         $('#configWizard').removeClass('hidden');
@@ -1246,7 +1292,7 @@ function SchemePanel() {
       $('#validateBody button[name=continue]').prop('disabled', !validScheme);
       $('#validateBody input[name=description]').prop('disabled', !validScheme);
     });
-  }
+  };
 
   // wizard
 
@@ -1280,7 +1326,7 @@ function SchemePanel() {
     $('#step2').addClass('active');
     $('#uploadBody').addClass('hidden');
     $('#validateBody').removeClass('hidden');
-    $('#validateBody h4').html("Result of <b>xls</b> to <b>yaml</b> conversion:");
+    $('#validateBody h4').html('Result of <b>xls</b> to <b>yaml</b> conversion:');
     $('#validateBody input[name=description]').val('');
     $('#validateBody button[name=continue]').prop('disabled', true);
     $('#validateBody input[name=description]').prop('disabled', true);
@@ -1486,7 +1532,7 @@ function SchemePanel() {
     $('#sourceFileShow').val(fileName);
   });
 
-  $("#validateBody form").validate({
+  $('#validateBody form').validate({
     debug: true,
     rules: {
       description: {
@@ -1595,7 +1641,7 @@ function SchemePanel() {
     $('#step2').addClass('active');
     $('#uploadBody').addClass('hidden');
     $('#validateBody').removeClass('hidden');
-    $('#validateBody h4').html("Result of <b>xls</b> to <b>yaml</b> conversion:");
+    $('#validateBody h4').html('Result of <b>xls</b> to <b>yaml</b> conversion:');
     $('#validateBody input[name=description]').val('');
     $('#validateBody button[name=continue]').prop('disabled', true);
     $('#validateBody input[name=description]').prop('disabled', true);

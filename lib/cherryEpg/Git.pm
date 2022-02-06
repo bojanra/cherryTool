@@ -161,6 +161,8 @@ sub upgrade {
 
 =head1 AUTHOR
 
+=encoding utf8
+
 This software is copyright (c) 2022 by Bojan Ramšak
 
 =head1 LICENSE
