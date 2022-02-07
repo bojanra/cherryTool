@@ -204,7 +204,7 @@ sub ringelspiel {
         if ( $decoded->{exceed} ) {
             $decoded->{status}  = $WARNING;
             $decoded->{message} = 'Public release - bitrate exceeded';
-        } elsif ( exists $decoded->{trialend} ) {
+        } elsif ( $decoded->{trialend} ) {
             $decoded->{status}  = $WARNING;
             $decoded->{message} = 'Trial period has ended';
         } else {

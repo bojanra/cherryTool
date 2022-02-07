@@ -3,6 +3,7 @@
 *.yaml
 .tidyall.d/
 .~*
+maintenance/*
 nytprof
 nytprof.out
 sessions/*
