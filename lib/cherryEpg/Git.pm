@@ -46,7 +46,7 @@ sub _build_branch {
 
 =head3 fixHook( )
 
-Fix the post-update hook script to restart cherryWeb after pull.
+Fix the post-merge hook script to restart cherryWeb after pull.
 
 =cut
 
@@ -62,7 +62,7 @@ sub fixHook {
     };
 
     return if !$top;
-    $top .= "/.git/hooks/post-checkout";
+    $top .= "/.git/hooks/post-merge";
 
     my $hook;
     if ( -e $top && -x _ && open( $hook, '<', $top ) ) {
@@ -76,7 +76,7 @@ sub fixHook {
         $logger->error("update post-hook");
         return;
     } else {
-        print( $hook "#!/bin/bash\n( sleep 2; pkill -KILL -f /cherryTool) &\nexit 0\n" );
+        print( $hook "#!/bin/bash\n( sleep 2; systemctl --user restart cherryWeb.service) &\nexit 0\n" );
         close($hook);
 
         chmod( 0755, $top );
