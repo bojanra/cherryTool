@@ -818,7 +818,6 @@ ajax '/maintenance' => require_role cherryweb => sub {
                 message => "[" . $mtainer->name . "] applied",
                 pod     => $pod,
                 content => $output,
-                test    => "ŠČŽščž"
             }
         );
     } ## end if ( $mtainer->load($tempname...))

@@ -481,14 +481,6 @@ function SystemInfo() {
       if (item.success == 1) {
         $('#maintenance').removeClass('btn-primary btn-danger').addClass('btn-success').css('opacity', 1);
         $('#maintenance small').html(item.message);
-        $('#pod').removeClass('hidden');
-        $('#pod pre').text(item.pod);
-
-        const link = document.createElement('a');
-        link.setAttribute('href', 'data:application/xml;charset=utf-8,' + encodeURIComponent(item.content));
-        link.setAttribute('download', 'report');
-        document.body.appendChild(link);
-        link.click();
       } else {
         $('#maintenance').removeClass('btn-primary btn-success').addClass('btn-danger').css('opacity', 1);
         if (item.message) {
@@ -496,6 +488,18 @@ function SystemInfo() {
         } else {
           $('#maintenance small').html('Task failed');
         }
+      }
+      if ('pod' in item) {
+        $('#pod').removeClass('hidden');
+        $('#pod pre').text(item.pod);
+
+        const $link = $('<a>');
+        $(document.body).append($link);
+        var url = URL.createObjectURL(new Blob([item.content], {
+          type: 'text/plain'
+        }));
+        $link.attr('download', 'report');
+        $link.attr('href', url)[0].click();
       }
     });
   };
