@@ -2,7 +2,7 @@
 
 use YAML::XS;
 
-use Test::More tests => 16;
+use Test::More tests => 18;
 
 BEGIN {
     use_ok("cherryEpg::Scheme");
@@ -54,3 +54,12 @@ ok( !$scheme->delete('unknown'),  "fail on delete non-existing scheme" );
 ok( ref( $scheme->list() ) eq 'ARRAY', "list archive" );
 
 ok( $scheme->delete($backup), "delete scheme from archive" );
+
+$sut = 'rules';
+
+ok( $scheme->readXLS("t/scheme/$sut.xls"), 'read .xls' );
+
+$s = $scheme->build();
+
+ok( $s->{isValid}, 'build scheme with RULE sheet' );
+
