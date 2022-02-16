@@ -58,6 +58,7 @@ cherryTool - tool for managing cherryEpg environment
  -x id      export events for service in XMLTV format to file {service_id.xml}
 
  -W         run the web server
+ -K text    change system description and restart web service
 
 =head1 DESCRIPTION
 
@@ -95,11 +96,12 @@ use YAML::XS;
 use Time::HiRes qw( time );
 use Plack::Runner;
 use IPC::ConcurrencyLimit;
+use IPC::Run3 qw(run3);
 use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:ij:J:Il:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
 
 say("cherryTool - ver. $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
 
@@ -121,25 +123,26 @@ $args{f}                 && resetSectionVersionTable();
 $args{P}                 && resetRules();
 $args{T}                 && resetDatabase();
 $args{j}                 && maintainerApply();
-$args{J}                 && maintainerConvert();
+$args{J}                 && maintainerConvert( $args{J} );
 $args{n}                 && schemeList(1);
 $args{F}                 && schemeList();
-$args{c}                 && schemeCompile();
+$args{c}                 && schemeCompile( $args{c} );
 ( $args{l} or $args{L} ) && schemeImport();
-$args{e}                 && schemeExport();
-$args{G}                 && multiGrabIngest();
+$args{e}                 && schemeExport( $args{e} );
+$args{G}                 && multiGrabIngest( $args{G} );
 $args{B}                 && multiBuild();
 $args{Q}                 && infoDatabase();
 $args{V}                 && infoEnvironment();
-$args{M}                 && inspect();
-$args{Z}                 && loggerTest();
+$args{M}                 && inspect( $args{M} );
+$args{Z}                 && loggerTest( $args{Z} );
 ( $args{R} or $args{N} ) && checkSystem();
 $args{Y}                 && carouselClean();
 $args{C}                 && carouselList();
-$args{u}                 && carouselAdd();
-$args{p}                 && carouselPlay();
+$args{u}                 && carouselAdd( $args{u} );
+$args{p}                 && carouselPlay( $args{p} );
 ( $args{S} or $args{s} ) && carouselStop();
 $args{W}                 && webServer();
+$args{K}                 && descriptionApply( $args{K} );
 
 ( $args{g} || $args{i} || $args{I} || $args{r} || $args{w} || $args{d} || $args{x} ) && do { $multiCommand = 1 };
 
@@ -321,8 +324,9 @@ sub inspect {
 }
 
 sub loggerTest {
-    my $message = $args{Z};
-    my $cherry  = cherryEpg->instance( verbose => $verbose );
+    my ($message) = @_;
+
+    my $cherry = cherryEpg->instance( verbose => $verbose );
 
     my $logger = get_logger('system');
     $logger->error( "test log record", undef, undef, [$message] );
@@ -343,8 +347,9 @@ sub maintainerApply {
 } ## end sub maintainerApply
 
 sub maintainerConvert {
-    my $mtainer  = cherryEpg::Maintainer->new( verbose => $verbose );
-    my $filename = $args{J};
+    my ($filename) = @_;
+
+    my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
 
     if ( my $content = $mtainer->convert($filename) ) {
         my $binFile = basename($filename) . '.bin';
@@ -358,7 +363,7 @@ sub maintainerConvert {
 } ## end sub maintainerConvert
 
 sub multiGrabIngest {
-    my $target = $args{G};
+    my ($target) = @_;
 
     my $cherry = cherryEpg->instance( verbose => $verbose );
     say("Starting multi-grab/ingest on target: $target");
@@ -399,7 +404,8 @@ sub resetSectionVersionTable {
 }
 
 sub schemeCompile {
-    my $source = $args{c};
+    my ($source) = @_;
+
     my $doBackup;
 
     say("Convert xls to yaml scheme:");
@@ -452,7 +458,8 @@ $filename.$suffix, $targetFile, $target // "-", scalar @{$raw->{channel}}, scala
 
         my $report = $scheme->export($targetFile);
     } else {
-        die("Incorrect input filename [$source] or file not found.\n");
+        say("Incorrect input filename [$source] or file not found.\n");
+        exit 1;
     }
 } ## end sub schemeCompile
 
@@ -507,7 +514,8 @@ $filename, scalar @{$s->{channel}}, scalar @{$s->{eit}}, scalar @{$s->{rule}}
 } ## end sub schemeImport
 
 sub schemeExport {
-    my $target = $args{e};
+    my ($target) = @_;
+
     say("Export scheme to $target");
     my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
     $scheme->pull();
@@ -564,7 +572,7 @@ sub serviceManipulator {
                 $errorFlag += 1;
             }
         } ## end foreach my $channel_id (@ARGV)
-        exit if $errorFlag;
+        exit 1 if $errorFlag;
     } else {
         if ( $args{w} ) {
             say("You are going to wipe all services from the system!");
@@ -617,8 +625,8 @@ sub webServer {
 
     my $id = $limit->get_lock;
     if ( not $id ) {
-        warn "cherryEPG web UI is already running. No lock. Bye";
-        exit 0;
+        say("cherryEPG web UI is already running. No lock.");
+        exit 1;
     } else {
         chdir;
 
@@ -635,3 +643,38 @@ sub webServer {
         $runner->run();
     } ## end else [ if ( not $id ) ]
 } ## end sub webServer
+
+sub descriptionApply {
+    my ($description) = @_;
+
+    my $cherry     = cherryEpg->instance( verbose => $verbose );
+    my $configFile = glob( $cherry->configFile );
+
+    # check if file exists
+    if ( $configFile and -e $configFile ) {
+        my $configuration = YAML::XS::LoadFile($configFile);
+
+        if ($configuration) {
+            $configuration->{description} = $description;
+            if ( YAML::XS::DumpFile( $configFile, $configuration ) ) {
+                say "Description modified";
+
+                # prepare symbolic link
+                say "Updated symbolic link"
+                    if symlink( "/var/lib/cherryepg/config.yml", "/var/lib/cherryepg/cherryTool/config_local.yml" );
+
+                run3( "systemctl --user restart cherryWeb.service", \undef, \undef, \undef );
+                if ( $? == 0 ) {
+                    say("Service restarted");
+                    exit 0;
+                } else {
+                    say("Restart failed!");
+                    exit 1;
+                }
+            } ## end if ( YAML::XS::DumpFile...)
+        } ## end if ($configuration)
+    } ## end if ( $configFile and -e...)
+
+    say("Description modification failed!");
+    exit 1;
+} ## end sub descriptionApply

@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.6';
+our $VERSION = '2.1.7';
 
 with('MooX::Singleton');
 
@@ -54,12 +54,10 @@ sub _build_config {
 
     $configFile = glob($configFile);
 
-    my $configuration;
-
     # check if file exists
     if ( $configFile and -e $configFile ) {
 
-        $configuration = YAML::XS::LoadFile($configFile);
+        my $configuration = YAML::XS::LoadFile($configFile);
 
         # return only the subtree
         if ( ref $configuration eq 'HASH' ) {
