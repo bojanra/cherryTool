@@ -126,7 +126,7 @@ Return 1 on success.
 sub check {
     my ( $self, $filepath ) = @_;
 
-    run3( "perl -c $filepath", \undef, \undef, \undef );
+    run3("perl -c $filepath");
 
     return if $?;
 
