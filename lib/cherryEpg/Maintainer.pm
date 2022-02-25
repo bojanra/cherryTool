@@ -111,7 +111,7 @@ sub apply {
         $logger->error( "Applying [$name] to the system", undef, undef, $report );
         return;
     } else {
-        $logger->info( "Applying [$name] to the system", undef, undef, $report );
+        $logger->info( "Applying [$name] to the system", undef, undef, undef );
         return 1;
     }
 } ## end sub apply
