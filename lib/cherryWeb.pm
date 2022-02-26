@@ -24,6 +24,10 @@ hook before => sub {
 
 };
 
+hook permission_denied => sub {
+    send_error( request->path, 403 );
+};
+
 hook before_template_render => sub {
     my $tokens = shift;
     my $user   = session 'logged_in_user';
