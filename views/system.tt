@@ -1,12 +1,12 @@
 <% INCLUDE menu.tt %>
 <div class="container">
   <div id="systemInfo" class="panel panel-default">
-
-    <div class="panel-heading ">
-      <div class="btn-group pull-right">
-        <a href="#"><span id="systemUptime" class="label align hidden">Uptime: <time class="timeago" datetime="2008-07-17T09:24:17Z"></time></span><span id="systemStatus" class="label label-default align"></span></a>
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">System status</h3>
+      <div class="input-group input-group-sm">
+        <span id="systemUptime" class="label btn hidden">Uptime: <time class="timeago" datetime="2008-07-17T09:24:17Z"></time></span>
+        <span id="systemStatus" class="label btn"></span>
       </div>
-      <h3 class="panel-title"><strong>System status</strong></h3>
     </div>
     <ul class="list-group">
       <li class="list-group-item">

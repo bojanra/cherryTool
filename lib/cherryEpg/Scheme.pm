@@ -313,16 +313,19 @@ sub parseService {
         }
 
         # tsid, sid and onid must be numbers
-        if (   $field[1] !~ m|^\d+$|
+        if (  !$field[1]
+            || $field[1] !~ m|^\d+$|
+            || !$field[2]
             || $field[2] !~ m|^\d+$|
+            || !$field[3]
             || $field[3] !~ m|^\d+$| ) {
             $self->error("TSID, SID or ONID are not numbers in row [$sheetName:$rowCounter]");
             next;
-        } ## end if ( $field[1] !~ m|^\d+$|...)
+        } ## end if ( !$field[1] || $field...)
 
         # segments must be numbers
         my $maxSegment = $field[4];
-        if ( $maxSegment !~ m|^\d+$| ) {
+        if ( !$maxSegment || $maxSegment !~ m|^\d+$| ) {
             $self->error("Segments is not number in row [$sheetName:$rowCounter]");
             next;
         }

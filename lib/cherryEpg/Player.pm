@@ -204,6 +204,24 @@ sub load {
     return;
 } ## end sub load
 
+=head3 applyRedundancy( $meta)
+
+Apply the redundancy setting inside the meta structure in-place.
+
+=cut
+
+sub applyRedundancy {
+    my ( $self, $meta ) = @_;
+
+    if ( $meta->{redundancy} ) {
+        my $hostname = hostname() // '-';
+        if ( ref( $meta->{redundancy} ) eq 'HASH' and $meta->{redundancy}{$hostname} ) {
+            $meta->{dst} = $meta->{redundancy}{$hostname};
+        }
+        delete $meta->{redundancy};
+    } ## end if ( $meta->{redundancy...})
+} ## end sub applyRedundancy
+
 =head3 arm( $target, $meta, \$pes, $eit_id)
 
 Create .tmp file with $meta data and $pes in carousel directory
@@ -231,13 +249,7 @@ sub arm {
     };
 
     # check for redundancy
-    if ( $meta->{redundancy} ) {
-        my $hostname = hostname() // '-';
-        if ( ref( $meta->{redundancy} ) eq 'HASH' and $meta->{redundancy}{$hostname} ) {
-            $meta->{dst} = $meta->{redundancy}{$hostname};
-        }
-        delete $meta->{redundancy};
-    } ## end if ( $meta->{redundancy...})
+    $self->applyRedundancy($meta);
 
     # verify destination ip:port
     if ( !$meta->{dst} ) {
@@ -245,7 +257,7 @@ sub arm {
         return;
     }
     if ( $meta->{dst} !~ m/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}$/ ) {
-        $logger->error( "incorrect format of destination [", $meta->{dst}, "]", undef, $eit_id );
+        $logger->error( "incorrect format of destination [" . $meta->{dst} . "]", undef, $eit_id );
         return;
     }
 
@@ -458,7 +470,10 @@ sub list {
                     delete $carousel->{$target};
                     next;
                 }
-                $carousel->{$target}{pid}       = _getPID($ts);
+                $carousel->{$target}{pid} = _getPID($ts);
+
+                # check for redundancy
+                $self->applyRedundancy($meta);
                 $carousel->{$target}{meta}      = $meta;
                 $carousel->{$target}{size}      = length($$ts);
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();

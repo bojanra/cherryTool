@@ -582,7 +582,7 @@ sub listEvent {
         WHERE channel_id=$channel_id "
             . ( defined $event_id ? " AND event_id = $event_id" : "" )
             . ( defined $start    ? " AND start >= $start"      : "" )
-            . ( defined $stop     ? " AND stop <= $stop"        : "" )
+            . ( defined $stop     ? " AND stop >= $stop"        : "" )
             . ( defined $touch    ? " AND timestamp > $touch"   : "" )
             . " ORDER BY start"
     );

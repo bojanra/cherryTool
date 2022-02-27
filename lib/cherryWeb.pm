@@ -118,23 +118,6 @@ get '/export/:id.xml' => sub {
         $list = $cherry->epg->listChannel();
     } elsif ( $id =~ m/^\d+$/ ) {
         $list = $cherry->epg->listChannel($id);
-    } elsif ( $id =~ /^[abcde]$/ ) {
-
-        # the selected group
-        my $groupIndex = ord($id) - 97;
-
-        # get all channels
-        $list = $cherry->epg->listChannel();
-
-        # max group
-        my $groupCount = 5;
-        my $total      = scalar @$list;
-        my $groupSize  = int( $total / $groupCount ) + 1;
-        my $start      = $groupIndex * $groupSize;
-
-        # remove from start
-        my (@wanted) = $groupIndex == ( $groupCount - 1 ) ? splice( @$list, $start ) : splice( @$list, $start, $groupSize );
-        $list = \@wanted;
     } else {
         send_error( "Not allowed", 404 );
     }
@@ -645,24 +628,61 @@ ajax '/ebudget' => require_role cherryweb => sub {
     );
 };
 
+# return service info
+ajax '/service/info' => require_role cherryweb => sub {
+    my $channel_id = params->{'id'};
+
+    my $cherry = cherryEpg->instance();
+
+    # get info
+    my $result = $cherry->epg->listChannel($channel_id)->[0];
+    my $last   = $cherry->epg->listChannelLastUpdate();
+
+    # get events
+    my @list = $cherry->epg->listEvent( $channel_id, undef, undef, time() );
+    splice( @list, 2 );
+
+    # if present is missing
+    if ( @list == 0 || @list > 0 && $list[0]->{start} > time() ) {
+
+        # this is not the present event
+        unshift( @list, {} );
+        splice( @list, 2 );
+    } ## end if ( @list == 0 || @list...)
+
+    # if following is missing
+    push( @list, {} ) if @list == 1;
+
+    foreach my $event (@list) {
+        $event->{timeSpan} = '?';
+        if ( $event->{start} ) {
+            $event->{timeSpan} =
+                localtime( $event->{start} )->strftime("%H:%M:%S") . ' - ' . localtime( $event->{stop} )->strftime("%H:%M:%S");
+        }
+        $event->{title}    = '-';
+        $event->{subtitle} = '-';
+        foreach my $desc ( $event->{descriptors}->@* ) {
+            if ( exists $desc->{event_name} ) {
+                $event->{title}    = $desc->{event_name};
+                $event->{subtitle} = $desc->{text} || '-';
+                last;
+            }
+        } ## end foreach my $desc ( $event->...)
+        delete $event->{descriptors};
+    } ## end foreach my $event (@list)
+
+
+    $result->{last}   = localtime( $last->{$channel_id}{timestamp} )->strftime();
+    $result->{events} = \@list;
+
+    return send_as( JSON => $result );
+};
+
 # show ringelspiel statistics
 ajax '/carousel' => require_role cherryweb => sub {
     my $taster = cherryEpg::Taster->instance();
 
     return send_as( JSON => $taster->ringelspiel );
-};
-
-# get tooltip channel info
-ajax '/channel' => require_role cherryweb => sub {
-    my $channel_id = params->{'id'};
-    my $cherry     = cherryEpg->instance();
-    my $result     = ${ $cherry->epg->listChannel($channel_id) }[0];
-
-    if ( $result->{channel_id} ) {
-        return send_as( JSON => $result );
-    } else {
-        return send_as( JSON => {} );
-    }
 };
 
 # browse log

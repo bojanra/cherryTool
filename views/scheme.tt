@@ -123,9 +123,9 @@
                         <input type="text" id="sourceFileShow" name="sourceFileShow" placeholder="sample.xls" class="form-control" readonly>
                       </div>
                     </div>
-                    <span class="clearfix">
+                    <div class="form-group">
                       <button type="button" name="upload" class="btn btn-success pull-right"><i class="glyphicon glyphicon-upload"></i><strong> Upload</strong> scheme</button>
-                    </span>
+                    </div>
                   </form>
                 </div>
               </div>

@@ -1,33 +1,120 @@
 <% INCLUDE menu.tt %>
 <div class="container">
   <div id="dashBoard" class="panel panel-default">
-    <div class="panel-heading ">
-      <div class="btn-group pull-right">
-        <a href="#"><span id="eBudget" class="label label-default align"></span></a>
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Event budget matrix</h3>
+      <div class="input-group input-group-sm">
+        <span id="eBudget" class="label label-default btn">Default</span>
       </div>
-      <h3 class="panel-title"><strong>Event budget matrix</strong></h3>
     </div>
     <div id="serviceDash" class="panel-body">
     </div>
   </div>
 
-  <div id="ringelSpiel" class="panel panel-default">
-    <div class="panel-heading">
-      <div class="btn-group pull-right">
-        <a href="#"><span id="oStats" class="label label-danger align"></span><span id="oLast" class="label label-info align"></span><span id="oStreams" class="label label-default align"></span></a>
+  <div id="serviceAgent" class="panel panel-info hidden">
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Service info</h3>
+      <div class="input-group input-group-sm">
+        <button id="serviceClose" class="btn btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
-      <h3 class="panel-title"><strong>Output streams</strong></h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="row ">
+          <div class="col-md-3">
+            <div class="report">
+              <p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Name:</span><span id='serviceName'></span></p>
+              <p class="text-primary"><i class="glyphicon glyphicon-th-large"></i><span>SID:</span><span id="serviceId"></span></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="report">
+              <p class="text-primary"><i class="glyphicon glyphicon-flag"></i><span>Codepage:</span><span id="serviceCodepage"></span></p>
+              <p class="text-primary"><i class="glyphicon glyphicon-book"></i><span>Language:</span><span id="serviceLanguage"></span></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="report">
+              <p class="text-primary"><i class="glyphicon glyphicon-calendar"></i><span>Segments:</span><span id="serviceSegments"></span></p>
+              <p class="text-primary"><i class="glyphicon glyphicon-dashboard"></i><span>Update:</span><span id="serviceUpdate"></span></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="report">
+              <p class="text-primary"><i class="glyphicon glyphicon-eye-open"></i><span>Parser:</span><span id="serviceParser"></span></p>
+            </div>
+          </div>
+        </div>
+        <form action="" class="">
+          <div class="input-group">
+            <span class="input-group-addon" id="url-input"><i class="glyphicon glyphicon-link"></i> URL</span>
+            <input id="serviceUrl" type="text" class="form-control" aria-describedby="url-input" disabled>
+          </div>
+          <span class="clearfix" />
+        </form>
+      </li>
+
+      <li class="list-group-item">
+        <div id="serviceCtrl" class="row equal">
+          <div class="col-md-2">
+            <h4 class="hidden">Import</h4>
+            <form id="uploadForm" action="" class="hidden">
+              <button type="button" name="upload" class="btn btn-success"><i class="glyphicon
+                  glyphicon-upload"></i><strong> Upload&ingest</strong> file</button>
+            </form>
+          </div>
+          <div class="col-md-8">
+            <ul id="event" class="list-group">
+              <li class="list-group-item list-group-item-info">
+                <p class="start label label-default">a</p>
+                <p class="label label-primary">Present</p>
+                <div class="title">b</div>
+                <div class="subtitle">c</div>
+              </li>
+              <li class="list-group-item list-group-item-info">
+                <p class="start label label-default">a</p>
+                <p class="label label-primary">Following</p>
+                <p class="title">b</p>
+                <p class="subtitle">c</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <h4>Export</h4>
+            <a class="btn btn-default" id="exportXML" href=""><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
+            <a class="btn btn-default" id="exportCSV" href="" disabled><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
+            <a class="btn btn-default" href="/export/full.xml" target="_blank"><i class="glyphicon glyphicon-shopping-cart"></i> Full</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <div class="report hidden">
+          <p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span>-</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="ringelSpiel" class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Output streams</h3>
+      <div class="input-group input-group-sm">
+        <span id="oStats" class="label label-danger btn"></span>
+        <span id="oLast" class="label label-info btn"></span>
+        <span id="oStreams" class="label label-default btn"></span>
+      </div>
     </div>
     <div id="streamDash" class="panel-body">
     </div>
   </div>
 
   <div id="logBrowser" class="panel panel-default">
-    <div class="panel-heading">
-      <div class="btn-group pull-right">
-        <a href="#"><span id="logUpdate" class="label label-default align"></span></a>
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Log browser</h3>
+      <div class="input-group input-group-sm">
+        <span id="logUpdate" class="label label-default btn"></span>
       </div>
-      <h3 class="panel-title"><strong>Log browser </strong></h3>
     </div>
     <div id="logBrowserTabs" class="panel-body">
       <div class="row ">
@@ -73,6 +160,6 @@
       log.refresh();
     });
 
-    $('.panel-heading a').on('click', () => refresh.now());
+    $('.panel-heading span.btn').on('click', () => refresh.now());
   });
 </script>

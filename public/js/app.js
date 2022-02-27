@@ -2,6 +2,7 @@ function ServiceMatrix() {
   var count = 0;
   var day = 5;
   var loading = 0;
+  var currentService = null;
 
   this.refresh = () => {
     if (loading) {
@@ -16,7 +17,7 @@ function ServiceMatrix() {
       data: 'day=' + day,
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      success: this.newdata,
+      success: this.present,
       error: function(jqXHR, tStatus, err) {
         if (tStatus === 'parsererror') {
           $(location).attr("href", "/");
@@ -32,7 +33,62 @@ function ServiceMatrix() {
     });
   };
 
-  this.newdata = (report) => {
+  this.updateService = (id) => {
+    if (this.currentService == id) {
+      this.currentService = null;
+      $('#serviceAgent').addClass('hidden');
+      return;
+    }
+
+    // show agent
+    $('#serviceAgent').removeClass('hidden');
+
+    $.ajax({
+      context: this,
+      url: "/service/info",
+      dataType: 'json',
+      data: 'id=' + id,
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      success: this.showService,
+      error: function(jqXHR, tStatus, err) {
+        if (tStatus === 'parsererror') {
+          return;
+        }
+        //        $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
+      },
+      timeout: 3000
+    });
+  };
+
+  this.showService = (data) => {
+    if ('name' in data) {
+      this.currentService = data.channel_id;
+      $('#serviceName').html(data.name);
+      $('#serviceId').html(data.channel_id);
+      $('#serviceCodepage').html(data.codepage);
+      $('#serviceLanguage').html(data.language);
+      $('#serviceSegments').html(data.maxsegments);
+      $('#serviceUpdate').html(data.grabber.update);
+      $('#serviceParser').html(data.parser);
+      $('#serviceUrl').val(data.grabber.url);
+      $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
+      $('#exportXML').prop('target', '_' + data.channel_id);
+      $('#exportCSV').prop('href', '/export/' + data.channel_id + '.csv');
+      $('#exportCSV').prop('target', '_' + data.channel_id);
+
+      data.events.forEach((e, i) => {
+        var $eventField = $('#event li').eq(i);
+        $eventField.find('.start').html(e.timeSpan);
+        $eventField.find('.title').html(e.title);
+        $eventField.find('.subtitle').html(e.subtitle);
+      });
+    } else {
+
+    }
+  };
+
+  this.present = (report) => {
     loading = 0;
     if (report.status === 0) {
       setPanelState('#dashBoard', 'success');
@@ -119,16 +175,13 @@ function ServiceMatrix() {
       }
       var column = $('#col' + col).find('tbody');
 
-      column.append(
-        `<tr id="ch${channel.id}">
-            <td class="moreInfo">
-              <a target="_xmltv" href="/export/${channel.id}.xml">${channel.name.substr(0, 9)}</a>
-            </td>
-            <td>
-              <span class="sparkline">...</span>
-            </td>
+      var $tr = $(`<tr id="ch${channel.id}">
+            <td>${channel.name.substr(0, 9)}</td>
+            <td><span class="sparkline">...</span></td>
             <td><time class="timeago"></time></td>
           </tr>`);
+      $tr.data('id', channel.id);
+      column.append($tr);
     });
 
     this.update(report);
@@ -137,6 +190,16 @@ function ServiceMatrix() {
   };
 
   this.refresh();
+
+  $('#serviceDash').on('click', 'tr', (event) => {
+    var $tr = $(event.currentTarget);
+    this.updateService($tr.data('id'));
+  });
+
+  $('#serviceClose').on('click', () => {
+    this.currentService = null;
+    $('#serviceAgent').addClass('hidden');
+  });
 }
 /// ------------------------------------------------------------------------------------------------------------------------------------------------------
 function LogBrowser(large) {
@@ -168,15 +231,15 @@ function LogBrowser(large) {
       handle: 'round'
     });
 
-    $('#logBrowserSlider').on('change', (ev) => {
-      $('#logBrowserMinLevel').text(levels[ev.value.newValue]);
+    $('#logBrowserSlider').on('change', (event) => {
+      $('#logBrowserMinLevel').text(levels[event.value.newValue]);
       this.table.draw();
     });
 
     $('#logBrowserMinLevel').text(levels[logBrowserSlider.value]);
 
-    $('#logBrowser .btn').click((e) => {
-      $(e.currentTarget).toggleClass('active');
+    $('#logBrowser .btn').click((event) => {
+      $(event.currentTarget).toggleClass('active');
       this.table.draw();
       return false;
     });
@@ -304,8 +367,8 @@ function LogBrowser(large) {
     this.table.draw();
   };
 
-  $('#logTable tbody').on('click', 'td.details-control', (e) => {
-    var $tr = $(e.currentTarget).closest('tr');
+  $('#logTable tbody').on('click', 'td.details-control', (event) => {
+    var $tr = $(event.currentTarget).closest('tr');
     var row = this.table.row($tr[0]);
 
     if (row.child.isShown()) {
@@ -517,7 +580,7 @@ function SystemInfo() {
       timeout: 5000
     }).done((data) => {
       $('#update').css('opacity', 1);
-      $('#update').removeClass('btn-warning').removeClass('btn-success').removeClass('btn-danger').removeClass('btn-info');
+      $('#update').removeClass('btn-warning btn-success btn-danger btn-info');
       $('#update small').html(data.message);
       if (data.success == 1) {
         this.updateStatus = 0;
@@ -532,7 +595,7 @@ function SystemInfo() {
     }).fail(() => {
       this.updateStatus = 0;
       $('#update').css('opacity', 1);
-      $('#update').removeClass('btn-warning').removeClass('btn-info').removeClass('btn-success').addClass('btn-danger');
+      $('#update').removeClass('btn-warning btn-info btn-success').addClass('btn-danger');
       $('#update small').html('Connection error');
     });
   };
@@ -624,7 +687,7 @@ function SystemInfo() {
     placement: 'right'
   });
 
-  $('#systemInfo a').on('click', () => {
+  $('#systemInfo .panel-heading .btn').on('click', () => {
     this.refresh();
   });
 
@@ -831,14 +894,14 @@ function CarouselPanel() {
     });
   };
 
-  $('#browseReport').on('click', 'td:nth-child(1),th:nth-child(1)', (e) => {
+  $('#browseReport').on('click', 'td:nth-child(1),th:nth-child(1)', () => {
     $('#browseReport td:nth-child(1)>time').toggleClass('hidden');
     $('#browseReport td:nth-child(1)>span').toggleClass('hidden');
   });
 
-  $('#browseReport').on('click', 'button', (e) => {
-    var button = $(e.currentTarget).attr('name');
-    this.target = $(e.currentTarget).closest('tr').data('target');
+  $('#browseReport').on('click', 'button', (event) => {
+    var button = $(event.currentTarget).attr('name');
+    this.target = $(event.currentTarget).closest('tr').data('target');
 
     if (button === 'delete') {
       $('#formConfirm').modal('show');
@@ -853,7 +916,7 @@ function CarouselPanel() {
     }
   });
 
-  $('#btnConfirm').on('click', (e) => {
+  $('#btnConfirm').on('click', () => {
     $('#formConfirm').modal('hide');
     this.delete();
   });
@@ -866,7 +929,7 @@ function CarouselPanel() {
     var file = $('#sourceFile')[0].files[0];
     formData.append('file', file);
     $('#parseReport').empty();
-    $('#parseReport').append('<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i> <b>Waiting for validation!</b></p>');
+    $('#parseReport').append('<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i> Waiting for validation!</p>');
 
     $('#step1').removeClass('active');
     $('#step2').addClass('active');
@@ -891,29 +954,28 @@ function CarouselPanel() {
       var validChunk = false;
       if ($.isArray(item.error)) {
         $('#parseReport').empty();
-        $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span><b>${item.source}</b></p>`);
+        $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span>${item.source}</p>`);
         if (item.error.length) {
-          item.error.forEach((m) => {
-            var message = m.replace(/(\[.+\])/, '<b>$1</b>');
-            $('#parseReport').append(`\n<p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span>&nbsp;</span><b>${message}</p>`);
+          item.error.forEach((message) => {
+            $('#parseReport').append(`\n<p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span>&nbsp;</span>${message}</p>`);
           });
         } else {
           validChunk = true;
         }
         if (validChunk) {
-          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-floppy-disk"></i><span>Title:</span><b>${item.title}</b></p>`);
-          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-envelope"></i><span>Destination:</span><b>${item.dst}</b></p>`);
-          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-shopping-cart"></i><span>Size:</span><b>${item.size}</b></p>`);
-          $('#parseReport').append(`\n<p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span><b>Enhanced chunk file valid.</b></p>`);
+          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-floppy-disk"></i><span>Title:</span>${item.title}</p>`);
+          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-envelope"></i><span>Destination:</span>${item.dst}</p>`);
+          $('#parseReport').append(`\n<p class="text-primary"><i class="glyphicon glyphicon-shopping-cart"></i><span>Size:</span>${item.size}</p>`);
+          $('#parseReport').append(`\n<p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span>Enhanced chunk file valid.</p>`);
           // session check
           this.md5 = item.md5;
         } else {
-          $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span><b>File not valid. Fix errors and try again!</b></p>');
+          $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span>File not valid. Fix errors and try again!</p>');
           this.md5 = null;
         }
       } else {
         $('#parseReport').empty();
-        $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span><b>Incorrect response from server.</b></p>');
+        $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span>Incorrect response from server.</p>');
       }
       if (validChunk) {
         $('#saveForm button[name=continue]').prop('disabled', false).addClass('btn-success').removeClass('btn-default');
@@ -1177,10 +1239,10 @@ function SchemePanel() {
   };
 
   this.head = (item) => {
-    return `<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span><b>${item.source}</b></p>
-      <p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span><b>${item.channel}</b></p>
-      <p class="text-primary"><i class="glyphicon glyphicon-transfer"></i><span>EIT:</span><b>${item.eit}</b></p>
-      <p class="text-primary"><i class="glyphicon glyphicon-th-list"></i><span>Rules:</span><b>${item.rule}</b></p>`;
+    return `<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span>${item.source}</p>
+      <p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span>${item.channel}</p>
+      <p class="text-primary"><i class="glyphicon glyphicon-transfer"></i><span>EIT:</span>${item.eit}</p>
+      <p class="text-primary"><i class="glyphicon glyphicon-th-list"></i><span>Rules:</span>${item.rule}</p>`;
   };
 
   this.delete = () => {
@@ -1275,18 +1337,17 @@ function SchemePanel() {
         $('#parseReport').append(this.head(item));
         if (item.errorList.length) {
           item.errorList.forEach((item) => {
-            var message = item.replace(/(\[.+\])/, '<b>$1</b>');
-            $('#parseReport').append(`\n<p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span>&nbsp;</span><b>${message}</p>`);
+            $('#parseReport').append(`\n<p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span>&nbsp;</span>${item}</p>`);
           });
         } else {
           validScheme = true;
         }
         if (validScheme) {
-          $('#parseReport').append('\n<p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span><b>Scheme valid.</b></p>');
+          $('#parseReport').append('\n<p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span>Scheme valid.</p>');
           // session check
           this.mtime = item.mtime;
         } else {
-          $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span><b>Scheme not valid. Fix errors and try again!</b></p>');
+          $('#parseReport').append('\n<p class="text-danger"><i class="glyphicon glyphicon-remove"></i><span>&nbsp;</span>Scheme not valid. Fix errors and try again!</p>');
           this.mtime = null;
         }
         $('#validateBody input').val(item.description);
@@ -1324,7 +1385,7 @@ function SchemePanel() {
     formData.append('file', file);
 
     $('#parseReport').empty();
-    $('#parseReport').append('\n<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i> <b>Waiting for validation!</b></p>');
+    $('#parseReport').append('\n<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i>Waiting for validation!</p>');
 
     $('#step1').removeClass('active');
     $('#step2').addClass('active');
@@ -1502,14 +1563,14 @@ function SchemePanel() {
 
   // helper handler
 
-  $('#browseReport').on('click', 'td:nth-child(1),th:nth-child(1)', (e) => {
+  $('#browseReport').on('click', 'td:nth-child(1),th:nth-child(1)', () => {
     $('#browseReport td:nth-child(1)>time').toggleClass('hidden');
     $('#browseReport td:nth-child(1)>span').toggleClass('hidden');
   });
 
-  $('#browseReport').on('click', 'button', (e) => {
-    var button = $(e.currentTarget).attr('name');
-    this.target = $(e.currentTarget).closest('tr').data('target');
+  $('#browseReport').on('click', 'button', (event) => {
+    var button = $(event.currentTarget).attr('name');
+    this.target = $(event.currentTarget).closest('tr').data('target');
 
     if (button === 'del') {
       $('#formConfirm').modal('show');
@@ -1518,7 +1579,7 @@ function SchemePanel() {
     }
   });
 
-  $('#btnConfirm').on('click', (e) => {
+  $('#btnConfirm').on('click', () => {
     $('#formConfirm').modal('hide');
     this.delete();
   });
@@ -1639,7 +1700,7 @@ function SchemePanel() {
     $('#step3').removeClass('active');
 
     $('#parseReport').empty();
-    $('#parseReport').append('<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i> <b>Waiting for validation!</b></p>');
+    $('#parseReport').append('<p class="text-warning"><i class="glyphicon glyphicon-hourglass"></i>Waiting for validation!</p>');
 
     $('#step1').removeClass('active');
     $('#step2').addClass('active');

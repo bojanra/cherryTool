@@ -21,11 +21,6 @@ body {
   margin-bottom: 10px;
 }
 
-.vertical-align {
-  display: flex;
-  align-items: center;
-}
-
 .label {
   padding-top: 0.2em !important;
   padding-bottom: 0em !important;
@@ -398,6 +393,7 @@ div.panel-heading div.btn-group {
   padding: 0.2em 0px 0px 1px;
   white-space: nowrap;
   line-height: 1.1em;
+  cursor: pointer;
 }
 
 .table-log>thead>tr>th,
@@ -442,13 +438,20 @@ a:hover {
 .report p {
   padding: 0px 5px;
   margin-bottom: 0px;
+  font-weight: bold;
 }
 
-.report span {
+.report i {
+  color: #000;
+}
+
+.report span:first-of-type {
   display: inline-block;
   margin-left: 5px;
   margin-right: 5px;
   width: 8em;
+  color: #000;
+  font-weight: normal;
 }
 
 div.report {
@@ -469,10 +472,12 @@ div.report {
   padding: 0;
 }
 
-#serviceAgent .list-group-item {}
-
 #browsePanel .form-group {
   margin-bottom: 0px;
+}
+
+input {
+  font-weight: bold;
 }
 
 #reportSpan {
@@ -530,6 +535,7 @@ h4 {
 
 h3.panel-title {
   font-weight: bold;
+  padding-top: 7.5px;
 }
 
 #browseReport a {
@@ -547,10 +553,6 @@ h3 {
 .badge-success {
   color: #fff;
   background-color: #5cb85c;
-}
-
-#systemInfo span {
-  cursor: pointer;
 }
 
 .upload-area {
@@ -585,8 +587,92 @@ h3 {
   border-color: #8c8c8c;
 }
 
-.input-group-sm span,
-.input-group-sm button {
-
+.panel-heading .input-group-sm span,
+.panel-heading .input-group input,
+.panel-heading .input-group-sm button {
   font-weight: bold;
+  vertical-align: top;
+  margin-top: -3.5px;
+}
+
+.panel-heading .input-group {
+  margin-top: 8px;
+  float: right;
+  line-height: 11.25px;
+}
+
+.container div.panel-heading {
+  padding-top: 3px;
+  padding-bottom: 2px;
+}
+
+@media (min-width: 992px) {
+  .row.equal {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+#serviceCtrl .list-group-item-info {
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+
+#event {
+  margin: 0px;
+}
+
+
+.ribbon {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  width: 100px;
+  height: 15px;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+#event .start {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#event .title {
+  margin: 0px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#event .subtitle {
+  margin: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#serviceAgent .list-group-item {
+  padding: 5px 10px;
+}
+
+#serviceAgent .list-group-item .btn {
+  margin-bottom: 5px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.input-group input,
+.form-group input {
+  padding-top: 12px;
+}
+
+.input-group span {
+  padding: 8px 12px 4px 12px;
+}
+
+#serviceAgent .report span:first-of-type {
+  width: 5em;
 }
