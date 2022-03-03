@@ -18,7 +18,7 @@
           </button>
           <div class="list-group-item" id="wMenuDropzone">
             <div class="upload-area">
-              <h1>Drag and Drop<br />for<br />Upload</h1>
+              <h1>Drop scheme here</h1>
             </div>
           </div>
         </div>

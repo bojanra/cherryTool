@@ -1,137 +1,8 @@
-function ServiceMatrix() {
+function ServiceMatrix(log) {
   var count = 0;
-  var day = 5;
   var loading = 0;
   var currentService = null;
-
-  this.refresh = () => {
-    if (loading) {
-      return;
-    }
-    loading = 1;
-    $('#eBudget').html('loading...');
-    $.ajax({
-      context: this,
-      url: "/ebudget",
-      dataType: 'json',
-      data: 'day=' + day,
-      type: 'POST',
-      contentType: 'application/x-www-form-urlencoded',
-      success: this.present,
-      error: function(jqXHR, tStatus, err) {
-        if (tStatus === 'parsererror') {
-          $(location).attr("href", "/");
-          return;
-        }
-        setPanelState('#dashBoard', 'danger');
-        $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
-        $('#eBudget').html('failed');
-        count = 0;
-        loading = 0;
-      },
-      timeout: 8000
-    });
-  };
-
-  this.updateService = (id) => {
-    if (this.currentService == id) {
-      this.currentService = null;
-      $('#serviceAgent').addClass('hidden');
-      return;
-    }
-
-    // show agent
-    $('#serviceAgent').removeClass('hidden');
-
-    $.ajax({
-      context: this,
-      url: "/service/info",
-      dataType: 'json',
-      data: 'id=' + id,
-      type: 'POST',
-      contentType: 'application/x-www-form-urlencoded',
-      success: this.showService,
-      error: function(jqXHR, tStatus, err) {
-        if (tStatus === 'parsererror') {
-          return;
-        }
-        //        $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
-      },
-      timeout: 3000
-    });
-  };
-
-  this.showService = (data) => {
-    if ('name' in data) {
-      this.currentService = data.channel_id;
-      $('#serviceName').html(data.name);
-      $('#serviceId').html(data.channel_id);
-      $('#serviceCodepage').html(data.codepage);
-      $('#serviceLanguage').html(data.language);
-      $('#serviceSegments').html(data.maxsegments);
-      $('#serviceUpdate').html(data.grabber.update);
-      $('#serviceParser').html(data.parser);
-      $('#serviceUrl').val(data.grabber.url);
-      $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
-      $('#exportXML').prop('target', '_' + data.channel_id);
-      $('#exportCSV').prop('href', '/export/' + data.channel_id + '.csv');
-      $('#exportCSV').prop('target', '_' + data.channel_id);
-
-      data.events.forEach((e, i) => {
-        var $eventField = $('#event li').eq(i);
-        $eventField.find('.start').html(e.timeSpan);
-        $eventField.find('.title').html(e.title);
-        $eventField.find('.subtitle').html(e.subtitle);
-      });
-    } else {
-
-    }
-  };
-
-  this.present = (report) => {
-    loading = 0;
-    if (report.status === 0) {
-      setPanelState('#dashBoard', 'success');
-    } else if (report.status === 1) {
-      setPanelState('#dashBoard', 'warning');
-    } else if (report.status === 3) {
-      setPanelState('#dashBoard', 'danger');
-      $('#eBudget').html(report.timestamp);
-      $('#serviceDash').html('<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
-      count = 0;
-      return;
-    } else {
-      setPanelState('#dashBoard', 'danger');
-    }
-    // is size of previous result is equal to current, just update data
-    if (report.data.length === count) {
-      this.update(report);
-    } else {
-      this.build(report);
-    }
-  };
-
-  this.update = (report) => {
-    $('#eBudget').html(report.timestamp);
-    $.each(report.data, function(i, channel) {
-      // define state based on budget
-      var state = 'success';
-      if (channel.status == 2) {
-        state = 'danger';
-      } else if (channel.status == 1) {
-        state = 'warning';
-      }
-      $('#ch' + channel.id).removeClass().addClass(state);
-      $('#ch' + channel.id + " time").timeago('update', channel.update);
-      $('#ch' + channel.id + " span").sparkline(channel.budget, {
-        type: 'bar',
-        barColor: '#007fff',
-        zeroColor: '#ff0000',
-        negBarColor: '#0f95d4',
-        tooltipSuffix: ' events'
-      });
-    });
-  };
+  var logBrowser = log;
 
   this.build = (report) => {
     // clean the area
@@ -189,7 +60,165 @@ function ServiceMatrix() {
     $('time.timeago').timeago();
   };
 
-  this.refresh();
+  this.ingest = (param) => {
+    param.append('id', currentService);
+    $('#serviceStatus').removeClass('hidden label-success label-danger').addClass('label-info').html('Uploading...');
+
+    $.ajax({
+      url: "/service/ingest",
+      dataType: 'json',
+      data: param,
+      type: 'POST',
+      processData: false,
+      mimeTypes: 'multipart/form-data',
+      contentType: false,
+      cache: false,
+      timeout: 10000
+    }).always((item) => {
+      if (item) {
+        if (item.success) {
+          $('#serviceStatus').removeClass('hidden label-info label-danger').addClass('label-success').html(item.message);
+        } else {
+          $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html(item.message);
+        }
+        $('#eBudget').click();
+      } else {
+        $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html('Upload failed');
+      }
+    });
+  };
+
+  this.present = (report) => {
+    loading = 0;
+    if (report.status === 0) {
+      setPanelState('#dashBoard', 'success');
+    } else if (report.status === 1) {
+      setPanelState('#dashBoard', 'warning');
+    } else if (report.status === 3) {
+      setPanelState('#dashBoard', 'danger');
+      $('#eBudget').html(report.timestamp);
+      $('#serviceDash').html('<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
+      count = 0;
+      return;
+    } else {
+      setPanelState('#dashBoard', 'danger');
+    }
+    // is size of previous result is equal to current, just update data
+    if (report.data.length === count) {
+      this.update(report);
+    } else {
+      this.build(report);
+      $('#ch42 td').first().click();
+    }
+  };
+
+  this.refresh = () => {
+    if (loading) {
+      return;
+    }
+    loading = 1;
+    $('#eBudget').html('loading...');
+    $.ajax({
+      context: this,
+      url: "/ebudget",
+      dataType: 'json',
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      success: this.present,
+      error: function(jqXHR, tStatus, err) {
+        if (tStatus === 'parsererror') {
+          $(location).attr("href", "/");
+          return;
+        }
+        setPanelState('#dashBoard', 'danger');
+        $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
+        $('#eBudget').html('failed');
+        count = 0;
+        loading = 0;
+      },
+      timeout: 8000
+    });
+  };
+
+  this.showService = (data) => {
+    if ('name' in data) {
+      $('#serviceStatus').addClass('hidden');
+      $('#serviceAgent ul').css('opacity', '1');
+      $('#serviceAgent button').prop('disabled', false);
+      $('#serviceName').html(data.name);
+      $('#serviceId').html(data.channel_id);
+      $('#serviceCodepage').html(data.codepage);
+      $('#serviceLanguage').html(data.language);
+      $('#serviceSegments').html(data.maxsegments);
+      $('#serviceUpdate').html(data.grabber.update);
+      $('#serviceParser').html(data.parser);
+      $('#serviceUrl').val(data.grabber.url);
+      $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
+      $('#exportXML').prop('target', '_' + data.channel_id);
+      $('#exportCSV').prop('href', '/export/' + data.channel_id + '.csv');
+      $('#exportCSV').prop('target', '_' + data.channel_id);
+      $('#exportALL').prop('href', '/export/all.xml');
+      $('#exportALL').prop('target', '_all');
+
+      data.events.forEach((e, i) => {
+        var $eventField = $('#event li').eq(i);
+        $eventField.find('.start').html(e.timeSpan);
+        $eventField.find('.title').html(e.title);
+        $eventField.find('.subtitle').html(e.subtitle);
+      });
+    } else {
+      $('#serviceStatus').removeClass('hidden label-success label-info').addClass('label-danger').html('failed');
+      $('#serviceAgent ul').css('opacity', '.5');
+      $('#serviceAgent button').prop('disabled', true);
+      $('#serviceAgent a').removeAttr('href');
+    }
+  };
+
+  this.update = (report) => {
+    $('#eBudget').html(report.timestamp);
+    $.each(report.data, function(i, channel) {
+      // define state based on budget
+      var state = 'success';
+      if (channel.status === 2) {
+        state = 'danger';
+      } else if (channel.status === 1) {
+        state = 'warning';
+      }
+      $('#ch' + channel.id).removeClass().addClass(state);
+      $('#ch' + channel.id + " time").timeago('update', channel.update);
+      $('#ch' + channel.id + " span").sparkline(channel.budget, {
+        type: 'bar',
+        barColor: '#007fff',
+        zeroColor: '#ff0000',
+        negBarColor: '#0f95d4',
+        tooltipSuffix: ' events'
+      });
+    });
+  };
+
+  this.updateService = (id) => {
+    if (currentService === id) {
+      currentService = null;
+      (logBrowser).setService(null);
+      $('#serviceAgent').addClass('hidden');
+      return;
+    }
+    currentService = id;
+    (logBrowser).setService(id);
+
+    // show agent
+    $('#serviceAgent').removeClass('hidden');
+
+    $.ajax({
+      context: this,
+      url: "/service/info",
+      dataType: 'json',
+      data: 'id=' + id,
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      timeout: 3000
+    }).always(this.showService);
+  };
 
   $('#serviceDash').on('click', 'tr', (event) => {
     var $tr = $(event.currentTarget);
@@ -198,12 +227,43 @@ function ServiceMatrix() {
 
   $('#serviceClose').on('click', () => {
     this.currentService = null;
+    (logBrowser).setService(null);
     $('#serviceAgent').addClass('hidden');
   });
+
+  $('#ingestData button').on('click', () => {
+    $('#eventFile').click();
+  });
+
+  $('#eventFile').on('change', () => {
+    var formData = new FormData();
+    var file = $('#eventFile')[0].files[0];
+    formData.append('file', file);
+
+    this.ingest(formData);
+  });
+
+  $('html').on('dragover', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+
+  $('.upload-area').on('drop', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var formData = new FormData();
+    formData.append('file', event.originalEvent.dataTransfer.files[0]);
+
+    this.ingest(formData);
+  });
+
+  this.refresh();
 }
 /// ------------------------------------------------------------------------------------------------------------------------------------------------------
 function LogBrowser(large) {
   var levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
+  var currentService = null;
 
   this.readFilterButton = () => {
     var filter = [];
@@ -215,6 +275,16 @@ function LogBrowser(large) {
     }
     return filter.join();
   };
+
+  this.setService = (id) => {
+    if (id == null) {
+      $('#logService').addClass('hidden');
+    } else {
+      $('#logService').removeClass('hidden');
+    }
+    this.currentService = id;
+    this.refresh();
+  }
 
   if (large) {
     $('#logBrowserSlider').slider({
@@ -293,6 +363,7 @@ function LogBrowser(large) {
           d.category = '';
           d.level = 0;
         }
+        d.channel = this.currentService;
       },
       complete: (settings, json) => {
         if (json === 'success') {
@@ -751,8 +822,6 @@ function Timer(fn) {
 }
 /// ------------------------------------------------------------------------------------------------------------------------------------------------------
 function CarouselPanel() {
-  this.dragMessage = "Drag and Drop<br/>for<br/>Upload&Save";
-
   this.init = () => {
     $('#cPanel').removeClass('hidden');
     $('#sourceFileShow').val('');
@@ -1070,34 +1139,11 @@ function CarouselPanel() {
   $('html').on('dragover', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    $('h1').html('Drag here');
-  });
-
-  $('html').on('dragleave', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html(this.dragMessage);
-  });
-
-  $('html').on('drop', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-  });
-
-  $('.upload-area').on('dragenter', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html('Drop');
-  }).on('dragover', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html('Drop');
   });
 
   $('.upload-area').on('drop', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    $('.wizard-menu h1').html('Upload');
 
     var formData = new FormData();
     const files = Array.from(event.originalEvent.dataTransfer.files);
@@ -1131,7 +1177,6 @@ function CarouselPanel() {
           $('#' + id).fadeOut('slow').remove();
         }, 8000);
       }
-      $('.wizard-menu h1').html(this.dragMessage);
       $('#wMenuBrowse').trigger('click');
     });
 
@@ -1207,8 +1252,6 @@ function Announcement() {
 }
 /// ------------------------------------------------------------------------------------------------------------------------------------------------------
 function SchemePanel() {
-  this.dragMessage = "Drag and Drop<br/>for<br/>Upload";
-
   this.init = () => {
     $('#cPanel').removeClass('hidden');
     $('#sourceFileShow').val('');
@@ -1654,34 +1697,11 @@ function SchemePanel() {
   $('html').on('dragover', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    $('h1').html('Drag here');
-  });
-
-  $(window).on('dragleave', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html(this.dragMessage);
-  });
-
-  $('html').on('drop', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-  });
-
-  $('.upload-area').on('dragenter', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html('Drop');
-  }).on('dragover', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    $('.wizard-menu h1').html('Drop');
   });
 
   $('.upload-area').on('drop', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    $('.wizard-menu h1').html('Upload');
 
     var formData = new FormData();
     formData.append('file', event.originalEvent.dataTransfer.files[0]);

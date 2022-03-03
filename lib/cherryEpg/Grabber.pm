@@ -49,6 +49,8 @@ sub BUILD {
     }
     $self->{source}      = $self->cherry->config->{core}{stock};
     $self->{destination} = dir( $self->cherry->config->{core}{ingest}, $self->{channel_id} );
+
+    mkdir( $self->{destination} ) if !-d $self->{destination};
 } ## end sub BUILD
 
 =head3 grab( )
@@ -61,10 +63,8 @@ The url is parsed through strftime on http and ftp requests for n days.
 sub grab {
     my ($self) = @_;
 
-    # check for destination directory or mkdir
-    if ( !-d $self->{destination} and !mkdir $self->{destination} ) {
+    if ( !-d $self->{destination} ) {
         $logger->error( "destination [$self->{destination}]", $self->{channel_id} );
-        return;
     }
 
     # decide which scheme to use
@@ -112,6 +112,29 @@ sub grab {
 
     return $result;
 } ## end sub grab
+
+=head3 move( $source, $filename)
+
+Move $source file to ingest directory with $filename.
+Return 1 on success.
+
+=cut
+
+sub move {
+    my ( $self, $source, $filename ) = @_;
+
+    my $filePath = file( $self->{destination}, $filename );
+
+    return unless -e $source;
+
+    if ( rename( $source, $filePath ) ) {
+        $logger->info( "move file [$filename]", $self->{channel_id}, undef );
+        return 1;
+    } else {
+        $logger->error( "move file [$filename]", $self->{channel_id}, undef );
+        return;
+    }
+} ## end sub move
 
 =head3 _rsync()
 
@@ -310,8 +333,6 @@ Write $content to $filepath
 
 sub _writeFile {
     my ( $self, $filepath, $content ) = @_;
-
-    $content = '' unless $content;
 
     $content = '' unless $content;
 

@@ -10,6 +10,7 @@ use cherryEpg::Git;
 use cherryEpg::Maintainer;
 use DBI qw(:sql_types);
 use File::Temp qw(tempfile);
+use Path::Class;
 use Time::Piece;
 use Sys::Hostname;
 use Try::Tiny;
@@ -93,7 +94,7 @@ get '/scheme/reference' => require_role cherryweb => sub {
 
 # generate system info report for monitoring
 get '/report.:format' => sub {
-    my $format = param('format');
+    my $format = params->{'format'};
 
     my $taster = cherryEpg::Taster->instance();
 
@@ -108,13 +109,13 @@ get '/report.:format' => sub {
 
 # get events for single, group or all channels in xmltv format
 get '/export/:id.xml' => sub {
-    my $id = param('id');
+    my $id = params->{id};
 
     my $cherry = cherryEpg->instance();
 
     my $list;
 
-    if ( $id eq "full" ) {
+    if ( $id eq "all" ) {
         $list = $cherry->epg->listChannel();
     } elsif ( $id =~ m/^\d+$/ ) {
         $list = $cherry->epg->listChannel($id);
@@ -131,7 +132,7 @@ get '/export/:id.xml' => sub {
 
 # download scheme by target
 get '/scheme/:target' => require_role cherryweb => sub {
-    my $target = param('target');
+    my $target = params->{target};
 
     my $scheme = cherryEpg::Scheme->new();
     my $s      = $scheme->restore($target);
@@ -145,8 +146,7 @@ get '/scheme/:target' => require_role cherryweb => sub {
 
 # download chunk by target
 get '/carousel/:target' => require_role cherryweb => sub {
-    my $target = param('target');
-
+    my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
     my ( $a, undef, undef, undef, undef, $serialized ) = $player->load($target);
@@ -161,7 +161,7 @@ get '/carousel/:target' => require_role cherryweb => sub {
 
 # run chunk through dvbsnoop and return result
 get '/dump/:target' => require_role cherryweb => sub {
-    my $target = param('target');
+    my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
     my $dump   = $player->dump($target);
@@ -186,7 +186,7 @@ ajax '/status' => require_role cherryweb => sub {
 
 ajax '/announce' => require_role cherryweb => sub {
 
-    my $config = params->{'config'};
+    my $config = params->{config};
 
     my $cherry = cherryEpg->instance();
     my $epg    = $cherry->epg;
@@ -196,12 +196,12 @@ ajax '/announce' => require_role cherryweb => sub {
         # update
         my $newConfig = {
             present => {
-                text    => params->{'present'} // '',
-                publish => params->{'present_check'} ? 1 : 0,
+                text    => params->{present} // '',
+                publish => params->{present_check} ? 1 : 0,
             },
             following => {
-                text    => params->{'following'} // '',
-                publish => params->{'following_check'} ? 1 : 0,
+                text    => params->{following} // '',
+                publish => params->{following_check} ? 1 : 0,
             }
         };
         if ( $epg->announcerSave($newConfig) && $cherry->sectionDelete() ) {
@@ -239,7 +239,7 @@ ajax '/carousel/browse' => require_role cherryweb => sub {
 };
 
 ajax '/carousel/delete' => require_role cherryweb => sub {
-    my $target = params->{'target'};
+    my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
 
@@ -249,7 +249,7 @@ ajax '/carousel/delete' => require_role cherryweb => sub {
 };
 
 ajax '/carousel/pause' => require_role cherryweb => sub {
-    my $target = params->{'target'};
+    my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
 
@@ -261,7 +261,7 @@ ajax '/carousel/pause' => require_role cherryweb => sub {
 };
 
 ajax '/carousel/play' => require_role cherryweb => sub {
-    my $target = params->{'target'};
+    my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
 
@@ -319,7 +319,7 @@ ajax '/carousel/upload' => require_role cherryweb => sub {
 };
 
 ajax '/carousel/save' => require_role cherryweb => sub {
-    my $md5 = params->{'md5'};
+    my $md5 = params->{md5};
 
     my $file = session 'chunkFile';
 
@@ -398,9 +398,9 @@ ajax '/scheme/upload' => require_role cherryweb => sub {
         session schemeFile => $file;
 
         $report = {
-            channel     => scalar @{ $raw->{channel} },
-            eit         => scalar @{ $raw->{eit} },
-            rule        => scalar @{ $raw->{rule} },
+            channel     => scalar $raw->{channel}->@*,
+            eit         => scalar $raw->{eit}->@*,
+            rule        => scalar $raw->{rule}->@*,
             source      => $filename,
             description => $raw->{source}{description} // '',
             mtime       => $raw->{source}{mtime},
@@ -423,8 +423,8 @@ ajax '/scheme/browse' => require_role cherryweb => sub {
 };
 
 ajax '/scheme/validate' => require_role cherryweb => sub {
-    my $description = params->{'description'};
-    my $mtime       = params->{'mtime'};
+    my $description = params->{description};
+    my $mtime       = params->{mtime};
 
     my $file = session 'schemeFile';
 
@@ -449,7 +449,7 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
 };
 
 ajax '/scheme/prepare' => require_role cherryweb => sub {
-    my $target = params->{'target'};
+    my $target = params->{target};
 
     my $scheme = cherryEpg::Scheme->new();
 
@@ -473,9 +473,9 @@ ajax '/scheme/prepare' => require_role cherryweb => sub {
         session schemeFile => $file;
 
         $report = {
-            channel     => scalar @{ $raw->{channel} },
-            eit         => scalar @{ $raw->{eit} },
-            rule        => scalar @{ $raw->{rule} },
+            channel     => scalar $raw->{channel}->@*,
+            eit         => scalar $raw->{eit}->@*,
+            rule        => scalar $raw->{rule}->@*,
             source      => $raw->{source}{filename},
             description => $raw->{source}{description},
             mtime       => $raw->{source}{mtime},
@@ -545,12 +545,12 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     if ( $action eq 'loadScheme' ) {
         my ( $success, $error ) = $scheme->push();
         $scheme->backup();
-        push( @report, { success => $success, message => "Load scheme (" . scalar $error->@* . " errors)" } );
+        push( @report, { success => $success, message => "Load scheme (" . $error->@* . " errors)" } );
         unlink($file);
     } ## end if ( $action eq 'loadScheme')
 
     if ( params->{grab} || params->{ingest} ) {
-        my $count = scalar @{ $cherry->channelMulti( 'all', params->{grab}, params->{ingest} ) };
+        my $count = scalar $cherry->channelMulti( 'all', params->{grab}, params->{ingest} )->@*;
 
         my @job;
         push( @job,    'grab' )   if params->{grab};
@@ -570,7 +570,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
 };
 
 ajax '/scheme/delete' => require_role cherryweb => sub {
-    my $target = params->{'target'};
+    my $target = params->{target};
 
     my $scheme = cherryEpg::Scheme->new();
 
@@ -583,7 +583,7 @@ ajax '/scheme/delete' => require_role cherryweb => sub {
 ajax '/scheme' => require_role cherryweb => sub {
     my $scheme = cherryEpg::Scheme->new();
 
-    my $active = shift @{ $scheme->list() };
+    my $active = shift $scheme->list()->@*;
     if ($active) {
         $active->{timestamp} = localtime( $active->{timestamp} )->strftime();
     }
@@ -628,9 +628,74 @@ ajax '/ebudget' => require_role cherryweb => sub {
     );
 };
 
+# ingest service eventdata file
+ajax '/service/ingest' => require_role cherryweb => sub {
+    my $channel_id = params->{'id'};
+    say $channel_id;
+    my $upload = request->upload('file');
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "Uploading eventdata failed",
+        }
+        )
+        if !$upload;
+
+    my $filename = $upload->filename;
+    my $tempname = $upload->tempname;
+    my $cherry   = cherryEpg->instance();
+    my $channel  = $cherry->epg->listChannel($channel_id)->[0];
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "Service [$channel_id] not found",
+        }
+        )
+        if !$channel;
+
+    my $grabber  = cherryEpg::Grabber->new( channel => $channel );
+    my $ingester = cherryEpg::Ingester->new( channel => $channel );
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "Transporting of [$filename] failed",
+        }
+        )
+        if !$grabber->move( $tempname, $filename );
+
+    my $filepath = file( $grabber->{destination}, $filename );
+    my $report   = $ingester->processFile( $filepath, 1 );
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "Ingest failed!",
+        }
+        )
+        if !$report;
+
+    return send_as(
+        JSON => {
+            success => 0,
+            message => "[" . $report->{eventList}->@* . "] events ingested with [" . $report->{errorList}->@* . "] errors",
+        }
+        )
+        if $report->{errorList}->@*;
+
+    return send_as(
+        JSON => {
+            success => 1,
+            message => "[" . $report->{eventList}->@* . "] events ingested",
+        }
+    );
+};
+
 # return service info
 ajax '/service/info' => require_role cherryweb => sub {
-    my $channel_id = params->{'id'};
+    my $channel_id = params->{id};
 
     my $cherry = cherryEpg->instance();
 
@@ -687,11 +752,12 @@ ajax '/carousel' => require_role cherryweb => sub {
 
 # browse log
 ajax '/log' => require_role cherryweb => sub {
-    my $draw     = params->{'draw'}     // 99;
-    my $start    = params->{'start'}    // 0;
-    my $limit    = params->{'length'}   // 0;
-    my $category = params->{'category'} // '';
-    my $level    = params->{'level'}    // 0;
+    my $draw     = params->{draw}     // 99;
+    my $start    = params->{start}    // 0;
+    my $limit    = params->{'length'} // 0;
+    my $category = params->{category} // '';
+    my $level    = params->{level}    // 0;
+    my $channel  = params->{channel};
 
     my $cherry = cherryEpg->instance();
     my $t      = localtime;
@@ -702,7 +768,7 @@ ajax '/log' => require_role cherryweb => sub {
     # grep only numbers
     @categoryList = sort grep( /\d/, @categoryList );
 
-    my ( $total, $filtered, $listRef ) = $cherry->epg->getLogList( \@categoryList, $level, $start, $limit );
+    my ( $total, $filtered, $listRef ) = $cherry->epg->getLogList( \@categoryList, $level, $start, $limit, $channel );
 
     return send_as(
         JSON => {
@@ -718,7 +784,7 @@ ajax '/log' => require_role cherryweb => sub {
 # working with the repo
 ajax '/git' => require_role cherryweb => sub {
 
-    my $status = params->{'update'} // 0;
+    my $status = params->{update} // 0;
 
     my $git = cherryEpg::Git->new();
 
@@ -849,14 +915,14 @@ ajax '/maintenance' => require_role cherryweb => sub {
     return send_as(
         JSON => {
             success => 0,
-            message => "Loading faile!",
+            message => "Loading failed!",
         }
     );
 };
 
 # read single log entry
 get '/log/:id.json' => require_role cherryweb => sub {
-    my $id = params->{'id'};
+    my $id = params->{id};
 
     my $cherry = cherryEpg->instance();
 

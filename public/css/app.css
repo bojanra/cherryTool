@@ -416,8 +416,8 @@ div.panel-heading div.btn-group {
 }
 
 .table-condensed a:visited,
-a:link,
-a:hover {
+.table-condensed a:link,
+.table-condensed a:hover {
   color: black;
   text-decoration: none;
 }

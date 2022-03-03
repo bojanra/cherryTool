@@ -1478,14 +1478,14 @@ sub getLogEntry {
     }
 } ## end sub getLogEntry
 
-=head3 getLogList( $categoryList, $level, $start, $limit)
+=head3 getLogList( $categoryList, $level, $start, $limit, $channel_id)
 
 Return list of log records filtered by params
 
 =cut
 
 sub getLogList {
-    my ( $self, $categoryList, $level, $start, $limit ) = @_;
+    my ( $self, $categoryList, $level, $start, $limit, $channel_id ) = @_;
     my $dbh = $self->dbh;
     return unless $dbh;
 
@@ -1493,6 +1493,12 @@ sub getLogList {
     $categoryList //= [];
     $start        //= 0;
     $limit        //= 100;
+
+    # build channelFilter
+    my $channelFilter = "";
+    if ( $channel_id && $channel_id =~ m/^\d+$/ ) {
+        $channelFilter = " AND log.channel_id = $channel_id ";
+    }
 
     # count all rows
     my ($total) = $dbh->selectrow_array("SELECT COUNT(*) FROM log");
@@ -1507,7 +1513,7 @@ sub getLogList {
     }
 
     # count filtered rows
-    my $sql        = "SELECT COUNT(*) FROM log WHERE `level` >= ?" . $categoryListFilter;
+    my $sql        = "SELECT COUNT(*) FROM log WHERE `level` >= ?" . $categoryListFilter . $channelFilter;
     my $statement  = $dbh->prepare($sql);
     my $result     = $statement->execute($level);
     my ($filtered) = $statement->fetchrow_array();
@@ -1533,6 +1539,7 @@ sub getLogList {
         . "LEFT JOIN channel AS eit ON log.channel_id = eit.channel_id "
         . "WHERE `level` >= ? "
         . $categoryListFilter
+        . $channelFilter
         . "ORDER BY id DESC LIMIT ? OFFSET ?";
 
     $statement = $dbh->prepare($sql);

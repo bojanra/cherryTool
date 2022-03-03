@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.9';
+our $VERSION = '2.1.10';
 
 with('MooX::Singleton');
 
@@ -371,7 +371,7 @@ sub channelIngest {
     my ( $self, $channel, $dump ) = @_;
 
     my $myIngest = cherryEpg::Ingester->new( channel => $channel, dump => $dump // 0 );
-    return $myIngest->update() if $myIngest->parserReady;
+    return $myIngest->walkDir() if $myIngest->parserReady;
 } ## end sub channelIngest
 
 =head3 channelGrab( $channel)

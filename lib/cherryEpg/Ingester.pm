@@ -107,44 +107,35 @@ sub short_descriptor {
     $short_descriptor->{event_name} = $event->{title};
 
     if ( !defined $short_descriptor->{event_name} ) {
-        push( @{ $event->{error} }, "codepage conversion of title failed" );
+        push( $event->{error}->@*, "codepage conversion of title failed" );
     }
 
     $event->{subtitle}        = _prepareTextField( $event->{subtitle} // "" );
     $short_descriptor->{text} = $event->{subtitle};
 
     if ( !defined $short_descriptor->{text} ) {
-        push( @{ $event->{error} }, "codepage conversion of subtitle failed" );
+        push( $event->{error}->@*, "codepage conversion of subtitle failed" );
     }
 
     return $short_descriptor;
 } ## end sub short_descriptor
 
-=head3 ingest( $result )
+=head3 ingestData( $result )
 
 Ingest all events returned by the parser.
 
 =cut
 
-sub ingest {
+sub ingestData {
     my ( $self, $result ) = @_;
     my $eventList   = $result->{eventList};
-    my $parserError = scalar( @{ $result->{errorList} } );
+    my $parserError = $result->{errorList}->@*;
     my $ingestError = 0;
 
-    $result->{added}             = 0;
-    $result->{overlap}           = [];
-    $result->{overwritten_in_db} = 0;
-    $result->{defined}           = 0;
+    $result->{defined} = $eventList->@*;
 
-    # no events defined
-    if ( scalar( @{ $result->{eventList} } ) == 0 ) {
-        return $result;
-    }
-
-    # sort before continuing
+    # sort before continue
     @$eventList = sort { $a->{start} <=> $b->{start} } @$eventList;
-    $result->{defined} = scalar(@$eventList);
 
     # are there events starting at same time
     my $i = 0;
@@ -154,7 +145,7 @@ sub ingest {
 
             # remove first event
             my @overlapped = splice( @$eventList, $i, 1 );
-            push( @{ $result->{overlap} }, @overlapped );
+            push( $result->{overlap}->@*, @overlapped );
             next;
         } ## end if ( $$eventList[$i]->...)
         $i += 1;
@@ -183,7 +174,7 @@ sub ingest {
 
                 # move the later event to the error log or to the failed event log
                 my @overlapped = splice( @$eventList, $i + 1, 1 );
-                push( @{ $result->{overlap} }, @overlapped );
+                push( $result->{overlap}->@*, @overlapped );
                 next;
             } ## end if ( $$eventList[ $i +...])
         } else {
@@ -228,21 +219,21 @@ sub ingest {
 
         # check if title missing
         if ( !exists $event->{title} || $event->{title} eq "" ) {
-            push( @{ $event->{error} }, "missing title" );
+            push( $event->{error}->@*, "missing title" );
             $event->{title} = "-";
         }
 
         if ( ( $event->{stop} - $event->{start} ) > 24 * 60 * 60 ) {
-            push( @{ $event->{error} }, "event duration exceeded (>24hours)" );
+            push( $event->{error}->@*, "event duration exceeded (>24hours)" );
             $event->{stop} = $event->{start} + 24 * 60 * 60;
         }
 
         if ( $event->{start} == $event->{stop} ) {
-            push( @{ $event->{error} }, "event start - stop are identical" );
+            push( $event->{error}->@*, "event start - stop are identical" );
         }
 
         if ( $event->{start} > $event->{stop} ) {
-            push( @{ $event->{error} }, "event stop before start" );
+            push( $event->{error}->@*, "event stop before start" );
         }
 
         # build the descriptors
@@ -286,7 +277,7 @@ sub ingest {
                 if ( defined $item->{description} && defined $item->{text} ) {
                     $extended_descriptor->{item} = $item;
                 } else {
-                    push( @{ $event->{error} }, "codepage conversion of item description/text failed" );
+                    push( $event->{error}->@*, "codepage conversion of item description/text failed" );
                 }
             } ## end if ( exists $event->{item...})
 
@@ -295,7 +286,7 @@ sub ingest {
             if ( defined $extended_descriptor->{text} ) {
                 push( @descriptors, $extended_descriptor );
             } else {
-                push( @{ $event->{error} }, "codepage conversion of synopsis failed" );
+                push( $event->{error}->@*, "codepage conversion of synopsis failed" );
             }
         } ## end if ( exists $event->{synopsis...})
 
@@ -308,11 +299,11 @@ sub ingest {
                 $rate->{country_code} = $event->{country_code} || 'SVN';
                 $rate->{rating}       = $event->{parental} - 3;
 
-                push( @{ $parental_descriptor->{list} }, $rate );
+                push( $parental_descriptor->{list}->@*, $rate );
 
                 push( @descriptors, $parental_descriptor );
             } else {
-                push( @{ $event->{error} }, "incorrect parental rating - ignored" );
+                push( $event->{error}->@*, "incorrect parental rating - ignored" );
             }
         } ## end if ( defined $event->{...})
 
@@ -328,17 +319,17 @@ sub ingest {
             }
 
             if ( ref $event->{content} eq 'ARRAY' ) {
-                foreach my $code ( @{ $event->{content} } ) {
+                foreach my $code ( $event->{content}->@* ) {
                     if ( $code =~ m/^\d+$/ && $code >= 0 && $code <= 0xff ) {
-                        push( @{ $content_descriptor->{list} }, $code );
+                        push( $content_descriptor->{list}->@*, $code );
                     } else {
-                        push( @{ $event->{error} }, "invalid content descriptor [$code] - ignored" );
+                        push( $event->{error}->@*, "invalid content descriptor [$code] - ignored" );
                     }
-                } ## end foreach my $code ( @{ $event...})
+                } ## end foreach my $code ( $event->...)
 
-                push( @descriptors, $content_descriptor ) if scalar @{ $content_descriptor->{list} };
+                push( @descriptors, $content_descriptor ) if $content_descriptor->{list}->@*;
             } else {
-                push( @{ $event->{error} }, "incorrect content descriptor format [" . ( ref $event->{content} ) . "] - ignored" );
+                push( $event->{error}->@*, "incorrect content descriptor format [" . ( ref $event->{content} ) . "] - ignored" );
             }
         } ## end if ( defined $event->{...})
 
@@ -355,111 +346,156 @@ sub ingest {
 
             $result->{added} += 1;
         } else {
-            push( @{ $event->{error} }, "insert in database failed" );
+            push( $event->{error}->@*, "insert in database failed" );
         }
 
         # if there were errors save the event to report
-        if ( exists $event->{error} && scalar( @{ $event->{error} } ) ) {
-            push( @{ $result->{errorList} }, {%$event} );
+        if ( exists $event->{error} && scalar( $event->{error}->@* ) ) {
+            push( $result->{errorList}->@*, {%$event} );
             ++$ingestError;
         }
     } ## end foreach my $event (@$eventList)
 
-    my $overlapCount = scalar( @{ $result->{overlap} } );
-
-    if ( exists $result->{errorList} && scalar( @{ $result->{errorList} } ) ) {
-        $logger->warn(
-            "ingest ["
-                . ( $result->{added} + 0 ) . "/"
-                . ( $result->{defined} - $overlapCount )
-                . "] events with ["
-                . ( scalar @{ $result->{errorList} } )
-                . "] error",
-            $self->{channel_id}, undef, $result
-        );
-    } else {
-        $logger->info( "ingest [" . ( $result->{added} + 0 ) . "/" . ( $result->{defined} - $overlapCount ) . "] events",
-            $self->{channel_id}, undef, $result );
-    }
-
-    if ( $self->dump ) {
-        $YAML::XS::QuoteNumericStrings = 0;
-        my $output = Dump($result);
-        utf8::decode($output);
-        say "Parser output:";
-        say $output;
-    } ## end if ( $self->dump )
-
     return $result;
-} ## end sub ingest
+} ## end sub ingestData
 
-=head3 parseFile( $file)
+=head3 processFile( $dataFile, $forced = 0)
 
-Parse the $file.
-Return parsed $result.
+Process given $dataFile in channel ingest directory. Check regarding MD5 and run parser if required.
+$dataFile is complete path to file.
+If $forced then ignore existing MD5 file.
 
 =cut
 
-sub parseFile {
-    my ( $self, $file ) = @_;
+sub processFile {
+    my ( $self, $dataFile, $forced ) = @_;
 
-    my $engine;
+    my $md5File  = $dataFile . ".md5";
+    my $ctrlFile = $md5File . ".parsed";
 
-    # initialize and see if the parser is really loaded
-    my $success = try {
-        $engine = $self->{parser}->new( source => $file, logger => get_logger('parser') );
-        1;
-    } catch {
-        $logger->error( "initialize [$self->{parser}]", $self->{channel_id} );
-        return;
-    };
+    # update md5 file if not existing or source file newer (last modify)
+    if ( !-e $md5File || stat($md5File)->mtime < stat($dataFile)->mtime ) {
 
-    return if !$success;
+        # calculate md5 and save to file
+        open( my $data, '<', $dataFile ) || do {
+            $logger->error( "read [$dataFile] for MD5", $self->{channel_id} );
+            return;
+        };
+        binmode($data);
+        my $md5sum = Digest::MD5->new->addfile(*$data)->hexdigest;
+        close($data);
 
-    $logger->trace( "load parser [$self->{parser}]", $self->{channel_id} );
+        open( my $chksum, '>', $md5File ) || do {
+            $logger->error( "write [$md5File]", $self->{channel_id} );
+            return;
+        };
+        print( $chksum $md5sum );
+        close($chksum);
+    } ## end if ( !-e $md5File || stat...)
 
-    # run the parser
-    my $parsedData = try {
-        $engine->parse( $self->{parserOption} );
-    } catch {
-        my $error = $_;
-        say $error if $logger->is_trace();
-        my @reason   = split( /:/, $error );
-        my $filename = basename($file);
-        $logger->error( "parsing [$filename] failed", $self->{channel_id}, undef, \@reason );
-        return;
-    };
+    # check if there is something new
+    if ( !-e $ctrlFile || compare( $md5File, $ctrlFile ) != 0 || $forced ) {
 
-    return if !$parsedData;
+        # initialize and see if the parser is really loaded
+        my $engine = try {
+            return $self->{parser}->new( source => $dataFile, logger => get_logger('parser') );
+        } catch {
+            $logger->error( "initialize [$self->{parser}]", $self->{channel_id} );
+            return;
+        };
 
-    # no events defined
-    my $errorCount = scalar( @{ $parsedData->{errorList} } );
-    my $eventCount = scalar( @{ $parsedData->{eventList} } );
+        return if !$engine;
 
-    if ( !$eventCount ) {
-        if ($errorCount) {
-            $logger->error( "parse [$parsedData->{source}] with [$errorCount] errors", $self->{channel_id}, undef, $parsedData );
+        $logger->trace( "load parser [$self->{parser}]", $self->{channel_id} );
+
+        # run the parser
+        my $result = try {
+            $engine->parse( $self->{parserOption} );
+        } catch {
+            my $error = $_;
+            say $error if $logger->is_trace();
+            my @reason   = split( /:/, $error );
+            my $filename = basename($dataFile);
+            $logger->error( "parsing [$dataFile]", $self->{channel_id}, undef, \@reason );
+            return;
+        };
+
+        return if !$result;
+
+        # count the no events defined
+        my $errorCount = $result->{errorList}->@*;
+        my $eventCount = $result->{eventList}->@*;
+
+        if ( !$eventCount ) {
+            if ($errorCount) {
+                $logger->error( "parsed [$result->{source}] with [$errorCount] errors", $self->{channel_id}, undef, $result );
+            } else {
+                $logger->error( "no events found [$result->{source}]", $self->{channel_id}, undef, $result );
+            }
         } else {
-            $logger->error( "no events found [$parsedData->{source}]", $self->{channel_id}, undef, $parsedData );
+            $logger->trace( "found [$eventCount] events, [$errorCount] errors", $self->{channel_id} );
         }
+
+        say( join( "\n", $result->{errorList}->@* ) ) if $errorCount && $logger->is_trace();
+
+        # mark file as parsed
+        copy( $md5File, $ctrlFile );
+
+        $result->{added}             = 0;
+        $result->{overlap}           = [];
+        $result->{overwritten_in_db} = 0;
+        $result->{defined}           = 0;
+
+        say "before: ", $result;
+        return $result if !$eventCount;
+
+        # ingest
+        $result = $self->ingestData($result);
+
+        my $overlapCount = $result->{overlap}->@*;
+
+        # count the no events defined
+        $errorCount = $result->{errorList}->@*;
+
+        if ($errorCount) {
+            $logger->warn(
+                "ingest ["
+                    . $result->{added} . "/"
+                    . ( $result->{defined} - $overlapCount )
+                    . "] events with ["
+                    . $errorCount
+                    . "] error",
+                $self->{channel_id}, undef, $result
+            );
+        } else {
+            $logger->info( "ingest [" . $result->{added} . "/" . ( $result->{defined} - $overlapCount ) . "] events",
+                $self->{channel_id}, undef, $result );
+        }
+
+        if ( $self->dump ) {
+            $YAML::XS::QuoteNumericStrings = 0;
+            my $output = Dump($result);
+            utf8::decode($output);
+            say "Parser output:";
+            say $output;
+        } ## end if ( $self->dump )
+
+        return $result;
     } else {
-        $logger->trace( "found [$eventCount] events, [$errorCount] errors", $self->{channel_id} );
+        $logger->info( "nothing to do", $self->{channel_id} );
+        return;
     }
+} ## end sub processFile
 
-    say( join( "\n", @{ $parsedData->{errorList} } ) ) if $errorCount && $logger->is_trace();
+=head3 walkDir()
 
-    return $parsedData;
-} ## end sub parseFile
-
-=head3 update()
-
-Iterate over the channel source directory and find files to update.
+Walk through channel source directory and find files to be processed.
 
 Return reference to updated files.
 
 =cut
 
-sub update {
+sub walkDir {
     my ($self) = @_;
 
     my $workingDir = $self->{source};
@@ -480,59 +516,7 @@ sub update {
                 # skip "hidden" files starting with a dot
                 return if /\/\./;
 
-                my $dataFile = $_;
-                my $md5File  = $dataFile . ".md5";
-                my $ctrlFile = $md5File . ".parsed";
-
-                # update md5 file if not existing or source file newer (last modify)
-                if ( !-e $md5File || stat($md5File)->mtime < stat($dataFile)->mtime ) {
-
-                    # calculate md5 and save to file
-                    my $data;
-                    if ( !open( $data, '<', $dataFile ) ) {
-                        $logger->error( "read [$dataFile] for MD5", $self->{channel_id} );
-                        return;
-                    }
-                    binmode($data);
-                    my $md5sum = Digest::MD5->new->addfile(*$data)->hexdigest;
-                    close($data);
-
-                    my $chksum;
-                    if ( !open( $chksum, '>', $md5File ) ) {
-                        $logger->error( "write [$md5File]", $self->{channel_id} );
-                        return;
-                    }
-                    print( $chksum $md5sum );
-                    close($chksum);
-                } ## end if ( !-e $md5File || stat...)
-
-                # check if there is something new
-                if ( !-e $ctrlFile or compare( $md5File, $ctrlFile ) != 0 ) {
-                    $ingestCount += 1;
-
-                    # and parse it
-                    my $success = 0;
-                    if ( -e $dataFile ) {
-
-                        # parse the file and report
-                        my $parsedData = $self->parseFile($dataFile);
-
-                        # only continue with events
-                        if ($parsedData) {
-
-                            # ingest
-                            $self->ingest($parsedData);
-                            copy( $md5File, $ctrlFile );
-
-                            push( @doneFiles, $parsedData );
-                        } ## end if ($parsedData)
-                    } else {
-                        $logger->error( "open [$dataFile]: $!", $self->{channel_id} );
-                    }
-                } else {
-                    $logger->info( "nothing to do", $self->{channel_id} );
-
-                }
+                push( @doneFiles, $self->processFile($_) );
             },
             no_chdir => 1
         },
@@ -540,7 +524,7 @@ sub update {
     );
 
     return \@doneFiles;
-} ## end sub update
+} ## end sub walkDir
 
 =head3 _prepareTextField( $text)
 

@@ -15,6 +15,7 @@
     <div class="panel-heading clearfix">
       <h3 class="panel-title pull-left">Service info</h3>
       <div class="input-group input-group-sm">
+        <span id="serviceStatus" class="label label-danger btn hidden">Default</span>
         <button id="serviceClose" class="btn btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
     </div>
@@ -57,10 +58,13 @@
       <li class="list-group-item">
         <div id="serviceCtrl" class="row equal">
           <div class="col-md-2">
-            <h4 class="hidden">Import</h4>
-            <form id="uploadForm" action="" class="hidden">
-              <button type="button" name="upload" class="btn btn-success"><i class="glyphicon
-                  glyphicon-upload"></i><strong> Upload&ingest</strong> file</button>
+            <h4 class="">Import</h4>
+            <form id="ingestData" action="" class="">
+              <input type="file" id="eventFile" class="hidden" />
+              <button type="button" name="upload" class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i> Upload&ingest</button>
+              <div class="upload-area">
+                <h1>Drop data here</h1>
+              </div>
             </form>
           </div>
           <div class="col-md-8">
@@ -81,16 +85,10 @@
           </div>
           <div class="col-md-2">
             <h4>Export</h4>
-            <a class="btn btn-default" id="exportXML" href=""><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
-            <a class="btn btn-default" id="exportCSV" href="" disabled><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
-            <a class="btn btn-default" href="/export/full.xml" target="_blank"><i class="glyphicon glyphicon-shopping-cart"></i> Full</a>
+            <a class="btn btn-primary" id="exportXML"><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
+            <a class="btn btn-default" id="exportCSV" disabled><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
+            <a class="btn btn-primary" id="exportALL" target="_blank"><i class="glyphicon glyphicon-shopping-cart"></i> All</a>
           </div>
-        </div>
-      </li>
-
-      <li class="list-group-item">
-        <div class="report hidden">
-          <p class="text-success"><i class="glyphicon glyphicon-ok"></i><span>&nbsp;</span>-</p>
         </div>
       </li>
     </ul>
@@ -113,6 +111,7 @@
     <div class="panel-heading clearfix">
       <h3 class="panel-title pull-left">Log browser</h3>
       <div class="input-group input-group-sm">
+        <span id="logService" class="label label-warning btn hidden">Filtered by service</span>
         <span id="logUpdate" class="label label-default btn"></span>
       </div>
     </div>
@@ -151,7 +150,7 @@
 <script type="text/javascript">
   $(document).ready(() => {
     const log = new LogBrowser();
-    const matrix = new ServiceMatrix();
+    const matrix = new ServiceMatrix(log);
     const spiel = new RingelSpiel();
 
     const refresh = new Timer(() => {
