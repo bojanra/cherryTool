@@ -108,7 +108,6 @@ function ServiceMatrix(log) {
       this.update(report);
     } else {
       this.build(report);
-      $('#ch42 td').first().click();
     }
   };
 

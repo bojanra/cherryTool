@@ -446,7 +446,6 @@ sub processFile {
         $result->{overwritten_in_db} = 0;
         $result->{defined}           = 0;
 
-        say "before: ", $result;
         return $result if !$eventCount;
 
         # ingest
