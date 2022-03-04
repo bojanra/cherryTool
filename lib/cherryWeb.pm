@@ -631,8 +631,7 @@ ajax '/ebudget' => require_role cherryweb => sub {
 # ingest service eventdata file
 ajax '/service/ingest' => require_role cherryweb => sub {
     my $channel_id = params->{'id'};
-    say $channel_id;
-    my $upload = request->upload('file');
+    my $upload     = request->upload('file');
 
     return send_as(
         JSON => {

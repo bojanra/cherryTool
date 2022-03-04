@@ -534,9 +534,7 @@ sub eitBuild {
             # copy stream to other destination
             my $counter = 1;
             $specs->{title} = "Dynamic EIT cc";
-            say $eit->{option}{COPY};
             foreach ( split( /\s*[|;+]\s*/, $eit->{option}{COPY} ) ) {
-                say $_;
                 $specs->{dst} = $_;
                 $filename = sprintf( "eit_%03ix%02i", $eit->{eit_id}, $counter++ );
                 if ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
