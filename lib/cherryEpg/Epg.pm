@@ -1452,7 +1452,8 @@ sub getLastError {
 
 =head3 getLogEntry($id)
 
-Get info field from log entry with $id.
+Get row from log entry with $id for rows with defined "info" field.
+Return hashref on success.
 
 =cut
 
@@ -1462,16 +1463,15 @@ sub getLogEntry {
     my $dbh = $self->dbh;
     return unless $dbh;
 
-    my $sql       = "SELECT info FROM log WHERE id = ?";
+    my $sql       = "SELECT * FROM log WHERE id = ?";
     my $statement = $dbh->prepare($sql);
 
     if ( $statement->execute($id) ) {
-        my $json = $statement->fetchrow_array();
+        my $row = $statement->fetchrow_hashref();
 
-        if ($json) {
-            return decode_json($json);
-        } else {
-            return;
+        if ( $row and $row->{info} ) {
+            $row->{info} = decode_json( $row->{info} );
+            return $row;
         }
     } else {
         return;

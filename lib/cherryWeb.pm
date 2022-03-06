@@ -13,7 +13,6 @@ use File::Temp qw(tempfile);
 use Path::Class;
 use Time::Piece;
 use Sys::Hostname;
-use Try::Tiny;
 use Digest::MD5;
 use Gzip::Faster;
 
@@ -40,10 +39,6 @@ hook before_template_render => sub {
 sub loginPageHandler {
     my $return_url = params->{return_url} // '';
     template 'login' => { hostname => hostname };
-}
-
-sub permissionDeniedPageHandler {
-    return 'permissionDeniedPageHandler';
 }
 
 any '/logout' => sub {
@@ -99,11 +94,11 @@ get '/report.:format' => sub {
     my $taster = cherryEpg::Taster->instance();
 
     if ( $format eq "txt" ) {
-        return send_file( \$taster->format(), content_type => 'text/plain; charset=UTF-8' );
+        send_file( \$taster->format(), content_type => 'text/plain; charset=UTF-8' );
     } elsif ( $format eq "json" ) {
-        return send_as( JSON => $taster->report() );
+        send_as( JSON => $taster->report() );
     } else {
-        return "";
+        return "The [$format] format is not yet supported. ";
     }
 };
 
@@ -181,7 +176,7 @@ ajax '/status' => require_role cherryweb => sub {
     my $systemStart = localtime( time - $report->{uptime} );
     $report->{systemStart} = $systemStart->datetime();
 
-    return send_as( JSON => $report );
+    send_as( JSON => $report );
 };
 
 ajax '/announce' => require_role cherryweb => sub {
@@ -205,19 +200,19 @@ ajax '/announce' => require_role cherryweb => sub {
             }
         };
         if ( $epg->announcerSave($newConfig) && $cherry->sectionDelete() ) {
-            return send_as(
+            send_as(
                 JSON => {
                     success  => 1,
                     announce => $newConfig
                 }
             );
         } else {
-            return send_as( JSON => { success => 0 } );
+            send_as( JSON => { success => 0 } );
         }
     } else {
 
         # just status
-        return send_as(
+        send_as(
             JSON => {
                 success  => 1,
                 announce => $epg->announcerLoad()
@@ -235,7 +230,7 @@ ajax '/carousel/browse' => require_role cherryweb => sub {
         $item->{timestamp} = localtime( $item->{timestamp} )->datetime;
     }
 
-    return send_as( JSON => $list );
+    send_as( JSON => $list );
 };
 
 ajax '/carousel/delete' => require_role cherryweb => sub {
@@ -245,7 +240,7 @@ ajax '/carousel/delete' => require_role cherryweb => sub {
 
     my $report = $player->delete($target);
 
-    return send_as( JSON => { success => $report // 0, target => $target } );
+    send_as( JSON => { success => $report // 0, target => $target } );
 };
 
 ajax '/carousel/pause' => require_role cherryweb => sub {
@@ -254,10 +249,10 @@ ajax '/carousel/pause' => require_role cherryweb => sub {
     my $player = cherryEpg::Player->new();
 
     if ( $player->stop($target) ) {
-        return send_as( JSON => { success => 1, target => $target } );
+        send_as( JSON => { success => 1, target => $target } );
     }
 
-    return send_as( JSON => { success => 0 } );
+    send_as( JSON => { success => 0 } );
 };
 
 ajax '/carousel/play' => require_role cherryweb => sub {
@@ -270,18 +265,18 @@ ajax '/carousel/play' => require_role cherryweb => sub {
         my $report = $player->play($target);
 
         if ($report) {
-            return send_as( JSON => { success => 1, target => $target } );
+            send_as( JSON => { success => 1, target => $target } );
         }
     } ## end if ( $player->arm( $player...))
 
-    return send_as( JSON => { success => 0 } );
+    send_as( JSON => { success => 0 } );
 };
 
 ajax '/carousel/upload' => require_role cherryweb => sub {
     my $upload = request->upload('file');
 
     if ( !$upload ) {
-        return send_as( JSON => { success => 0 } );
+        send_as( JSON => { success => 0 } );
     }
 
     my $filename = $upload->filename;
@@ -315,7 +310,7 @@ ajax '/carousel/upload' => require_role cherryweb => sub {
         $report->{error}  = [];
         $report->{source} = $filename;
     } ## end else [ if ( !@raw ) ]
-    return send_as( JSON => $report );
+    send_as( JSON => $report );
 };
 
 ajax '/carousel/save' => require_role cherryweb => sub {
@@ -331,20 +326,20 @@ ajax '/carousel/save' => require_role cherryweb => sub {
         if ( $md5 eq $md5Reference ) {
             if ( $player->copy($file) ) {
                 unlink($file);
-                return send_as( JSON => { success => 1 } );
+                send_as( JSON => { success => 1 } );
             }
         } ## end if ( $md5 eq $md5Reference)
         unlink($file);
     } ## end if ( -e $file )
 
-    return send_as( JSON => { success => 0 } );
+    send_as( JSON => { success => 0 } );
 };
 
 ajax '/carousel/upnsave' => require_role cherryweb => sub {
     my @multi = request->upload('file');
 
     if ( !scalar @multi ) {
-        return send_as( JSON => [ { success => 0, message => 'Upload failed' } ] );
+        send_as( JSON => [ { success => 0, message => 'Upload failed' } ] );
     }
 
     my @report = ();
@@ -358,14 +353,14 @@ ajax '/carousel/upnsave' => require_role cherryweb => sub {
         }
     } ## end foreach my $upload (@multi)
 
-    return send_as( JSON => \@report );
+    send_as( JSON => \@report );
 };
 
 ajax '/scheme/upload' => require_role cherryweb => sub {
     my $upload = request->upload('file');
 
     if ( !$upload ) {
-        return send_as( JSON => { errorList => ["Upload failed"] } );
+        send_as( JSON => { errorList => ["Upload failed"] } );
     }
 
     my $filename = $upload->filename;
@@ -407,7 +402,7 @@ ajax '/scheme/upload' => require_role cherryweb => sub {
             errorList   => $scheme->error
         };
     } ## end else [ if ( !$raw ) ]
-    return send_as( JSON => $report );
+    send_as( JSON => $report );
 };
 
 ajax '/scheme/browse' => require_role cherryweb => sub {
@@ -419,7 +414,7 @@ ajax '/scheme/browse' => require_role cherryweb => sub {
         $item->{timestamp} = localtime( $item->{timestamp} )->datetime;
     }
 
-    return send_as( JSON => $list );
+    send_as( JSON => $list );
 };
 
 ajax '/scheme/validate' => require_role cherryweb => sub {
@@ -435,7 +430,7 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
                 $scheme->{scheme}{source}{description} = $description;
                 $scheme->export($file);
 
-                return send_as(
+                send_as(
                     JSON => {
                         success     => 1,
                         description => $description
@@ -445,7 +440,7 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
         } ## end if ( $scheme->Import($file...))
         unlink($file) if -e $file;
     } ## end if ( -e $file )
-    return send_as( JSON => { success => 0 } );
+    send_as( JSON => { success => 0 } );
 };
 
 ajax '/scheme/prepare' => require_role cherryweb => sub {
@@ -482,7 +477,7 @@ ajax '/scheme/prepare' => require_role cherryweb => sub {
             errorList   => $scheme->error
         };
     } ## end else [ if ( !$raw ) ]
-    return send_as( JSON => $report );
+    send_as( JSON => $report );
 };
 
 ajax '/scheme/action' => require_role cherryweb => sub {
@@ -505,13 +500,13 @@ ajax '/scheme/action' => require_role cherryweb => sub {
 
                 # if failed
                 unlink($file);
-                return send_as( JSON => [ { success => 0, message => 'Loading scheme' } ] );
+                send_as( JSON => [ { success => 0, message => 'Loading scheme' } ] );
             } ## end if ( !$scheme->Import(...))
         } else {
-            return send_as( JSON => [ { success => 0, message => 'Loading file' } ] );
+            send_as( JSON => [ { success => 0, message => 'Loading file' } ] );
         }
     } else {
-        return send_as( JSON => [ { success => 0, message => 'Unknown action' } ] );
+        send_as( JSON => [ { success => 0, message => 'Unknown action' } ] );
     }
 
     # let's continue
@@ -566,7 +561,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
         push( @report, { success => 1, message => 'Nothing to-do' } );
     }
 
-    return send_as( JSON => \@report );
+    send_as( JSON => \@report );
 };
 
 ajax '/scheme/delete' => require_role cherryweb => sub {
@@ -576,7 +571,7 @@ ajax '/scheme/delete' => require_role cherryweb => sub {
 
     my $report = $scheme->delete($target);
 
-    return send_as( JSON => { success => $report // 0, target => $target } );
+    send_as( JSON => { success => $report // 0, target => $target } );
 };
 
 # current configuration
@@ -588,7 +583,7 @@ ajax '/scheme' => require_role cherryweb => sub {
         $active->{timestamp} = localtime( $active->{timestamp} )->strftime();
     }
 
-    return send_as( JSON => $active );
+    send_as( JSON => $active );
 };
 
 # show event budget for future/past
@@ -598,7 +593,7 @@ ajax '/ebudget' => require_role cherryweb => sub {
     my $taster = cherryEpg::Taster->instance();
     my $result = $taster->eventBudget();
 
-    return send_as(
+    send_as(
         JSON => {
             status    => 3,
             timestamp => $t->strftime(),
@@ -619,7 +614,7 @@ ajax '/ebudget' => require_role cherryweb => sub {
         }
     } ## end foreach my $channel (@$result)
 
-    return send_as(
+    send_as(
         JSON => {
             data      => $result,
             status    => $status,
@@ -633,7 +628,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
     my $channel_id = params->{'id'};
     my $upload     = request->upload('file');
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "Uploading eventdata failed",
@@ -646,7 +641,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
     my $cherry   = cherryEpg->instance();
     my $channel  = $cherry->epg->listChannel($channel_id)->[0];
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "Service [$channel_id] not found",
@@ -657,7 +652,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
     my $grabber  = cherryEpg::Grabber->new( channel => $channel );
     my $ingester = cherryEpg::Ingester->new( channel => $channel );
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "Transporting of [$filename] failed",
@@ -668,7 +663,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
     my $filepath = "" . file( $grabber->{destination}, $filename );
     my $report   = $ingester->processFile( $filepath, 1 );
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "Ingest failed!",
@@ -676,7 +671,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
         )
         if !$report;
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "[" . $report->{eventList}->@* . "] events ingested with [" . $report->{errorList}->@* . "] errors",
@@ -684,7 +679,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
         )
         if $report->{errorList}->@*;
 
-    return send_as(
+    send_as(
         JSON => {
             success => 1,
             message => "[" . $report->{eventList}->@* . "] events ingested",
@@ -739,14 +734,14 @@ ajax '/service/info' => require_role cherryweb => sub {
     $result->{last}   = localtime( $last->{$channel_id}{timestamp} )->strftime();
     $result->{events} = \@list;
 
-    return send_as( JSON => $result );
+    send_as( JSON => $result );
 };
 
 # show ringelspiel statistics
 ajax '/carousel' => require_role cherryweb => sub {
     my $taster = cherryEpg::Taster->instance();
 
-    return send_as( JSON => $taster->ringelspiel );
+    send_as( JSON => $taster->ringelspiel );
 };
 
 # browse log
@@ -769,7 +764,7 @@ ajax '/log' => require_role cherryweb => sub {
 
     my ( $total, $filtered, $listRef ) = $cherry->epg->getLogList( \@categoryList, $level, $start, $limit, $channel );
 
-    return send_as(
+    send_as(
         JSON => {
             draw            => $draw,
             recordsTotal    => $total    // 0,
@@ -788,7 +783,7 @@ ajax '/git' => require_role cherryweb => sub {
     my $git = cherryEpg::Git->new();
 
     if ( !$git ) {
-        return send_as(
+        send_as(
             JSON => {
                 success => 0,
                 message => "Problem with repository"
@@ -805,7 +800,7 @@ ajax '/git' => require_role cherryweb => sub {
             if ( $s->{originCommit} ) {
 
                 # updates available
-                return send_as(
+                send_as(
                     JSON => {
                         success => 2,
                         message => "Udates available (" . $s->{originCommit} . ")"
@@ -814,7 +809,7 @@ ajax '/git' => require_role cherryweb => sub {
             } else {
 
                 # no updates
-                return send_as(
+                send_as(
                     JSON => {
                         success => 1,
                         message => "System UpToDate"
@@ -824,7 +819,7 @@ ajax '/git' => require_role cherryweb => sub {
         } elsif ( !$s->{fetch} ) {
 
             # connection to repository failed
-            return send_as(
+            send_as(
                 JSON => {
                     success => 0,
                     message => "Check failed"
@@ -833,7 +828,7 @@ ajax '/git' => require_role cherryweb => sub {
         } elsif ( !$s->{hook} ) {
 
             # the hook file will not trigger restart
-            return send_as(
+            send_as(
                 JSON => {
                     success => 0,
                     message => "Hook not installed"
@@ -842,7 +837,7 @@ ajax '/git' => require_role cherryweb => sub {
         } else {
 
             # local changes
-            return send_as(
+            send_as(
                 JSON => {
                     success => 0,
                     message => "Commit your local modifications"
@@ -853,14 +848,14 @@ ajax '/git' => require_role cherryweb => sub {
 
         # upgrade
         if ( $git->upgrade() ) {
-            return send_as(
+            send_as(
                 JSON => {
                     success => 1,
                     message => "Upgrade done!"
                 }
             );
         } else {
-            return send_as(
+            send_as(
                 JSON => {
                     success => 0,
                     message => "Upgrade failed!"
@@ -870,7 +865,7 @@ ajax '/git' => require_role cherryweb => sub {
     } else {
 
         # error
-        return send_as(
+        send_as(
             JSON => {
                 success => 0,
                 message => "Unknown command!"
@@ -884,7 +879,7 @@ ajax '/maintenance' => require_role cherryweb => sub {
     my $upload = request->upload('file');
 
     if ( !$upload ) {
-        return send_as(
+        send_as(
             JSON => {
                 success => 0,
                 message => "Upload failed!",
@@ -901,7 +896,7 @@ ajax '/maintenance' => require_role cherryweb => sub {
         my $output  = $mtainer->output;
         my $pod     = $mtainer->pod;
 
-        return send_as(
+        send_as(
             JSON => {
                 success => $success,
                 message => "[" . $mtainer->name . "] applied",
@@ -911,7 +906,7 @@ ajax '/maintenance' => require_role cherryweb => sub {
         );
     } ## end if ( $mtainer->load($tempname...))
 
-    return send_as(
+    send_as(
         JSON => {
             success => 0,
             message => "Loading failed!",
@@ -925,12 +920,19 @@ get '/log/:id.json' => require_role cherryweb => sub {
 
     my $cherry = cherryEpg->instance();
 
-    my $info = $cherry->epg->getLogEntry($id);
+    my $row = $cherry->epg->getLogEntry($id);
 
-    delete $info->{source}{blob}
-        if ref($info) eq 'HASH' && exists $info->{source} && ref( $info->{source} ) eq 'HASH' && exists $info->{source}{blob};
+    send_as( JSON => {} ) unless $row && $row->{info};
 
-    return send_as( JSON => $info );
+    delete $row->{info}{source}{blob}
+        if $row
+        && $row->{info}
+        && ref( $row->{info} ) eq 'HASH'
+        && $row->{info}{source}
+        && $row->{info}{source} eq 'HASH'
+        && $row->{info}{source}{blob};
+
+    send_as( JSON => $row->{info} );
 };
 
 # default route
