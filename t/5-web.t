@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 
 use Mojo::Base -strict;
-use Test::More tests => 26;
+use Test::More tests => 29;
 use Test::Mojo;
+use Try::Tiny;
 
 BEGIN {
     $ENV{DANCER_CONFDIR}     = 't/lib';
@@ -51,6 +52,14 @@ BEGIN {
 END
         ;
     my $upload = { file => { content => $sample, filename => 'sample.xml' }, id => $id };
+    $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
+
+    my $content = do {
+        local $/;
+        open( my $fh, '<', 't/testData/SimpleSchedule.xls' ) || return;
+        <$fh>;
+    };
+    $upload = { file => { content => $content, filename => 'Simple.xls' }, id => 90 };
     $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
     $t->get_ok('/logout')->status_is(200);

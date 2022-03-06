@@ -128,10 +128,10 @@ sub move {
     return unless -e $source;
 
     if ( rename( $source, $filePath ) ) {
-        $logger->info( "move file [$filename]", $self->{channel_id}, undef );
+        $logger->info( "import file [$filename]", $self->{channel_id}, undef );
         return 1;
     } else {
-        $logger->error( "move file [$filename]", $self->{channel_id}, undef );
+        $logger->error( "import file [$filename]", $self->{channel_id}, undef );
         return;
     }
 } ## end sub move

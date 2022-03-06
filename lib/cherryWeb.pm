@@ -665,7 +665,7 @@ ajax '/service/ingest' => require_role cherryweb => sub {
         )
         if !$grabber->move( $tempname, $filename );
 
-    my $filepath = file( $grabber->{destination}, $filename );
+    my $filepath = "" . file( $grabber->{destination}, $filename );
     my $report   = $ingester->processFile( $filepath, 1 );
 
     return send_as(

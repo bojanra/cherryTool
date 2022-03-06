@@ -123,19 +123,17 @@ function ServiceMatrix(log) {
       dataType: 'json',
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      success: this.present,
-      error: function(jqXHR, tStatus, err) {
-        if (tStatus === 'parsererror') {
-          $(location).attr("href", "/");
-          return;
-        }
-        setPanelState('#dashBoard', 'danger');
-        $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
-        $('#eBudget').html('failed');
-        count = 0;
-        loading = 0;
-      },
       timeout: 8000
+    }).done(this.present).fail((jqXHR, tStatus, err) => {
+      if (tStatus === 'parsererror') {
+        $(location).attr("href", "/");
+        return;
+      }
+      setPanelState('#dashBoard', 'danger');
+      $('#serviceDash').html('<div class="alert alert-warning">Error getting analysis data. Please refresh!</div>');
+      $('#eBudget').html('failed');
+      count = 0;
+      loading = 0;
     });
   };
 
@@ -219,7 +217,7 @@ function ServiceMatrix(log) {
     }).always(this.showService);
   };
 
-  $('#serviceDash').on('click', 'tr', (event) => {
+  $('#serviceDash').on('click', 'tbody>tr', (event) => {
     var $tr = $(event.currentTarget);
     this.updateService($tr.data('id'));
   });
@@ -409,24 +407,21 @@ function LogBrowser(large) {
       url: "/log/" + id + ".json",
       dataType: 'json',
       type: 'GET',
-      success: function(data) {
-        if (data !== '') {
-          var row = this.table.row(tr);
-          var $pre = $(`<a href="/log/${id}.json"><span class="label label-primary">JSON <i class="glyphicon glyphicon-file"></i></span></a>`);
-          var $view = $('<span></span>').jsonViewer(data, {
-            collapsed: true,
-            rootCollapsable: false
-          });
-          row.child($pre, 'even').show();
-          $pre.after($view);
-          $view.children().children().children('a.json-toggle').click();
-          tr.addClass('shown');
-        }
-      },
       timeout: 4000
+    }).done((data) => {
+      if (data !== '') {
+        var row = this.table.row(tr);
+        var $pre = $(`<a href="/log/${id}.json"><span class="label label-primary">JSON <i class="glyphicon glyphicon-file"></i></span></a>`);
+        var $view = $('<span></span>').jsonViewer(data, {
+          collapsed: true,
+          rootCollapsable: false
+        });
+        row.child($pre, 'even').show();
+        $pre.after($view);
+        $view.children().children().children('a.json-toggle').click();
+        tr.addClass('shown');
+      }
     });
-
-    return;
   };
 
   this.hide = () => {
@@ -475,19 +470,17 @@ function RingelSpiel() {
       dataType: 'json',
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      success: this.newdata,
-      error: function(jqXHR, tStatus, err) {
-        if (tStatus === 'parsererror') {
-          $(location).attr('href', '/ringelspiel');
-          return;
-        }
-        setPanelState('#ringelSpiel', 'danger');
-        $('#oStreams').html('failed');
-        $('#streamDash').html('<div class="alert alert-warning" role="alert">Error getting analysis data. Please refresh!</div>');
-        count = 0;
-        loading = 0;
-      },
       timeout: 4000
+    }).done(this.newdata).fail((jqXHR, tStatus, err) => {
+      if (tStatus === 'parsererror') {
+        $(location).attr('href', '/ringelspiel');
+        return;
+      }
+      setPanelState('#ringelSpiel', 'danger');
+      $('#oStreams').html('failed');
+      $('#streamDash').html('<div class="alert alert-warning" role="alert">Error getting analysis data. Please refresh!</div>');
+      count = 0;
+      loading = 0;
     });
   };
 
@@ -679,23 +672,21 @@ function SystemInfo() {
       dataType: 'json',
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      success: this.update,
-      error: function(jqXHR, tStatus, err) {
-        if (tStatus === 'parsererror') {
-          $(location).attr("href", "/system");
-          return;
-        }
-        $('#systemStatus').html('Failed. Please reload!');
-        $('#systemStatus').removeClass('label-default').addClass('label-danger');
-        $('#systemVersion').html('');
-        $('#systemEPG').html('');
-        $('#systemPlayout').html('');
-        $('#systemNTP').html('');
-        $('#systemDatabase').html('');
-        $('#systemWebgrab').html('');
-        $('#systemAnnouncer').html('');
-      },
       timeout: 100000
+    }).done(this.update).fail((jqXHR, tStatus, err) => {
+      if (tStatus === 'parsererror') {
+        $(location).attr("href", "/system");
+        return;
+      }
+      $('#systemStatus').html('Failed. Please reload!');
+      $('#systemStatus').removeClass('label-default').addClass('label-danger');
+      $('#systemVersion').html('');
+      $('#systemEPG').html('');
+      $('#systemPlayout').html('');
+      $('#systemNTP').html('');
+      $('#systemDatabase').html('');
+      $('#systemWebgrab').html('');
+      $('#systemAnnouncer').html('');
     });
   };
 
