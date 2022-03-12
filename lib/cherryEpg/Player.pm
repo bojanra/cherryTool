@@ -443,7 +443,8 @@ sub list {
 
     my $path = dir( $self->cherry->config->{core}{carousel} );
 
-    my $carousel = {};
+    my $carousel   = {};
+    my $dstPortPid = {};
 
     if ( -d -r $path and opendir( my $dir, $path ) ) {
         my @files = readdir($dir);
@@ -470,11 +471,12 @@ sub list {
                     delete $carousel->{$target};
                     next;
                 }
-                $carousel->{$target}{pid} = _getPID($ts);
+                my $pid = _getPID($ts);
 
                 # check for redundancy
                 $self->applyRedundancy($meta);
                 $carousel->{$target}{meta}      = $meta;
+                $carousel->{$target}{pid}       = $pid;
                 $carousel->{$target}{size}      = length($$ts);
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();
             } elsif ( $extension eq $chunkExtension ) {
@@ -485,11 +487,15 @@ sub list {
                     delete $carousel->{$target};
                     next;
                 }
-                my $size = length($$ts);
-                $carousel->{$target}{pid}       = _getPID($ts);
+                my $pid = _getPID($ts);
                 $carousel->{$target}{meta}      = $meta;
-                $carousel->{$target}{size}      = $size;
+                $carousel->{$target}{pid}       = $pid;
+                $carousel->{$target}{size}      = length($$ts);
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();
+
+                # mark active chunks by pid
+                $dstPortPid->{ $meta->{dst} } = {} if !$dstPortPid->{ $meta->{dst} };
+                $dstPortPid->{ $meta->{dst} }{$pid} = 1;
             } elsif ( $extension eq $tmpExtension ) {
                 $carousel->{$target}{tmp}       = 1;
                 $carousel->{$target}{size}      = ( -s $file ) - 188;
@@ -497,6 +503,14 @@ sub list {
             }
         } ## end foreach my $current (@files)
         my @list = map { $carousel->{$_} } reverse sort keys %{$carousel};
+
+        # mark chunks if there exists other active chunks with same dst and pid
+        foreach my $chunk (@list) {
+            $chunk->{duplicate} = 1 if $dstPortPid->{ $chunk->{meta}{dst} }{ $chunk->{pid} };
+        }
+
+        # order list by dst
+        @list = sort { $a->{meta}{dst} cmp $b->{meta}{dst} || $a->{pid} <=> $b->{pid} } @list;
 
         return \@list;
     } ## end if ( -d -r $path and opendir...)

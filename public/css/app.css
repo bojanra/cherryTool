@@ -512,6 +512,11 @@ h4 {
   vertical-align: middle;
 }
 
+#browseReport span.label {
+  display: block;
+  width: 5.5em;
+}
+
 #browseReport .paused td {
   color: #aaa;
 }
@@ -548,11 +553,6 @@ h3.panel-title {
 
 h3 {
   margin-top: 10px;
-}
-
-.badge-success {
-  color: #fff;
-  background-color: #5cb85c;
 }
 
 .upload-area {

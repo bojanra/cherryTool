@@ -121,7 +121,8 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>
-                  <span class="badge badge-success hidden">Playing</span>
+                  <span class="label label-success hidden playing">Playing</span>
+                  <span class="label label-danger hidden taken">PID taken</span>
                 </td>
                 <td class="text-right">
                   <button class="btn btn-info btn-sm" name="preview">

@@ -50,6 +50,8 @@ sub error {
 Do the file processing and return a reference to hash with keys
 - errorList => array with troubles during parsing
 - eventList => array of events found TIME MUST BE in GMT
+- parser => parser name,
+- source => source filename
 
 =cut
 

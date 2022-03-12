@@ -192,7 +192,7 @@ Flags Chunk           Title                         PID  Destination          [b
         if ( $_->{meta}{bitrate} ) {
             push( @item, $_->{meta}{bitrate} );
         } elsif ( $_->{meta}{interval} ) {
-            push( @item, int( $_->{size} / $_->{meta}{interval} * 1000 ) );
+            push( @item, int( ( $_->{size} * 8 ) / $_->{meta}{interval} * 1000 ) );
         } else {
             push( @item, '?' );
         }

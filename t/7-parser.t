@@ -2,7 +2,7 @@
 
 use File::Rsync;
 
-use Test::More tests => 43;
+use Test::More tests => 45;
 
 BEGIN {
     use_ok("cherryEpg");

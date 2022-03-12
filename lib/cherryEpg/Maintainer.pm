@@ -7,7 +7,7 @@ use strictures 2;
 use Try::Tiny;
 use IPC::Run3 qw(run3);
 use Gzip::Faster;
-use File::Temp qw(tempfile);
+use File::Temp;
 use Log::Log4perl qw(get_logger);
 use cherryEpg;
 

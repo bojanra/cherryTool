@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Base -strict;
-use Test::More tests => 29;
+use Test::More tests => 45;
 use Test::Mojo;
 use Try::Tiny;
 
@@ -32,29 +32,15 @@ BEGIN {
 
     $t->post_ok( '/service/info' => form => { id => $id } )->status_is(200)->json_is( '/channel_id', $id );
 
-    my $sample = <<END
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tv source-data-url="https://tvprofil.net/api/xmltv/" source-info-name="TvProfil API v2.0 - XMLTV" source-info-url="https://tvprofil.com">
-  <channel id="bbc1">
-    <display-name>BBC1</display-name>
-    <url>http://www.bbc.co.uk/bbcone/</url>
-    <icon src="https://cdn-0.tvprofil.com/cdn/400x200/4/img/kanali-logo/bbc-one-logo.png"/>
-  </channel>
-  <programme channel="bbc1" start="20210220012000 +0000" stop="20210220012500 +0000">
-    <title lang="hr">Weather for the Week Ahead</title>
-    <category>news</category>
-  </programme>
-  <programme channel="bbc1" start="20210220012500 +0000" stop="20210220013000 +0000">
-    <title lang="hr">BBC News</title>
-    <category>news</category>
-  </programme>
-</tv>
-END
-        ;
-    my $upload = { file => { content => $sample, filename => 'sample.xml' }, id => $id };
+    my $content = do {
+        local $/;
+        open( my $fh, '<', 't/testData/TVXML.xml' ) || return;
+        <$fh>;
+    };
+    my $upload = { file => { content => $content, filename => 'sample.xml' }, id => $id };
     $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
-    my $content = do {
+    $content = do {
         local $/;
         open( my $fh, '<', 't/testData/SimpleSchedule.xls' ) || return;
         <$fh>;
@@ -62,7 +48,50 @@ END
     $upload = { file => { content => $content, filename => 'Simple.xls' }, id => 90 };
     $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
-    $t->get_ok('/logout')->status_is(200);
+    # clean pid=17
+    $t->post_ok('/carousel/browse')->status_is(200);
+    my @list = grep { $_->{pid} == 17 } $t->tx->res->json->@*;
 
+    subtest 'Delete chunks' => sub {
+        foreach my $chunk (@list) {
+            $t->post_ok( '/carousel/delete' => form => { target => $chunk->{target} } )->status_is(200);
+        }
+        pass("Done");
+        done_testing();
+    };
+
+    $content = do {
+        local $/;
+        open( my $fh, '<', 't/testData/SDT.ets.gz' ) || return;
+        <$fh>;
+    };
+
+    # add first
+    $upload = { file => { content => $content, filename => 'SDT.ets.gz' } };
+    $t->post_ok( '/carousel/upnsave' => form => $upload )->status_is(200)->json_is( '/0/success', 1 );
+
+    # add second
+    $upload = { file => { content => $content, filename => 'SDT.ets.gz' } };
+    $t->post_ok( '/carousel/upnsave' => form => $upload )->status_is(200)->json_is( '/0/success', 1 );
+    my $target = $t->tx->res->json('/0/target');
+
+    # start playing
+    $t->post_ok( '/carousel/play' => form => { target => $target } )->status_is(200);
+
+    # check if marked
+    $t->post_ok('/carousel/browse')->status_is(200);
+    ok( ref( $t->tx->res->json ) eq 'ARRAY' );
+    @list = grep { $_->{pid} == 17 && $_->{duplicate} == 1 } $t->tx->res->json->@*;
+    ok( scalar(@list) == 2, "Detect duplicate" );
+
+    subtest 'Delete chunks' => sub {
+        foreach my $chunk (@list) {
+            $t->post_ok( '/carousel/delete' => form => { target => $chunk->{target} } )->status_is(200);
+        }
+        pass("Done");
+        done_testing();
+    };
+
+    $t->get_ok('/logout')->status_is(200);
     $t->get_ok('/report.json')->status_is(200)->json_has('/timestamp');
 }

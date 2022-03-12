@@ -827,16 +827,15 @@ function CarouselPanel() {
     $('#saveForm').addClass('hidden');
     $('#browseForm').removeClass('hidden');
 
-    $('#browseReport table tr.chunk').remove();
-
     $.ajax({
       url: "/carousel/browse",
       dataType: 'json',
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
       timeout: 5000
-    }).done((data) => {
-      if (data.length) {
+    }).always((data) => {
+      $('#browseReport table tr.chunk').remove();
+      if (data && data.length) {
         data.forEach((item) => {
           const $row = this.browseTemplate.clone();
           $row.data('target', item.target);
@@ -847,13 +846,18 @@ function CarouselPanel() {
 
           if (item.playing) {
             $row.addClass('playing');
-            $row.find('td:nth-child(5) span').removeClass('hidden');
+            $row.find('td:nth-child(5) span.playing').removeClass('hidden');
             if (item.ets) {
               $row.find('button[name=pause]').prop('disabled', false).removeClass('btn-default').addClass('btn-warning');
             }
           } else if (item.ets) {
             $row.addClass('paused');
-            $row.find('button[name=play]').prop('disabled', false).removeClass('btn-default').addClass('btn-success');
+            if (item.duplicate) {
+              $row.find('td:nth-child(5) span.taken').removeClass('hidden');
+              $row.find('button[name=play]').removeClass('btn-default').addClass('btn-danger');
+            } else {
+              $row.find('button[name=play]').prop('disabled', false).removeClass('btn-default').addClass('btn-success');
+            }
           }
 
           if (item.ets) {
@@ -880,19 +884,8 @@ function CarouselPanel() {
       timeout: 2000
     }).done((data) => {
       if (data.success && data.target === this.target) {
-        var $row = $('tr').filter((index, item) => {
-          return $(item).data('target') === this.target;
-        });
-        $row.animate({
-          opacity: '0.0'
-        }, 'slow', () => {
-          $row.remove();
-          // refresh list if empty
-          if (!$('#browseReport table').find('tr.chunk').length) {
-            this.browse();
-          }
-        });
-      } else {}
+        this.browse();
+      }
     });
   };
 
@@ -907,15 +900,8 @@ function CarouselPanel() {
       timeout: 2000
     }).done((data) => {
       if (data.success && data.target === this.target) {
-        var $row = $('tr').filter((index, item) => {
-          return $(item).data('target') === this.target;
-        });
-        $row.find('td:nth-child(5) span').addClass('hidden');
-        $row.removeClass('playing');
-        $row.addClass('paused');
-        $row.find('button[name=play]').prop('disabled', false).removeClass('btn-default').addClass('btn-success');
-        $row.find('button[name=pause]').prop('disabled', true).removeClass('btn-warning').addClass('btn-default');
-      } else {}
+        this.browse();
+      }
     });
   };
 
@@ -941,15 +927,8 @@ function CarouselPanel() {
       timeout: 2000
     }).done((data) => {
       if (data.success && data.target === this.target) {
-        var $row = $('tr').filter((index, item) => {
-          return $(item).data('target') === this.target;
-        });
-        $row.find('td:nth-child(5) span').removeClass('hidden');
-        $row.addClass('playing');
-        $row.removeClass('paused');
-        $row.find('button[name=play]').prop('disabled', true).removeClass('btn-success').addClass('btn-default');
-        $row.find('button[name=pause]').prop('disabled', false).removeClass('btn-default').addClass('btn-warning');
-      } else {}
+        this.browse();
+      }
     });
   };
 

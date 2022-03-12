@@ -346,8 +346,8 @@ ajax '/carousel/upnsave' => require_role cherryweb => sub {
     my $player = cherryEpg::Player->new();
 
     foreach my $upload (@multi) {
-        if ( $player->load( $upload->tempname ) and $player->copy( $upload->tempname ) ) {
-            push( @report, { success => 1, message => $upload->filename . ' saved' } );
+        if ( $player->load( $upload->tempname ) and my $target = $player->copy( $upload->tempname ) ) {
+            push( @report, { success => 1, message => $upload->filename . ' saved', target => $target } );
         } else {
             push( @report, { success => 0, message => $upload->filename . ' failed' } );
         }
