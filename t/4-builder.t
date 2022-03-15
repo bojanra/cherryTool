@@ -2,7 +2,7 @@
 
 use utf8;
 
-use Test::More tests => 25;
+use Test::More tests => 33;
 
 BEGIN {
     use_ok("cherryEpg");
@@ -80,6 +80,32 @@ ok( $cherry->eitBuild($eit), 'build single eit' );
 
 # reset version
 ok( $cherry->sectionDelete(), 'reset section and version table' );
+
+# multi make/build
+isa_ok( $cherry->eitMulti(), 'ARRAY', 'make eit' );
+
+# read, build load scheme for testing SDT, PAT and PMT building
+$sut = "psi";
+ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
+
+my $s = $scheme->build();
+
+ok( $s->{isValid}, "build scheme" );
+
+ok( $cherry->databaseReset(), "clean/init db" );
+
+my ( $success, $error ) = $scheme->push();
+ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
+
+# test multigrabber
+my $count = scalar( $cherry->epg->listChannel($channelId)->@* );
+my $grab  = $cherry->channelMulti( 'all', 1, 1 );
+ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
+
+# delete carousel
+my $player = new_ok( cherryEpg::Player => [ verbose => 0 ], 'cherryEpg::Player' );
+
+ok( defined $player->delete(), "delete carousel" );
 
 # multi make/build
 isa_ok( $cherry->eitMulti(), 'ARRAY', 'make eit' );

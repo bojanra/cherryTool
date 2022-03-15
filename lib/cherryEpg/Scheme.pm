@@ -4,6 +4,7 @@ use 5.010;
 use utf8;
 use Moo;
 use strictures 2;
+no warnings 'experimental';
 use Try::Tiny;
 use Path::Class;
 use File::Basename;
@@ -16,6 +17,8 @@ use File::stat;
 use Time::Piece;
 use Gzip::Faster;
 use cherryEpg;
+use cherryEpg::Table;
+use cherryEpg::Player;
 use POSIX qw(ceil);
 use open ':std', ':encoding(utf8)';
 
@@ -141,6 +144,24 @@ sub push {
 
     # load to db
     my ( $success, $error ) = $self->cherry->epg->import($scheme);
+
+    # generate&play tables
+    my $psigen = cherryEpg::Table->new();
+    my $player = cherryEpg::Player->new();
+    foreach my $name ( sort keys $scheme->{table}->%* ) {
+        my $table = $scheme->{table}{$name};
+        my $chunk = $psigen->build($table);
+
+        if ($chunk) {
+            if ( $player->arm( $name, $table->{'..'}, \$chunk, undef ) && $player->play($name) ) {
+                $logger->trace("playing $table->{table} - $name");
+            } else {
+                $logger->error("playing $table->{table} - $name");
+            }
+        } else {
+            $logger->error("building $table->{table} - $name");
+        }
+    } ## end foreach my $name ( sort keys...)
 
     if ( scalar @$error == 0 ) {
         $logger->info( "import [$filename] with " . scalar(@$success) . " elements", undef, undef, $scheme );
@@ -454,13 +475,20 @@ sub parseEIT {
             my @list = split( / *, */, $field[5] );    # implicit remove spaces
             foreach (@list) {
                 my ( $key, $value ) = split(/ *= */);
-                $option{ uc($key) } = defined $value ? $value : 1;
-            }
+                my $uKey = uc($key);
+                my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT);
+                if ( $uKey ~~ @list ) {
+                    $value += 0 if $value && $value =~ /^\d+$/;
+                    $option{$uKey} = defined $value ? $value : 1;
+                } else {
+                    $self->error("Unknown option: $key in row [$sheetName:$rowCounter]");
+                }
+            } ## end foreach (@list)
         } ## end if ( $field[5] and $field...)
 
         my $eit = {
             tsid    => $field[0],
-            output  => 'udp://' . $field[1] . ':' . $field[2],
+            output  => $field[1] . ':' . $field[2],
             pid     => $field[3],
             exclude => \%exclude,
             option  => \%option,
@@ -803,6 +831,9 @@ sub build {
     # map channels to scheme
     $scheme->{channel} = \@sortedChannel;
 
+    # generate PAT, SDT, PMT
+    $self->tableBuilder($scheme);
+
     $scheme->{isValid} = scalar @{ $self->error } == 0;
 
     # copy raw part
@@ -811,6 +842,133 @@ sub build {
     $self->{scheme} = $scheme;
     return $scheme;
 } ## end sub build
+
+=head3 tableBuilder( $scheme)
+
+Build SDT, PAT and PMT tables.
+Add them to $scheme->{table}.
+
+=cut
+
+sub tableBuilder {
+    my ( $self, $scheme ) = @_;
+
+    # first convert rules and service list to hash
+    my %channel = map { $_->{channel_id} => $_ } $scheme->{channel}->@*;
+    my %channelByEit;
+    foreach my $rule ( $scheme->{rule}->@* ) {
+        next if !$rule->{actual};
+        if ( !$channelByEit{ $rule->{eit_id} } ) {
+            $channelByEit{ $rule->{eit_id} } = {
+                original_network_id => $rule->{original_network_id},
+                transport_stream_id => $rule->{transport_stream_id},
+                service             => {}
+            };
+        } ## end if ( !$channelByEit{ $rule...})
+        $channelByEit{ $rule->{eit_id} }{service}{ $rule->{service_id} } = $rule->{channel_id};
+    } ## end foreach my $rule ( $scheme->...)
+
+    $scheme->{table} = {};
+    foreach my $eit ( $scheme->{eit}->@* ) {
+
+        my %pmtByService = ();
+
+        # build PAT and prepare PMT
+        if ( $eit->{option}{PAT} ) {
+            my $table = {
+                '..' => {
+                    dst      => $eit->{output},
+                    interval => 500,
+                    title    => "Auto PAT",
+                },
+                table               => 'PAT',
+                pid                 => 0,
+                transport_stream_id => $channelByEit{ $eit->{eit_id} }{transport_stream_id},
+                programs            => []
+            };
+
+            my $pmtPid = 100;
+            $pmtPid = $eit->{option}{PMT} if $eit->{option}{PMT} && $eit->{option}{PMT} > 1;
+
+            foreach my $service ( sort keys $channelByEit{ $eit->{eit_id} }{service}->%* ) {
+                CORE::push(
+                    $table->{programs}->@*,
+                    {
+                        program_number => $service,
+                        pid            => $pmtPid
+                    }
+                );
+                $pmtByService{$service} = $pmtPid++;
+            } ## end foreach my $service ( sort ...)
+
+            my $filename = sprintf( "eit_%03i_pat", $eit->{eit_id} );
+            $scheme->{table}{$filename} = $table;
+        } ## end if ( $eit->{option}{PAT...})
+
+        # build SDT
+        if ( $eit->{option}{SDT} ) {
+            my $table = {
+                '..' => {
+                    dst      => $eit->{output},
+                    interval => 4000,
+                    title    => "Auto SDT",
+                },
+                table               => 'SDT',
+                pid                 => 17,
+                transport_stream_id => $channelByEit{ $eit->{eit_id} }{transport_stream_id},
+                original_network_id => $channelByEit{ $eit->{eit_id} }{original_network_id},
+                services            => []
+            };
+            foreach my $service ( sort keys $channelByEit{ $eit->{eit_id} }{service}->%* ) {
+
+                my $detail = $channel{ $channelByEit{ $eit->{eit_id} }{service}{$service} };
+                my $item   = {
+                    service_id                 => $service,
+                    eit_schedule_flag          => 1,
+                    eit_present_following_flag => 1,
+                    running_status             => 4,
+                    free_ca_mode               => 0,
+                    descriptors                => [ {
+                            service_descriptor => {
+                                service_type          => 25,
+                                service_provider_name => 'cherryhill.eu',
+                                service_name          => $detail->{name}
+                            }
+                        }
+                    ]
+                };
+
+                CORE::push( $table->{services}->@*, $item );
+            } ## end foreach my $service ( sort ...)
+            my $filename = sprintf( "eit_%03i_sdt", $eit->{eit_id} );
+            $scheme->{table}{$filename} = $table;
+        } ## end if ( $eit->{option}{SDT...})
+
+
+        # build the PMT part
+        if ( $eit->{option}{PMT} ) {
+            my $count = 0;
+            foreach my $service ( keys %pmtByService ) {
+                my $table = {
+                    '..' => {
+                        dst      => $eit->{output},
+                        interval => 4000,
+                        title    => "Auto PMT",
+                        pcr      => 1
+                    },
+                    table                    => 'PMT',
+                    pid                      => $pmtByService{$service},
+                    pcr_pid                  => 0x1ffe,
+                    program_number           => $service,
+                    program_info_descriptors => [],
+                    elementary_streams       => []
+                };
+                my $filename = sprintf( "eit_%03i_pmt%02i", $eit->{eit_id}, $count++ );
+                $scheme->{table}{$filename} = $table;
+            } ## end foreach my $service ( keys ...)
+        } ## end if ( $eit->{option}{PMT...})
+    } ## end foreach my $eit ( $scheme->...)
+} ## end sub tableBuilder
 
 =head3 error( @args )
 

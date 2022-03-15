@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.13';
+our $VERSION = '2.1.14';
 
 with('MooX::Singleton');
 
@@ -500,8 +500,10 @@ sub eitBuild {
 
         my $pes = $epg->getEit( $eit->{eit_id}, $interval );
 
-        $eit->{output} =~ m|udp://(.+)$|;
-        my $dst = $1;
+        my $dst = $eit->{output};
+
+        # for backward compatibility remove the method stuff
+        $dst =~ s|^udp://||;
 
         my $specs = {
             interval => $interval * 1000,    # must be in ms

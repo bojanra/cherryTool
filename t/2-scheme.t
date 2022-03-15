@@ -30,6 +30,7 @@ my $origin = YAML::XS::Load($serialized);
 # remove the {source} and {target} key from original as this is not in db
 delete $origin->{source};
 delete $origin->{target};
+delete $origin->{table};
 
 ok( $scheme->pull(), "read scheme from db" );
 $serialized = $scheme->export();

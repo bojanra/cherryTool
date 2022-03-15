@@ -1,14 +1,36 @@
 #!/usr/bin/perl
 
 use Mojo::Base -strict;
-use Test::More tests => 45;
+use Test::More tests => 52;
 use Test::Mojo;
 use Try::Tiny;
 
 BEGIN {
     $ENV{DANCER_CONFDIR}     = 't/lib';
     $ENV{DANCER_ENVIRONMENT} = 'test';
-}
+
+    use_ok("cherryEpg");
+    use_ok("cherryEpg::Scheme");
+
+    `generateSampleScheduleData`;
+
+    ok( $? == 0, "generate sample schedule data" );
+} ## end BEGIN
+
+# prepare the environment for testing
+my $cherry = cherryEpg->instance( verbose => 0 );
+my $sut    = 'simple';
+
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
+
+ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
+
+my $s = $scheme->build();
+
+ok( $cherry->databaseReset(), "clean/init db" );
+
+my ( $success, $error ) = $scheme->push();
+ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
 {
     my $t = Test::Mojo->with_roles('+PSGI')->new('bin/app.psgi');
