@@ -8,6 +8,7 @@ use Try::Tiny;
 use YAML::XS;
 use Time::Piece;
 use Digest::CRC qw(crc);
+use Encode;
 
 =head3 build( $table)
 
@@ -224,14 +225,24 @@ sub _service_descriptor {
     my @requiredKey = qw(service_type service_name service_provider_name);
     return if $self->keyMissing( $descriptor, @requiredKey );
 
+    my $service_provider_name = encode( 'utf-8', $descriptor->{service_provider_name} );
+
+    # only add codepage indication when needed
+    if ( $service_provider_name ne $descriptor->{service_provider_name} ) {
+        $service_provider_name = "\x15" + $service_provider_name;
+    }
+
+    my $service_name = encode( 'utf-8', $descriptor->{service_name} );
+    if ( $service_name ne $descriptor->{service_name} ) {
+        $service_name = "\x15" . $service_name;
+    }
+
     my $bin = pack( "CCCCa*Ca*",
         0x48,
-        3 + length( $descriptor->{service_provider_name} ) + length( $descriptor->{service_name} ),
+        3 + length($service_provider_name) + length($service_name),
         $descriptor->{service_type},
-        length( $descriptor->{service_provider_name} ),
-        $descriptor->{service_provider_name},
-        length( $descriptor->{service_name} ),
-        $descriptor->{service_name} );
+        length($service_provider_name),
+        $service_provider_name, length($service_name), $service_name );
 
     return $bin;
 } ## end sub _service_descriptor

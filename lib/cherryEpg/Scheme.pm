@@ -954,7 +954,6 @@ sub tableBuilder {
                         dst      => $eit->{output},
                         interval => 4000,
                         title    => "Auto PMT",
-                        pcr      => 1
                     },
                     table                    => 'PMT',
                     pid                      => $pmtByService{$service},
