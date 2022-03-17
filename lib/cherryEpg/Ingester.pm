@@ -120,6 +120,29 @@ sub short_descriptor {
     return $short_descriptor;
 } ## end sub short_descriptor
 
+=head3 languageCodeMap( $3letter)
+
+Convert 3 letter language code to 2 letter.
+
+=cut
+
+sub languageCodeMap {
+    my ( $self, $code ) = @_;
+    my %languageMapping = (
+        ces => 'cz',
+        deu => 'de',
+        eng => 'en',
+        fra => 'fr',
+        pol => 'pl',
+        rus => 'rs',
+        slv => 'sl',
+        spa => 'es',
+    );
+
+    return $languageMapping{$code} if $languageMapping{$code};
+    return $code // 'en';
+} ## end sub languageCodeMap
+
 =head3 ingestData( $result )
 
 Ingest all events returned by the parser.
@@ -236,6 +259,11 @@ sub ingestData {
             push( $event->{error}->@*, "event stop before start" );
         }
 
+        my $title;
+        my $subtitle;
+        my $synopsis = $event->{synopsis} // '';
+        my $language = $self->{language};
+
         # build the descriptors
         my @descriptors;
 
@@ -251,14 +279,20 @@ sub ingestData {
                     $language
                 );
                 push( @descriptors, $short_descriptor );
-            }
+                $title    = $event->{title}{$language};
+                $subtitle = $event->{subtitle}{$language} // '';
+            } ## end foreach my $language ( keys...)
             #
         } else {
 
             # classic simple single language EIT
+            $title    = $event->{title}    // '';
+            $subtitle = $event->{subtitle} // '';
             my $short_descriptor = $self->short_descriptor( $event, $self->{language} );
             push( @descriptors, $short_descriptor );
         } ## end else [ if ( ref( $event->{title...}))]
+
+        $language = $self->languageCodeMap($language);
 
         if ( exists $event->{synopsis} && $event->{synopsis} ne "" ) {
             my $extended_descriptor;
@@ -333,17 +367,19 @@ sub ingestData {
             }
         } ## end if ( defined $event->{...})
 
-        if (
-            defined $self->epg->addEvent( {
-                    start       => $event->{start},
-                    stop        => $event->{stop},
-                    channel_id  => $self->{channel_id},
-                    id          => exists $event->{id} ? $event->{id} : undef,
-                    descriptors => [@descriptors]
-                }
-            )
-            ) {
+        my $store = {
+            start       => $event->{start},
+            stop        => $event->{stop},
+            channel_id  => $self->{channel_id},
+            id          => exists $event->{id} ? $event->{id} : undef,
+            descriptors => [@descriptors],
+            title       => $title,
+            subtitle    => $subtitle,
+            synopsis    => $synopsis,
+            language    => $language
+        };
 
+        if ( defined $self->epg->addEvent($store) ) {
             $result->{added} += 1;
         } else {
             push( $event->{error}->@*, "insert in database failed" );

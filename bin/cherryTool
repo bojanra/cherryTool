@@ -598,7 +598,7 @@ sub serviceManipulator {
                 $cherry->epg->channelListExport( [$channel], $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
             my $filename = "service_" . $channel_id . ".xml";
 
-            #TODO error handling
+            utf8::decode($content);
             open( my $file, ">", $filename ) or die("Failed to open $filename for writing: $?");
             print( $file $content );
             close($file);

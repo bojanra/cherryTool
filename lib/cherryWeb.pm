@@ -120,9 +120,8 @@ get '/export/:id.xml' => sub {
 
     return "" unless $list;
 
-    header( 'Content-Type'  => 'text/xml' );
-    header( 'Cache-Control' => 'no-store, no-cache, must-revalidate' );
-    return $cherry->epg->channelListExport( $list, $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
+    header( 'Content-Type' => 'application/xml' );
+    return $cherry->epg->channelListExport( $list, $cherry->config->{core}{exportIP} );
 };
 
 # download scheme by target
