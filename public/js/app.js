@@ -1547,7 +1547,7 @@ function SchemePanel() {
     $('#browsePanel').removeClass('hidden');
     $('#actionPanel').addClass('hidden');
 
-    $('#browseReport table tr.scheme').remove();
+    $('#browseReport table tr.chunk').remove();
 
     $.ajax({
       url: "/scheme/browse",

@@ -27,16 +27,14 @@ sub build {
             $self->{table} = $table->{table};
 
             # no strict 'refs';
-            my $section = $self->$tableMethod($table);
+            my $list = $self->$tableMethod($table);
 
-            if ($section) {
+            my $chunk = '';
+            foreach my $section (@$list) {
                 $self->crcAdd($section);
-
-                return unless defined $table->{pid};
-
-                return $self->packetize( $table->{pid}, $section );
-            } ## end if ($section)
-            return;
+                $chunk .= $self->packetize( $table->{pid}, $section );
+            }
+            return $chunk;
         } else {
             return;
         }
@@ -79,7 +77,7 @@ sub descriptorBuilder {
 
 =head3 _PAT ($table)
 
-Parse the PAT $table structure and return \$section.
+Parse the PAT $table structure and return array of sections.
 
 =cut
 
@@ -89,29 +87,42 @@ sub _PAT {
     my @requiredKey = qw( transport_stream_id programs);
     return if $self->keyMissing( $table, @requiredKey );
 
-    my $programs             = '';
+    my @list;
+
     my @requiredKeyInService = qw(program_number pid);
+    my $programs             = '';
     foreach my $program ( @{ $table->{programs} } ) {
         return if $self->keyMissing( $program, @requiredKeyInService );
 
         # pack stream
-        $programs .= pack( "nn", $program->{program_number}, 0xe000 | $program->{pid} );
+        my $packed = pack( "nn", $program->{program_number}, 0xe000 | $program->{pid} );
+        if ( ( length($programs) + length($packed) ) <= ( 1021 - 9 ) ) {
+            $programs .= $packed;
+        } else {
+            push( @list, $programs );
+            $programs = '';
+        }
     } ## end foreach my $program ( @{ $table...})
+    push( @list, $programs );
+    my $last_section_number = scalar(@list) - 1;
+    my $section_number      = 0;
 
-    my $section = pack( "CnnCCCa*",
-        $table->{table_id} // 0,
-        ( 5 + length($programs) + 4 ) | 0b1011 << 12,
-        $table->{transport_stream_id},
-        ( ( $table->{version_number} // 0 ) << 1 ) | 0b11000001,
-        $table->{section_number} // 0,
-        $table->{last_section_number} // 0, $programs );
+    foreach my $section (@list) {
+        my $stream = pack( "CnnCCCa*",
+            $table->{table_id} // 0,
+            ( 5 + length($section) + 4 ) | 0b1011 << 12,
+            $table->{transport_stream_id},
+            ( ( $table->{version_number} // 0 ) << 1 ) | 0b11000001,
+            $section_number++, $last_section_number, $section );
+        $section = \$stream;
+    } ## end foreach my $section (@list)
 
-    return \$section;
+    return \@list;
 } ## end sub _PAT
 
 =head3 _SDT ($table)
 
-Parse the SDT $table structure and return \$section.
+Parse the SDT $table structure and return array of sections.
 
 =cut
 
@@ -121,40 +132,49 @@ sub _SDT {
     my @requiredKey = qw( transport_stream_id original_network_id services);
     return if $self->keyMissing( $table, @requiredKey );
 
-    my $services = '';
+    my @list;
+
     my @requiredKeyInService =
         qw(service_id eit_schedule_flag eit_present_following_flag running_status free_ca_mode descriptors);
+    my $services = '';
     foreach my $service ( @{ $table->{services} } ) {
         return if $self->keyMissing( $service, @requiredKeyInService );
         my $descriptor = $self->descriptorLoop( $service->{descriptors} );
         return if !defined $descriptor;
 
         # pack stream
-        $services .= pack( "nCna*",
+        my $packed = pack( "nCna*",
             $service->{service_id},
             0xfc | ( $service->{eit_schedule_flag} & 1 ) << 1 | ( $service->{eit_present_following_flag} & 1 ),
             ( $service->{running_status} & 0x07 ) << 13 | ( $service->{free_ca_mode} & 1 ) << 12 | length($descriptor),
             $descriptor );
-
+        if ( ( length($services) + length($packed) ) <= ( 1021 - 12 ) ) {
+            $services .= $packed;
+        } else {
+            push( @list, $services );
+            $services = '';
+        }
     } ## end foreach my $service ( @{ $table...})
+    push( @list, $services );
+    my $last_section_number = scalar(@list) - 1;
+    my $section_number      = 0;
 
-    my $section = pack( "CnnCCCnCa*",
-        $table->{table_id} // 0x42,
-        ( 8 + length($services) + 4 ) | 0xf000,
-        $table->{transport_stream_id},
-        ( ( $table->{version_number} // 0 ) << 1 ) | 0b11000001,
-        $table->{section_number}      // 0,
-        $table->{last_section_number} // 0,
-        $table->{original_network_id},
-        0xff,
-        $services );
+    foreach my $services (@list) {
+        my $stream = pack( "CnnCCCnCa*",
+            $table->{table_id} // 0x42, ( 8 + length($services) + 4 ) | 0xf000,
+            $table->{transport_stream_id}, ( ( $table->{version_number} // 0 ) << 1 ) | 0b11000001,
+            $section_number++,             $last_section_number,
+            $table->{original_network_id}, 0xff,
+            $services );
+        $services = \$stream;
+    } ## end foreach my $services (@list)
 
-    return \$section;
+    return \@list;
 } ## end sub _SDT
 
 =head3 _PMT ($table)
 
-Parse the PMT $table structure and return \$section.
+Parse the PMT $table structure and return array of sections.
 
 =cut
 
@@ -194,7 +214,7 @@ sub _PMT {
         $bin
     );
 
-    return \$section;
+    return [ \$section ];
 } ## end sub _PMT
 
 =head3 descriptorLoop( $list)
@@ -257,7 +277,7 @@ sub crcAdd {
     my ( $self, $section ) = @_;
 
     utf8::downgrade($$section);
-    my $crc = crc( $$section, 32, 0xffffffff, 0x00000000, 0, 0x04C11DB7, 0 );
+    my $crc = crc( $$section, 32, 0xffffffff, 0x00000000, 0, 0x04C11DB7, 0, 0 );
     $$section .= pack( "N", $crc );
     return;
 } ## end sub crcAdd

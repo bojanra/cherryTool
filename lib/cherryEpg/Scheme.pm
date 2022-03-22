@@ -952,12 +952,12 @@ sub tableBuilder {
                 my $table = {
                     '..' => {
                         dst      => $eit->{output},
-                        interval => 4000,
+                        interval => 500,
                         title    => "Auto PMT",
                     },
                     table                    => 'PMT',
                     pid                      => $pmtByService{$service},
-                    pcr_pid                  => 0x1ffe,
+                    pcr_pid                  => 0x1fff,
                     program_number           => $service,
                     program_info_descriptors => [],
                     elementary_streams       => []
