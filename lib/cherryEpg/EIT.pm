@@ -43,7 +43,7 @@ sub BUILD {
 
     $self->{table}                       = 'EIT';
     $self->{table_id}                    = $rule->{table_id};
-    $self->{service_id}                  = $rule->{service_id};
+    $self->{service_id}                  = $rule->{service_id} & 0xffff;
     $self->{last_section_number}         = undef;
     $self->{transport_stream_id}         = $rule->{transport_stream_id};
     $self->{original_network_id}         = $rule->{original_network_id};

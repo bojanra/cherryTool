@@ -746,15 +746,13 @@ sub build {
                 # just build a rule
                 foreach my $service ( @{ $tsHash->{$tsid}{tables}{$table} } ) {
 
-                    # get the original id
-                    my $realServiceId = $service->{sid} & 0xffff;
-                    my $rule          = {
+                    my $rule = {
                         actual              => ( $table eq 'actual' ? 1 : 0 ),
                         channel_id          => $service->{sid},
                         eit_id              => $eitCounter,
                         comment             => '',
                         original_network_id => $service->{onid},
-                        service_id          => $realServiceId,
+                        service_id          => $service->{sid},
                         transport_stream_id =>
                             ( exists $tsHash->{$tsid}{option}{TSID} ? $tsHash->{$tsid}{option}{TSID} : $service->{tsid} ),
                     };
@@ -957,7 +955,7 @@ sub tableBuilder {
                     },
                     table                    => 'PMT',
                     pid                      => $pmtByService{$service},
-                    pcr_pid                  => 0x1fff,
+                    pcr_pid                  => 0x1ffe,
                     program_number           => $service,
                     program_info_descriptors => [],
                     elementary_streams       => []

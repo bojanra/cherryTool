@@ -861,7 +861,7 @@ sub updateEit {
 
 Update eit sections for given $rule.
 $rule is reference to hash containing keys:
-eit_id, service_id, original_network_id, transport_stream_id, service_id, actual
+eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual
 
 Update sections only if there are changes in event table of schedule since last update.
 
@@ -1014,7 +1014,7 @@ sub updateEitPresent {
 
 Update eit playout packet for given $rule.
 $rule is reference to hash containing keys:
-eit_id, service_id, original_network_id, transport_stream_id, service_id, actual, maxsegments
+eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual, maxsegments
 
 Update sections only if there are changes in event table of schedule since last update.
 

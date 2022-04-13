@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.17';
+our $VERSION = '2.1.18';
 
 with('MooX::Singleton');
 
@@ -525,7 +525,12 @@ sub eitBuild {
             }
         } ## end if ( exists $eit->{option...})
 
-        if ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
+        # remove file if no data
+        if ( length($pes) == 0 ) {
+            $player->delete($filename);
+
+            # or try to play
+        } elsif ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
             push( $report->{list}->@*, { filename => $filename, success => 1 } );
         } else {
             push( $report->{list}->@*, { filename => $filename, success => 0, msg => 'play failed' } );
@@ -539,7 +544,9 @@ sub eitBuild {
             foreach ( split( /\s*[|;+]\s*/, $eit->{option}{COPY} ) ) {
                 $specs->{dst} = $_;
                 $filename = sprintf( "eit_%03ix%02i", $eit->{eit_id}, $counter++ );
-                if ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
+                if ( length($pes) == 0 ) {
+                    $player->delete($filename);
+                } elsif ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
                     push( $report->{list}->@*, { filename => $filename, success => 1 } );
                 } else {
                     push( $report->{list}->@*, { filename => $filename, success => 0, msg => 'play failed' } );
