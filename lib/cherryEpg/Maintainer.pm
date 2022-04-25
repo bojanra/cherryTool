@@ -79,7 +79,7 @@ sub extractPod {
 
     utf8::decode($pod);
 
-    return if $?;
+    return if ( $? & 0xff );
     return $pod;
 } ## end sub extractPod
 
