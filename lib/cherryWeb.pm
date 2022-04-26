@@ -802,7 +802,7 @@ ajax '/git' => require_role cherryweb => sub {
                 send_as(
                     JSON => {
                         success => 2,
-                        message => "Udates available (" . $s->{originCommit} . ")"
+                        message => "Updates available (" . $s->{originCommit} . ")"
                     }
                 );
             } else {
