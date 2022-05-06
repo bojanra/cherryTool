@@ -81,6 +81,7 @@ function ServiceMatrix(log) {
         } else {
           $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html(item.message);
         }
+        this.fetchService( currentService);
         $('#eBudget').click();
       } else {
         $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html('Upload failed');
@@ -193,7 +194,7 @@ function ServiceMatrix(log) {
     });
   };
 
-  this.updateService = (id) => {
+  this.toggleService = (id) => {
     if (currentService === id) {
       currentService = null;
       (logBrowser).setService(null);
@@ -205,7 +206,10 @@ function ServiceMatrix(log) {
 
     // show agent
     $('#serviceAgent').removeClass('hidden');
+    this.fetchService( id);
+  };
 
+  this.fetchService = (id) => {
     $.ajax({
       context: this,
       url: "/service/info",
@@ -219,7 +223,7 @@ function ServiceMatrix(log) {
 
   $('#serviceDash').on('click', 'tbody>tr', (event) => {
     var $tr = $(event.currentTarget);
-    this.updateService($tr.data('id'));
+    this.toggleService($tr.data('id'));
   });
 
   $('#serviceClose').on('click', () => {
@@ -1547,7 +1551,7 @@ function SchemePanel() {
     $('#browsePanel').removeClass('hidden');
     $('#actionPanel').addClass('hidden');
 
-    $('#browseReport table tr.chunk').remove();
+    $('#browseReport table tr.scheme').remove();
 
     $.ajax({
       url: "/scheme/browse",
