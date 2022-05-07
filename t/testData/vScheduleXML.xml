@@ -1,0 +1,32 @@
+<vMixManager>
+  <Events>
+    <Event Title="HAPPY-PUB (1)" Type="video" Start="07/05/2022 14:12:36" Transition="Fade" TransitionTime="1000" EventDuration="00:02:41.2670000" InPoint="00:00:00" MediaDuration="00:02:41.2670000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Downloads\HAPPY-PUB (1).mp4">C:\Users\Admin\Downloads\HAPPY-PUB (1).mp4
+Video: AVC
+Audio: AAC
+Duration: 00:02:41</Event>
+    <Event Title="JINGLE LUBUMBASHI 1" Type="video" Start="07/05/2022 14:15:16" Transition="Fade" TransitionTime="1000" EventDuration="00:00:42.6460000" InPoint="00:00:00" MediaDuration="00:00:42.6460000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Downloads\JINGLE LUBUMBASHI 1.mp4">C:\Users\Admin\Downloads\JINGLE LUBUMBASHI 1.mp4
+Video: AVC
+Audio: AAC
+Duration: 00:00:42</Event>
+    <Event Title="JUNGLE INTERNET DYNAMIQUE" Type="video" Start="07/05/2022 14:15:58" Transition="Fade" TransitionTime="1000" EventDuration="00:00:19.4990000" InPoint="00:00:00" MediaDuration="00:00:19.4990000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Downloads\JUNGLE INTERNET DYNAMIQUE.mp4">C:\Users\Admin\Downloads\JUNGLE INTERNET DYNAMIQUE.mp4
+Video: AVC
+Audio: AAC
+Duration: 00:00:19</Event>
+    <Event Title="JINGLE DYNAMIQUE" Type="video" Start="07/05/2022 14:16:16" Transition="Fade" TransitionTime="1000" EventDuration="00:00:24.0860000" InPoint="00:00:00" MediaDuration="00:00:24.0860000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Downloads\JINGLE DYNAMIQUE.mp4">C:\Users\Admin\Downloads\JINGLE DYNAMIQUE.mp4
+Video: AVC
+Audio: AAC
+Duration: 00:00:24</Event>
+    <Event Title="HAPPY-PUB" Type="video" Start="07/05/2022 14:16:39" Transition="Fade" TransitionTime="1000" EventDuration="00:02:41.2800000" InPoint="00:00:00" MediaDuration="00:02:41.2800000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Downloads\HAPPY-PUB.mp4">C:\Users\Admin\Downloads\HAPPY-PUB.mp4
+Video: AVC
+Audio: AAC
+Duration: 00:02:41</Event>
+    <Event Title="Moise Mbiye - Ye Oyo (clip officiel)" Type="video" Start="07/05/2022 14:19:20" Transition="Fade" TransitionTime="1000" EventDuration="00:05:58.4000000" InPoint="00:00:00" MediaDuration="00:05:58.4000000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Videos\4K Video Downloader\Moise Mbiye - Ye Oyo (clip officiel).mp4">C:\Users\Admin\Videos\4K Video Downloader\Moise Mbiye - Ye Oyo (clip officiel).mp4
+Video: AVC
+Audio: AAC
+Duration: 00:05:58</Event>
+    <Event Title="Trina Fukiau - Après ce combat (Couronnée) clip of" Type="video" Start="07/05/2022 14:25:17" Transition="Fade" TransitionTime="1000" EventDuration="00:04:12.9820000" InPoint="00:00:00" MediaDuration="00:04:12.9820000" KeepDuration="True" Looping="True" Path="C:\Users\Admin\Videos\4K Video Downloader\Trina Fukiau - Après ce combat (Couronnée) clip of.mp4">C:\Users\Admin\Videos\4K Video Downloader\Trina Fukiau - Après ce combat (Couronnée) clip of.mp4
+Video: AVC
+Audio: AAC
+Duration: 00:04:12</Event>
+  </Events>
+</vMixManager>
