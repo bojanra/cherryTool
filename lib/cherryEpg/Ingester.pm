@@ -324,18 +324,18 @@ sub ingestData {
             }
         } ## end if ( exists $event->{synopsis...})
 
-        if ( defined $event->{parental} ) {
-            if ( $event->{parental} >= 4 ) {
-                my $parental_descriptor;
-                $parental_descriptor->{descriptor_tag} = 0x55;    # parental rating descriptor
+        if ( defined $event->{parental_rating} ) {
+            if ( $event->{parental_rating} >= 4 ) {
+                my $parental_rating_descriptor;
+                $parental_rating_descriptor->{descriptor_tag} = 0x55;    # parental_rating_descriptor
 
                 my $rate;
                 $rate->{country_code} = $event->{country_code} || 'SVN';
-                $rate->{rating}       = $event->{parental} - 3;
+                $rate->{rating}       = $event->{parental_rating} - 3;
 
-                push( $parental_descriptor->{list}->@*, $rate );
+                push( $parental_rating_descriptor->{list}->@*, $rate );
 
-                push( @descriptors, $parental_descriptor );
+                push( @descriptors, $parental_rating_descriptor );
             } else {
                 push( $event->{error}->@*, "incorrect parental rating - ignored" );
             }

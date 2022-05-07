@@ -19,7 +19,7 @@ after 'parse' => sub {
     my $report = $output->{report}->{eventList};
 
     foreach my $event ( @{$report} ) {
-        $event->{parental} = 18;
+        $event->{parental_rating} = 18;
     }
 };
 

@@ -186,7 +186,7 @@ SWITCH: for ( $element->{Name} ) {
         /mpeg7:minimumage/i && do {
 
             if ( $value >= 4 ) {
-                $self->{currentProgramInfo}{parental} = $value;
+                $self->{currentProgramInfo}{parental_rating} = $value;
             }
             return;
         };

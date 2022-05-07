@@ -139,7 +139,7 @@ SWITCH: for ( $element->{Name} ) {
             return;
         };
         /^parental$/i && do {
-            $event->{parental} = $value;
+            $event->{parental_rating} = $value;
             return;
         };
         /^title$/i && do {

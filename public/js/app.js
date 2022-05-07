@@ -81,7 +81,7 @@ function ServiceMatrix(log) {
         } else {
           $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html(item.message);
         }
-        this.fetchService( currentService);
+        this.fetchService(currentService);
         $('#eBudget').click();
       } else {
         $('#serviceStatus').removeClass('hidden label-info label-success').addClass('label-danger').html('Upload failed');
@@ -206,7 +206,7 @@ function ServiceMatrix(log) {
 
     // show agent
     $('#serviceAgent').removeClass('hidden');
-    this.fetchService( id);
+    this.fetchService(id);
   };
 
   this.fetchService = (id) => {

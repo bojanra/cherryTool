@@ -168,7 +168,7 @@ SWITCH: for ( $element->{Name} ) {
         /ParentalGuidance/i && do {
 
             if ( $self->{Name} =~ /^\d+$/ ) {
-                $self->{currentProgramInfo}{parental} = $self->{Name};
+                $self->{currentProgramInfo}{parental_rating} = $self->{Name};
             }
             return;
         };

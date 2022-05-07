@@ -57,7 +57,7 @@ sub parse {
             $eventId, $date, $time, $duration, $title, $short, $description,
 
             #    7      8          9      10     11     12     13        14
-            $item, $synopsis, undef, undef, undef, undef, $country, $parental
+            $item, $synopsis, undef, undef, undef, undef, $country, $parental_rating
            )
             = @cells;
 
@@ -107,11 +107,12 @@ sub parse {
             synopsis => $synopsis // "",
         };
 
-        if ( $parental =~ m|^0x\w+$| ) {
-            my $code = hex($parental);
-            $event->{country_code} = uc($country);
-            $event->{parental}     = $code + 3;
+        if ( $parental_rating =~ m|^0x\w+$| ) {
+            my $code = hex($parental_rating);
+            $event->{parental_rating} = $code + 3;
         }
+
+        $event->{country_code} = uc($country);
 
         # push to array
         push( @{ $report->{eventList} }, $event );

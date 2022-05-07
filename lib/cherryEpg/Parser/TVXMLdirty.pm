@@ -7,7 +7,7 @@ use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.15';
+our $VERSION = '0.18';
 
 sub BUILD {
     my ( $self, $arg ) = @_;
@@ -25,18 +25,30 @@ The XMLTV format can contain multiple programme schedules.
 
 Please be carefull programme = channel here.
 
-When multiple programme are defined $parserOption should contain a key value e.g.
+When multiple programme are defined the first element in $parserOption should contain the channel name e.g.
 channel => "htv1.tv.hrt.hr" to select a programme.
 If there is only a single programmee defined in the file no channel option is required.
 
-Just filter out some stupid noise after parsing the XML file.
+This "dirty" parser is not strict regarding time format therefore also
+start="20210220023000 +00:00" is accepted.
+Language priority can be defined, therefore also $parserOption is used.
+
+$parserOption contains two values separated by comma {channel},{language} e.g.
+
+htv1.tv.hrt.hr,cro
+,ger
+bbc
+
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
+    my ( $self, $parserOption ) = @_;
     my $report = $self->{report};
 
-    my $handler = TVXMLdirtyHandler->new();
+    # get values
+    my ( $channel, $language ) = split( /,/, $parserOption // '' );
+
+    my $handler = TVXMLdirtyHandler->new($language);
     my $parser  = XML::Parser::PerlSAX->new(
         Handler => $handler,
         output  => $report
@@ -45,12 +57,12 @@ sub parse {
     $parser->parse( Source => { SystemId => $self->{source} } );
 
     # now we have multiple channels, let's select the requested one
-    if ( defined $option ) {
+    if ($channel) {
 
         # select by parser option
-        if ( exists $report->{channel}{$option} ) {
-            $report->{eventList} = $report->{channel}{$option}{eventList};
-            $report->{option}    = $option;
+        if ( $report->{channel}{$channel} ) {
+            $report->{eventList} = $report->{channel}{$channel}{eventList};
+            $report->{option}    = $channel;
             delete $report->{channel};
         } else {
             push( @{ $report->{errorList} }, "incorrect channel selection" );
@@ -78,9 +90,11 @@ use Try::Tiny;
 use Carp qw( croak );
 
 sub new {
-    my $this  = shift;
+    my ( $this, $language ) = @_;
     my $class = ref($this) || $this;
-    my $self  = {};
+
+    # set primary language od default
+    my $self = { language => $language // 'en', };
 
     bless( $self, $class );
     return $self;
@@ -133,15 +147,13 @@ sub start_element {
         $event->{channel} = $element->{Attributes}{channel};
 
         $self->{currentEvent} = $event;
-    } elsif ( $element->{Name} =~ /title/i ) {
-
-    }
+    } ## end if ( $element->{Name} ...)
 
     # store current language
     if ( $element->{Attributes}{lang} ) {
         $self->{currentLang} = $element->{Attributes}{lang};
     } else {
-        $self->{currentLang} = '';
+        $self->{currentLang} = undef;
     }
 
     $self->{currentData} = "";
@@ -169,9 +181,9 @@ SWITCH: for ( $element->{Name} ) {
             $self->addEvent();
             return;
         };
-        $_ eq "title" && do {
+        /^title/ && do {
 
-            if ( $lang ne '' ) {
+            if ($lang) {
                 $event->{lang}{$lang}{title} = $value;
             } else {
                 $event->{title} = $value;
@@ -180,7 +192,7 @@ SWITCH: for ( $element->{Name} ) {
         };
         /sub-title/ && do {
 
-            if ( $lang ne '' ) {
+            if ($lang) {
                 $event->{lang}{$lang}{subtitle} = $value;
             } else {
                 $event->{subtitle} = $value;
@@ -189,10 +201,25 @@ SWITCH: for ( $element->{Name} ) {
         };
         /desc/i && do {
 
-            if ( $lang ne '' ) {
+            if ($lang) {
                 $event->{lang}{$lang}{synopsis} = $value;
             } else {
                 $event->{synopsis} = $value;
+            }
+            return;
+        };
+        /parentalrating/ && do {
+            if ( $value =~ /(\d+)/ ) {
+                $value = $1 + 3;
+            } else {
+                $self->_error( "parental_rating_descriptor not numeric [$value] in line " . $self->{linecount} );
+                return;
+            }
+
+            if ($lang) {
+                $event->{lang}{$lang}{parental_rating} = $value;
+            } else {
+                $event->{parental_rating} = $value;
             }
             return;
         };
@@ -214,29 +241,28 @@ sub _error {
 sub mapLang {
     my $self  = shift;
     my $event = $self->{currentEvent};
+    my $lang  = $self->{language};
 
-    my $lang = 'sl';
-
-    # default use slovene
-    foreach my $key (qw( title subtitle synopsis )) {
+    # try to use the selected language
+    foreach my $key (qw( title subtitle synopsis parental_rating)) {
         $event->{$key} = $event->{lang}{$lang}{$key} if exists $event->{lang}{$lang}{$key};
     }
     delete $event->{lang}{$lang};
 
     my $alternativeSubtitle;
 
-    # try others
-    foreach my $lang ( keys %{ $event->{lang} } ) {
-        foreach my $key (qw( title subtitle synopsis )) {
+    # if missing try other languages in alpabetical order but 'en' first
+    foreach my $lang ( sort { return -1 if $a eq 'en'; return 1 if $b eq 'en'; ( $a cmp $b ) } keys %{ $event->{lang} } ) {
+        foreach my $key (qw( title subtitle synopsis parental_rating)) {
             $event->{$key} = $event->{lang}{$lang}{$key} if exists $event->{lang}{$lang}{$key} && !exists $event->{$key};
 
-            # alternative
+            # use titla from other language as alternative subtitle
             if ( $key eq 'title' && exists $event->{lang}{$lang}{$key} && !$alternativeSubtitle ) {
                 $alternativeSubtitle = $event->{lang}{$lang}{$key};
             }
-        } ## end foreach my $key (qw( title subtitle synopsis ))
+        } ## end foreach my $key (qw( title subtitle synopsis parental_rating))
         delete $event->{lang}{$lang};
-    } ## end foreach my $lang ( keys %{ ...})
+    } ## end foreach my $lang ( sort { return...})
 
     delete $event->{lang} if exists $event->{lang};
 
@@ -249,22 +275,10 @@ sub addEvent {
     my $self  = shift;
     my $event = $self->{currentEvent};
 
-    # remove some "noise"
-    if ( exists $event->{synopsis} ) {
-        $event->{synopsis} =~ s/(<img .*?lazyload>\.?)//;
-        $event->{synopsis} =~ s/ ?\(\w\)$//;
-    }
-    if ( exists $event->{subtitle} ) {
-        $event->{subtitle} =~ s/<span.*?>(.+)<\/span>/$1/s;
-    }
-    if ( exists $event->{title} ) {
-        $event->{title} =~ s/ ?\(\?\)$//;
-    }
-
     # check if all event data is complete and valid
     my @missing;
     push( @missing, "start" )   unless $event->{start};
-    push( @missing, "title" )   unless defined $event->{title};
+    push( @missing, "title" )   unless $event->{title};
     push( @missing, "channel" ) unless defined $event->{channel};
     push( @missing, "stop" )    unless $event->{stop};
 
@@ -277,14 +291,14 @@ sub addEvent {
     delete $event->{channel};
 
     # push to final array
-    push( @{ $self->{channel}{$channel}{eventList} }, $event );
+    push( $self->{channel}{$channel}{eventList}->@*, $event );
 
     return 1;
 } ## end sub addEvent
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019-2020 by Bojan Ramšak
+This software is copyright (c) 2019-2022 by Bojan Ramšak
 
 =head1 LICENSE
 

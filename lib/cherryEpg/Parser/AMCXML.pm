@@ -119,7 +119,7 @@ SWITCH: for ( $element->{Name} ) {
 
             # parental rating (12+)
             if ( $value =~ /\((\d+)\+\)/ ) {
-                $event->{parental} = $1;
+                $event->{parental_rating} = $1;
             }
             return;
         };

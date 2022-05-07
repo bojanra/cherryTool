@@ -58,11 +58,20 @@ sub channelListExport {
                 'stop'    => Time::Piece->new( $event->{stop} )->strftime("%Y%m%d%H%M%S %z"),
             };
 
-            $eventDescription->{'sub-title'}{'lang'}    = $event->{language};
-            $eventDescription->{'sub-title'}{'content'} = $event->{subtitle};
+            $eventDescription->{'sub-title'}{lang}    = $event->{language};
+            $eventDescription->{'sub-title'}{content} = $event->{subtitle};
 
-            $eventDescription->{'desc'}{'lang'}    = $event->{language};
-            $eventDescription->{'desc'}{'content'} = $event->{synopsis};
+            $eventDescription->{desc}{lang}    = $event->{language};
+            $eventDescription->{desc}{content} = $event->{synopsis};
+
+            foreach my $descriptor ( $event->{descriptors}->@* ) {
+                next unless $descriptor->{descriptor_tag} == 85;
+                my $item = shift( $descriptor->{list}->@* );
+                if ($item) {
+                    $eventDescription->{parentalrating}{lang}    = $event->{language};
+                    $eventDescription->{parentalrating}{content} = $item->{rating};
+                }
+            } ## end foreach my $descriptor ( $event...)
 
             push( $xml->{tv}{programme}->@*, $eventDescription );
         } ## end foreach my $event ( $self->...)

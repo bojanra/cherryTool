@@ -126,7 +126,7 @@ SWITCH: for ( $element->{Name} ) {
         };
         $_ eq 'rating' && do {
             if ( $value =~ /(\d+)/ ) {
-                $event->{parental} = ( $1 + 3 ) if $1 > 0;
+                $event->{parental_rating} = ( $1 + 3 ) if $1 > 0;
             } else {
                 $self->_error("parental_rating_descriptor not numeric [$value]");
             }

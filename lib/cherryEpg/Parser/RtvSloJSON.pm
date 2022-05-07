@@ -80,17 +80,17 @@ sub parse {
 
             # Broadcast is not suitable for kids and youth up to age 15.
             if ( $flag == 2 ) {
-                $event->{parental} = 13;
+                $event->{parental_rating} = 13;
             }
 
             # Broadcast is not suitable for kids and youth up to age 12.
             elsif ( $flag == 3 ) {
-                $event->{parental} = 10;
+                $event->{parental_rating} = 10;
             }
 
             # For adults only.
             elsif ( $flag == 4 ) {
-                $event->{parental} = 15;
+                $event->{parental_rating} = 15;
             }
         } ## end if ( exists $e->{flags...})
 

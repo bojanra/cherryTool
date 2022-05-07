@@ -139,7 +139,7 @@ sub add2Section {
                 last;
             };
             $_ == 0x55 && do {
-                $alldescriptors .= $self->getParentaRatingDescriptorBin($descriptor);
+                $alldescriptors .= $self->getParentalRatingDescriptor($descriptor);
                 last;
             };
             $_ == 0x4e && do {
@@ -277,13 +277,13 @@ sub getShortEventDescriptorBin {
     return $struct;
 } ## end sub getShortEventDescriptorBin
 
-=head3 getParentaRatingDescriptorBin( $descriptor)
+=head3 getParentalRatingDescriptor( $descriptor)
 
 Return 1 or many Parental rating Descriptors
 
 =cut
 
-sub getParentaRatingDescriptorBin {
+sub getParentalRatingDescriptor {
     my ( $self, $descriptor ) = @_;
 
     my $descriptor_tag = 0x55;
@@ -297,7 +297,7 @@ sub getParentaRatingDescriptorBin {
     }
     $descriptor_length = length($substruct);
     return pack( "CCa*", $descriptor_tag, $descriptor_length, $substruct );
-} ## end sub getParentaRatingDescriptorBin
+} ## end sub getParentalRatingDescriptor
 
 =head3 getExtendedEventDescriptorBin( $descriptor)
 

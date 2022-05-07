@@ -115,11 +115,11 @@ sub _end {
                         my $plrating = $item->{plrating};
 
                         if ( $plrating == 4 ) {
-                            $event->{parental} = 12 - 3;
+                            $event->{parental_rating} = 12 - 3;
                         } elsif ( $plrating == 3 ) {
-                            $event->{parental} = 7 - 3;
+                            $event->{parental_rating} = 7 - 3;
                         } elsif ( $plrating == 1 ) {
-                            $event->{parental} = 16 - 3;
+                            $event->{parental_rating} = 16 - 3;
                         }
                     } ## end if ( exists $item->{plrating...})
 
