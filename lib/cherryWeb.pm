@@ -696,6 +696,13 @@ ajax '/service/info' => require_role cherryweb => sub {
     my $result = $cherry->epg->listChannel($channel_id)->[0];
     my $last   = $cherry->epg->listChannelLastUpdate();
 
+    # extract parser option from parser string
+    if ( $result->{parser} =~ s/\?(.*)$// ) {
+        $result->{option} = $1;
+    } else {
+        $result->{option} = '';
+    }
+
     # get events
     my @list = $cherry->epg->listEvent( $channel_id, undef, undef, time() );
     splice( @list, 2 );

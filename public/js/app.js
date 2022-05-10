@@ -150,6 +150,7 @@ function ServiceMatrix(log) {
       $('#serviceSegments').html(data.maxsegments);
       $('#serviceUpdate').html(data.grabber.update);
       $('#serviceParser').html(data.parser);
+      $('#serviceOption').html(data.option);
       $('#serviceUrl').val(data.grabber.url);
       $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
       $('#exportXML').prop('target', '_' + data.channel_id);

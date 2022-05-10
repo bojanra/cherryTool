@@ -43,6 +43,7 @@
           <div class="col-md-3">
             <div class="report">
               <p class="text-primary"><i class="glyphicon glyphicon-eye-open"></i><span>Parser:</span><span id="serviceParser"></span></p>
+              <p class="text-primary"><i class="glyphicon glyphicon-grain"></i><span>Option:</span><span id="serviceOption"></span></p>
             </div>
           </div>
         </div>
