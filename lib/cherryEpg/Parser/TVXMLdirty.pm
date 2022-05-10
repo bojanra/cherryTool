@@ -18,26 +18,32 @@ sub BUILD {
 =head3 parse( $parserOption)
 
 Do the file processing and return a reference to hash with keys
-- errorList => array with troubles during parsing
-- programme => hash of arrays of events found
+ - errorList => array with troubles during parsing
+ - eventList => array of events found TIME MUST BE in GMT
 
-The XMLTV format can contain multiple programme schedules.
+The "dirty" in the parsername means, that the parser is less strict and has more options.
+e.g. Time format is less strict therefore also start="20210220023000 +00:00" is accepted.
 
-Please be carefull programme = channel here.
+The parser accepts multiple options separated by commas in the $parserOption field.
+{channel_id},{language_code},{country_code}
 
-When multiple programme are defined the first element in $parserOption should contain the channel name e.g.
-channel => "htv1.tv.hrt.hr" to select a programme.
-If there is only a single programmee defined in the file no channel option is required.
+channel_id
+  When the XML contains event data for multiple channels this field selects a single channel.
+  If there is only a single channel defined in the file, no channel_id option is required and the
+  field should be empty.
 
-This "dirty" parser is not strict regarding time format therefore also
-start="20210220023000 +00:00" is accepted.
-Language priority can be defined, therefore also $parserOption is used.
+language_code
+  Language priority should be a 2-letter language code (de, en, sr, sl) which will be use for
+  selecting the event title/subtitle/synopsis. If not use it should be empty.
 
-$parserOption contains two values separated by comma {channel},{language} e.g.
+country_code
+  This field will be used when generating parental_rating_descriptor.
 
-htv1.tv.hrt.hr,cro
-,ger
-bbc
+Various exmaples of $parserOption :
+htv1.tv.hrt.hr,en,hrv - select channel htv1.tv.hrt.hr, prefer english language and define parental rating for Croatia
+,en,gbr - select channel bbc, use any language and define parent rating for United Kingdom
+,,svn - just define parent rating for Slovenia
+,sr - prefer Serbian language
 
 =cut
 
@@ -46,9 +52,9 @@ sub parse {
     my $report = $self->{report};
 
     # get values
-    my ( $channel, $language ) = split( /,/, $parserOption // '' );
+    my ( $channel, $language_code, $country_code ) = split( /,/, $parserOption // '' );
 
-    my $handler = TVXMLdirtyHandler->new($language);
+    my $handler = TVXMLdirtyHandler->new( $language_code, $country_code );
     my $parser  = XML::Parser::PerlSAX->new(
         Handler => $handler,
         output  => $report
@@ -90,11 +96,14 @@ use Try::Tiny;
 use Carp qw( croak );
 
 sub new {
-    my ( $this, $language ) = @_;
+    my ( $this, $language_code, $country_code ) = @_;
     my $class = ref($this) || $this;
 
-    # set primary language od default
-    my $self = { language => $language // 'en', };
+    # set primary language_code od default
+    my $self = {
+        language_code => $language_code // 'en',
+        country_code  => $country_code,
+    };
 
     bless( $self, $class );
     return $self;
@@ -149,7 +158,7 @@ sub start_element {
         $self->{currentEvent} = $event;
     } ## end if ( $element->{Name} ...)
 
-    # store current language
+    # store current language_code
     if ( $element->{Attributes}{lang} ) {
         $self->{currentLang} = $element->{Attributes}{lang};
     } else {
@@ -241,22 +250,24 @@ sub _error {
 sub mapLang {
     my $self  = shift;
     my $event = $self->{currentEvent};
-    my $lang  = $self->{language};
+    my $lang  = $self->{language_code};
 
-    # try to use the selected language
+    # try to use the selected language_code
     foreach my $key (qw( title subtitle synopsis parental_rating)) {
         $event->{$key} = $event->{lang}{$lang}{$key} if exists $event->{lang}{$lang}{$key};
     }
     delete $event->{lang}{$lang};
 
+    $event->{country_code} = $self->{country_code} if $self->{country_code};
+
     my $alternativeSubtitle;
 
-    # if missing try other languages in alpabetical order but 'en' first
+    # if missing try other language_code in alpabetical order but 'en' first
     foreach my $lang ( sort { return -1 if $a eq 'en'; return 1 if $b eq 'en'; ( $a cmp $b ) } keys %{ $event->{lang} } ) {
         foreach my $key (qw( title subtitle synopsis parental_rating)) {
             $event->{$key} = $event->{lang}{$lang}{$key} if exists $event->{lang}{$lang}{$key} && !exists $event->{$key};
 
-            # use titla from other language as alternative subtitle
+            # use title with other language_code as alternative subtitle
             if ( $key eq 'title' && exists $event->{lang}{$lang}{$key} && !$alternativeSubtitle ) {
                 $alternativeSubtitle = $event->{lang}{$lang}{$key};
             }

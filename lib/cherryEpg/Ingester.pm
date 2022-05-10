@@ -331,6 +331,7 @@ sub ingestData {
 
                 my $rate;
                 $rate->{country_code} = $event->{country_code} || 'SVN';
+                $rate->{country_code} = uc( $rate->{country_code} );
                 $rate->{rating}       = $event->{parental_rating} - 3;
 
                 push( $parental_rating_descriptor->{list}->@*, $rate );

@@ -6,11 +6,12 @@ use strictures 2;
 
 extends 'cherryEpg::Parser::TVXMLdirty';
 
-our $VERSION = '0.11';
+our $VERSION = '0.13';
 
 =head1
 
-use the parser option as offset
+Use the first parser option as timeshift offset in hours.
+Multiple parser options may be separated by commas or "|"
 
 =cut
 
@@ -19,9 +20,9 @@ around 'parse' => sub {
     my $offset = 0;
 
     if ($parserOption) {
-        my @option = split( /\|/, $parserOption );
+        my @option = split( /[\|,]/, $parserOption );
         $offset       = shift(@option);
-        $parserOption = join( '|', @option );
+        $parserOption = join( ',', @option );
         $parserOption = undef if $parserOption eq '';
     } ## end if ($parserOption)
 
@@ -38,7 +39,7 @@ around 'parse' => sub {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019 by Bojan Ramšak
+This software is copyright (c) 2019-2022 by Bojan Ramšak
 
 =head1 LICENSE
 
