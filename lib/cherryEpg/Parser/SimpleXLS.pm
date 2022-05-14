@@ -55,7 +55,7 @@ sub parse {
         if ( $cells[0] =~ /date/i ) {
 
             # but use the first one as column description
-            if ( 0 == scalar keys %mapping ) {
+            if ( !scalar keys %mapping ) {
 
                 # find the requested columns and generate a maptable
                 for ( my $i = 0 ; $i <= $#cells ; $i++ ) {
@@ -71,7 +71,7 @@ sub parse {
                     } ## end SWITCH: for ( $cells[$i] )
                 } ## end for ( my $i = 0 ; $i <=...)
 
-            } ## end if ( 0 == scalar keys ...)
+            } ## end if ( !scalar keys %mapping)
 
             next;
         } ## end if ( $cells[0] =~ /date/i)

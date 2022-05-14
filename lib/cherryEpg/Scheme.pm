@@ -871,37 +871,38 @@ sub tableBuilder {
 
         my %pmtByService = ();
 
-        # build PAT and prepare PMT
+        # build PAT always and prepare PMT
+        my $table = {
+            '..' => {
+                dst      => $eit->{output},
+                interval => 500,
+                title    => "Auto PAT",
+            },
+            table               => 'PAT',
+            pid                 => 0,
+            transport_stream_id => $channelByEit{ $eit->{eit_id} }{transport_stream_id},
+            programs            => []
+        };
+
+        my $pmtPid = 100;
+        $pmtPid = $eit->{option}{PMT} if $eit->{option}{PMT} && $eit->{option}{PMT} > 1;
+
+        foreach my $service ( sort keys $channelByEit{ $eit->{eit_id} }{service}->%* ) {
+            CORE::push(
+                $table->{programs}->@*,
+                {
+                    program_number => $service,
+                    pid            => $pmtPid
+                }
+            );
+            $pmtByService{$service} = $pmtPid++;
+        } ## end foreach my $service ( sort ...)
+
+        # but generate only if requested
         if ( $eit->{option}{PAT} ) {
-            my $table = {
-                '..' => {
-                    dst      => $eit->{output},
-                    interval => 500,
-                    title    => "Auto PAT",
-                },
-                table               => 'PAT',
-                pid                 => 0,
-                transport_stream_id => $channelByEit{ $eit->{eit_id} }{transport_stream_id},
-                programs            => []
-            };
-
-            my $pmtPid = 100;
-            $pmtPid = $eit->{option}{PMT} if $eit->{option}{PMT} && $eit->{option}{PMT} > 1;
-
-            foreach my $service ( sort keys $channelByEit{ $eit->{eit_id} }{service}->%* ) {
-                CORE::push(
-                    $table->{programs}->@*,
-                    {
-                        program_number => $service,
-                        pid            => $pmtPid
-                    }
-                );
-                $pmtByService{$service} = $pmtPid++;
-            } ## end foreach my $service ( sort ...)
-
             my $filename = sprintf( "eit_%03i_pat", $eit->{eit_id} );
             $scheme->{table}{$filename} = $table;
-        } ## end if ( $eit->{option}{PAT...})
+        }
 
         # build SDT
         if ( $eit->{option}{SDT} ) {

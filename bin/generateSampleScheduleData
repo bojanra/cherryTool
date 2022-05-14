@@ -44,7 +44,7 @@ use Try::Tiny;
 use Spreadsheet::Write;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 my %args;
 my $verbose = 0;
@@ -182,6 +182,14 @@ sub buildSchedule {
                 'content' => ${$sample}[2],
             },
         };
+
+        if ( $serviceId % 12 == 0 ) {
+            $e->{parentalrating} = {
+                'country' => 'ger',
+                'content' => ( $sampleDataIndex % 14 ) + 4,
+            };
+        } ## end if ( $serviceId % 12 ==...)
+
         push( @{ $schedule->{tv}{programme} }, $e );
     } ## end while ( ( $start + $eventCount...))
 

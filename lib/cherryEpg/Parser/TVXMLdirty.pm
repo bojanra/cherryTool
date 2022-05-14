@@ -160,9 +160,12 @@ sub start_element {
 
     # store current language_code
     if ( $element->{Attributes}{lang} ) {
-        $self->{currentLang} = $element->{Attributes}{lang};
-    } else {
-        $self->{currentLang} = undef;
+        $self->{currentEvent}{language_code} = $element->{Attributes}{lang};
+    }
+
+    # store country
+    if ( $element->{Attributes}{country} ) {
+        $self->{currentEvent}{country_code} = $element->{Attributes}{country};
     }
 
     $self->{currentData} = "";
@@ -178,7 +181,7 @@ sub end_element {
     my ( $self, $element ) = @_;
     my $value = $self->{currentData};
     my $event = $self->{currentEvent};
-    my $lang  = $self->{currentLang};
+    my $lang  = $event->{language_code};
 
     $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
 
@@ -258,6 +261,7 @@ sub mapLang {
     }
     delete $event->{lang}{$lang};
 
+    # use scheme configuration if defined
     $event->{country_code} = $self->{country_code} if $self->{country_code};
 
     my $alternativeSubtitle;
