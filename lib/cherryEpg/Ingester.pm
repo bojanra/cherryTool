@@ -190,7 +190,7 @@ sub ingestData {
         # stop if last event
         last if $i == $#$eventList;
 
-        if ( exists $$eventList[$i]->{stop} ) {
+        if ( exists $$eventList[$i]->{stop} && $$eventList[$i]->{stop} =~ /^\d+$/ ) {
 
             # check if eventList overlap
             if ( $$eventList[ $i + 1 ]->{start} < $$eventList[$i]->{stop} ) {
