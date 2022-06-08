@@ -518,7 +518,6 @@ sub processFile {
 
         return $result;
     } else {
-        $logger->info( "nothing to do", $self->{channel_id} );
         return;
     }
 } ## end sub processFile

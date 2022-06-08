@@ -8,17 +8,21 @@
   <programme channel="bbc1.uk" start="20220510002500 +0200" stop="20220510012500 +0200">
     <title lang="en">Gordon Ramsay’s Future Food Stars 1, ep. 6.</title>
     <desc lang="en">Gordon is celebrating the very best of British - exquisite produce and the pinnacle of fine dining. First, he invites his entrepreneurs to harvest oysters by hand on the glorious Essex coast. Using centuries-old techniques, they must collect as many restaurant-quality delicacies as they can. But it’s tough out on the mud flats, and the contenders battle their surroundings to maintain quality control, exposed to the elements.</desc>
-		<parentalrating country="cze">1</parentalrating>
+    <parentalrating country="cze">1</parentalrating>
+    <category lang="en">96</category>
   </programme>
   <programme channel="bbc1.uk" start="20220510012500 +0200" stop="20220510020000 +0200">
     <title lang="en">Catchpoint 4, ep. 3.</title>
     <desc lang="en">White battle it out against TV presenters Sam Nixon and Mark Rhodes, attempting to catch giant pink balls to win cash for charity.</desc>
+    <category lang="en">35</category>
   </programme>
   <programme channel="bbc1.uk" start="20220510020000 +0200" stop="20220510020500 +0200">
     <title lang="en">Weather for the Week Ahead</title>
+    <category lang="en">85</category>
   </programme>
   <programme channel="bbc1.uk" start="20220510020500 +0200" stop="20220510023000 +0200">
     <title lang="en">Joins BBC News, BBC One joins the BBC’s rolling news channel for a night of news.</title>
+    <category lang="en">0xa9</category>
   </programme>
   <programme channel="bbc1.uk" start="20220510023000 +0200" stop="20220510030000 +0200">
     <title lang="en">BBC Wales Investigates, Families Fleeing War</title>

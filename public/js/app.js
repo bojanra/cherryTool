@@ -3,6 +3,7 @@ function ServiceMatrix(log) {
   var loading = 0;
   var currentService = null;
   var logBrowser = log;
+  var postURL = '';
 
   this.build = (report) => {
     // clean the area
@@ -61,11 +62,10 @@ function ServiceMatrix(log) {
   };
 
   this.ingest = (param) => {
-    param.append('id', currentService);
     $('#serviceStatus').removeClass('hidden label-success label-danger').addClass('label-info').html('Uploading...');
 
     $.ajax({
-      url: "/service/ingest",
+      url: this.postURL,
       dataType: 'json',
       data: param,
       type: 'POST',
@@ -98,7 +98,8 @@ function ServiceMatrix(log) {
     } else if (report.status === 3) {
       setPanelState('#dashBoard', 'danger');
       $('#eBudget').html(report.timestamp);
-      $('#serviceDash').html('<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
+      $('#serviceDash').html(
+        '<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
       count = 0;
       return;
     } else {
@@ -152,6 +153,13 @@ function ServiceMatrix(log) {
       $('#serviceParser').html(data.parser);
       $('#serviceOption').html(data.option);
       $('#serviceUrl').val(data.grabber.url);
+      this.postURL = '/ingest/' + data.post + '/' + data.channel_id;
+      let fullURL = window.location.protocol + '//' + window.location.host + this.postURL;
+      $('#modURL span').text(fullURL);
+      $('#modURL pre').text(
+        'curl -F file=@oneFile.xml ' + fullURL + "\n" +
+        'curl -F file=@schedule1.xml -F file=@schedule2.xml ' + fullURL
+      );
       $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
       $('#exportXML').prop('target', '_' + data.channel_id);
       $('#exportCSV').prop('href', '/export/' + data.channel_id + '.csv');
@@ -166,7 +174,8 @@ function ServiceMatrix(log) {
         $eventField.find('.subtitle').html(e.subtitle);
       });
     } else {
-      $('#serviceStatus').removeClass('hidden label-success label-info').addClass('label-danger').html('failed');
+      $('#serviceStatus').removeClass('hidden label-success label-info')
+        .addClass('label-danger').html('failed');
       $('#serviceAgent ul').css('opacity', '.5');
       $('#serviceAgent button').prop('disabled', true);
       $('#serviceAgent a').removeAttr('href');
@@ -233,8 +242,12 @@ function ServiceMatrix(log) {
     $('#serviceAgent').addClass('hidden');
   });
 
-  $('#ingestData button').on('click', () => {
+  $('#ingestData button[name=upload]').on('click', () => {
     $('#eventFile').click();
+  });
+
+  $('#ingestData button[name=direct]').on('click', () => {
+    $('#modURL').modal();
   });
 
   $('#eventFile').on('change', () => {

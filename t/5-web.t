@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Mojo::Base -strict;
-use Test::More tests => 52;
+use Test::More tests => 53;
 use Test::Mojo;
 use Try::Tiny;
 
@@ -53,14 +53,19 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
     $t->post_ok('/status')->json_has('/version');
 
     $t->post_ok( '/service/info' => form => { id => $id } )->status_is(200)->json_is( '/channel_id', $id );
+    my $post = $t->tx->res->json('/post');
 
     my $content = do {
         local $/;
         open( my $fh, '<', 't/testData/TVXML.xml' ) || return;
         <$fh>;
     };
-    my $upload = { file => { content => $content, filename => 'sample.xml' }, id => $id };
-    $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
+    my $upload = { file => { content => $content, filename => 'sample.xml' } };
+    $t->post_ok( "/ingest/$post/$id" => form => $upload )->status_is(200)->json_is( '/success', 1 );
+
+    $id = 90;
+    $t->post_ok( '/service/info' => form => { id => $id } );
+    $post = $t->tx->res->json('/post');
 
     $content = do {
         local $/;
@@ -68,7 +73,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
         <$fh>;
     };
     $upload = { file => { content => $content, filename => 'Simple.xls' }, id => 90 };
-    $t->post_ok( '/service/ingest' => form => $upload )->status_is(200)->json_is( '/success', 1 );
+    $t->post_ok( "/ingest/$post/$id" => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
     # clean pid=17
     $t->post_ok('/carousel/browse')->status_is(200);

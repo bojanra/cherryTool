@@ -44,7 +44,7 @@ use Try::Tiny;
 use Spreadsheet::Write;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 my %args;
 my $verbose = 0;
@@ -189,6 +189,10 @@ sub buildSchedule {
                 'content' => ( $sampleDataIndex % 14 ) + 4,
             };
         } ## end if ( $serviceId % 12 ==...)
+
+        if ( $serviceId % 5 == 0 ) {
+            $e->{category} = { content => ( ( ( $sampleDataIndex << 4 ) + $eventCount ) & 0xff ) };
+        }
 
         push( @{ $schedule->{tv}{programme} }, $e );
     } ## end while ( ( $start + $eventCount...))

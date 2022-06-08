@@ -16,6 +16,7 @@ use Sys::Hostname;
 use File::stat;
 use Time::Piece;
 use Gzip::Faster;
+use Digest::MD5 qw(md5_base64);
 use cherryEpg;
 use cherryEpg::Table;
 use cherryEpg::Player;
@@ -395,7 +396,7 @@ sub parseService {
                 url    => $source,
             },
             language => $field[6],
-            parser   => $field[9] . ( $field[10] ? '?' . $field[10] : '' )
+            parser   => $field[9] . ( $field[10] ? '?' . $field[10] : '' ),
         };
         CORE::push( @{ $raw->{serviceList} }, $service );
 
@@ -514,6 +515,9 @@ sub parseConf {
     my $allSheets = $eBook->[0]{sheet};
     my $sheet     = $eBook->[ $allSheets->{$sheetName} ];
 
+    # use to generate uniq url for uploading
+    my $salt;
+
     foreach my $rowCounter ( 1 .. $sheet->{maxrow} ) {
 
         # get cells from row
@@ -534,17 +538,23 @@ sub parseConf {
 
         if ( $field[0] =~ m /nomesh/i ) {
             $raw->{nomesh} = $field[1] ? 1 : 0;
-        } elsif ( $field[0] =~ m /xsid/i ) {
+        } elsif ( $field[0] =~ m /^xsid$/i ) {
             $raw->{extendedSID} = $field[1] ? 1 : 0;
-        } elsif ( $field[0] =~ m /semimesh/i ) {
+        } elsif ( $field[0] =~ m /^semimesh$/i ) {
             $raw->{semimesh} = $field[1] ? 1 : 0;
-        } elsif ( $field[0] =~ m /description/i ) {
+        } elsif ( $field[0] =~ m /^description$/i ) {
             $raw->{description} = $field[1];
-        } elsif ( $field[0] =~ m /noautorule/i ) {
+        } elsif ( $field[0] =~ m /^noautorule$/i ) {
             $raw->{noautorule} = $field[1] ? 1 : 0;
+        } elsif ( $field[0] =~ m /^salt$/i ) {
+            $salt = $field[1];
         }
-
     } ## end foreach my $rowCounter ( 1 ...)
+
+    if ( !$salt ) {
+        $salt = $raw->{description} // '';
+    }
+    $raw->{salt} = $salt . hostname;
 } ## end sub parseConf
 
 =head3 parseRule(  )
@@ -679,7 +689,12 @@ sub build {
             next;
         } else {
             $serviceHash->{ $service->{sid} } = 1;
-        }
+
+            # add salted url to service info
+            my $url = substr( md5_base64( $raw->{salt} . $service->{sid} ), 0, 8 );
+            $url =~ s/[\/\+]/X/g;
+            $service->{post} = $url;
+        } ## end else [ if ( exists $serviceHash...)]
     } ## end foreach my $service ( @{ $raw...})
 
     if ( !$raw->{noautorule} ) {

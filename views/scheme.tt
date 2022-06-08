@@ -225,7 +225,8 @@
           <h3 class="modal-title text-center">Delete</h3>
         </div>
         <div class="modal-body text-center">
-          The scheme will be removed from archive.<br />This action cannot be undone. Are you sure?</div>
+          The scheme will be removed from archive.<br />This action cannot be undone. Are you sure?
+        </div>
         <div class="modal-footer">
           <button style='margin-left:10px;' type="button" class="btn btn-danger pull-right" id="btnConfirm">Delete!</button>
           <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Cancel</button>
@@ -240,7 +241,8 @@
           <h4 class="modal-title">Error</h4>
         </div>
         <div class="modal-body">
-          The selected scheme could not be prepared for activation.</div>
+          The selected scheme could not be prepared for activation.
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Ok</button>
         </div>

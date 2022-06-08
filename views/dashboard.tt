@@ -64,8 +64,9 @@
               <input type="file" id="eventFile" class="hidden" />
               <button type="button" name="upload" class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i> Upload&ingest</button>
               <div class="upload-area">
-                <h1>Drop data here</h1>
+                <h1>Drop file here</h1>
               </div>
+              <button type="button" name="direct" class="btn btn-primary" style="margin-bottom: 0px;margin-top: 5px;"><i class="glyphicon glyphicon-cloud-upload"></i> Direct upload</button>
             </form>
           </div>
           <div class="col-md-8">
@@ -142,6 +143,24 @@
             <tfoot class="tablehead">
             </tfoot>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modURL" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-center">Direct upload URL</h3>
+        </div>
+        <div class="modal-body">
+          You can upload one or multiple files with a POST request to <b><span></span></b><br />
+          Use following templates based on <b><a href="https://curl.se/">curl</a></b>
+          <pre>
+          </pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Ok</button>
         </div>
       </div>
     </div>

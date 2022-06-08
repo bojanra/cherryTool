@@ -623,67 +623,61 @@ ajax '/ebudget' => require_role cherryweb => sub {
 };
 
 # ingest service eventdata file
-ajax '/service/ingest' => require_role cherryweb => sub {
-    my $channel_id = params->{'id'};
+post '/ingest/:hash/:id' => sub {
+    my $channel_id = params->{id};
+    my $hash       = params->{hash};
     my $upload     = request->upload('file');
+    my $response   = { success => 0 };
 
-    send_as(
-        JSON => {
-            success => 0,
-            message => "Uploading eventdata failed",
+    my $channel = $cherry->epg->listChannel($channel_id)->[0];
+    if ( $channel && $channel->{post} && $channel->{post} eq $hash ) {
+        if ($upload) {
+            if ( ref($upload) ne 'ARRAY' ) {
+                $upload = [$upload];
+            }
+            my $failed;
+            my @message;
+            my $count    = 0;
+            my $grabber  = cherryEpg::Grabber->new( channel => $channel );
+            my $ingester = cherryEpg::Ingester->new( channel => $channel );
+
+            foreach my $file ( $upload->@* ) {
+                my $filename = $file->filename;
+                my $tempname = $file->tempname;
+                my $cherry   = cherryEpg->instance();
+                my $channel  = $cherry->epg->listChannel($channel_id)->[0];
+
+                if ( !$grabber->move( $tempname, $filename ) ) {
+                    $failed += 1;
+                    push( @message, "Transporting of [$filename] failed" );
+                } else {
+                    my $filepath = "" . file( $grabber->{destination}, $filename );
+                    my $report   = $ingester->processFile( $filepath, 1 );
+
+                    if ( !$report ) {
+                        $failed += 1;
+                        push( @message, "Ingest of [$filename] failed" );
+                    } elsif ( $report->{errorList}->@* ) {
+                        push( @message,
+                                  "["
+                                . $report->{eventList}->@*
+                                . "] events ingested with " . "["
+                                . $report->{errorList}->@*
+                                . "] errors from [$filename]" );
+                    } else {
+                        push( @message, "[" . $report->{eventList}->@* . "] events ingested from [$filename]" );
+                    }
+                } ## end else [ if ( !$grabber->move( ...))]
+            } ## end foreach my $file ( $upload->...)
+            $response->{success} = $failed ? 0 : 1;
+            $response->{message} = join( ', ', @message );
+        } else {
+            $response->{message} = "Uploading eventdata failed";
         }
-        )
-        if !$upload;
-
-    my $filename = $upload->filename;
-    my $tempname = $upload->tempname;
-    my $cherry   = cherryEpg->instance();
-    my $channel  = $cherry->epg->listChannel($channel_id)->[0];
-
-    send_as(
-        JSON => {
-            success => 0,
-            message => "Service [$channel_id] not found",
-        }
-        )
-        if !$channel;
-
-    my $grabber  = cherryEpg::Grabber->new( channel => $channel );
-    my $ingester = cherryEpg::Ingester->new( channel => $channel );
-
-    send_as(
-        JSON => {
-            success => 0,
-            message => "Transporting of [$filename] failed",
-        }
-        )
-        if !$grabber->move( $tempname, $filename );
-
-    my $filepath = "" . file( $grabber->{destination}, $filename );
-    my $report   = $ingester->processFile( $filepath, 1 );
-
-    send_as(
-        JSON => {
-            success => 0,
-            message => "Ingest failed!",
-        }
-        )
-        if !$report;
-
-    send_as(
-        JSON => {
-            success => 0,
-            message => "[" . $report->{eventList}->@* . "] events ingested with [" . $report->{errorList}->@* . "] errors",
-        }
-        )
-        if $report->{errorList}->@*;
-
-    send_as(
-        JSON => {
-            success => 1,
-            message => "[" . $report->{eventList}->@* . "] events ingested",
-        }
-    );
+    } else {
+        $response->{message} = "Incorrect hash or channel_id";
+    }
+    send_as( JSON => $response );
 };
 
 # return service info

@@ -220,6 +220,18 @@ SWITCH: for ( $element->{Name} ) {
             }
             return;
         };
+        /category/i && do {
+            if ( $value =~ /^0b[01]+$/i ) {
+                push( $event->{content}->@*, oct($value) );
+            } elsif ( $value =~ /^0x[0-9a-f]+$/i ) {
+                push( $event->{content}->@*, hex($value) );
+            } elsif ( $value =~ /^(\d+)$/ ) {
+                push( $event->{content}->@*, $value + 0 );
+            } else {
+                $self->_error( "category not numeric [$value] in line " . $self->{linecount} );
+            }
+            return;
+        };
         /parentalrating/ && do {
             if ( $value =~ /(\d+)/ ) {
                 $value = $1 + 3;
@@ -295,7 +307,6 @@ sub addEvent {
     push( @missing, "start" )   unless $event->{start};
     push( @missing, "title" )   unless $event->{title};
     push( @missing, "channel" ) unless defined $event->{channel};
-    push( @missing, "stop" )    unless $event->{stop};
 
     if ( scalar @missing > 0 ) {
         $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
