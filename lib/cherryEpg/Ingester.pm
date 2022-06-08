@@ -190,7 +190,7 @@ sub ingestData {
         # stop if last event
         last if $i == $#$eventList;
 
-        if ( exists $$eventList[$i]->{stop} && $$eventList[$i]->{stop} =~ /^\d+$/ ) {
+        if ( $$eventList[$i]->{stop} && $$eventList[$i]->{stop} =~ /^\d+$/ ) {
 
             # check if eventList overlap
             if ( $$eventList[ $i + 1 ]->{start} < $$eventList[$i]->{stop} ) {
@@ -210,7 +210,7 @@ sub ingestData {
 
     # what about the last event FIXME
     # set the duration of the last event to 15 min.
-    if ( !exists $$eventList[-1]->{stop} ) {
+    if ( !$$eventList[-1]->{stop} || $$eventList[-1]->{stop} !~ /^\d+$/ ) {
         $$eventList[-1]->{stop} = $$eventList[-1]->{start} + 15 * 60;
     }
 

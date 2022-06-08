@@ -287,7 +287,6 @@ sub addEvent {
     my @missing;
     push( @missing, "start" ) unless $event->{start};
     push( @missing, "title" ) unless $event->{title};
-    push( @missing, "stop" )  unless $event->{stop};
 
     if (@missing) {
         $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );

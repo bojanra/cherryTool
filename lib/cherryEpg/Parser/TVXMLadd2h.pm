@@ -20,7 +20,7 @@ after 'parse' => sub {
 
     foreach my $event ( @{$report} ) {
         $event->{start} += 2 * 60 * 60;
-        $event->{stop}  += 2 * 60 * 60;
+        $event->{stop}  += 2 * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
     }
 };
 

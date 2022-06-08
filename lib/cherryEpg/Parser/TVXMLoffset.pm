@@ -32,7 +32,7 @@ around 'parse' => sub {
 
     foreach my $event ( @{$eventList} ) {
         $event->{start} += $offset * 60 * 60;
-        $event->{stop}  += $offset * 60 * 60;
+        $event->{stop}  += $offset * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
     }
     return $report;
 };

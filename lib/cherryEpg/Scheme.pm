@@ -61,6 +61,7 @@ sub readXLS {
         extendedSID  => 0,
         nomesh       => 0,
         noautorule   => 0,
+        salt         => hostname . localtime,
     };
 
     $self->{raw}       = $raw;
