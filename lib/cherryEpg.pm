@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.24';
+our $VERSION = '2.1.25';
 
 with('MooX::Singleton');
 
