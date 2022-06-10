@@ -352,7 +352,7 @@ sub maintainerConvert {
     my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
 
     if ( my $content = $mtainer->convert($filename) ) {
-        my $binFile = basename($filename) . '.bin';
+        my $binFile = $filename . '.bin';
         open( my $file, '>:raw', $binFile ) || die "Error writing to $binFile: $?";
         print( $file $content );
         close($file);

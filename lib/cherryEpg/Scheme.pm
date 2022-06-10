@@ -17,6 +17,7 @@ use File::stat;
 use Time::Piece;
 use Gzip::Faster;
 use Digest::MD5 qw(md5_base64);
+use Encode qw(encode_utf8);
 use cherryEpg;
 use cherryEpg::Table;
 use cherryEpg::Player;
@@ -692,7 +693,7 @@ sub build {
             $serviceHash->{ $service->{sid} } = 1;
 
             # add salted url to service info
-            my $url = substr( md5_base64( $raw->{salt} . $service->{sid} ), 0, 8 );
+            my $url = substr( md5_base64( encode_utf8( $raw->{salt} . $service->{sid} ) ), 0, 8 );
             $url =~ s/[\/\+]/X/g;
             $service->{post} = $url;
         } ## end else [ if ( exists $serviceHash...)]
