@@ -197,7 +197,7 @@
                 <span>Action in progress. Please wait. <i>(This may take a couple of minutes.)</i></span>
               </div>
               <div class="alert alert-danger ">
-                <h4><b>Failed!</b> Exceptions occurred. Please check the <a href="/log">log</a>.</h4>
+                <h4><b>Failed!</b> Server error or job timed out. Please check the <a href="/log">log</a>.</h4>
               </div>
               <div class="alert alert-success ">
                 <h4><b>Done!</b> Check current status on the <a href="/">dashboard</a>.</h4>

@@ -1497,7 +1497,7 @@ function SchemePanel() {
       dataType: 'json',
       type: 'POST',
       data: data,
-      timeout: 120000
+      timeout: 180000
     }).always((data) => {
       $('#actionBody div.alert-warning').addClass('hidden');
       if (data && $.isArray(data) && data.length) {
