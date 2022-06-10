@@ -23,7 +23,7 @@ use IPC::ConcurrencyLimit;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.26';
+our $VERSION = '2.1.27';
 
 with('MooX::Singleton');
 
@@ -433,6 +433,8 @@ sub channelMulti {
             my ( $pid, $exit_code, $ident, $exit_signal, $core_dump, $result ) = @_;
             if ( defined($result) ) {
                 push( $collected->@*, @$result );
+            } else {
+                $logger->error( "process terminated without results", $ident );
             }
         }
     );
@@ -446,7 +448,7 @@ CHANNELMULTI_LOOP:
             if ( $target eq "all" or $channel->{grabber}{update} eq $target ) {
 
                 # fork proces
-                my $process = $pm->start and next CHANNELMULTI_LOOP;
+                my $process = $pm->start( $channel->{channel_id} ) and next CHANNELMULTI_LOOP;
 
                 my $result = [];
 
