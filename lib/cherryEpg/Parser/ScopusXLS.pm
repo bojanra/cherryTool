@@ -52,7 +52,6 @@ sub parse {
         next unless $cells[0] =~ m/^0x\d+$/;
 
         #    0         1      2      3          4       5       6
-        #    13
         my (
             $eventId, $date, $time, $duration, $title, $short, $description,
 
