@@ -145,7 +145,7 @@ function ServiceMatrix(log) {
       $('#serviceAgent ul').css('opacity', '1');
       $('#serviceAgent button').prop('disabled', false);
       $('#serviceName').html(data.name);
-      $('#serviceId').html(data.channel_id);
+      $('#serviceId').html(data.channel_id & 0xffff);
       $('#serviceCodepage').html(data.codepage);
       $('#serviceLanguage').html(data.language);
       $('#serviceSegments').html(data.maxsegments);
