@@ -11,7 +11,7 @@ use DBI qw(:sql_types);
 use JSON::XS;
 use POSIX qw(ceil);
 use cherryEpg::EIT;
-use IPC::SysV qw(SEM_UNDO S_IRWXU IPC_CREAT ftok);
+use IPC::SysV      qw(SEM_UNDO S_IRWXU IPC_CREAT ftok);
 use IPC::Semaphore qw(SEM_UNDO);
 
 with( 'cherryEpg::Exporter', 'cherryEpg::Announcer' );

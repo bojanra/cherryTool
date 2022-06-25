@@ -99,9 +99,9 @@ is( $?, 0, 'reset db to empty state' );
 SKIP: {
     skip 'maintenance compiling and applying', 4 if $ENV{'DANCER_ENVIRONMENT'} eq 'production';
 
-    my $m = 'maintenanceTest';
+    my $m = 'bin/maintenanceTest';
     unlink( $m . '.bin' );
-    $test->run( args => "-J bin/$m" );
+    $test->run( args => "-J $m" );
     ok( $test->stdout =~ /bytes written/m, 'compile maintenance package' );
     ok( -e "$m.bin",                       'maintenance file exist' );
 

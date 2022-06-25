@@ -6,7 +6,7 @@ use Moo;
 use strictures 2;
 use Try::Tiny;
 use Net::Curl::Easy qw(:constants );
-use Net::NTP qw(get_ntp_response);
+use Net::NTP        qw(get_ntp_response);
 use JSON::XS;
 use Time::Piece;
 use Sys::Hostname;
