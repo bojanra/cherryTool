@@ -25,7 +25,8 @@ hook before => sub {
 };
 
 hook permission_denied => sub {
-    send_error( request->path, 403 );
+    app->destroy_session;
+    redirect request->path;
 };
 
 hook before_template_render => sub {
