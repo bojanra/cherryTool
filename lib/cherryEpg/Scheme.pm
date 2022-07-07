@@ -143,7 +143,7 @@ sub push {
     my ($self) = @_;
 
     my $scheme   = $self->{scheme};
-    my $filename = $scheme->{source}{filename};
+    my $filename = $scheme->{source}{filename} // '-';
 
     # load to db
     my ( $success, $error ) = $self->cherry->epg->import($scheme);

@@ -11,6 +11,7 @@ cherryTool - tool for managing cherryEpg environment
 =head1 OPTIONS
 
  -v         use verbose output mode
+ -y         yes to all confirm questions
 
  -h         show this help
  -V         show version and configuration info
@@ -101,7 +102,7 @@ use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:vVwWxy:YZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:Cde:fFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:vVwWxyYZ:", \%args );
 
 say("cherryTool - ver. $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
 
@@ -113,9 +114,10 @@ pod2usage(
     if exists $args{h} or !$getoptsSuccess;
 
 my $verbose;
-
+my $yes;
 my $multiCommand;
 
+$args{y}                 && do { $yes     = 1 };
 $args{v}                 && do { $verbose = 1 };
 $args{A}                 && cleanStockDirectory();
 $args{O}                 && cleanupDatabase();
@@ -279,6 +281,7 @@ sub cleanStockDirectory {
 } ## end sub cleanStockDirectory
 
 sub confirmed {
+    return 1 if $yes;
     print(" Please confirm with <yes>: ");
     my $input = <STDIN>;
     chomp $input;
