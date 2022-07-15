@@ -78,3 +78,8 @@ log4perl:  |-
   log4perl.appender.Mail.from         = Watchdog <sender_mail@gmail.com>
   log4perl.appender.Mail.Debug        = 0
   log4perl.appender.Mail.warp_message = 0
+  log4perl.appender.Graylog              = cherryEpg::Log4perlGraylog
+  log4perl.appender.Graylog.PeerAddr     = localhost
+  log4perl.appender.Graylog.PeerPort     = 12201
+  log4perl.appender.Graylog.layout       = NoopLayout
+  log4perl.appender.Graylog.warp_message = 0

@@ -19,7 +19,7 @@ cherryTool - tool for managing cherryEpg environment
  -N         systemcheck and notify to log
  -Q         show detailed database statistics
  -M chunk   inspect chunk and generate mosaic.png
- -Z message send ERROR record to log for testing
+ -Z message send ERROR with message to logging engine for testing
  -j package apply maintenance package to system
  -J script  convert script to maintenance package
 
@@ -332,7 +332,7 @@ sub loggerTest {
     my $cherry = cherryEpg->instance( verbose => $verbose );
 
     my $logger = get_logger('system');
-    $logger->error( "test log record", undef, undef, [$message] );
+    $logger->error( $message, undef, undef, [$message] );
 } ## end sub loggerTest
 
 sub maintainerApply {

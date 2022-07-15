@@ -7,13 +7,13 @@ use base 'Log::Log4perl::Appender::ScreenColoredLevels';
 sub log {
     my ( $self, %params ) = @_;
 
-    my ( $text, $channel, $eit, $info ) = @{ $params{'message'} };
+    my ( $text, $channel, $eit, $info ) = @{ $params{message} };
     $channel //= "-";
     $eit     //= "-";
 
-    my $msg = sprintf( "%-5s %-8s : %s", $params{'log4p_level'}, $params{'log4p_category'}, $text );
+    my $msg = sprintf( "%-5s %-8s : %s", $params{log4p_level}, $params{log4p_category}, $text );
 
-    my $color = $self->{'color'}->{ $params{'log4p_level'} };
+    my $color = $self->{color}->{ $params{log4p_level} };
 
     $color = "BLUE" if !$color;
 
