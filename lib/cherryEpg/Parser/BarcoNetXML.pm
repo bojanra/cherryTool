@@ -119,13 +119,13 @@ SWITCH: for ( $element->{Name} ) {
         /StartDateTime/ && do {
             return if $value eq '';
 
-            $event->{start} = localtime->strptime( $value, "%Y-%m-%dT%H:%M:%S" )->epoch;
+            $event->{start} = gmtime->strptime( $value, "%Y-%m-%dT%H:%M:%S" )->epoch;
             return;
         };
         /EndDateTime/ && do {
             return if $value eq '';
 
-            $event->{stop} = localtime->strptime( $value, "%Y-%m-%dT%H:%M:%S" )->epoch;
+            $event->{stop} = gmtime->strptime( $value, "%Y-%m-%dT%H:%M:%S" )->epoch;
             return;
         };
     } ## end SWITCH: for ( $element->{Name} )
