@@ -476,7 +476,7 @@ sub list {
                 # check for redundancy
                 $self->applyRedundancy($meta);
                 $carousel->{$target}{meta}      = $meta;
-                $carousel->{$target}{pid}       = $pid;
+                $carousel->{$target}{pid}       = $pid + 0;
                 $carousel->{$target}{size}      = length($$ts);
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();
             } elsif ( $extension eq $chunkExtension ) {
@@ -489,7 +489,7 @@ sub list {
                 }
                 my $pid = _getPID($ts);
                 $carousel->{$target}{meta}      = $meta;
-                $carousel->{$target}{pid}       = $pid;
+                $carousel->{$target}{pid}       = $pid + 0;
                 $carousel->{$target}{size}      = length($$ts);
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();
 

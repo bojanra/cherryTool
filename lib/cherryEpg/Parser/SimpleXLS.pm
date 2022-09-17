@@ -70,7 +70,7 @@ sub rowHandler {
     return unless ( scalar @cell >= 6 );
 
     # try to find the header row
-    if ( !@mapping && ( join( '', @cell ) =~ /datum/i ) ) {
+    if ( !@mapping && ( join( '', @cell ) =~ /date/i ) ) {
 
         # find the requested columns and generate a maptable
         my $order = {};
