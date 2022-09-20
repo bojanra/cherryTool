@@ -10,7 +10,7 @@ use Spreadsheet::Read qw( row ReadData);
 
 extends 'cherryEpg::Parser::SimpleXLS';
 
-our $VERSION = '0.27';
+our $VERSION = '0.28';
 
 sub BUILD {
     my ( $self, $arg ) = @_;
@@ -61,23 +61,41 @@ sub rowHandler {
     $voditelji //= '';
 
     my $start;
-    if ( $date =~ m|^(\d+)[/\.](\d+)[/\.](\d\d)$| ) {
+    if ( $date =~ m|^(\d+)\.(\d+)\.(\d\d)$| ) {
+
+        # dd.mm.yy
+        $start = try {
+            localtime->strptime( $date, "%d.%m.%y" );
+        } catch {
+            $self->error( "date not in format DD.MM.YY in row %i [%s]", $rowCounter, $date );
+        };
+    } elsif ( $date =~ m|^(\d+)/(\d+)/(\d\d)$| ) {
 
         # dd/mm/yy
         $start = try {
             localtime->strptime( $date, "%d/%m/%y" );
         } catch {
-            $self->error( "date not in format DD/MM/YY in row %i [%i]", $rowCounter, $date );
+            $self->error( "date not in format DD/MM/YY in row %i [%s]", $rowCounter, $date );
         };
-    } elsif ( $date =~ m|^(\d+)[/\.](\d+)[/\.](\d{4})| ) {
+    } elsif ( $date =~ m|^(\d+)\.(\d+)\.(\d{4})| ) {
+
+        # dd.mm.yyyy
+        $start = try {
+            localtime->strptime( $date, "%d.%m.%Y" );
+        } catch {
+            $self->error( "date not in format DD.MM.YYYY in row %i [%s]", $rowCounter, $date );
+        };
+    } elsif ( $date =~ m|^(\d+)/(\d+)/(\d{4})| ) {
 
         # dd/mm/yyyy
         $start = try {
             localtime->strptime( $date, "%d/%m/%Y" );
         } catch {
-            $self->error( "date not in format DD/MM/YYYY in row %i [%i]", $rowCounter, $date );
+            $self->error( "date not in format DD/MM/YYYY in row %i [%s]", $rowCounter, $date );
         };
-    } else {
+    } ## end elsif ( $date =~ m|^(\d+)/(\d+)/(\d{4})|)
+
+    if ( !$start ) {
         $self->error( "date format unknown in row %i [%s]", $rowCounter, $date );
         return;
     }

@@ -43,7 +43,8 @@ sub error {
     my ($self) = shift;
 
     push( @{ $self->{report}{errorList} }, sprintf( shift @_, @_ ) );
-}
+    return;
+} ## end sub error
 
 =head3 parse( $parserOption)
 
