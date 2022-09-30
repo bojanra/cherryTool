@@ -32,20 +32,18 @@ file 'LICENSE', which is part of this source code package.
 
 =cut
 
-use 5.010;
-use warnings;
-use strict;
+use 5.024;
 use utf8;
-use Pod::Usage;
+use Encode qw( decode);
 use Getopt::Std;
-use Try::Tiny;
+use Pod::Usage;
 use Time::Piece;
 use Time::Seconds;
+use Try::Tiny;
 use XML::Simple;
-use Encode qw( decode);
-use open   qw ( :std :encoding(UTF-8));
+use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 my %args;
 

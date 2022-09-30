@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
-use Test::Cmd;
+use 5.024;
 use Cwd 'abs_path';
 use File::Basename;
-
+use Test::Cmd;
 use Test::More tests => 32;
 
 BEGIN {

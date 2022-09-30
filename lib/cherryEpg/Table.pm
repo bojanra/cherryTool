@@ -1,14 +1,13 @@
 package cherryEpg::Table;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use YAML::XS;
-use Time::Piece;
 use Digest::CRC qw(crc);
 use Encode;
+use Moo;
+use Time::Piece;
+use Try::Tiny;
+use YAML::XS;
 
 =head3 build( $table)
 

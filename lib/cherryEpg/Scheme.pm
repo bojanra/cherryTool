@@ -1,28 +1,27 @@
 package cherryEpg::Scheme;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-no warnings 'experimental';
-use Try::Tiny;
-use Path::Class;
-use File::Basename;
-use Log::Log4perl qw(get_logger);
-use YAML::XS;
-use Spreadsheet::Read  qw( row ReadData);
-use Data::Validate::IP qw(is_ipv4);
-use Sys::Hostname;
-use File::stat;
-use Time::Piece;
-use Gzip::Faster;
-use Digest::MD5 qw(md5_base64);
-use Encode      qw(encode_utf8);
-use cherryEpg;
-use cherryEpg::Table;
 use cherryEpg::Player;
-use POSIX qw(ceil);
+use cherryEpg::Table;
+use cherryEpg;
+use Data::Validate::IP qw(is_ipv4);
+use Digest::MD5        qw(md5_base64);
+use Encode             qw(encode_utf8);
+use File::Basename;
+use File::stat;
+use Gzip::Faster;
+use Log::Log4perl qw(get_logger);
+use Moo;
+use Path::Class;
+use POSIX             qw(ceil);
+use Spreadsheet::Read qw( row ReadData);
+use Sys::Hostname;
+use Time::Piece;
+use Try::Tiny;
+use YAML::XS;
 use open ':std', ':encoding(utf8)';
+no warnings 'experimental';
 
 my $archiveExtension = '.yaml.gz';
 

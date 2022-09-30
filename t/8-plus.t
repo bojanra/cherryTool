@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
+use 5.024;
 use File::Rsync;
-
 use Test::More tests => 32;
 
 BEGIN {
@@ -17,7 +17,7 @@ my $cherry = cherryEpg->instance( verbose => 0 );
 
 isa_ok( $cherry, 'cherryEpg' );
 
-my $scheme = new_ok( cherryEpg::Scheme => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
 
 foreach my $sut (qw( xsid multi large)) {
     note("test $sut scheme");
@@ -38,13 +38,13 @@ SKIP: {
         ok( scalar(@$success) && !scalar(@$error), "load scheme" );
 
         # test multigrabber
-        my $count = scalar( $cherry->epg->listChannel($channelId)->@* );
+        my $count = scalar( $cherry->epg->listChannel()->@* );
 
         my $grab = $cherry->channelMulti( 'all', 1, 1 );
         ok( scalar( $grab->@* ) == $count, "multi-grab with ingest" );
 
         # delete carousel
-        my $player = new_ok( cherryEpg::Player => [ verbose => 0 ], 'cherryEpg::Player' );
+        my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], 'cherryEpg::Player' );
 
         ok( defined $player->delete(), "delete carousel" );
 

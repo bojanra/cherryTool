@@ -11,8 +11,7 @@ file 'LICENSE', which is part of this source code package.
 
 =cut
 
-use strict;
-use warnings;
+use 5.024;
 use cherryWeb;
 use Plack::Builder;
 

@@ -1,5 +1,6 @@
 package cherryEpg::Log4perlMyScreen;
 
+use 5.024;
 use base 'Log::Log4perl::Appender::ScreenColoredLevels';
 
 # Just show the first element of the log array

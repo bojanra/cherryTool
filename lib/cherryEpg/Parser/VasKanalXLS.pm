@@ -1,12 +1,12 @@
 package cherryEpg::Parser::VasKanalXLS;
-use 5.010;
+
+use 5.024;
 use utf8;
 use Moo;
-use strictures 2;
-use Try::Tiny;
+use Spreadsheet::Read qw( row ReadData);
 use Time::Piece;
 use Time::Seconds;
-use Spreadsheet::Read qw( row ReadData);
+use Try::Tiny;
 
 extends 'cherryEpg::Parser::SimpleXLS';
 

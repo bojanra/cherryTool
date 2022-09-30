@@ -1,18 +1,18 @@
 #!/usr/bin/perl
 
+use 5.024;
 use utf8;
-use YAML::XS;
-use Path::Class;
-use Gzip::Faster;
 use File::Temp qw( tempfile);
-
+use Gzip::Faster;
+use Path::Class;
 use Test::More tests => 21;
+use YAML::XS;
 
 BEGIN {
     use_ok("cherryEpg::Player");
 }
 
-my $player = new_ok( cherryEpg::Player => [ verbose => 0 ], 'cherryEpg::Player' );
+my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], 'cherryEpg::Player' );
 my $serialized;
 my $imported;
 

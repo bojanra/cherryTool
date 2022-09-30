@@ -81,23 +81,21 @@ file 'LICENSE', which is part of this source code package.
 
 =cut
 
-use 5.010;
-use warnings;
-use strict;
+use 5.024;
 use utf8;
-use Pod::Usage;
-use Getopt::Std;
 use cherryEpg;
-use cherryEpg::Taster;
 use cherryEpg::Maintainer;
-use Log::Log4perl qw(get_logger);
+use cherryEpg::Taster;
 use File::Basename;
+use Getopt::Std;
+use IPC::ConcurrencyLimit;
+use IPC::Run3     qw(run3);
+use Log::Log4perl qw(get_logger);
+use Plack::Runner;
+use Pod::Usage;
+use Time::HiRes qw( time );
 use Time::Piece;
 use YAML::XS;
-use Time::HiRes qw( time );
-use Plack::Runner;
-use IPC::ConcurrencyLimit;
-use IPC::Run3 qw(run3);
 use open qw ( :std :encoding(UTF-8));
 
 my %args;

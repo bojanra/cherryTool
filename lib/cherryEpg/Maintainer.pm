@@ -1,15 +1,14 @@
 package cherryEpg::Maintainer;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use IPC::Run3 qw(run3);
-use Gzip::Faster;
-use File::Temp;
-use Log::Log4perl qw(get_logger);
 use cherryEpg;
+use File::Temp;
+use Gzip::Faster;
+use IPC::Run3     qw(run3);
+use Log::Log4perl qw(get_logger);
+use Moo;
+use Try::Tiny;
 
 has 'verbose' => (
     is      => 'ro',

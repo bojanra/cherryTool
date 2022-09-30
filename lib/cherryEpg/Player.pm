@@ -1,23 +1,22 @@
 package cherryEpg::Player;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use Path::Class;
-use File::Basename;
-use Log::Log4perl qw(get_logger);
-use File::Copy    qw();
-use File::Glob ':nocase';
-use Sys::Hostname;
-use File::stat;
-use Time::Piece;
-use Time::Seconds;
-use Gzip::Faster;
-use IPC::Run3 qw(run3);
 use cherryEpg;
 use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
+use File::Basename;
+use File::Copy qw();
+use File::Glob ':nocase';
+use File::stat;
+use Gzip::Faster;
+use IPC::Run3     qw(run3);
+use Log::Log4perl qw(get_logger);
+use Moo;
+use Path::Class;
+use Sys::Hostname;
+use Time::Piece;
+use Time::Seconds;
+use Try::Tiny;
 
 my $chunkExtension         = '.cts';
 my $enhancedChunkExtension = '.ets.gz';
@@ -500,6 +499,9 @@ sub list {
                 $carousel->{$target}{tmp}       = 1;
                 $carousel->{$target}{size}      = ( -s $file ) - 188;
                 $carousel->{$target}{timestamp} = gmtime( stat($file)->mtime )->epoch();
+            } else {
+                delete $carousel->{$target};
+                next;
             }
         } ## end foreach my $current (@files)
         my @list = map { $carousel->{$_} } reverse sort keys %{$carousel};

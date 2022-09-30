@@ -1,18 +1,17 @@
 package cherryEpg::Epg;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
 use Carp;
-use Encode;
-use DBI qw(:sql_types);
-use JSON::XS;
-use POSIX qw(ceil);
 use cherryEpg::EIT;
-use IPC::SysV      qw(SEM_UNDO S_IRWXU IPC_CREAT ftok);
+use DBI qw(:sql_types);
+use Encode;
 use IPC::Semaphore qw(SEM_UNDO);
+use IPC::SysV      qw(SEM_UNDO S_IRWXU IPC_CREAT ftok);
+use JSON::XS;
+use Moo;
+use POSIX qw(ceil);
+use Try::Tiny;
 
 with( 'cherryEpg::Exporter', 'cherryEpg::Announcer' );
 

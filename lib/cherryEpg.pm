@@ -1,29 +1,28 @@
 package cherryEpg;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use Path::Class;
 use Carp;
-use YAML::XS;
-use Log::Log4perl;
-use Log::Log4perl::Level;
-use File::Find qw(find);
-use File::Path qw(remove_tree);
-use Time::Piece;
 use cherryEpg::Epg;
 use cherryEpg::Grabber;
 use cherryEpg::Ingester;
-use cherryEpg::Scheme;
 use cherryEpg::Player;
-use Parallel::ForkManager;
+use cherryEpg::Scheme;
+use Fcntl      qw/:flock O_WRONLY O_CREAT O_EXCL/;
+use File::Find qw(find);
+use File::Path qw(remove_tree);
 use IPC::ConcurrencyLimit;
-use Fcntl qw/:flock O_WRONLY O_CREAT O_EXCL/;
-use open  qw ( :std :encoding(UTF-8));
+use Log::Log4perl::Level;
+use Log::Log4perl;
+use Moo;
+use Parallel::ForkManager;
+use Path::Class;
+use Time::Piece;
+use Try::Tiny;
+use YAML::XS;
+use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.1.36';
+our $VERSION = '2.2.02';
 
 with('MooX::Singleton');
 

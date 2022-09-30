@@ -1,20 +1,19 @@
 package cherryEpg::Ingester;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use Path::Class;
+use Digest::MD5 qw(md5_hex);
 use File::Basename;
-use YAML::XS;
-use Module::Load;
-use Log::Log4perl qw(get_logger);
-use File::Find    qw(find);
 use File::Compare;
 use File::Copy;
+use File::Find qw(find);
 use File::stat;
-use Digest::MD5 qw(md5_hex);
+use Log::Log4perl qw(get_logger);
+use Module::Load;
+use Moo;
+use Path::Class;
+use Try::Tiny;
+use YAML::XS;
 use open qw ( :std :encoding(UTF-8));
 
 my $logger = get_logger('ingester');

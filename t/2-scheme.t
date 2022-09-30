@@ -1,14 +1,14 @@
 #!/usr/bin/perl
 
+use 5.024;
 use YAML::XS;
-
 use Test::More tests => 18;
 
 BEGIN {
     use_ok("cherryEpg::Scheme");
 }
 
-my $scheme = new_ok( cherryEpg::Scheme => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
 my $sut    = 'simple';
 my $serialized;
 

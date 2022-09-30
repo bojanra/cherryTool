@@ -1,11 +1,11 @@
 package cherryEpg::Parser::ScopusXLS;
-use 5.010;
+
+use 5.024;
 use utf8;
 use Moo;
-use strictures 2;
+use Spreadsheet::Read qw( row ReadData);
 use Time::Piece;
 use Time::Seconds;
-use Spreadsheet::Read qw( row ReadData);
 
 extends 'cherryEpg::Parser';
 

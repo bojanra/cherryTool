@@ -1,11 +1,10 @@
 package cherryEpg::Announcer;
 
-use 5.010;
+use 5.024;
 use utf8;
 use Moo::Role;
-use strictures 2;
-use Time::Local;
 use Path::Class;
+use Time::Local;
 use YAML::XS;
 
 has 'announcer'     => ( is => 'lazy', );
@@ -79,7 +78,7 @@ sub announcerLoad {
 
 =head3 announcerInsert( $following, $event)
 
-Insert the announcer following/present (selected by $following) in 
+Insert the announcer following/present (selected by $following) in
 the given $event.
 
 =cut

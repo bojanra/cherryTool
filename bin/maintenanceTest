@@ -16,9 +16,7 @@ This software is copyright (c) 2022 by Bojan Ramšak
 
 =cut
 
-use 5.010;
-use warnings;
-use strict;
+use 5.024;
 use utf8;
 use IPC::Run3 qw(run3);
 use open qw ( :std :encoding(UTF-8));

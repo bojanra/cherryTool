@@ -4,7 +4,6 @@
 .tidyall.d/
 .~*
 config_local.yml
-maintenance/*
 nytprof
 nytprof.out
 sessions/*

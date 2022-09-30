@@ -1,13 +1,12 @@
 package cherryEpg::EIT;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Log::Log4perl qw(get_logger);
 use Carp;
-use Encode;
 use Digest::CRC qw(crc);
+use Encode;
+use Log::Log4perl qw(get_logger);
+use Moo;
 
 my $logger = get_logger('builder');
 

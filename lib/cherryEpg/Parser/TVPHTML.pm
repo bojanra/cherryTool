@@ -1,11 +1,11 @@
 package cherryEpg::Parser::TVPHTML;
-use 5.010;
+
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use HTML::Parser;
 use HTML::Entities;
+use HTML::Parser;
 use JSON::XS;
+use Moo;
 use Try::Tiny;
 use open ':std', ':encoding(utf8)';
 

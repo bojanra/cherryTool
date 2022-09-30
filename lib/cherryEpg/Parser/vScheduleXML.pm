@@ -1,8 +1,8 @@
 package cherryEpg::Parser::vScheduleXML;
-use 5.010;
+
+use 5.024;
 use utf8;
 use Moo;
-use strictures 2;
 use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';

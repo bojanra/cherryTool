@@ -1,9 +1,8 @@
 package cherryEpg::Exporter;
 
-use 5.010;
+use 5.024;
 use utf8;
 use Moo::Role;
-use strictures 2;
 use Time::Local;
 
 =head3 channelListExport( $list, $url)

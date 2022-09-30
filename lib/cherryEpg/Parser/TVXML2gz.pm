@@ -1,9 +1,9 @@
 package cherryEpg::Parser::TVXML2gz;
-use 5.010;
+
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
 use Gzip::Faster;
+use Moo;
 use Try::Tiny;
 
 extends 'cherryEpg::Parser::TVXML2';

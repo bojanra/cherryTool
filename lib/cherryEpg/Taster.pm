@@ -1,20 +1,17 @@
 package cherryEpg::Taster;
 
-use 5.010;
+use 5.024;
 use utf8;
+use cherryEpg::Git;
+use cherryEpg;
+use JSON::XS;
 use Moo;
-use strictures 2;
-use Try::Tiny;
 use Net::Curl::Easy qw(:constants );
 use Net::NTP        qw(get_ntp_response);
-use JSON::XS;
-use Time::Piece;
-use Sys::Hostname;
 use Readonly;
-use cherryEpg;
-use cherryEpg::Git;
-
-our $VERSION = '1.19';
+use Sys::Hostname;
+use Time::Piece;
+use Try::Tiny;
 
 # status code used in NAGIOS/NAEMON
 Readonly my $OK       => 0;

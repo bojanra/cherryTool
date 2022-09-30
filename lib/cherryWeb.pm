@@ -1,20 +1,21 @@
 package cherryWeb;
-use 5.010;
+
+use 5.024;
+use cherryEpg::Git;
+use cherryEpg::Maintainer;
+use cherryEpg::Scheme;
+use cherryEpg::Taster;
+use cherryEpg;
 use Dancer2;
 use Dancer2::Plugin::Ajax;
 use Dancer2::Plugin::Auth::Extensible;
-use cherryEpg;
-use cherryEpg::Taster;
-use cherryEpg::Scheme;
-use cherryEpg::Git;
-use cherryEpg::Maintainer;
-use DBI        qw(:sql_types);
-use File::Temp qw(tempfile);
-use Path::Class;
-use Time::Piece;
-use Sys::Hostname;
+use DBI qw(:sql_types);
 use Digest::MD5;
+use File::Temp qw(tempfile);
 use Gzip::Faster;
+use Path::Class;
+use Sys::Hostname;
+use Time::Piece;
 
 my $cherry = cherryEpg->instance();
 

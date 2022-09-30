@@ -1,11 +1,10 @@
 package cherryEpg::Parser;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
 use File::Basename;
 use Log::Log4perl;
+use Moo;
 
 has source => (
     is  => 'ro',

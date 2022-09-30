@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 
+use 5.024;
 use Mojo::Base -strict;
-use Test::More tests => 53;
 use Test::Mojo;
+use Test::More tests => 53;
 use Try::Tiny;
 
 BEGIN {

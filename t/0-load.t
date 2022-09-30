@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
-use 5.24.1;
-
+use 5.024;
 use Test::More tests => 1;
 
 BEGIN {

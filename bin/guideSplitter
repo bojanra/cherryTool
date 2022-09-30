@@ -31,17 +31,16 @@ file 'LICENSE', which is part of this source code package.
 =cut
 
 package guideSplitter;
-use 5.010;
-use warnings;
-use strict;
+
+use 5.024;
 use utf8;
+use Getopt::Std;
 use Moo;
 use Pod::Usage;
 use Try::Tiny;
-use Getopt::Std;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 has 'source' => ( is => 'ro' );
 has 'stdout' => ( is => 'ro', default => 0 );

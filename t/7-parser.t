@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
+use 5.024;
 use File::Rsync;
-
 use Test::More tests => 48;
 
 BEGIN {
@@ -33,7 +33,7 @@ subtest "copy sample schedule data" => sub {
     done_testing();
 };
 
-my $scheme = new_ok( cherryEpg::Scheme => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
 
 my $sut = 'parser';
 ok( defined $cherry->ingestDelete(), "delete ingest dir" );
@@ -48,7 +48,7 @@ ok( $s->{isValid}, "build scheme" );
 my ( $success, $error ) = $scheme->push();
 ok( scalar(@$success) && !scalar(@$error), "load scheme" );
 
-foreach my $channel ( $cherry->epg->listChannel($channelId)->@* ) {
+foreach my $channel ( $cherry->epg->listChannel()->@* ) {
     my $grab     = $cherry->channelGrab($channel);
     my $ingest   = $cherry->channelIngest($channel);
     my ($parser) = split( /\?/, $channel->{parser} );

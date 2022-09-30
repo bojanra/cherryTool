@@ -1,20 +1,19 @@
 package cherryEpg::Grabber;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
-use Path::Class;
 use File::Basename;
-use Log::Log4perl qw(get_logger);
 use File::Glob ':nocase';
 use File::Rsync;
+use Log::Log4perl qw(get_logger);
+use Moo;
 use Net::Curl::Easy qw(:constants );
+use Path::Class;
 use Time::Piece;
 use Time::Seconds;
-use URI;
+use Try::Tiny;
 use URI::Escape;
+use URI;
 
 my $CURLOPT_TIMEOUT = 60;
 

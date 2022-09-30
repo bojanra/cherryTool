@@ -1,10 +1,9 @@
 package cherryEpg::Log4perlGraylog;
 
-use 5.010;
-use JSON::XS;
+use 5.024;
 use Gzip::Faster;
+use JSON::XS;
 use Sys::Hostname;
-
 use base 'Log::Log4perl::Appender::Socket';
 
 # Modification to directly log to Graylog server https://www.graylog.org

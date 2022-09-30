@@ -1,13 +1,13 @@
 package cherryEpg::Parser::MiTVHTML;
-use 5.010;
+
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
+use HTML::Entities;
 use HTML::Parser;
+use HTTP::Tiny;
+use Moo;
 use Time::Piece;
 use Time::Seconds;
-use HTTP::Tiny;
-use HTML::Entities;
 use Try::Tiny;
 
 extends 'cherryEpg::Parser';

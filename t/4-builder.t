@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
+use 5.024;
 use utf8;
-
 use Test::More tests => 33;
 
 BEGIN {
@@ -33,7 +33,7 @@ like( $cherry->epg->version(), qr/\d+\./, "version" );
 # db stats
 is( scalar( @{ $cherry->epg->healthCheck() } ), 7, "db stats" );
 
-my $scheme = new_ok( cherryEpg::Scheme => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
 
 # read, build load scheme
 ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
@@ -55,22 +55,22 @@ ok( $scheme->delete($target), "delete scheme from archive" );
 ok( $target = $scheme->backup(), "backup scheme to archive" );
 
 # test multigrabber
-my $count = scalar( $cherry->epg->listChannel($channelId)->@* );
+my $count = scalar( $cherry->epg->listChannel()->@* );
 my $grab  = $cherry->channelMulti( 'all', 1, 1 );
 ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
 
 # export schedule to XML
-$channel = $cherry->epg->listChannel($ch)->@[0];
+$channel = $cherry->epg->listChannel()->@[0];
 my $content = $cherry->epg->channelListExport( [$channel], 'localhost', 'eng' );
 ok( $content && length($content) > 30000, "export channel in XMLTV format" );
 
 # reset/remove md5 file
-$channel = ${ $cherry->epg->listChannel($ch) }[0];
+$channel = ${ $cherry->epg->listChannel() }[0];
 my $result = $cherry->channelReset($channel);
 ok( $result, "Reset done for $channel->{name}" );
 
 # delete carousel
-my $player = new_ok( cherryEpg::Player => [ verbose => 0 ], 'cherryEpg::Player' );
+my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], 'cherryEpg::Player' );
 
 ok( defined $player->delete(), "delete carousel" );
 
@@ -98,12 +98,12 @@ my ( $success, $error ) = $scheme->push();
 ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
 
 # test multigrabber
-my $count = scalar( $cherry->epg->listChannel($channelId)->@* );
+my $count = scalar( $cherry->epg->listChannel()->@* );
 my $grab  = $cherry->channelMulti( 'all', 1, 1 );
 ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
 
 # delete carousel
-my $player = new_ok( cherryEpg::Player => [ verbose => 0 ], 'cherryEpg::Player' );
+my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], 'cherryEpg::Player' );
 
 ok( defined $player->delete(), "delete carousel" );
 

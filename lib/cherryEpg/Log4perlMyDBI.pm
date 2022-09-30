@@ -1,5 +1,6 @@
 package cherryEpg::Log4perlMyDBI;
 
+use 5.024;
 use base 'Log::Log4perl::Appender::DBI';
 
 # I've added a few modifications to write level and category as numbers in the database.

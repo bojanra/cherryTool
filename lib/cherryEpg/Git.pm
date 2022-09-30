@@ -1,14 +1,13 @@
 package cherryEpg::Git;
 
-use 5.010;
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
-use Try::Tiny;
 use File::Basename;
-use Sys::Hostname;
-use Log::Log4perl qw(get_logger);
 use Git::Repository;
+use Log::Log4perl qw(get_logger);
+use Moo;
+use Sys::Hostname;
+use Try::Tiny;
 
 my $logger = get_logger('system');
 

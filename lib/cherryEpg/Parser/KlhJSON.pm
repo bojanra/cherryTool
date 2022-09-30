@@ -1,9 +1,9 @@
 package cherryEpg::Parser::KlhJSON;
-use 5.010;
+
+use 5.024;
 use utf8;
-use Moo;
-use strictures 2;
 use JSON::XS;
+use Moo;
 use Time::Piece;
 use Time::Seconds;
 use Try::Tiny;

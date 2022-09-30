@@ -24,14 +24,14 @@ our @ISA = qw(Log::Log4perl::Appender);
 # log4perl.appender.Mail.Debug        = 0
 # log4perl.appender.Mail.warp_message = 0
 
-use 5.010;
+use 5.024;
 use utf8;
-use strict;
-use warnings;
 use Carp;
-use Sys::Hostname;
 use Net::SMTPS;
+use strict;
+use Sys::Hostname;
 use Time::Piece;
+use warnings;
 
 sub new {
     my ( $class, @options ) = @_;

@@ -1,10 +1,10 @@
 package cherryEpg::Parser::MezzoXLS;
-use 5.010;
+
+use 5.024;
 use utf8;
 use Moo;
-use strictures 2;
-use Time::Piece;
 use Spreadsheet::Read qw( row ReadData);
+use Time::Piece;
 
 extends 'cherryEpg::Parser';
 
