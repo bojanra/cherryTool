@@ -22,7 +22,7 @@ use Try::Tiny;
 use YAML::XS;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.2.02';
+our $VERSION = '2.2.03';
 
 with('MooX::Singleton');
 
@@ -447,7 +447,7 @@ CHANNELMULTI_LOOP:
             if ( $target eq "all" or $channel->{grabber}{update} eq $target ) {
 
                 # fork proces
-                my $process = $pm->start( $channel->{channel_id} ) and next CHANNELMULTI_LOOP;
+                my $pid = $pm->start( $channel->{channel_id} ) and next CHANNELMULTI_LOOP;
 
                 my $result = [];
 
@@ -583,6 +583,16 @@ sub eitMulti {
         return;
     }
 
+    my @pidLauched;
+    local $SIG{ALRM} = sub {
+        my $killed = kill( 9, @pidLauched );
+        $logger->fatal("eit building time exceeded [$killed]");
+        exit 1;
+    };
+
+    # stop all after timeout
+    alarm(55);
+
     my $collected     = [];
     my $parallelTasks = $self->config->{core}{parallelTasks} // 3;
     my $pm            = Parallel::ForkManager->new($parallelTasks);
@@ -604,7 +614,11 @@ sub eitMulti {
 EITMULTI_LOOP:
     foreach my $eit (@$allEit) {
 
-        my $process = $pm->start and next EITMULTI_LOOP;
+        my $pid;
+        if ( $pid = $pm->start ) {
+            push( @pidLauched, $pid );
+            next EITMULTI_LOOP;
+        }
 
         my $result = $self->eitBuild($eit);
 
