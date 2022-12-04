@@ -626,7 +626,8 @@ EITMULTI_LOOP:
     } ## end EITMULTI_LOOP: foreach my $eit (@$allEit)
     $pm->wait_all_children;
 
-    return $collected;    # FIXME
+    alarm(0);
+    return $collected;
 } ## end sub eitMulti
 
 =head1 AUTHOR
