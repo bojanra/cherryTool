@@ -510,6 +510,10 @@ ajax '/scheme/action' => require_role cherryweb => sub {
         send_as( JSON => [ { success => 0, message => 'Unknown action' } ] );
     }
 
+    # stop all current building processes started by cronjob
+    `pgrep -f "cherryTool -B" | xargs -L1 kill`;
+    `pgrep -f "cherryTool -G" | xargs -L1 kill`;
+
     # let's continue
 
     my $player = cherryEpg::Player->new();
