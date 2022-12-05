@@ -125,122 +125,145 @@ sub initdb {
 
     $self->_lockdb();
     $dbh->do(
-        "CREATE TABLE channel ( channel_id INTEGER,
-                                     name VARCHAR(64),
-                                     info BLOB,
-                PRIMARY KEY( channel_id))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE channel ( channel_id INTEGER,
+            name VARCHAR(64),
+            info BLOB,
+            PRIMARY KEY( channel_id))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE event ( event_id INTEGER,
-                                  channel_id INTEGER,
-                                  start INTEGER UNSIGNED,
-                                  stop INTEGER UNSIGNED,
-                                  info BLOB,
-                                  timestamp INTEGER UNSIGNED,
-                PRIMARY KEY( channel_id, event_id))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE event ( event_id INTEGER,
+            channel_id INTEGER,
+            start INTEGER UNSIGNED,
+            stop INTEGER UNSIGNED,
+            info BLOB,
+            timestamp INTEGER UNSIGNED,
+            PRIMARY KEY( channel_id, event_id))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE eit ( eit_id INTEGER,
-                                pid INTEGER,
-                                info BLOB,
-                PRIMARY KEY( eit_id))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE eit ( eit_id INTEGER,
+            pid INTEGER,
+            info BLOB,
+            PRIMARY KEY( eit_id))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE rule ( eit_id INTEGER NOT NULL,
-                                  service_id INTEGER,
-                                  original_network_id INTEGER,
-                                  transport_stream_id INTEGER,
-                                  channel_id INTEGER NOT NULL,
-                                  actual INTEGER,
-                                  comment TEXT,
-                PRIMARY KEY( eit_id, original_network_id, transport_stream_id, service_id))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE rule ( eit_id INTEGER NOT NULL,
+            service_id INTEGER,
+            original_network_id INTEGER,
+            transport_stream_id INTEGER,
+            channel_id INTEGER NOT NULL,
+            actual INTEGER,
+            comment TEXT,
+            PRIMARY KEY( eit_id, original_network_id, transport_stream_id, service_id))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE version ( service_id INTEGER,
-                                    original_network_id INTEGER,
-                                    transport_stream_id INTEGER,
-                                    table_id INTEGER,
-                                    version_number INTEGER,
-                                    timestamp INTEGER UNSIGNED,
-                PRIMARY KEY( service_id, original_network_id, transport_stream_id, table_id))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE version ( service_id INTEGER,
+            original_network_id INTEGER,
+            transport_stream_id INTEGER,
+            table_id INTEGER,
+            version_number INTEGER,
+            timestamp INTEGER UNSIGNED,
+            PRIMARY KEY( service_id, original_network_id, transport_stream_id, table_id))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE section ( service_id INTEGER,
-                                original_network_id INTEGER,
-                                transport_stream_id INTEGER,
-                                table_id INTEGER,
-                                section_number INTEGER,
-                                dump BLOB,
-                PRIMARY KEY( service_id, original_network_id, transport_stream_id, table_id, section_number))
-                ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE section (
+            service_id INTEGER,
+            original_network_id INTEGER,
+            transport_stream_id INTEGER,
+            table_id INTEGER,
+            section_number INTEGER,
+            dump BLOB,
+            PRIMARY KEY( service_id, original_network_id, transport_stream_id, table_id, section_number))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TABLE log ( id INTEGER NOT NULL AUTO_INCREMENT,
-                            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            level TINYINT,
-                            category TINYINT,
-                            text TEXT,
-                            channel_id INTEGER,
-                            eit_id INTEGER,
-                            info MEDIUMBLOB,
-                            PRIMARY KEY( id),
-                            KEY c (category),
-                            KEY l (level))
-                            ENGINE = MYISAM;"
+        <<~"SQL"
+        CREATE TABLE log ( id INTEGER NOT NULL AUTO_INCREMENT,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            level TINYINT,
+            category TINYINT,
+            text TEXT,
+            channel_id INTEGER,
+            eit_id INTEGER,
+            info MEDIUMBLOB,
+            PRIMARY KEY( id),
+            KEY c (category),
+            KEY l (level))
+            ENGINE = MYISAM;
+        SQL
     );
 
     $dbh->do(
-        "CREATE TRIGGER event_timestamp_insert BEFORE INSERT ON event
-                FOR EACH ROW
-                    SET NEW.timestamp = UNIX_TIMESTAMP();"
+        <<~"SQL"
+        CREATE TRIGGER event_timestamp_insert BEFORE INSERT ON event
+            FOR EACH ROW
+                SET NEW.timestamp = UNIX_TIMESTAMP();
+        SQL
     );
 
     $dbh->do(
-        "CREATE TRIGGER event_timestamp_update BEFORE UPDATE ON event
-               FOR EACH ROW
-                    SET NEW.timestamp = UNIX_TIMESTAMP();"
+        <<~"SQL"
+        CREATE TRIGGER event_timestamp_update BEFORE UPDATE ON event
+            FOR EACH ROW
+                SET NEW.timestamp = UNIX_TIMESTAMP();
+        SQL
     );
 
     $dbh->do(
-        "CREATE TRIGGER rule_delete AFTER DELETE ON rule
-                FOR EACH ROW BEGIN
-                    DELETE FROM version
-                        WHERE version.service_id = old.service_id
-                        AND version.original_network_id = old.original_network_id
-                        AND version.transport_stream_id = old.transport_stream_id;
-                    DELETE FROM section
-                        WHERE section.service_id = old.service_id
-                        AND section.original_network_id = old.original_network_id
-                        AND section.transport_stream_id = old.transport_stream_id;
-                END"
+        <<~"SQL"
+        CREATE TRIGGER rule_delete AFTER DELETE ON rule
+            FOR EACH ROW BEGIN
+                DELETE FROM version WHERE version.service_id = old.service_id
+                    AND version.original_network_id = old.original_network_id
+                    AND version.transport_stream_id = old.transport_stream_id;
+                DELETE FROM section WHERE section.service_id = old.service_id
+                    AND section.original_network_id = old.original_network_id
+                    AND section.transport_stream_id = old.transport_stream_id;
+            END
+        SQL
     );
 
     $dbh->do(
-        "CREATE TRIGGER eit_delete BEFORE DELETE ON eit
-                FOR EACH ROW BEGIN
-                    DELETE FROM rule WHERE rule.eit_id = old.eit_id;
-                    DELETE FROM log WHERE log.eit_id = old.eit_id;
-                END"
+        <<~"SQL"
+        CREATE TRIGGER eit_delete BEFORE DELETE ON eit
+            FOR EACH ROW BEGIN
+                DELETE FROM rule WHERE rule.eit_id = old.eit_id;
+                DELETE FROM log WHERE log.eit_id = old.eit_id;
+            END
+        SQL
     );
 
     $dbh->do(
-        "CREATE TRIGGER channel_delete BEFORE DELETE ON channel
-                FOR EACH ROW BEGIN
-                    DELETE FROM event WHERE event.channel_id = old.channel_id;
-                    DELETE FROM rule WHERE rule.channel_id = old.channel_id;
-                    DELETE FROM log WHERE log.channel_id = old.channel_id;
-                END"
+        <<~"SQL"
+        CREATE TRIGGER channel_delete BEFORE DELETE ON channel
+            FOR EACH ROW BEGIN
+                DELETE FROM event WHERE event.channel_id = old.channel_id;
+                DELETE FROM rule WHERE rule.channel_id = old.channel_id;
+                DELETE FROM log WHERE log.channel_id = old.channel_id;
+            END
+        SQL
     );
     $self->_unlockdb();
 
@@ -273,7 +296,11 @@ sub healthCheck {
     return unless $dbh;
 
     return $self->dbh->selectall_arrayref(
-        "SELECT table_name,Engine,table_rows,Data_length,Create_time,Update_time,Check_time,table_collation FROM information_schema.tables WHERE table_schema = 'cherry_db'"
+        <<~"SQL"
+        SELECT table_name,Engine,table_rows,Data_length,Create_time,Update_time,Check_time,table_collation
+            FROM information_schema.tables
+        WHERE table_schema = 'cherry_db'
+        SQL
     );
 } ## end sub healthCheck
 
@@ -384,7 +411,7 @@ sub listChannel {
 
 List all channels and last time they were updated.
 
-Return array on success.
+Return reference to array on success.
 
 =cut
 
@@ -394,10 +421,12 @@ sub listChannelLastUpdate {
     return 0 unless $dbh;
 
     return $dbh->selectall_hashref(
-        '(SELECT channel_id, timestamp from (SELECT DISTINCT channel_id, timestamp FROM event ORDER BY timestamp DESC) AS T GROUP BY channel_id)
-        UNION ALL
-        (SELECT channel_id, 0 FROM channel WHERE NOT EXISTS (SELECT DISTINCT channel_id FROM event WHERE channel.channel_id = event.channel_id) )',
-        'channel_id'
+        <<~"SQL"
+        (SELECT channel_id, timestamp from (SELECT DISTINCT channel_id, timestamp FROM event ORDER BY timestamp DESC) AS T GROUP BY channel_id)
+            UNION ALL
+        (SELECT channel_id, 0 FROM channel WHERE NOT EXISTS (SELECT DISTINCT channel_id FROM event WHERE channel.channel_id = event.channel_id) )
+        SQL
+        , 'channel_id'
     );
 } ## end sub listChannelLastUpdate
 
@@ -564,7 +593,7 @@ $start, $stop are used as interval specification.
 If $touch is defined only elements with timestamp newer than
 $touch are returned.
 
-Return array of events.
+Return reference to array of events.
 
 =cut
 
@@ -601,7 +630,7 @@ sub listEvent {
         $data->{timestamp}  = $_timestamp;
         push( @list, $data );
     } ## end while ( $sel->fetch )
-    return @list;
+    return \@list;
 } ## end sub listEvent
 
 =head3 deleteEvent( $channel_id, $event_id, $start_min, $start_max, $stop_min, $stop_max)
@@ -673,10 +702,12 @@ sub addRule {
     $comment //= "";
 
     return $dbh->do(
-        "REPLACE INTO rule VALUES
+        <<~"SQL"
+        REPLACE INTO rule VALUES
         ((SELECT eit_id FROM eit WHERE eit_id = $eit_id),
         $service_id, $original_network_id, $transport_stream_id,
-        (SELECT channel_id FROM channel WHERE channel_id = $channel_id), $actual, '$comment')"
+        (SELECT channel_id FROM channel WHERE channel_id = $channel_id), $actual, '$comment')
+        SQL
     );
 } ## end sub addRule
 
@@ -982,10 +1013,12 @@ sub updateEitPresent {
 
     # Remove all section of this table
     $dbh->do(
-        "DELETE FROM section WHERE service_id=$rule->{service_id}
+        <<~"SQL"
+        DELETE FROM section WHERE service_id=$rule->{service_id}
               AND original_network_id=$rule->{original_network_id}
               AND transport_stream_id=$rule->{transport_stream_id}
-              AND table_id=$rule->{table_id}"
+              AND table_id=$rule->{table_id}
+        SQL
     );
 
     my $insert = $dbh->prepare(
@@ -1157,9 +1190,11 @@ sub updateEitSchedule {
 
         # Remove all section of this table
         $dbh->do(
-            "DELETE FROM section WHERE
+            <<~"SQL"
+            DELETE FROM section WHERE
             service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
-            AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}"
+            AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}
+        SQL
         );
 
         my $insert = $dbh->prepare(
@@ -1176,9 +1211,11 @@ sub updateEitSchedule {
         }
 
         $dbh->do(
-            "REPLACE INTO version VALUES ( $rule->{service_id},
+            <<~"SQL"
+            REPLACE INTO version VALUES ( $rule->{service_id},
             $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id},
-            $last_version_number, $currentTime)"
+            $last_version_number, $currentTime)
+        SQL
         );
 
         $self->_unlockdb();
@@ -1211,7 +1248,7 @@ sub getEit {
 
     return unless $pid;
 
-    my $eit = shift( @{ $self->listEit($eit_id) } );
+    my $eit = shift( $self->listEit($eit_id)->@* );
 
     # fetch all sections from database
     my $sel = $dbh->prepare(
@@ -1505,10 +1542,10 @@ sub getLogList {
     # when all 5 categories are selected we don't need to filter
     my $categoryListFilter = '';
 
-    my $categoryListSize = scalar( @{$categoryList} );
+    my $categoryListSize = scalar( $categoryList->@* );
 
     if ( $categoryListSize > 0 and $categoryListSize < 5 ) {
-        $categoryListFilter = " AND `category` IN (" . join( ",", @{$categoryList} ) . ") ";
+        $categoryListFilter = " AND `category` IN (" . join( ",", $categoryList->@* ) . ") ";
     }
 
     # count filtered rows
@@ -1568,78 +1605,43 @@ sub cleanupLog {
     return $count;
 } ## end sub cleanupLog
 
-=head3 import( $scheme)
+=head3 addScheme( $scheme)
 
-Import epg scheme from $scheme structure.
+Add table content based on $scheme structure.
 
 =cut
 
-sub import {
+sub addScheme {
     my ( $self, $scheme ) = @_;
     my @success;
     my @error;
 
-    foreach my $channel ( @{ $scheme->{channel} } ) {
+    foreach my $channel ( $scheme->{channel}->@* ) {
         if ( $self->addChannel($channel) ) {
             push( @success, "Channel: " . $channel->{channel_id} . " " . $channel->{name} );
         } else {
             push( @error, "Channel: " . $channel->{channel_id} . " " . $channel->{name} );
         }
-    } ## end foreach my $channel ( @{ $scheme...})
+    } ## end foreach my $channel ( $scheme...)
 
-    foreach my $eit ( @{ $scheme->{eit} } ) {
+    foreach my $eit ( $scheme->{eit}->@* ) {
         if ( $self->addEit($eit) ) {
             push( @success, "EIT: " . $eit->{eit_id} . " " . $eit->{pid} );
         } else {
             push( @error, "EIT: " . $eit->{eit_id} . " " . $eit->{pid} );
         }
-    } ## end foreach my $eit ( @{ $scheme...})
+    } ## end foreach my $eit ( $scheme->...)
 
-    foreach my $rule ( @{ $scheme->{rule} } ) {
+    foreach my $rule ( $scheme->{rule}->@* ) {
         if ( $self->addRule($rule) ) {
             push( @success, "Rule: " . $rule->{eit_id} . "-" . $rule->{channel_id} );
         } else {
             push( @error, "Rule: " . $rule->{eit_id} . "-" . $rule->{channel_id} );
         }
-    } ## end foreach my $rule ( @{ $scheme...})
+    } ## end foreach my $rule ( $scheme->...)
 
     return ( \@success, \@error );
-} ## end sub import
-
-=head3 export ( )
-
-Export scheme as $scheme structure.
-Return scheme structure.
-
-=cut
-
-sub export {
-    my ($self) = @_;
-    my $theScheme;
-
-    $theScheme->{channel} = [];
-
-    foreach my $channel ( sort { $a->{channel_id} <=> $b->{channel_id} } @{ $self->listChannel() } ) {
-        push( @{ $theScheme->{channel} }, $channel );
-    }
-
-    my @sortedRule =
-        sort {
-               $a->{transport_stream_id} <=> $b->{transport_stream_id}
-            or $b->{actual}              <=> $a->{actual}
-            or $a->{channel_id}          <=> $b->{channel_id}
-        } @{ $self->listRule() };
-
-    $theScheme->{rule} = \@sortedRule;
-
-    $theScheme->{eit} = ();
-
-    foreach my $eit ( sort { $a->{eit_id} <=> $b->{eit_id} } @{ $self->listEit() } ) {
-        push( @{ $theScheme->{eit} }, $eit );
-    }
-
-    return $theScheme;
-} ## end sub export
+} ## end sub addScheme
 
 =head3 _unfreezeEvent( $event)
 
@@ -1665,7 +1667,7 @@ sub _unfreezeEvent {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019 by Bojan Ramšak
+This software is copyright (c) 2022 by Bojan Ramšak
 
 =head1 LICENSE
 

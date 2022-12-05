@@ -4,7 +4,6 @@ use 5.024;
 use cherryEpg::Git;
 use cherryEpg::Maintainer;
 use cherryEpg::Scheme;
-use cherryEpg::Taster;
 use cherryEpg;
 use Dancer2;
 use Dancer2::Plugin::Ajax;
@@ -93,12 +92,12 @@ get '/scheme/reference' => require_role cherryweb => sub {
 get '/report.:format' => sub {
     my $format = params->{'format'};
 
-    my $taster = cherryEpg::Taster->instance();
+    my $cherry = cherryEpg->instance();
 
     if ( $format eq "txt" ) {
-        send_file( \$taster->format(), content_type => 'text/plain; charset=UTF-8' );
+        send_file( \$cherry->format(), content_type => 'text/plain; charset=UTF-8' );
     } elsif ( $format eq "json" ) {
-        send_as( JSON => $taster->report() );
+        send_as( JSON => $cherry->report() );
     } else {
         return "The [$format] format is not yet supported. ";
     }
@@ -123,7 +122,7 @@ get '/export/:id.xml' => sub {
     return "" unless $list;
 
     header( 'Content-Type' => 'application/xml' );
-    return $cherry->epg->channelListExport( $list, $cherry->config->{core}{exportIP} );
+    return $cherry->epg->exportScheduleData( $list, $cherry->config->{core}{exportIP} );
 };
 
 # download scheme by target
@@ -168,8 +167,7 @@ get '/dump/:target' => require_role cherryweb => sub {
 # from here on there are the AJAX handlers
 # status
 ajax '/status' => require_role cherryweb => sub {
-    my $taster = cherryEpg::Taster->instance();
-    my $report = $taster->report();
+    my $report = cherryEpg->instance()->report();
 
     # correct timestamp/uptime format display with TIMEAGO
     my $timestamp = localtime( $report->{timestamp} );
@@ -184,8 +182,7 @@ ajax '/announce' => require_role cherryweb => sub {
 
     my $config = params->{config};
 
-    my $cherry = cherryEpg->instance();
-    my $epg    = $cherry->epg;
+    my $epg = cherryEpg->instance()->epg;
 
     if ($config) {
 
@@ -200,7 +197,7 @@ ajax '/announce' => require_role cherryweb => sub {
                 publish => params->{following_check} ? 1 : 0,
             }
         };
-        if ( $epg->announcerSave($newConfig) && $cherry->sectionDelete() ) {
+        if ( $epg->announcerSave($newConfig) && $cherry->deleteSection() ) {
             send_as(
                 JSON => {
                     success  => 1,
@@ -227,7 +224,7 @@ ajax '/carousel/browse' => require_role cherryweb => sub {
     my $list = cherryEpg::Player->new()->list();
 
     # convert date to ISO 8601 for use with timeago
-    foreach my $item ( @{$list} ) {
+    foreach my $item ( $list->@* ) {
         $item->{timestamp} = localtime( $item->{timestamp} )->datetime;
     }
 
@@ -388,7 +385,7 @@ ajax '/scheme/upload' => require_role cherryweb => sub {
         my $file;
         ( undef, $file ) = tempfile( 'schemeXXXXXX', OPEN => 1, UNLINK => 0, SUFFIX => '.yaml.gz', DIR => $CHERRY_TEMPDIR );
 
-        $scheme->export($file);
+        $scheme->exportScheme($file);
 
         # save the temporary filename
         session schemeFile => $file;
@@ -408,10 +405,10 @@ ajax '/scheme/upload' => require_role cherryweb => sub {
 
 ajax '/scheme/browse' => require_role cherryweb => sub {
 
-    my $list = cherryEpg::Scheme->new()->list();
+    my $list = cherryEpg::Scheme->new()->listScheme();
 
     # convert date to ISO 8601 for use with timeago
-    foreach my $item ( @{$list} ) {
+    foreach my $item ( $list->@* ) {
         $item->{timestamp} = localtime( $item->{timestamp} )->datetime;
     }
 
@@ -426,10 +423,10 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
 
     if ( -e $file ) {
         my $scheme = cherryEpg::Scheme->new();
-        if ( $scheme->Import($file) ) {
+        if ( $scheme->importScheme($file) ) {
             if ( $mtime eq $scheme->{scheme}{source}{mtime} ) {
                 $scheme->{scheme}{source}{description} = $description;
-                $scheme->export($file);
+                $scheme->exportScheme($file);
 
                 send_as(
                     JSON => {
@@ -438,7 +435,7 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
                     }
                 );
             } ## end if ( $mtime eq $scheme...)
-        } ## end if ( $scheme->Import($file...))
+        } ## end if ( $scheme->importScheme...)
         unlink($file) if -e $file;
     } ## end if ( -e $file )
     send_as( JSON => { success => 0 } );
@@ -463,7 +460,7 @@ ajax '/scheme/prepare' => require_role cherryweb => sub {
         my $file;
         ( undef, $file ) = tempfile( 'schemeXXXXXX', OPEN => 1, UNLINK => 0, SUFFIX => '.yaml.gz', DIR => $CHERRY_TEMPDIR );
 
-        $scheme->export($file);
+        $scheme->exportScheme($file);
 
         # save the temporary filename
         session schemeFile => $file;
@@ -497,12 +494,12 @@ ajax '/scheme/action' => require_role cherryweb => sub {
             $scheme = cherryEpg::Scheme->new();
 
             # try to load and compare timestamp
-            if ( !$scheme->Import($file) or params->{mtime} ne $scheme->{scheme}{source}{mtime} ) {
+            if ( !$scheme->importScheme($file) or params->{mtime} ne $scheme->{scheme}{source}{mtime} ) {
 
                 # if failed
                 unlink($file);
                 send_as( JSON => [ { success => 0, message => 'Loading scheme' } ] );
-            } ## end if ( !$scheme->Import(...))
+            } ## end if ( !$scheme->importScheme...)
         } else {
             send_as( JSON => [ { success => 0, message => 'Loading file' } ] );
         }
@@ -531,15 +528,15 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     }
 
     if ( $action eq 'loadScheme' and params->{resetDatabase} ) {
-        push( @report, { success => defined $cherry->databaseReset(), message => 'Reset tables in database' } );
+        push( @report, { success => defined $cherry->resetDatabase(), message => 'Reset tables in database' } );
     }
 
     if ( params->{deleteIngest} ) {
-        push( @report, { success => defined $cherry->ingestDelete(), message => 'Delete ingest directory' } );
+        push( @report, { success => defined $cherry->deleteIngest(), message => 'Delete ingest directory' } );
     }
 
     if ( ( $action eq 'loadScheme' and !params->{deleteIngest} ) or params->{reIngest} ) {
-        push( @report, { success => defined $cherry->channelReset(), message => 'Reset ingest directory' } );
+        push( @report, { success => defined $cherry->resetChannel(), message => 'Reset ingest directory' } );
     }
 
     if ( $action eq 'loadScheme' ) {
@@ -550,7 +547,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     } ## end if ( $action eq 'loadScheme')
 
     if ( params->{grab} || params->{ingest} ) {
-        my $count = scalar $cherry->channelMulti( 'all', params->{grab}, params->{ingest} )->@*;
+        my $count = scalar $cherry->parallelGrabIngestChannel( 'all', params->{grab}, params->{ingest} )->@*;
 
         my @job;
         push( @job,    'grab' )   if params->{grab};
@@ -559,7 +556,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     } ## end if ( params->{grab} ||...)
 
     if ( params->{build} ) {
-        push( @report, { success => defined $cherry->eitMulti(), message => 'Build output EIT' } );
+        push( @report, { success => defined $cherry->parallelUpdateEit(), message => 'Build output EIT' } );
     }
 
     if ( !scalar @report ) {
@@ -581,9 +578,8 @@ ajax '/scheme/delete' => require_role cherryweb => sub {
 
 # current configuration
 ajax '/scheme' => require_role cherryweb => sub {
-    my $scheme = cherryEpg::Scheme->new();
+    my $active = shift cherryEpg::Scheme->new()->listScheme()->@*;
 
-    my $active = shift $scheme->list()->@*;
     if ($active) {
         $active->{timestamp} = localtime( $active->{timestamp} )->strftime();
     }
@@ -595,8 +591,9 @@ ajax '/scheme' => require_role cherryweb => sub {
 ajax '/ebudget' => require_role cherryweb => sub {
     my $t = localtime;
 
-    my $taster = cherryEpg::Taster->instance();
-    my $result = $taster->eventBudget();
+    my $cherry = cherryEpg->instance();
+
+    my $budget = $cherry->eventBudget();
 
     send_as(
         JSON => {
@@ -604,12 +601,12 @@ ajax '/ebudget' => require_role cherryweb => sub {
             timestamp => $t->strftime(),
         }
         )
-        unless $result;
+        unless $budget;
 
     # convert date to ISO 8601 for use with timeago and get overall
     # worsed status
     my $status = 0;
-    foreach my $channel (@$result) {
+    foreach my $channel (@$budget) {
         $status = $channel->{status} if $status < $channel->{status};
         if ( $channel->{update} ) {
             my $t = localtime( $channel->{update} );
@@ -617,11 +614,11 @@ ajax '/ebudget' => require_role cherryweb => sub {
         } else {
             $channel->{update} = undef;
         }
-    } ## end foreach my $channel (@$result)
+    } ## end foreach my $channel (@$budget)
 
     send_as(
         JSON => {
-            data      => $result,
+            data      => $budget,
             status    => $status,
             timestamp => $t->strftime(),
         }
@@ -704,21 +701,21 @@ ajax '/service/info' => require_role cherryweb => sub {
     }
 
     # get events
-    my @list = $cherry->epg->listEvent( $channel_id, undef, undef, time() );
-    splice( @list, 2 );
+    my $eventList = $cherry->epg->listEvent( $channel_id, undef, undef, time() );
+    splice( $eventList->@*, 2 );
 
     # if present is missing
-    if ( @list == 0 || @list > 0 && $list[0]->{start} > time() ) {
+    if ( $eventList->@* == 0 || $eventList->@* > 0 && $eventList->[0]->{start} > time() ) {
 
         # this is not the present event
-        unshift( @list, {} );
-        splice( @list, 2 );
-    } ## end if ( @list == 0 || @list...)
+        unshift( $eventList->@*, {} );
+        splice( $eventList->@*, 2 );
+    } ## end if ( $eventList->@* ==...)
 
     # if following is missing
-    push( @list, {} ) if @list == 1;
+    push( $eventList->@*, {} ) if $eventList->@* == 1;
 
-    foreach my $event (@list) {
+    foreach my $event ( $eventList->@* ) {
         $event->{timeSpan} = '?';
         if ( $event->{start} ) {
             $event->{timeSpan} =
@@ -734,20 +731,20 @@ ajax '/service/info' => require_role cherryweb => sub {
             }
         } ## end foreach my $desc ( $event->...)
         delete $event->{descriptors};
-    } ## end foreach my $event (@list)
+    } ## end foreach my $event ( $eventList...)
 
 
     $result->{last}   = localtime( $last->{$channel_id}{timestamp} )->strftime();
-    $result->{events} = \@list;
+    $result->{events} = $eventList;
 
     send_as( JSON => $result );
 };
 
 # show ringelspiel statistics
 ajax '/carousel' => require_role cherryweb => sub {
-    my $taster = cherryEpg::Taster->instance();
+    my $cherry = cherryEpg->instance();
 
-    send_as( JSON => $taster->ringelspiel );
+    send_as( JSON => $cherry->ringelspiel );
 };
 
 # browse log

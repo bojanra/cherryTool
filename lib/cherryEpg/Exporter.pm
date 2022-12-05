@@ -5,7 +5,7 @@ use utf8;
 use Moo::Role;
 use Time::Local;
 
-=head3 channelListExport( $list, $url)
+=head3 exportScheduleData( $list, $url)
 
 Export schedule data for $list of channels in xml format.
 Use $url as source and $language for descriptors.
@@ -13,7 +13,7 @@ Return xml serialized string.
 
 =cut
 
-sub channelListExport {
+sub exportScheduleData {
     my ( $self, $list, $url ) = @_;
     $url //= "127.0.0.1";
 
@@ -34,7 +34,7 @@ sub channelListExport {
 
         my $channelNotDefined = 1;
 
-        foreach my $event ( $self->listEvent( $channel->{channel_id} ) ) {
+        foreach my $event ( $self->listEvent( $channel->{channel_id} )->@* ) {
 
             # define the channel with the first event
             if ($channelNotDefined) {
@@ -81,7 +81,7 @@ sub channelListExport {
     utf8::encode($output);
 
     return $output;
-} ## end sub channelListExport
+} ## end sub exportScheduleData
 
 1;
 

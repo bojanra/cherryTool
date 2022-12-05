@@ -49,7 +49,7 @@ sub log {
 
     my $subject = "$params{'log4p_level'} from $params{'log4p_category'} on " . hostname . "\n";
     my $content = "";
-    $content .= "cherryEPG on host " . hostname . " notification:\n";
+    $content .= "cherryEpg on host " . hostname . " notification:\n";
     $content .= "* $text" . ( $channel ? " (SID=$channel)" : "" ) . "\n";
     if ($info) {
         if ( ref($info) eq 'ARRAY' ) {

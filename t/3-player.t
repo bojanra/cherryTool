@@ -12,7 +12,7 @@ BEGIN {
     use_ok("cherryEpg::Player");
 }
 
-my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], 'cherryEpg::Player' );
+my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
 my $serialized;
 my $imported;
 
@@ -28,7 +28,7 @@ my $meta = {
 my $carouselPath = $player->cherry->config->{core}{carousel};
 my $testfile     = 'testing';
 
-ok( -d -W $carouselPath, 'carousel directory writable' );
+ok( -d -W $carouselPath, "carousel directory writable" );
 
 ok( defined $player->delete(), "delete carousel" );
 

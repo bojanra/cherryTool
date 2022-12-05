@@ -12,7 +12,7 @@ BEGIN {
 
 my $cherry = cherryEpg->instance( verbose => 0 );
 
-isa_ok( $cherry, 'cherryEpg' );
+isa_ok( $cherry, "cherryEpg" );
 
 subtest "copy sample schedule data" => sub {
     my $stock = $cherry->config->{core}{stock};
@@ -33,11 +33,11 @@ subtest "copy sample schedule data" => sub {
     done_testing();
 };
 
-my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 
 my $sut = 'parser';
-ok( defined $cherry->ingestDelete(), "delete ingest dir" );
-ok( $cherry->databaseReset(),        "clean/init db" );
+ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+ok( $cherry->resetDatabase(),        "clean/init db" );
 
 # read, build load scheme
 ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
@@ -45,12 +45,12 @@ ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
 my $s = $scheme->build();
 ok( $s->{isValid}, "build scheme" );
 
-my ( $success, $error ) = $scheme->push();
+my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) && !scalar(@$error), "load scheme" );
 
 foreach my $channel ( $cherry->epg->listChannel()->@* ) {
-    my $grab     = $cherry->channelGrab($channel);
-    my $ingest   = $cherry->channelIngest($channel);
+    my $grab     = $cherry->grabChannel($channel);
+    my $ingest   = $cherry->ingestChannel($channel);
     my ($parser) = split( /\?/, $channel->{parser} );
     ok( ref($grab) eq 'ARRAY' && scalar(@$grab) > 0 && scalar(@$ingest) && !scalar( @{ $$ingest[0]->{errorList} } ),
         "$parser test with channel $channel->{channel_id}" );

@@ -22,15 +22,16 @@ BEGIN {
 my $cherry = cherryEpg->instance( verbose => 0 );
 my $sut    = 'simple';
 
-my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], 'cherryEpg::Scheme' );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 
 ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
 
 my $s = $scheme->build();
 
-ok( $cherry->databaseReset(), "clean/init db" );
+ok( $cherry->resetDatabase(), "clean/init db" );
 
-my ( $success, $error ) = $scheme->push();
+my ( $success, $error ) = $scheme->pushScheme();
+
 ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
 {

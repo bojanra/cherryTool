@@ -70,11 +70,11 @@ sub readXLS {
 
     if ( !-e $file ) {
         $self->error("Compiling failed. Cannot open input file [$file]");
-        return $raw;
+        return;
     }
 
-    my $isServiceSheet = 0;
-    my $isEitSheet     = 0;
+    my $isServiceSheet;
+    my $isEitSheet;
 
     my $eBook = ReadData( $file, parser => "xls" );
 
@@ -107,8 +107,8 @@ sub readXLS {
         } ## end for ($sheetName)
     } ## end foreach my $sheetName ( keys...)
 
-    $self->error("Missing [SERVICE] sheet") if !$isServiceSheet;
-    $self->error("Missing [EIT] sheet")     if !$isEitSheet;
+    $self->error("Missing [SERVICE] sheet") unless $isServiceSheet;
+    $self->error("Missing [EIT] sheet")     unless $isEitSheet;
 
     # read input file as binary and insert in report
     my $blob = try {
@@ -132,20 +132,20 @@ sub readXLS {
     return $raw;
 } ## end sub readXLS
 
-=head3 push()
+=head3 pushScheme()
 
-Push/load current scheme to database.
+Push/add current scheme to database.
 
 =cut
 
-sub push {
+sub pushScheme {
     my ($self) = @_;
 
     my $scheme   = $self->{scheme};
     my $filename = $scheme->{source}{filename} // '-';
 
     # load to db
-    my ( $success, $error ) = $self->cherry->epg->import($scheme);
+    my ( $success, $error ) = $self->cherry->epg->addScheme($scheme);
 
     # generate&play tables
     my $psigen = cherryEpg::Table->new();
@@ -172,41 +172,17 @@ sub push {
             undef, undef, $scheme );
     }
     return ( $success, $error );
-} ## end sub push
+} ## end sub pushScheme
 
-=head3 pull()
-
-Pull/read scheme from database.
-
-=cut
-
-sub pull {
-    my ( $self, $filename ) = @_;
-
-    # get struct
-    my $exported = $self->cherry->epg->export();
-
-    $self->{raw}       = {};
-    $self->{errorList} = [];
-    $self->{scheme}    = $exported;
-
-    # all schemes from db are valid
-    $self->{scheme}{isValid} = 1;
-
-    $logger->trace( "exporting scheme from database", undef, undef, $exported );
-
-    return $exported;
-} ## end sub pull
-
-=head3 Import( $file )
-=head3 Import( $string )
+=head3 importScheme( $file )
+=head3 importScheme( $string )
 
 Import scheme from YAML $file or $string.
 Return reference to $scheme
 
 =cut
 
-sub Import {
+sub importScheme {
     my ( $self, $arg ) = @_;
 
     $self->{raw}       = {};
@@ -238,22 +214,22 @@ sub Import {
         } ## end else [ if ( $file =~ /\.gz$/ )]
     } ## end else [ if ( $arg =~ m/^--/s )]
 
-    return unless $scheme;
+    return unless $scheme && exists $scheme->{source};
 
     $self->{scheme} = $scheme;
 
     return $scheme;
-} ## end sub Import
+} ## end sub importScheme
 
-=head3 export( $file)
-=head3 export( )
+=head3 exportScheme( $file)
+=head3 exportScheme( )
 
 Write scheme to $file in yaml format or gzip if $flag is set and return 1 on success.
 Return scheme data as string if no filename defined.
 
 =cut
 
-sub export {
+sub exportScheme {
     my ( $self, $file, $gzip ) = @_;
 
     $YAML::XS::QuoteNumericStrings = 0;
@@ -272,7 +248,7 @@ sub export {
     } else {
         return YAML::XS::Dump( $self->{scheme} );
     }
-} ## end sub export
+} ## end sub exportScheme
 
 =head3 parseService(  )
 
@@ -399,7 +375,7 @@ sub parseService {
             language => $field[6],
             parser   => $field[9] . ( $field[10] ? '?' . $field[10] : '' ),
         };
-        CORE::push( @{ $raw->{serviceList} }, $service );
+        push( $raw->{serviceList}->@*, $service );
 
     } ## end foreach my $rowCounter ( 1 ...)
 } ## end sub parseService
@@ -497,7 +473,7 @@ sub parseEIT {
             comment => ''
         };
 
-        CORE::push( @{ $raw->{eit}{$sheetName} }, $eit );
+        push( $raw->{eit}{$sheetName}->@*, $eit );
 
     } ## end foreach my $rowCounter ( 1 ...)
 } ## end sub parseEIT
@@ -626,7 +602,7 @@ sub parseRule {
             service_id          => $field[4] + 0,
             transport_stream_id => $field[3] + 0,
         };
-        CORE::push( @{ $raw->{rule} }, $rule );
+        push( $raw->{rule}->@*, $rule );
     } ## end foreach my $rowCounter ( 1 ...)
 } ## end sub parseRule
 
@@ -640,6 +616,8 @@ Return $scheme
 
 sub build {
     my ( $self, $target ) = @_;
+
+    return unless $self->{raw};
 
     $target = $target // hostname;
     my $raw    = $self->{raw};
@@ -663,7 +641,7 @@ sub build {
     my $tsHash = {};
     my $output = {};    # key is ip:port:pid
 
-    foreach my $eit ( @{ $raw->{eit}{$_target} } ) {
+    foreach my $eit ( $raw->{eit}{$_target}->@* ) {
         my $tsid = $eit->{tsid};
         if ( exists $tsHash->{$tsid} ) {
             $self->error("Duplicate TS output [$tsid]");
@@ -676,12 +654,12 @@ sub build {
                 $output->{$o} = $tsid;
             }
         } ## end else [ if ( exists $tsHash->{...})]
-    } ## end foreach my $eit ( @{ $raw->...})
+    } ## end foreach my $eit ( $raw->{eit...})
 
     # make hash of services by channel_id
     my $serviceHash = {};
 
-    foreach my $service ( @{ $raw->{serviceList} } ) {
+    foreach my $service ( $raw->{serviceList}->@* ) {
         my $tsid = $service->{tsid};
 
         # check for duplicate
@@ -696,7 +674,7 @@ sub build {
             $url =~ s/[\/\+]/X/g;
             $service->{post} = $url;
         } ## end else [ if ( exists $serviceHash...)]
-    } ## end foreach my $service ( @{ $raw...})
+    } ## end foreach my $service ( $raw->...)
 
     if ( !$raw->{noautorule} ) {
 
@@ -705,7 +683,7 @@ sub build {
         # make hash of all TSID used in service sheet
         my $tsByService = {};
 
-        foreach my $service ( @{ $raw->{serviceList} } ) {
+        foreach my $service ( $raw->{serviceList}->@* ) {
             my $tsid = $service->{tsid};
             if ( !exists $tsByService->{$tsid} ) {
                 $tsByService->{$tsid} = {};
@@ -716,14 +694,14 @@ sub build {
                 }
             } ## end if ( !exists $tsByService...)
             $tsByService->{$tsid}{ $service->{sid} } = $service;
-        } ## end foreach my $service ( @{ $raw...})
+        } ## end foreach my $service ( $raw->...)
 
         # build list of actual, other
         foreach my $tsid ( keys %$tsHash ) {
             $tsHash->{$tsid}{tables}{actual} = [];
             $tsHash->{$tsid}{tables}{other}  = [];
 
-            foreach my $service ( @{ $raw->{serviceList} } ) {
+            foreach my $service ( $raw->{serviceList}->@* ) {
 
                 # check exclude and skip
                 # we check only by sid not by onid|tsid|sid
@@ -731,21 +709,19 @@ sub build {
                 next if exists $tsHash->{$tsid}{exclude}{$sid};
 
                 if ( $service->{tsid} == $tsid ) {
-                    CORE::push( @{ $tsHash->{$tsid}{tables}{actual} }, $service );
+                    push( $tsHash->{$tsid}{tables}{actual}->@*, $service );
                 } else {
                     next if ( $tsHash->{$tsid}{option}{NOMESH} || $raw->{nomesh} );
-                    CORE::push( @{ $tsHash->{$tsid}{tables}{other} }, $service );
+                    push( $tsHash->{$tsid}{tables}{other}->@*, $service );
                 }
-            } ## end foreach my $service ( @{ $raw...})
+            } ## end foreach my $service ( $raw->...)
         } ## end foreach my $tsid ( keys %$tsHash)
 
         # generate eit & rules
-        my $eitCounter = 0;
         foreach my $tsid ( sort { $a <=> $b } keys %$tsHash ) {
 
-            $eitCounter += 1;
             my $eit = {
-                eit_id => $eitCounter,
+                eit_id => $tsid,
                 pid    => $tsHash->{$tsid}{pid} + 0,    # must be numeric
                 output => $tsHash->{$tsid}{output},
                 option => $tsHash->{$tsid}{option}
@@ -754,26 +730,26 @@ sub build {
             # update options from CONF sheet
             $eit->{option}{SEMIMESH} = $raw->{semimesh} if $raw->{semimesh} and !defined $eit->{option}{SEMIMESH};
 
-            CORE::push( @{ $scheme->{eit} }, $eit );
+            push( $scheme->{eit}->@*, $eit );
 
             # list both (actual, other)
             foreach my $table ( keys %{ $tsHash->{$tsid}{tables} } ) {
 
                 # just build a rule
-                foreach my $service ( @{ $tsHash->{$tsid}{tables}{$table} } ) {
+                foreach my $service ( $tsHash->{$tsid}{tables}{$table}->@* ) {
 
                     my $rule = {
                         actual              => ( $table eq 'actual' ? 1 : 0 ),
                         channel_id          => $service->{sid},
-                        eit_id              => $eitCounter,
+                        eit_id              => $tsid,
                         comment             => '',
                         original_network_id => $service->{onid},
                         service_id          => $service->{sid},
                         transport_stream_id =>
                             ( exists $tsHash->{$tsid}{option}{TSID} ? $tsHash->{$tsid}{option}{TSID} : $service->{tsid} ),
                     };
-                    CORE::push( @{ $scheme->{rule} }, $rule );
-                } ## end foreach my $service ( @{ $tsHash...})
+                    push( $scheme->{rule}->@*, $rule );
+                } ## end foreach my $service ( $tsHash...)
             } ## end foreach my $table ( keys %{...})
         } ## end foreach my $tsid ( sort { $a...})
     } else {
@@ -810,7 +786,7 @@ sub build {
 
             my $rule = {%$in};
 
-            CORE::push( $scheme->{rule}->@*, $rule );
+            push( $scheme->{rule}->@*, $rule );
         } ## end foreach my $in ( $raw->{rule...})
 
         foreach my $eit_id ( sort { $a <=> $b } keys %$eitInUse ) {
@@ -824,7 +800,7 @@ sub build {
             # update options from CONF sheet
             $eit->{option}{SEMIMESH} = $raw->{semimesh} if $raw->{semimesh} and !defined $eit->{option}{SEMIMESH};
 
-            CORE::push( $scheme->{eit}->@*, $eit );
+            push( $scheme->{eit}->@*, $eit );
         } ## end foreach my $eit_id ( sort {...})
     } ## end else [ if ( !$raw->{noautorule...})]
 
@@ -833,14 +809,14 @@ sub build {
                $a->{transport_stream_id} <=> $b->{transport_stream_id}
             || $b->{actual}              <=> $a->{actual}
             || $a->{channel_id}          <=> $b->{channel_id}
-        } @{ $scheme->{rule} };
+        } $scheme->{rule}->@*;
 
     $scheme->{rule} = \@sortedRule;
 
     # copy sorted list of channels to scheme
     my @sortedChannel =
         map { delete $_->{tsid}; delete $_->{onid}; $_->{channel_id} = $_->{sid}; delete $_->{sid}; $_ }
-        sort { $a->{sid} <=> $b->{sid} } @{ $raw->{serviceList} };
+        sort { $a->{sid} <=> $b->{sid} } $raw->{serviceList}->@*;
 
     # map channels to scheme
     $scheme->{channel} = \@sortedChannel;
@@ -848,10 +824,12 @@ sub build {
     # generate PAT, SDT, PMT
     $self->tableBuilder($scheme);
 
-    $scheme->{isValid} = scalar @{ $self->error } == 0;
+    $scheme->{isValid} = scalar $self->error->@* == 0;
 
-    # copy raw part
-    $scheme->{source} = $raw->{source};
+    # copy keys from raw
+    foreach (qw( source)) {
+        $scheme->{$_} = $raw->{$_};
+    }
 
     $self->{scheme} = $scheme;
     return $scheme;
@@ -904,7 +882,7 @@ sub tableBuilder {
         $pmtPid = $eit->{option}{PMT} if $eit->{option}{PMT} && $eit->{option}{PMT} > 1;
 
         foreach my $service ( sort keys $channelByEit{ $eit->{eit_id} }{service}->%* ) {
-            CORE::push(
+            push(
                 $table->{programs}->@*,
                 {
                     program_number => $service,
@@ -953,7 +931,7 @@ sub tableBuilder {
                     ]
                 };
 
-                CORE::push( $table->{services}->@*, $item );
+                push( $table->{services}->@*, $item );
             } ## end foreach my $service ( sort ...)
             my $filename = sprintf( "eit_%03i_sdt", $eit->{eit_id} );
             $scheme->{table}{$filename} = $table;
@@ -995,7 +973,7 @@ sub error {
     my ( $self, @arg ) = @_;
 
     if ( scalar @arg ) {
-        CORE::push( @{ $self->{errorList} }, sprintf( shift @arg, @arg ) );
+        push( $self->{errorList}->@*, sprintf( shift @arg, @arg ) );
     } else {
         return $self->{errorList};
     }
@@ -1014,32 +992,32 @@ sub restore {
     my $path = dir( $self->cherry->config->{core}{scheme} );
     my $file = file( $path, $target . $archiveExtension );
 
-    my $scheme = $self->Import($file);
+    my $scheme = $self->importScheme($file);
 
     return $scheme;
 } ## end sub restore
 
-=head3 backup ()
+=head3 backupScheme ()
 
 Backup current scheme to archive in gzipped YAML string format.
 Return $target on success.
 
 =cut
 
-sub backup {
+sub backupScheme {
     my ($self) = @_;
 
     my $target = gmtime->strftime("%Y%m%d%H%M%S");
     my $file   = file( $self->cherry->config->{core}{scheme}, $target . $archiveExtension );
 
-    if ( $self->export( $file, 1 ) ) {
+    if ( $self->exportScheme( $file, 1 ) ) {
         $logger->info("backup scheme [$target]");
         return $target;
     } else {
         $logger->error("backup scheme [$target]");
         return;
     }
-} ## end sub backup
+} ## end sub backupScheme
 
 =head3 delete ( $target )
 
@@ -1059,14 +1037,14 @@ sub delete {
     return 0;
 } ## end sub delete
 
-=head3 list ( )
+=head3 listScheme ( )
 
 List all files in archive with detailed data.
 Return hash.
 
 =cut
 
-sub list {
+sub listScheme {
     my ($self) = @_;
 
     my $path = dir( $self->cherry->config->{core}{scheme} );
@@ -1085,19 +1063,21 @@ sub list {
 
             my $item = {
                 timestamp   => gmtime->strptime( $target, "%Y%m%d%H%M%S" )->epoch(),
-                eit         => scalar @{ $scheme->{eit} },
-                channel     => scalar @{ $scheme->{channel} },
-                rule        => scalar @{ $scheme->{rule} },
+                eit         => scalar $scheme->{eit}->@*,
+                channel     => scalar $scheme->{channel}->@*,
+                rule        => scalar $scheme->{rule}->@*,
                 source      => $scheme->{source}{filename}    // '-',
                 description => $scheme->{source}{description} // '-',
                 target      => $target,
             };
-            CORE::push( @list, $item );
+
+            push( @list, $item );
         } ## end foreach my $target (@all)
+
         return \@list;
     } ## end if ( -d $path && -r _ ...)
     return;
-} ## end sub list
+} ## end sub listScheme
 
 =head1 AUTHOR
 

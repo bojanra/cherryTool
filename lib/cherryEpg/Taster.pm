@@ -3,9 +3,8 @@ package cherryEpg::Taster;
 use 5.024;
 use utf8;
 use cherryEpg::Git;
-use cherryEpg;
 use JSON::XS;
-use Moo;
+use Moo::Role;
 use Net::Curl::Easy qw(:constants );
 use Net::NTP        qw(get_ntp_response);
 use Readonly;
@@ -19,22 +18,8 @@ Readonly my $WARNING  => 1;
 Readonly my $CRITICAL => 2;
 Readonly my $UNKNOWN  => 3;
 
-with('MooX::Singleton');
-
-has 'verbose' => (
-    is      => 'ro',
-    default => 0
-);
-
-has 'cherry' => ( is => 'lazy', );
-
-sub BUILD {
+after BUILD => sub {
     my ( $self, $arg ) = @_;
-
-    # read configuration
-    foreach my $key ( keys %{ $self->cherry->config->{core}{taster} } ) {
-        $self->{$key} = $self->cherry->config->{core}{taster}{$key};
-    }
 
     # number of days in future to check default
     $self->{eventbudget}{days} //= 7;
@@ -47,13 +32,7 @@ sub BUILD {
     # 2 - today and tomorrow
     $self->{eventbudget}{threshold}{critical} //= 2;
 
-} ## end sub BUILD
-
-sub _build_cherry {
-    my ($self) = @_;
-
-    return cherryEpg->instance( verbose => $self->verbose );
-}
+};    ## end sub BUILD
 
 =head3 eventBudget ( )
 
@@ -66,7 +45,7 @@ sub eventBudget {
     $days = $days // $self->{eventbudget}{days};
     my @report;
 
-    my $lastUpdate = $self->cherry->epg->listChannelLastUpdate();
+    my $lastUpdate = $self->epg->listChannelLastUpdate();
     return unless $lastUpdate;
     my $eBudget = $self->getMultiInterval($days);
 
@@ -121,9 +100,9 @@ sub getMultiInterval {
             if ( $dayCount == $days ) {
 
                 # get number of all remaining events in database
-                $serviceList = $self->cherry->epg->listChannelEventCount( $dayCount, 65535 );
+                $serviceList = $self->epg->listChannelEventCount( $dayCount, 65535 );
             } else {
-                $serviceList = $self->cherry->epg->listChannelEventCount( $dayCount, $dayCount + 1 );
+                $serviceList = $self->epg->listChannelEventCount( $dayCount, $dayCount + 1 );
             }
 
             if ( $dayCount == 0 ) {
@@ -135,7 +114,7 @@ sub getMultiInterval {
             } else {
                 foreach my $row (@$serviceList) {
                     my ( $name, $id, $count ) = @$row;
-                    push( @{ $result->{$id}{count} }, $count );
+                    push( $result->{$id}{count}->@*, $count );
                 }
             } ## end else [ if ( $dayCount == 0 ) ]
         } ## end for ( my $dayCount = 0 ...)
@@ -145,7 +124,7 @@ sub getMultiInterval {
 
         # count events per service for previous days but not today
         for ( my $dayCount = $days ; $dayCount < 0 ; $dayCount++ ) {
-            my $serviceList = $self->cherry->epg->listChannelEventCount( $dayCount, $dayCount + 1 );
+            my $serviceList = $self->epg->listChannelEventCount( $dayCount, $dayCount + 1 );
 
             # we are looking in the past and therefore we show count of events negative
             if ( $dayCount == $days ) {
@@ -157,7 +136,7 @@ sub getMultiInterval {
             } else {
                 foreach my $row (@$serviceList) {
                     my ( $name, $id, $count ) = @$row;
-                    push( @{ $result->{$id}{count} }, -$count );
+                    push( $result->{$id}{count}->@*, -$count );
                 }
             } ## end else [ if ( $dayCount == $days)]
         } ## end for ( my $dayCount = $days...)
@@ -209,16 +188,16 @@ sub ringelspiel {
             $decoded->{message} = 'Streaming';
         }
 
-        foreach my $stream ( @{ $decoded->{streams} } ) {
+        foreach my $stream ( $decoded->{streams}->@* ) {
             my $last = 0;
-            foreach my $file ( @{ $stream->{files} } ) {
+            foreach my $file ( $stream->{files}->@* ) {
                 $last = $file->{last} if $file->{last} > $last;
                 my $t = localtime( $file->{last} );
                 $file->{last} = $t->datetime;
             }
             my $t = localtime($last);
             $stream->{last} = $t->datetime;
-        } ## end foreach my $stream ( @{ $decoded...})
+        } ## end foreach my $stream ( $decoded...)
     } else {
         my $t = localtime;
         $decoded = {
@@ -234,13 +213,13 @@ sub ringelspiel {
     return $decoded;
 } ## end sub ringelspiel
 
-=head3 version ( )
+=head3 versionReport ( )
 
 Report installed version numbers
 
 =cut
 
-sub version {
+sub versionReport {
     my ($self) = @_;
 
     #debian
@@ -256,24 +235,24 @@ sub version {
 
     my $report = {
         package     => $deb,
-        cherryEpg   => $cherryEpg::VERSION,
+        cherryEpg   => $cherryEpg::VERSION . '',
         ringelspiel => $self->ringelspiel->{version},
         branch      => cherryEpg::Git->new()->branch,
     };
 
     return $report;
-} ## end sub version
+} ## end sub versionReport
 
-=head3 databaseSummary ( )
+=head3 databaseReport ( )
 
 Get mysql database summary status
 
 =cut
 
-sub databaseSummary {
+sub databaseReport {
     my ($self) = @_;
 
-    my $healthCheck = $self->cherry->epg->healthCheck;
+    my $healthCheck = $self->epg->healthCheck;
 
     if ($healthCheck) {
         my @list;
@@ -288,7 +267,7 @@ sub databaseSummary {
 
         return {
             status  => $OK,
-            message => "Running " . $self->cherry->epg->version,
+            message => "Running " . $self->epg->version,
             report  => $report,
         };
     } else {
@@ -298,15 +277,15 @@ sub databaseSummary {
             report  => {},
         };
     } ## end else [ if ($healthCheck) ]
-} ## end sub databaseSummary
+} ## end sub databaseReport
 
-=head3 ringelspielSummary ( )
+=head3 ringelspielReport ( )
 
 Report ringelspiel summary information.
 
 =cut
 
-sub ringelspielSummary {
+sub ringelspielReport {
     my ($self) = @_;
 
     my $ringelspiel = $self->ringelspiel;
@@ -316,14 +295,14 @@ sub ringelspielSummary {
         my $streamCount = 0;
         my $bitrate     = 0;
 
-        foreach my $s ( @{ $ringelspiel->{streams} } ) {
+        foreach my $s ( $ringelspiel->{streams}->@* ) {
             $streamCount += 1;
             $bitrate     += $s->{bitrate};
             $s->{last} = localtime->strptime( $s->{last}, "%Y-%m-%dT%H:%M:%S" )->epoch();
-            foreach my $f ( @{ $s->{files} } ) {
+            foreach my $f ( $s->{files}->@* ) {
                 $f->{last} = localtime->strptime( $f->{last}, "%Y-%m-%dT%H:%M:%S" )->epoch();
             }
-        } ## end foreach my $s ( @{ $ringelspiel...})
+        } ## end foreach my $s ( $ringelspiel...)
 
         # 2000-02-29T12:34:56
         my $start = localtime->strptime( $ringelspiel->{start}, "%Y-%m-%dT%H:%M:%S" )->epoch();
@@ -344,7 +323,7 @@ sub ringelspielSummary {
             report  => {},
         };
     } ## end else [ if ( $ringelspiel->{version...})]
-} ## end sub ringelspielSummary
+} ## end sub ringelspielReport
 
 =head3 uptime ( )
 
@@ -366,13 +345,13 @@ sub uptime {
     }
 } ## end sub uptime
 
-=head3 ntp ( )
+=head3 ntpReport ( )
 
 Report system ntp status
 
 =cut
 
-sub ntp {
+sub ntpReport {
     my ($self) = @_;
 
     my %ntp;
@@ -417,15 +396,15 @@ sub ntp {
             report  => {},
         };
     } ## end else [ if ($success) ]
-} ## end sub ntp
+} ## end sub ntpReport
 
-=head3 epg ( )
+=head3 eventBudgetReport ( )
 
 Report Epg builder status.
 
 =cut
 
-sub epg {
+sub eventBudgetReport {
     my ($self) = @_;
 
     my $budget = $self->eventBudget();
@@ -454,18 +433,18 @@ sub epg {
         message => $message[$status]
     };
 
-} ## end sub epg
+} ## end sub eventBudgetReport
 
-=head3 announcer ( )
+=head3 announcerReport ( )
 
 Report Announcer status.
 
 =cut
 
-sub announcer {
+sub announcerReport {
     my ($self) = @_;
 
-    my $a = $self->cherry->epg->announcerLoad();
+    my $a = $self->epg->announcerLoad();
 
     if ( $a && ( $a->{present}{publish} || $a->{following}{publish} ) ) {
         my $msg = {};
@@ -484,7 +463,7 @@ sub announcer {
         # inactive
         return undef;
     }
-} ## end sub announcer
+} ## end sub announcerReport
 
 =head3 report ( )
 
@@ -499,17 +478,18 @@ sub report {
 
     my $report = {
         timestamp => $timestamp->epoch(),
-        version   => $self->version(),
+        version   => $self->versionReport(),
         modules   => {
-            ntp      => $self->ntp(),
-            playout  => $self->ringelspielSummary(),
-            database => $self->databaseSummary(),
-            epg      => $self->epg(),
+            ntp      => $self->ntpReport(),
+            playout  => $self->ringelspielReport(),
+            database => $self->databaseReport(),
         },
         uptime => $self->uptime(),
     };
 
-    my $announcer = $self->announcer();
+    $report->{modules}{epg} = $self->eventBudgetReport();
+
+    my $announcer = $self->announcerReport();
     $report->{modules}{announcer} = $announcer if $announcer;
 
     my $status = $OK;
@@ -706,12 +686,12 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         write;
     } ## end foreach my $key ( sort keys...)
 
-    if ( ref $data->{streams} eq 'ARRAY' && @{ $data->{streams} } ) {
+    if ( ref $data->{streams} eq 'ARRAY' && $data->{streams}->@* ) {
         $~ = "REPORT_CAROUSEL_HEADER";
         write;
 
         $~ = "REPORT_CAROUSEL";
-        foreach my $stream ( sort { $a->{addr} cmp $b->{addr} } @{ $data->{streams} } ) {
+        foreach my $stream ( sort { $a->{addr} cmp $b->{addr} } $data->{streams}->@* ) {
 
             @fields = (
                 $stream->{addr}, $stream->{port}, $stream->{bitrate},

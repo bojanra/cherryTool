@@ -131,7 +131,7 @@ sub add2Section {
     my $alldescriptors = "";
 
     # iterate over event descriptors
-    foreach my $descriptor ( @{ $event->{descriptors} } ) {
+    foreach my $descriptor ( $event->{descriptors}->@* ) {
         for ( $descriptor->{descriptor_tag} ) {
             $_ == 0x4d && do {
                 $alldescriptors .= $self->getShortEventDescriptorBin($descriptor);
@@ -150,7 +150,7 @@ sub add2Section {
                 last;
             };
         } ## end for ( $descriptor->{descriptor_tag...})
-    } ## end foreach my $descriptor ( @{...})
+    } ## end foreach my $descriptor ( $event...)
 
     my $descriptor_loop_length = length($alldescriptors);
 
@@ -289,7 +289,7 @@ sub getParentalRatingDescriptor {
     my $descriptor_length;
 
     my $substruct = '';
-    foreach ( @{ $descriptor->{list} } ) {
+    foreach ( $descriptor->{list}->@* ) {
         my $country_code = $_->{country_code} // 'SVN';
         my $rating       = $_->{rating}       // 0;
         $substruct .= pack( "a3C", $country_code, $rating );
@@ -390,7 +390,7 @@ sub getContentDescriptorBin {
     my $descriptor_length;
 
     my $substruct = '';
-    foreach my $nibbles ( @{ $descriptor->{list} } ) {
+    foreach my $nibbles ( $descriptor->{list}->@* ) {
         $substruct .= pack( "CC", $nibbles, 0 );
     }
     $descriptor_length = length($substruct);

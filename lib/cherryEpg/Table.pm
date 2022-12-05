@@ -90,7 +90,7 @@ sub _PAT {
 
     my @requiredKeyInService = qw(program_number pid);
     my $programs             = '';
-    foreach my $program ( @{ $table->{programs} } ) {
+    foreach my $program ( $table->{programs}->@* ) {
         return if $self->keyMissing( $program, @requiredKeyInService );
 
         # pack stream
@@ -101,7 +101,7 @@ sub _PAT {
             push( @list, $programs );
             $programs = '';
         }
-    } ## end foreach my $program ( @{ $table...})
+    } ## end foreach my $program ( $table...)
     push( @list, $programs );
     my $last_section_number = scalar(@list) - 1;
     my $section_number      = 0;
@@ -136,7 +136,7 @@ sub _SDT {
     my @requiredKeyInService =
         qw(service_id eit_schedule_flag eit_present_following_flag running_status free_ca_mode descriptors);
     my $services = '';
-    foreach my $service ( @{ $table->{services} } ) {
+    foreach my $service ( $table->{services}->@* ) {
         return if $self->keyMissing( $service, @requiredKeyInService );
         my $descriptor = $self->descriptorLoop( $service->{descriptors} );
         return if !defined $descriptor;
@@ -153,7 +153,7 @@ sub _SDT {
             push( @list, $services );
             $services = '';
         }
-    } ## end foreach my $service ( @{ $table...})
+    } ## end foreach my $service ( $table...)
     push( @list, $services );
     my $last_section_number = scalar(@list) - 1;
     my $section_number      = 0;
@@ -188,7 +188,7 @@ sub _PMT {
 
     my $bin                 = '';
     my @requiredKeyInStream = qw( descriptors stream_type elementary_pid);
-    foreach my $stream ( @{ $table->{elementary_streams} } ) {
+    foreach my $stream ( $table->{elementary_streams}->@* ) {
         return if $self->keyMissing( $stream, @requiredKeyInStream );
         my $descriptor = $self->descriptorLoop( $stream->{descriptors} );
         return if !defined $descriptor;
@@ -197,7 +197,7 @@ sub _PMT {
             pack( "Cnna*", $stream->{stream_type}, 0xe000 | $stream->{elementary_pid}, 0xf000 | length($descriptor),
             $descriptor );
 
-    } ## end foreach my $stream ( @{ $table...})
+    } ## end foreach my $stream ( $table...)
 
     my $section = pack(
         "CnnCCCnna*a*",    # Sestavi celoten section
@@ -226,14 +226,14 @@ sub descriptorLoop {
     my ( $self, $loop ) = @_;
 
     my $buffer = '';
-    foreach ( @{$loop} ) {
+    foreach ( $loop->@* ) {
         my $d = $self->descriptorBuilder($_);
         if ( defined $d ) {
             $buffer .= $d;
         } else {
             return;
         }
-    } ## end foreach ( @{$loop} )
+    } ## end foreach ( $loop->@* )
 
     return $buffer;
 } ## end sub descriptorLoop

@@ -1,4 +1,4 @@
-package cherryEpg;
+package cherryEpg v2.3.01;
 
 use 5.024;
 use utf8;
@@ -22,9 +22,7 @@ use Try::Tiny;
 use YAML::XS;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '2.2.03';
-
-with('MooX::Singleton');
+with( 'MooX::Singleton', 'cherryEpg::Taster' );
 
 has 'configFile' => (
     is      => 'ro',
@@ -158,13 +156,13 @@ sub cleanup {
     $logger->info("cleanup old log records [$count]");
 } ## end sub cleanup
 
-=head3 stockDelete( )
+=head3 deleteStock( )
 
 Delete stock directory.
 
 =cut
 
-sub stockDelete {
+sub deleteStock {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
@@ -173,15 +171,15 @@ sub stockDelete {
 
     $logger->info("delete files from stock directory");
     return remove_tree( $dir, { keep_root => 1 } );
-} ## end sub stockDelete
+} ## end sub deleteStock
 
-=head3 ingestDelete( )
+=head3 deleteIngest( )
 
 Delete directories in ingest.
 
 =cut
 
-sub ingestDelete {
+sub deleteIngest {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
@@ -190,32 +188,32 @@ sub ingestDelete {
 
     $logger->info("delete subdirs in ingest directory");
     return remove_tree( $dir, { keep_root => 1 } );
-} ## end sub ingestDelete
+} ## end sub deleteIngest
 
-=head3 ruleDelete( )
+=head3 deleteRule( )
 
 Delete all rules in database.
 
 =cut
 
-sub ruleDelete {
+sub deleteRule {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
 
     my $count = $self->epg->deleteRule();
 
-    $logger->info("delete rules from database {$count}");
+    $logger->info("delete rules from database [$count]");
     return $count;
-} ## end sub ruleDelete
+} ## end sub deleteRule
 
-=head3 sectionDelete( )
+=head3 deleteSection( )
 
 Delete all entries from section and version table.
 
 =cut
 
-sub sectionDelete {
+sub deleteSection {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
@@ -224,15 +222,15 @@ sub sectionDelete {
 
     $logger->info("reset section and version table");
     return $count;
-} ## end sub sectionDelete
+} ## end sub deleteSection
 
-=head3 channelDelete( $channel_id)
+=head3 deleteChannel( $channel_id)
 
 Delete/wipe channel with $channel_id from database.
 
 =cut
 
-sub channelDelete {
+sub deleteChannel {
     my ( $self, $channel_id ) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
@@ -245,15 +243,15 @@ sub channelDelete {
 
     $logger->info( "wipe service from database and disk", $channel_id );
     return $result;
-} ## end sub channelDelete
+} ## end sub deleteChannel
 
-=head3 databaseReset( )
+=head3 resetDatabase( )
 
 Clean all data and intialize database.
 
 =cut
 
-sub databaseReset {
+sub resetDatabase {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("system");
@@ -261,17 +259,17 @@ sub databaseReset {
     $logger->info("clean database - empty tables");
 
     return $self->epg->initdb();
-} ## end sub databaseReset
+} ## end sub resetDatabase
 
-=head3 channelPurge( $channel)
+=head3 purgeChannel( $channel)
 
-Reset ingest by files for channel $channel.
+Reset ingest by deleting files for channel $channel.
 If no channel defined, go for all.
 Return ref. to list of removed files.
 
 =cut
 
-sub channelPurge {
+sub purgeChannel {
     my ( $self, $channel ) = @_;
 
     my $logger = Log::Log4perl->get_logger("ingester");
@@ -307,9 +305,9 @@ sub channelPurge {
     $logger->info( "purge service by removing files [" . ( scalar @files ) . "]", $channel->{channel_id}, '', \@files );
 
     return \@files;
-} ## end sub channelPurge
+} ## end sub purgeChannel
 
-=head3 channelReset( $channel)
+=head3 resetChannel( $channel)
 
 Reset ingest by removing *.md5.parsed files for channel $channel.
 If no channel defined, go for all.
@@ -317,7 +315,7 @@ Return number of removed files.
 
 =cut
 
-sub channelReset {
+sub resetChannel {
     my ( $self, $channel ) = @_;
 
     my $logger = Log::Log4perl->get_logger("ingester");
@@ -356,9 +354,9 @@ sub channelReset {
     $logger->info( "reset service remov .md5 files [" . ( scalar @files ) . "]", $channel->{channel_id}, undef, \@files );
 
     return \@files;
-} ## end sub channelReset
+} ## end sub resetChannel
 
-=head3 channelIngest( $channel, $dump)
+=head3 ingestChannel( $channel, $dump)
 
 Run the ingester for channel $channel (channel hash).
 If $dump also dump parser output.
@@ -366,43 +364,43 @@ Return report as hashref.
 
 =cut
 
-sub channelIngest {
+sub ingestChannel {
     my ( $self, $channel, $dump ) = @_;
 
     my $myIngest = cherryEpg::Ingester->new( channel => $channel, dump => $dump // 0 );
     return $myIngest->walkDir() if $myIngest->parserReady;
-} ## end sub channelIngest
+} ## end sub ingestChannel
 
-=head3 channelGrab( $channel)
+=head3 grabChannel( $channel)
 
 Run the grabber for channel $channel (channel hash).
 Return report as hashref.
 
 =cut
 
-sub channelGrab {
+sub grabChannel {
     my ( $self, $channel ) = @_;
 
     my $myGrabber = cherryEpg::Grabber->new( channel => $channel );
     return $myGrabber->grab();
-} ## end sub channelGrab
+} ## end sub grabChannel
 
-=head3 channelMulti( $target, $grab, $ingest)
+=head3 parallelGrabIngestChannel( $target, $grab, $ingest)
 
 Grab and ingest channel schedules depending on target [daily, hourly, weekly]
 Return list of grabbed files.
 
 =cut
 
-sub channelMulti {
+sub parallelGrabIngestChannel {
     my ( $self, $target, $grab, $ingest ) = @_;
+
+    my $logger = Log::Log4perl->get_logger("grabber");
 
     # just define
     $target //= "all";
     $grab   //= 1;
     $ingest //= 1;
-
-    my $logger = Log::Log4perl->get_logger("grabber");
 
     my $limit = IPC::ConcurrencyLimit->new(
         type      => 'Flock',
@@ -452,10 +450,10 @@ CHANNELMULTI_LOOP:
                 my $result = [];
 
                 # grab
-                $result = $self->channelGrab($channel) if $grab;
+                $result = $self->grabChannel($channel) if $grab;
 
                 # ingest
-                $self->channelIngest($channel) if $ingest;
+                $self->ingestChannel($channel) if $ingest;
 
                 $pm->finish( 0, $result );
             } ## end if ( $target eq "all" ...)
@@ -465,16 +463,16 @@ CHANNELMULTI_LOOP:
     $pm->wait_all_children;
 
     return $collected;
-} ## end sub channelMulti
+} ## end sub parallelGrabIngestChannel
 
-=head3 eitBuild( $eit)
+=head3 buildEit( $eit)
 
 Check if EIT with $eit must be updated and when needed build and export them to files.
 Return filepath updated!
 
 =cut
 
-sub eitBuild {
+sub buildEit {
     my ( $self, $eit ) = @_;
 
     my $logger = Log::Log4perl->get_logger("builder");
@@ -558,15 +556,15 @@ sub eitBuild {
         $logger->trace( "up-to-date", undef, $eit_id );
     }
     return $report;
-} ## end sub eitBuild
+} ## end sub buildEit
 
-=head3 eitMulti()
+=head3 parallelUpdateEit()
 
 Check if EIT must be updated and when needed build and export them to files.
 
 =cut
 
-sub eitMulti {
+sub parallelUpdateEit {
     my ($self) = @_;
 
     my $logger = Log::Log4perl->get_logger("builder");
@@ -620,7 +618,7 @@ EITMULTI_LOOP:
             next EITMULTI_LOOP;
         }
 
-        my $result = $self->eitBuild($eit);
+        my $result = $self->buildEit($eit);
 
         $pm->finish( 0, $result );
     } ## end EITMULTI_LOOP: foreach my $eit (@$allEit)
@@ -628,7 +626,7 @@ EITMULTI_LOOP:
 
     alarm(0);
     return $collected;
-} ## end sub eitMulti
+} ## end sub parallelUpdateEit
 
 =head1 AUTHOR
 

@@ -725,15 +725,9 @@ function SystemInfo() {
     });
     $('#systemVersion').html(block);
     $('#systemEPG').html(this.generateBlock(report.modules.epg, true));
-    $('#systemPlayout').html(this.generateBlock(report.modules.playout));
-    $('#systemNTP').html(this.generateBlock(report.modules.ntp));
-    $('#systemDatabase').html(this.generateBlock(report.modules.database));
-    if (report.modules.webgrab) {
-      $('#systemWebgrab').html(this.generateBlock(report.modules.webgrab, true));
-      $('#systemWebgrab').parent().removeClass('hidden');
-    } else {
-      $('#systemWebgrab').parent().addClass('hidden');
-    }
+    $('#systemPlayout').html(this.generateBlock(report.modules.playout, false));
+    $('#systemNTP').html(this.generateBlock(report.modules.ntp, false));
+    $('#systemDatabase').html(this.generateBlock(report.modules.database, false));
     if (report.modules.announcer) {
       $('#systemAnnouncer').html(this.generateBlock(report.modules.announcer, false));
       $('#systemAnnouncer').parent().removeClass('hidden');
@@ -1245,7 +1239,6 @@ function SchemePanel() {
     const $template = $('#browsePanel tr.scheme').remove().first();
     $template.removeClass('hidden');
     this.browseTemplate = $template;
-    this.refresh();
     $('#wMenuBrowse').trigger('click');
   };
 
@@ -1269,8 +1262,8 @@ function SchemePanel() {
   };
 
   this.head = (item) => {
-    return `<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span>${item.source}</p>
-      <p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span>${item.channel}</p>
+    var fields = `<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span>${item.source}</p>`;
+    return fields + `<p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span>${item.channel}</p>
       <p class="text-primary"><i class="glyphicon glyphicon-transfer"></i><span>EIT:</span>${item.eit}</p>
       <p class="text-primary"><i class="glyphicon glyphicon-th-list"></i><span>Rules:</span>${item.rule}</p>`;
   };
@@ -1566,6 +1559,8 @@ function SchemePanel() {
     $('#actionPanel').addClass('hidden');
 
     $('#browseReport table tr.scheme').remove();
+
+    this.refresh()
 
     $.ajax({
       url: "/scheme/browse",

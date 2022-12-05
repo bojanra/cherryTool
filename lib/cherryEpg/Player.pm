@@ -576,7 +576,6 @@ sub _getPID {
     return $pid & 0x1fff;
 } ## end sub _getPID
 
-
 =head1 AUTHOR
 
 =encoding utf8

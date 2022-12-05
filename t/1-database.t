@@ -4,7 +4,7 @@ use 5.024;
 use Test::More tests => 4;
 
 BEGIN {
-    use_ok('cherryEpg');
+    use_ok("cherryEpg");
 }
 
 my $cherry = cherryEpg->instance();
@@ -15,5 +15,5 @@ isa_ok( $cherry->epg->dbh, 'DBI::db', "dbh" );
 ok( $cherry->epg->initdb(), "init db structure" );
 
 # here we call it with logging
-ok( $cherry->databaseReset(), "clean/init db" );
+ok( $cherry->resetDatabase(), "clean/init db" );
 
