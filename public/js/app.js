@@ -91,25 +91,30 @@ function ServiceMatrix(log) {
 
   this.present = (report) => {
     loading = 0;
-    if (report.status === 0) {
-      setPanelState('#dashBoard', 'success');
-    } else if (report.status === 1) {
-      setPanelState('#dashBoard', 'warning');
-    } else if (report.status === 3) {
-      setPanelState('#dashBoard', 'danger');
-      $('#eBudget').html(report.timestamp);
-      $('#serviceDash').html(
-        '<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
-      count = 0;
-      return;
+    if (report.linger) {
+      $('#dashBoard').addClass('hidden');
     } else {
-      setPanelState('#dashBoard', 'danger');
-    }
-    // is size of previous result is equal to current, just update data
-    if (report.data.length === count) {
-      this.update(report);
-    } else {
-      this.build(report);
+      $('#dashBoard').removeClass('hidden');
+      if (report.status === 0) {
+        setPanelState('#dashBoard', 'success');
+      } else if (report.status === 1) {
+        setPanelState('#dashBoard', 'warning');
+      } else if (report.status === 3) {
+        setPanelState('#dashBoard', 'danger');
+        $('#eBudget').html(report.timestamp);
+        $('#serviceDash').html(
+          '<div class="alert alert-warning" role="alert">Connecting to database failed. Please check service!</div>');
+        count = 0;
+        return;
+      } else {
+        setPanelState('#dashBoard', 'danger');
+      }
+      // is size of previous result is equal to current, just update data
+      if (report.data.length === count) {
+        this.update(report);
+      } else {
+        this.build(report);
+      }
     }
   };
 
@@ -728,6 +733,7 @@ function SystemInfo() {
     $('#systemPlayout').html(this.generateBlock(report.modules.playout, false));
     $('#systemNTP').html(this.generateBlock(report.modules.ntp, false));
     $('#systemDatabase').html(this.generateBlock(report.modules.database, false));
+    $('#systemLinger').html(this.generateBlock(report.modules.linger, true));
     if (report.modules.announcer) {
       $('#systemAnnouncer').html(this.generateBlock(report.modules.announcer, false));
       $('#systemAnnouncer').parent().removeClass('hidden');
@@ -1263,9 +1269,14 @@ function SchemePanel() {
 
   this.head = (item) => {
     var fields = `<p class="text-primary"><i class="glyphicon glyphicon-file"></i><span>Source file:</span>${item.source}</p>`;
-    return fields + `<p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span>${item.channel}</p>
+    if ('linger' in item) {
+      return fields + `<p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Synchronize from:</span>${item.linger}</p>
+        <p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>With public_key:</span>${item.public_key}</p>`;
+    } else {
+      return fields + `<p class="text-primary"><i class="glyphicon glyphicon-film"></i><span>Services:</span>${item.channel}</p>
       <p class="text-primary"><i class="glyphicon glyphicon-transfer"></i><span>EIT:</span>${item.eit}</p>
       <p class="text-primary"><i class="glyphicon glyphicon-th-list"></i><span>Rules:</span>${item.rule}</p>`;
+    }
   };
 
   this.delete = () => {

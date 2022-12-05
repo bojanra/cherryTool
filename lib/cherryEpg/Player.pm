@@ -21,6 +21,7 @@ use Try::Tiny;
 my $chunkExtension         = '.cts';
 my $enhancedChunkExtension = '.ets.gz';
 my $tmpExtension           = '.tmp';
+my $syncedChunkExtension   = '.ctss';
 
 my $logger = get_logger('player');
 
@@ -41,18 +42,19 @@ sub BUILD {
     my ( $self, $args ) = @_;
 }
 
-=head3 delete( )
-=head3 delete( $target)
+=head3 delete( $subdir)
+=head3 delete( $subdir, $target)
 
-Remove files from carousel directory.
+Remove files from carousel.
 This is not for controlling of the carousel. Use stop().
 
 =cut
 
 sub delete {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
-    my $path = $self->cherry->config->{core}{carousel};
+    $subdir //= '/';
+    my $path = dir( $self->cherry->config->{core}{carousel}, $subdir );
 
     if ( !$target ) {
 
@@ -69,7 +71,7 @@ sub delete {
         push( @list, glob($pattern) );
 
         my $count = unlink(@list);
-        $logger->info("all files removed from carousel [$count]") if $count;
+        $logger->info("all files removed from carousel [$subdir] [$count]") if $count;
         return $count;
     } elsif ( length($target) >= 3 ) {
 
@@ -86,12 +88,12 @@ sub delete {
         push( @list, glob($pattern) );
 
         my $count = unlink(@list);
-        $logger->info("[$target] removed from carousel") if $count;
+        $logger->info("[$target] removed from carousel [$subdir]") if $count;
         return $count;
     } ## end elsif ( length($target) >=...)
 } ## end sub delete
 
-=head3 stop( $target)
+=head3 stop( $subdir, $target)
 =head3 stop( 'EIT')
 =head3 stop()
 
@@ -100,26 +102,30 @@ Stop the carousel by removing .cts files.
 =cut
 
 sub stop {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
-    my $path = $self->cherry->config->{core}{carousel};
+    my $path = dir( $self->cherry->config->{core}{carousel}, $subdir );
 
-    if ( !$target ) {
+    if ( !$subdir ) {
 
-        # remove all .cts files and .tmp files
+        # remove all .cts files
         my @list = ();
 
         my $pattern = file( $path, '*' . $chunkExtension );
         push( @list, glob($pattern) );
 
+        # TODO subdir
+
         my $count = unlink(@list);
         $logger->info("stop playing all files [$count]") if $count;
         return $count;
-    } elsif ( $target eq 'EIT' ) {
+    } elsif ( $subdir eq 'EIT' ) {
 
         # remove only EITs
         my $pattern = file( $path, 'eit_*' . $chunkExtension );
         my @list    = glob($pattern);
+
+        # TODO subdir
 
         my $count = unlink(@list);
         $logger->info("stop playing EIT files [$count]") if $count;
@@ -130,38 +136,39 @@ sub stop {
         my $filename = $target . $chunkExtension;
 
         # stringify
-        my $file = file( $path, $filename ) . '';
+        my $file = file( $path, $filename );
         if ( -f $file ) {
             my $count = unlink($file);
-            $logger->info("stop playing [$target]") if $count;
+            $logger->info("stop playing [$target] in [$subdir]") if $count;
             return $count;
         }
     } ## end elsif ( length($target) >...)
 } ## end sub stop
 
 
-=head3 load( $target)
+=head3 load( $subdir, $target)
 =head3 load( $file)
 
-Read $target .ets file from carousel or $file and return $target, $meta, \$pes, undef, $source, \$serialized
+Read $target .ets file from carousel or $file from anywhere else.
+return $target, $meta, \$pes, undef, $source, \$serialized
 
 =cut
 
 sub load {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
     my $serialized;
     my $zipFile;
 
-    if ( -e $target ) {
+    if ( -f $subdir ) {
 
         # we have an extenal file
-        $zipFile = $target;
+        $zipFile = $subdir;
         $target  = gmtime->strftime("%Y%m%d%H%M%S");
     } else {
 
         # the file is in the carousel
-        $zipFile = file( $self->cherry->config->{core}{carousel}, $target . $enhancedChunkExtension );
+        $zipFile = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $enhancedChunkExtension );
     }
 
     if ( -r $zipFile ) {
@@ -221,16 +228,18 @@ sub applyRedundancy {
     } ## end if ( $meta->{redundancy...})
 } ## end sub applyRedundancy
 
-=head3 arm( $target, $meta, \$pes, $eit_id)
+=head3 arm( $subdir, $target, $meta, \$pes, $eit_id)
 
-Create .tmp file with $meta data and $pes in carousel directory
+Create .tmp file with $meta data and $pes in carousel root or sub- directory.
 The filename is built from $target -> $target.tmp
 Return 1 on success.
 
 =cut
 
 sub arm {
-    my ( $self, $target, $meta, $pes, $eit_id ) = @_;
+    my ( $self, $subdir, $target, $meta, $pes, $eit_id ) = @_;
+
+    $subdir //= '/';
 
     return unless $target;
 
@@ -260,6 +269,7 @@ sub arm {
         return;
     }
 
+    # build dummy packet with ringelspiel instructions
     my $encoded     = JSON::XS::encode_json($meta);
     my $firstPacket = pack( "CnC", 0x47, 0x1fff, 0x10 ) . "ringelspiel " . $encoded;
 
@@ -273,7 +283,7 @@ sub arm {
         $firstPacket .= "\xff";
     }
 
-    my $tempFile = file( $self->cherry->config->{core}{carousel}, $target . $tmpExtension );
+    my $tempFile = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $tmpExtension );
 
     my $out;
     if ( !open( $out, '>', $tempFile ) ) {
@@ -290,20 +300,19 @@ sub arm {
     return 1;
 } ## end sub arm
 
-=head3 decode( $target)
+=head3 decode( $subdir, $target)
 
-Decode the .cts $target im carousel directory and return $meta hash and \$ts
+Decode the .cts $target in carousel and return $meta hash and \$ts
 without first packet on success.
 
 =cut
 
 sub decode {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
     return unless $target;
 
-    my $path = $self->cherry->config->{core}{carousel};
-    my $file = file( $path, $target . $chunkExtension );
+    my $file = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $chunkExtension );
 
     return if !-r $file;
 
@@ -338,24 +347,23 @@ sub decode {
     $logger->warn("incorrect CTS file format [$file]");
 } ## end sub decode
 
-=head3 isPlaying( $target )
+=head3 isPlaying( $subdir, $target )
 
 Return 1 if $target .cts file exists.
 
 =cut
 
 sub isPlaying {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
-    my $path  = $self->cherry->config->{core}{carousel};
-    my $chunk = file( $path, $target . $chunkExtension );
+    my $chunk = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $chunkExtension );
 
     return -e $chunk;
 } ## end sub isPlaying
 
-=head3 play( $target, $eit_id )
+=head3 play( $subdir, $target, $eit_id )
 
-Start playing file in carousel directory by renaming the $target file to $target.cts.
+Start playing file in carousel root or sub- directory by renaming the $target file to $target.cts.
 $eit_id is used only for logging
 During rename the outputfile is locked.
 Return $destination on success.
@@ -363,11 +371,12 @@ Return $destination on success.
 =cut
 
 sub play {
-    my ( $self, $target, $eit_id ) = @_;
+    my ( $self, $subdir, $target, $eit_id ) = @_;
 
+    $subdir //= '/';
     my $path        = $self->cherry->config->{core}{carousel};
-    my $source      = file( $path, $target . $tmpExtension );
-    my $destination = file( $path, $target . $chunkExtension );
+    my $source      = file( $path, $subdir, $target . $tmpExtension );
+    my $destination = file( $path, $subdir, $target . $chunkExtension );
 
     return if !-e $source;
 
@@ -392,7 +401,7 @@ sub play {
     return $destination;
 } ## end sub play
 
-=head3 copy( $file)
+=head3 copy( $subdir, $file)
 
 Import .ets $file by copying the $file with current timestamp to carousel.
 No errorchecking just copy!
@@ -401,7 +410,7 @@ Return $target of new file.
 =cut
 
 sub copy {
-    my ( $self, $filepath ) = @_;
+    my ( $self, $subdir, $filepath ) = @_;
 
     if ( -e $filepath ) {
         my $LIMIT       = 10;
@@ -413,7 +422,7 @@ sub copy {
         # allow multiple file <LIMIT with same epoch
         do {
             $target  = $currentTime . chr( 97 + $count++ );
-            $zipFile = file( $self->cherry->config->{core}{carousel}, $target . $enhancedChunkExtension );
+            $zipFile = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $enhancedChunkExtension );
         } while ( -e $zipFile and $count < $LIMIT );
 
         if ( $count == $LIMIT ) {
@@ -431,16 +440,19 @@ sub copy {
     } ## end if ( -e $filepath )
 } ## end sub copy
 
-=head3 list()
+=head3 list( $subdir)
 
-List all files in carousel with detailed info and return array on success.
+List all files in $subdir of carousel or in carousel with detailed info and return
+array on success.
 
 =cut
 
 sub list {
-    my ($self) = @_;
+    my ( $self, $subdir ) = @_;
 
-    my $path = dir( $self->cherry->config->{core}{carousel} );
+    $subdir //= '/';
+
+    my $path = dir( $self->cherry->config->{core}{carousel}, $subdir );
 
     my $carousel   = {};
     my $dstPortPid = {};
@@ -465,7 +477,7 @@ sub list {
                 $carousel->{$target}{ets} = 1;
 
                 # open the file
-                my ( undef, $meta, $ts ) = $self->load($target);
+                my ( undef, $meta, $ts ) = $self->load( $subdir, $target );
                 if ( !$ts ) {
                     delete $carousel->{$target};
                     next;
@@ -481,7 +493,7 @@ sub list {
             } elsif ( $extension eq $chunkExtension ) {
                 $carousel->{$target}{playing} = 1;
 
-                my ( $meta, $ts ) = $self->decode($target);
+                my ( $meta, $ts ) = $self->decode( $subdir, $target );
                 if ( !$ts ) {
                     delete $carousel->{$target};
                     next;
@@ -580,7 +592,7 @@ sub _getPID {
 
 =encoding utf8
 
-This software is copyright (c) 2021 by Bojan Ramšak
+This software is copyright (c) 2021-2022 by Bojan Ramšak
 
 =head1 LICENSE
 

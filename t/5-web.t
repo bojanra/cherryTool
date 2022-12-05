@@ -3,7 +3,7 @@
 use 5.024;
 use Mojo::Base -strict;
 use Test::Mojo;
-use Test::More tests => 64;
+use Test::More tests => 65;
 use Try::Tiny;
 
 BEGIN {
@@ -31,6 +31,8 @@ my $s = $scheme->build();
 ok( $cherry->resetDatabase(), "clean/init db" );
 
 my ( $success, $error ) = $scheme->pushScheme();
+
+my $backup = $scheme->backup();
 
 ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
@@ -178,3 +180,5 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
     $t->get_ok('/logout')->status_is(200);
     $t->get_ok('/report.json')->status_is(200)->json_has('/timestamp');
 }
+
+ok( $scheme->delete($backup), "delete scheme from archive" );

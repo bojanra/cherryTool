@@ -32,11 +32,11 @@ cherryTool - tool for managing cherryEpg environment
  -c xls     convert xls scheme file to yaml scheme
 
  -C         list content of carousel
- -u file    add/upload .gz file to carousel
- -p chunk   play TS chunk
- -s chunk   stop TS chunk
+ -u file    add/upload .gz file to carousel  #TBD
+ -p chunk   play TS chunk                    #TBD
+ -s chunk   stop TS chunk                    #TBD
  -S         stop - ALL
- -y chunk   delete TS chunk from carousel TODO
+ -y chunk   delete TS chunk from carousel    #TBD
  -Y         delete ALL from carousel directory - stop carousel
 
  -G target  grab&ingest by target: all, daily, hourly, weekly
@@ -150,7 +150,7 @@ exit;
 sub listCarousel {
     my $player = cherryEpg::Player->new( verbose => $verbose );
 
-    my $list = $player->list();
+    my $list = $player->list('/');
     my @item;
 
     format PLAYER_TOP =
@@ -159,7 +159,7 @@ Flags Chunk           Title                         PID  Destination          [b
 ---------------------------------------------------------------------------------------------
 .
     format PLAYER =
- @ @@ @<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<< @>>>  @<<<<<<<<<<<<<<<<< @>>>>>>> @>>>>>>>
+ @ @@ @<<<<<<<<<<<<<< @<<<<<<<<<<<<<<<<<<<<<<<<<<< @>>>  @<<<<<<<<<<<<<<<<< @>>>>>>> @>>>>>>>
 @item
 .
 
@@ -214,7 +214,7 @@ sub stopCarousel {
     if ( $args{Y} ) {
         say("Stop playing ALL files in carousel");
         exit 2 unless confirmed();
-        $player->stop();
+        $player->stop('/');
     } else {
         say("TBD");
     }
@@ -224,7 +224,7 @@ sub cleanCarousel {
     my $player = cherryEpg::Player->new( verbose => $verbose );
     say("Delete ALL files from carousel");
     exit 2 unless confirmed();
-    $player->delete();
+    $player->delete('/');
 } ## end sub cleanCarousel
 
 sub checkSystem {
@@ -507,7 +507,7 @@ $filename, scalar @{$s->{channel}}, scalar @{$s->{eit}}, scalar @{$s->{rule}}
     $cherry->deleteIngest() if $args{L};
 
     my ( $success, $error ) = $scheme->pushScheme();
-    $scheme->backupScheme();
+    $scheme->backup();
 
 } ## end sub importScheme
 

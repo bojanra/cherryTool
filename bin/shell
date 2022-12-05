@@ -1,0 +1,83 @@
+#!/usr/bin/perl
+
+=head1 NAME
+
+shell - simple wrapper for rrsync
+
+=head1 SYNOPSIS
+
+ shell [ht] linger_id
+
+=head1 DESCRIPTION
+
+C<shell> is a wrapper for rrsync to be used for doing synchronization over ssh with rsync.
+
+=head1 OPTIONS
+
+ -h         show this help
+ -t         update last read time stamp for linger_id
+
+=head1 AUTHOR
+
+=encoding utf8
+
+This software is copyright (c) 2022 by Bojan Ramšak
+
+=head1 LICENSE
+
+This file is subject to the terms and conditions defined in
+file 'LICENSE', which is part of this source code package.
+
+=cut    
+
+use v5.24;
+use utf8;
+use cherryEpg;
+use Getopt::Std;
+use Pod::Usage;
+use Try::Tiny;
+use Path::Class;
+use open qw ( :std :encoding(UTF-8));
+
+our $VERSION = '1.01';
+
+my %args;
+
+getopts( "ht", \%args ) or $args{h} = 1;
+
+if ( exists $args{h} ) {
+    say("shell - ver. $VERSION Copyright 2022 Bojan Ramsak");
+    pod2usage(
+        -verbose  => 99,
+        -exitval  => 0,
+        -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+    );
+} ## end if ( exists $args{h} )
+
+my $linger_id    = shift @ARGV;
+my $origin       = $ENV{SSH_ORIGINAL_COMMAND};
+my $msg          = '';
+my $cherry       = cherryEpg->instance();
+my $carouselPath = dir( $cherry->config->{core}{carousel}, $linger_id . ".linger" );
+
+# be sure to have a symbolic link or at least a copy of this file
+my $rrsyncPath = file( $ENV{'HOME'}, 'bin', 'rrsync' );
+
+my $logger = Log::Log4perl->get_logger("system");
+
+if ( !$linger_id ) {
+    $logger->error("missing linger_id");
+}
+
+if ( $args{t} ) {
+    exit( $cherry->markLinger($linger_id) == 1 ? 0 : 1 );
+}
+
+if ( $origin =~ m/^rsync/ ) {
+    system("$rrsyncPath -ro $carouselPath");
+    $cherry->markLinger($linger_id) if $? == 0;
+} else {
+    exit 1;
+}
+
+exit 0;

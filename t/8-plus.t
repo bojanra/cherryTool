@@ -2,7 +2,7 @@
 
 use 5.024;
 use File::Rsync;
-use Test::More tests => 32;
+use Test::More tests => 35;
 
 BEGIN {
     use_ok("cherryEpg");
@@ -23,7 +23,7 @@ foreach my $sut (qw( xsid multi large)) {
     note("test $sut scheme");
 
 SKIP: {
-        skip "large test in production", 9 if $sut eq 'large' and $ENV{'DANCER_ENVIRONMENT'} eq 'production';
+        skip "large test in production", 10 if $sut eq 'large' and $ENV{'DANCER_ENVIRONMENT'} eq 'production';
 
         ok( defined $cherry->deleteIngest(), "delete ingest dir" );
         ok( $cherry->resetDatabase(),        "clean/init db" );
@@ -37,6 +37,8 @@ SKIP: {
         my ( $success, $error ) = $scheme->pushScheme();
         ok( scalar(@$success) && !scalar(@$error), "load scheme" );
 
+        my $backup = $scheme->backup();
+
         # test multigrabber
         my $count = scalar( $cherry->epg->listChannel()->@* );
 
@@ -46,10 +48,12 @@ SKIP: {
         # delete carousel
         my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
 
-        ok( defined $player->delete(), "delete carousel" );
+        ok( defined $player->delete('/'), "delete carousel" );
 
         # multi make/build
         isa_ok( $cherry->parallelUpdateEit(), 'ARRAY', "make eit" );
+
+        ok( $scheme->delete($backup), "delete scheme from archive" );
     } ## end SKIP:
 } ## end foreach my $sut (qw( xsid multi large))
 

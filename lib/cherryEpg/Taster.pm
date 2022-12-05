@@ -435,6 +435,27 @@ sub eventBudgetReport {
 
 } ## end sub eventBudgetReport
 
+=head3 lingerReport ( )
+
+Report linger status.
+
+=cut
+
+sub lingerReport {
+    my ($self) = @_;
+
+    my $linger = $self->isLinger();
+
+    return {
+        report => {
+            cloud => "cherryhill.eu",    # TODO
+        },
+        status  => 0,
+        message => 'Last synchronization on xxxx',    # TODO
+    };
+
+} ## end sub lingerReport
+
 =head3 announcerReport ( )
 
 Report Announcer status.
@@ -487,7 +508,19 @@ sub report {
         uptime => $self->uptime(),
     };
 
-    $report->{modules}{epg} = $self->eventBudgetReport();
+    if ( $self->isLinger ) {
+        $report->{modules}{linger} = $self->lingerReport();
+        $report->{modules}{epg}    = {
+            status  => 1,
+            message => "Local EIT building disabled",
+        };
+    } else {
+        $report->{modules}{epg}    = $self->eventBudgetReport();
+        $report->{modules}{linger} = {
+            status  => 1,
+            message => "Disabled",
+        };
+    } ## end else [ if ( $self->isLinger )]
 
     my $announcer = $self->announcerReport();
     $report->{modules}{announcer} = $announcer if $announcer;

@@ -62,6 +62,16 @@
       </li>
       <li class="list-group-item">
         <h4 class="list-group-item-heading">
+          Synchronize from cloud server
+          <a href="#" data-toggle="tooltip" title="Download carousel files from cloud cherryEpg server">
+            <i class="glyphicon glyphicon-question-sign"></i>
+          </a>
+        </h4>
+        <p id="systemLinger" class="list-group-item-text">
+        </p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">
           Announcement
           <a href="#" data-toggle="tooltip" title="Announcements are activated.">
             <i class="glyphicon glyphicon-question-sign"></i>

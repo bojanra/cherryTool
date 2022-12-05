@@ -3,6 +3,7 @@
 *.yaml
 .tidyall.d/
 .~*
+bin/rrsync
 config_local.yml
 nytprof
 nytprof.out

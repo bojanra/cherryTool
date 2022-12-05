@@ -2,7 +2,7 @@
 
 use 5.024;
 use utf8;
-use Test::More tests => 43;
+use Test::More tests => 44;
 
 BEGIN {
     use_ok("cherryEpg");
@@ -15,7 +15,7 @@ BEGIN {
 } ## end BEGIN
 
 my $cherry = cherryEpg->instance( verbose => 0 );
-my $sut    = "simple";
+my $sut;
 my $target;
 my $channel;
 
@@ -31,58 +31,9 @@ ok( defined $cherry->deleteIngest(), "delete ingest dir" );
 like( $cherry->epg->version(), qr/\d+\./, "version" );
 
 # db stats
-is( scalar( @{ $cherry->epg->healthCheck() } ), 7, "db stats" );
+is( scalar( @{ $cherry->epg->healthCheck() } ), 9, "db stats" );
 
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
-
-# read, build load scheme
-ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
-
-my $s = $scheme->build();
-
-ok( $s->{isValid}, "build scheme" );
-
-ok( $cherry->resetDatabase(), "clean/init db" );
-
-my ( $success, $error ) = $scheme->pushScheme();
-ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
-
-ok( $target = $scheme->backupScheme(), "backup scheme to archive" );
-
-ok( $scheme->delete($target), "delete scheme from archive" );
-
-# just to have a sample
-ok( $target = $scheme->backupScheme(), "backup scheme to archive" );
-
-# test multigrabber
-my $count = scalar( $cherry->epg->listChannel()->@* );
-my $grab  = $cherry->parallelGrabIngestChannel( "all", 1, 1 );
-ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
-
-# export schedule to XML
-$channel = $cherry->epg->listChannel()->@[0];
-my $content = $cherry->epg->exportScheduleData( [$channel], "localhost", "eng" );
-ok( $content && length($content) > 30000, "export channel in XMLTV format" );
-
-# reset/remove md5 file
-$channel = ${ $cherry->epg->listChannel() }[0];
-my $result = $cherry->resetChannel($channel);
-ok( $result, "Reset done for $channel->{name}" );
-
-# delete carousel
-my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
-
-ok( defined $player->delete(), "delete carousel" );
-
-# test building
-my $eit = $cherry->epg->listEit()->@[0];
-ok( $cherry->buildEit($eit), "build single eit" );
-
-# reset version
-ok( $cherry->deleteSection(), "reset section and version table" );
-
-# multi make/build
-isa_ok( $cherry->parallelUpdateEit(), "ARRAY", "make eit" );
 
 # read, build load scheme for testing SDT, PAT and PMT building
 $sut = "psi";
@@ -96,6 +47,8 @@ ok( $cherry->resetDatabase(), "clean/init db" );
 
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
+
+my $backup = $scheme->backup();
 
 # test multigrabber
 my $count = scalar( $cherry->epg->listChannel()->@* );
@@ -125,9 +78,61 @@ cmp_ok( ref $cherry->eventBudgetReport(), 'eq', 'HASH', "eventBudget report" );
 
 cmp_ok( ref $cherry->ntpReport(), 'eq', 'HASH', "ntp report" );
 
+cmp_ok( ref $cherry->lingerReport(), 'eq', 'HASH', "linger report" );
+
 cmp_ok( ref $cherry->report(), 'eq', 'HASH', "overall report" );
 
 cmp_ok( $cherry->uptime(), '>', 1, "uptime" );
 
 like( $cherry->format(), qr/cherryTaster/, "Text report" );
 
+ok( $scheme->delete($backup), "delete scheme from archive" );
+
+# read, build load scheme
+$sut = "simple";
+ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
+
+my $s = $scheme->build();
+
+ok( $s->{isValid}, "build scheme" );
+
+ok( $cherry->resetDatabase(), "clean/init db" );
+
+# delete ingest
+ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+
+my ( $success, $error ) = $scheme->pushScheme();
+ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
+
+# keep as sample
+ok( $target = $scheme->backup(), "backup scheme to archive" );
+
+# test multigrabber
+my $count = scalar( $cherry->epg->listChannel()->@* );
+my $grab  = $cherry->parallelGrabIngestChannel( "all", 1, 1 );
+ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
+
+# export schedule to XML
+$channel = $cherry->epg->listChannel()->@[0];
+my $content = $cherry->epg->exportScheduleData( [$channel], "localhost", "eng" );
+ok( $content && length($content) > 30000, "export channel in XMLTV format" );
+
+# reset/remove md5 file
+$channel = ${ $cherry->epg->listChannel() }[0];
+my $result = $cherry->resetChannel($channel);
+ok( $result, "Reset done for $channel->{name}" );
+
+# delete carousel
+my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
+
+ok( defined $player->delete('/'), "delete carousel" );
+
+# test building
+my $eit = $cherry->epg->listEit()->@[0];
+ok( $cherry->buildEit($eit), "build single eit" );
+
+# reset version
+ok( $cherry->deleteSection(), "reset section and version table" );
+
+# multi make/build
+isa_ok( $cherry->parallelUpdateEit(), "ARRAY", "make eit" );

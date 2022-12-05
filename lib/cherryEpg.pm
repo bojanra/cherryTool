@@ -1,4 +1,4 @@
-package cherryEpg v2.3.04;
+package cherryEpg v2.4.01;
 
 use 5.024;
 use utf8;
@@ -22,7 +22,7 @@ use Try::Tiny;
 use YAML::XS;
 use open qw ( :std :encoding(UTF-8));
 
-with( 'MooX::Singleton', 'cherryEpg::Taster' );
+with( 'MooX::Singleton', 'cherryEpg::Taster', 'cherryEpg::Cloud' );
 
 has 'configFile' => (
     is      => 'ro',
@@ -397,6 +397,11 @@ sub parallelGrabIngestChannel {
 
     my $logger = Log::Log4perl->get_logger("grabber");
 
+    if ( $self->isLinger ) {
+        $logger->trace("skip grab&ingest in linger mode");
+        return [];
+    }
+
     # just define
     $target //= "all";
     $grab   //= 1;
@@ -478,9 +483,12 @@ sub buildEit {
     my $logger = Log::Log4perl->get_logger("builder");
 
     my $eit_id = $eit->{eit_id};
+    my $subdir = $eit->{option}{LINGERONLY} ? '/COMMON.linger/' : '/';
+
     $logger->trace( "build EIT", undef, $eit_id );
 
     my $report = {
+        eit_id => $eit_id,
         update => undef,
         list   => []
     };
@@ -488,13 +496,13 @@ sub buildEit {
     my $epg = $self->epgInstance;
     $report->{update} = $epg->updateEit($eit_id);
 
-    my $filename = sprintf( "eit_%03i", $eit->{eit_id} );
+    my $filename = sprintf( "eit_%03i", $eit_id );
 
     my $player = cherryEpg::Player->new();
 
     if ( !defined $report->{update} ) {
         $logger->error( "build EIT", undef, $eit_id );
-    } elsif ( $report->{update} || !$player->isPlaying($filename) ) {
+    } elsif ( $report->{update} || !$player->isPlaying( $subdir, $filename ) ) {
         my $interval = 30;
 
         my $pes = $epg->getEit( $eit->{eit_id}, $interval );
@@ -526,13 +534,13 @@ sub buildEit {
 
         # remove file if no data
         if ( length($pes) == 0 ) {
-            $player->delete($filename);
+            $player->delete( $subdir, $filename );
 
             # or try to play
-        } elsif ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
-            push( $report->{list}->@*, { filename => $filename, success => 1 } );
+        } elsif ( $player->arm( $subdir, $filename, $specs, \$pes, $eit_id ) && $player->play( $subdir, $filename ) ) {
+            push( $report->{list}->@*, { path => $subdir . $filename, success => 1 } );
         } else {
-            push( $report->{list}->@*, { filename => $filename, success => 0, msg => 'play failed' } );
+            push( $report->{list}->@*, { path => $subdir . $filename, success => 0, msg => 'play failed' } );
         }
 
         if ( $eit->{option}{COPY} ) {
@@ -542,13 +550,13 @@ sub buildEit {
             $specs->{title} = "Dynamic EIT cc";
             foreach ( split( /\s*[|;+]\s*/, $eit->{option}{COPY} ) ) {
                 $specs->{dst} = $_;
-                $filename = sprintf( "eit_%03ix%02i", $eit->{eit_id}, $counter++ );
+                my $theCopy = sprintf( "eit_%03ix%02i", $eit->{eit_id}, $counter++ );
                 if ( length($pes) == 0 ) {
-                    $player->delete($filename);
-                } elsif ( $player->arm( $filename, $specs, \$pes, $eit_id ) && $player->play($filename) ) {
-                    push( $report->{list}->@*, { filename => $filename, success => 1 } );
+                    $player->delete( '/', $theCopy );
+                } elsif ( $player->arm( '/', $theCopy, $specs, \$pes, $eit_id ) && $player->play( '/', $theCopy ) ) {
+                    push( $report->{list}->@*, { path => '/' . $theCopy, success => 1 } );
                 } else {
-                    push( $report->{list}->@*, { filename => $filename, success => 0, msg => 'play failed' } );
+                    push( $report->{list}->@*, { path => '/' . $theCopy, success => 0, msg => 'play failed' } );
                 }
             } ## end foreach ( split( /\s*[|;+]\s*/...))
         } ## end if ( $eit->{option}{COPY...})
@@ -560,14 +568,22 @@ sub buildEit {
 
 =head3 parallelUpdateEit()
 
-Check if EIT must be updated and when needed build and export them to files.
+When not in linger mode, check if EIT must be updated and when needed build and export them to files.
+In linger mode sync .cts files from cloud provider to carousel.
 
 =cut
 
 sub parallelUpdateEit {
     my ($self) = @_;
+    my $logger;
 
-    my $logger = Log::Log4perl->get_logger("builder");
+    if ( $self->isLinger ) {
+        $logger = Log::Log4perl->get_logger("system");
+        $logger->info("sync from cloud");
+        return $self->syncLinger();
+    }
+
+    $logger = Log::Log4perl->get_logger("builder");
 
     my $limit = IPC::ConcurrencyLimit->new(
         type      => 'Flock',
@@ -591,7 +607,7 @@ sub parallelUpdateEit {
     # stop all after timeout
     alarm(55);
 
-    my $collected     = [];
+    my $doneList      = [];
     my $parallelTasks = $self->config->{core}{parallelTasks} // 3;
     my $pm            = Parallel::ForkManager->new($parallelTasks);
 
@@ -602,7 +618,7 @@ sub parallelUpdateEit {
         sub {
             my ( $pid, $exit_code, $ident, $exit_signal, $core_dump, $result ) = @_;
             if ( defined($result) ) {
-                push( $collected->@*, $result );
+                push( $doneList->@*, $result );
             }
         }
     );
@@ -625,7 +641,13 @@ EITMULTI_LOOP:
     $pm->wait_all_children;
 
     alarm(0);
-    return $collected;
+
+    # mapping build EIT to linger sites subdir
+    my $pathByEit = {};
+    map { $pathByEit->{ $_->{eit_id} } = $_->{list}[0]->{path} . '.cts' } $doneList->@*;
+    $self->makeSymbolicLink($pathByEit);
+
+    return $doneList;
 } ## end sub parallelUpdateEit
 
 =head1 AUTHOR

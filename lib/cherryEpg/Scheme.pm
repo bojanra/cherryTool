@@ -75,6 +75,7 @@ sub readXLS {
 
     my $isServiceSheet;
     my $isEitSheet;
+    my $isCloudSheet;
 
     my $eBook = ReadData( $file, parser => "xls" );
 
@@ -85,30 +86,40 @@ sub readXLS {
         $self->parseConf( $eBook, 'CONF' );
     }
 
-    foreach my $sheetName ( keys %$allSheets ) {
+    # skip all stuff for local EIT building when cloud based operation
+    unless ( $raw->{linger} ) {
 
-        next if $sheetName eq 'CONF';
+        foreach my $sheetName ( keys %$allSheets ) {
 
-        for ($sheetName) {
-            /^SERVICE$/ && do {
-                $isServiceSheet = 1;
-                $self->parseService( $eBook, $sheetName );
-                last;
-            };
-            /^EIT/ && do {
-                $isEitSheet = 1;
-                $self->parseEIT( $eBook, $sheetName );
-                last;
-            };
-            /^RULE$/ && do {
-                $self->parseRule( $eBook, $sheetName );
-                last;
-            };
-        } ## end for ($sheetName)
-    } ## end foreach my $sheetName ( keys...)
+            next if $sheetName eq 'CONF';
 
-    $self->error("Missing [SERVICE] sheet") unless $isServiceSheet;
-    $self->error("Missing [EIT] sheet")     unless $isEitSheet;
+            for ($sheetName) {
+                /^SERVICE$/ && do {
+                    $isServiceSheet = 1;
+                    $self->parseService( $eBook, $sheetName );
+                    last;
+                };
+                /^EIT/ && do {
+                    $isEitSheet = 1;
+                    $self->parseEIT( $eBook, $sheetName );
+                    last;
+                };
+                /^RULE$/ && do {
+                    $self->parseRule( $eBook, $sheetName );
+                    last;
+                };
+                /^CLOUD/ && do {
+                    $isCloudSheet = 1;
+                    $self->parseCloud( $eBook, $sheetName );
+                    last;
+                };
+            } ## end for ($sheetName)
+        } ## end foreach my $sheetName ( keys...)
+
+        $self->error("Missing [SERVICE] sheet") unless $isServiceSheet;
+        $self->error("Missing [EIT] sheet")     unless $isEitSheet;
+        $self->error("Missing [CLOUD] sheet")   unless ( $isEitSheet && $isServiceSheet ) || $isCloudSheet;
+    } ## end unless ( $raw->{linger} )
 
     # read input file as binary and insert in report
     my $blob = try {
@@ -147,6 +158,10 @@ sub pushScheme {
     # load to db
     my ( $success, $error ) = $self->cherry->epg->addScheme($scheme);
 
+    # build authorized_keys file and directories for synchronization Linger sites from cloud server
+    $self->cherry->updateAuthorizedKeys();
+    $self->cherry->updateSyncDirectory();
+
     # generate&play tables
     my $psigen = cherryEpg::Table->new();
     my $player = cherryEpg::Player->new();
@@ -155,7 +170,7 @@ sub pushScheme {
         my $chunk = $psigen->build($table);
 
         if ($chunk) {
-            if ( $player->arm( $name, $table->{'..'}, \$chunk, undef ) && $player->play($name) ) {
+            if ( $player->arm( '/', $name, $table->{'..'}, \$chunk, undef ) && $player->play( '/', $name ) ) {
                 $logger->trace("playing $table->{table} - $name");
             } else {
                 $logger->error("playing $table->{table} - $name");
@@ -454,7 +469,7 @@ sub parseEIT {
             foreach (@list) {
                 my ( $key, $value ) = split(/ *= */);
                 my $uKey = uc($key);
-                my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT);
+                my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT LINGERONLY);
                 if ( $uKey ~~ @list ) {
                     $value += 0 if $value && $value =~ /^\d+$/;
                     $option{$uKey} = defined $value ? $value : 1;
@@ -477,6 +492,102 @@ sub parseEIT {
 
     } ## end foreach my $rowCounter ( 1 ...)
 } ## end sub parseEIT
+
+=head3 parseCloud(  )
+
+Columns in CLOUD sheet:
+Remote	     	Public key                      EIT     option
+Cablesystem	    AAAAC3NzaC1lZDI1...XAIZgq87g	24,33   keys=value
+
+=cut
+
+sub parseCloud {
+    my ( $self, $eBook, $sheetName ) = @_;
+    my $raw = $self->{raw};
+
+    my $allSheets = $eBook->[0]{sheet};
+    my $sheet     = $eBook->[ $allSheets->{$sheetName} ];
+
+    foreach my $rowCounter ( 1 .. $sheet->{maxrow} ) {
+
+        # get cells from row
+        my @field = Spreadsheet::Read::row( $sheet, $rowCounter );
+        my $publicKey;
+        my %info;
+
+        if ( scalar(@field) < 2 ) {
+            $self->error("Not enough columns in row [$sheetName:$rowCounter]");
+            next;
+        }
+
+        # skip column name row
+        next if !$field[1] || $field[1] =~ m/public_key/i || $rowCounter == 1;
+
+        # remove leading and trailing spaces, ', "
+        foreach (@field) {
+            next if !defined;
+            s/^[\s'"]+//;
+            s/[\s'"]+$//;
+        }
+
+        # the site name
+        if ( !$field[0] || $field[0] eq "" ) {
+            $self->error("Site name missing in row [$sheetName:$rowCounter]");
+        } else {
+            $info{site} = $field[0];
+        }
+
+        # public key
+        if ( length( $field[1] ) != 68 ) {
+            $self->error("public_key not valid [$sheetName:$rowCounter]");
+        } else {
+            $publicKey = $field[1];
+        }
+
+        # the EIT list
+        if ( $field[2] and $field[2] ne "" ) {
+            my @list   = split( / *[,.] */, $field[2] );    # implicit remove spaces
+            my $listOk = 1;
+            foreach (@list) {
+                if ( !m/^\d+$/ ) {
+                    $self->error("Incorrect EIT list format in row [$sheetName:$rowCounter]");
+                    $listOk = 0;
+                    last;
+                }
+            } ## end foreach (@list)
+
+            # map list to hash
+            if ($listOk) {
+                my %eit;
+                @eit{@list} = (1) x @list;
+                $info{eit} = \%eit;
+            }
+        } ## end if ( $field[2] and $field...)
+
+        # map elements in option field to keys
+        if ( $field[3] and $field[3] ne "" ) {
+            my @list = split( / *, */, $field[5] );    # implicit remove spaces
+            foreach (@list) {
+                my ( $key, $value ) = split(/ *= */);
+                my $uKey = uc($key);
+                my @list = qw(DISABLED);
+                if ( $uKey ~~ @list ) {
+                    $value += 0 if $value && $value =~ /^\d+$/;
+                    $info{option}{$uKey} = defined $value ? $value : 1;
+                } else {
+                    $self->error("Unknown option: $key in row [$sheetName:$rowCounter]");
+                }
+            } ## end foreach (@list)
+        } ## end if ( $field[3] and $field...)
+
+        my $site = {
+            public_key => $publicKey,
+            info       => \%info,
+        };
+
+        push( $raw->{cloud}->@*, $site );
+    } ## end foreach my $rowCounter ( 1 ...)
+} ## end sub parseCloud
 
 =head3 parseConf(  )
 
@@ -525,6 +636,8 @@ sub parseConf {
             $raw->{noautorule} = $field[1] ? 1 : 0;
         } elsif ( $field[0] =~ m /^salt$/i ) {
             $salt = $field[1];
+        } elsif ( $field[0] =~ m /^cloud$/i ) {
+            $raw->{linger} = $field[1];
         }
     } ## end foreach my $rowCounter ( 1 ...)
 
@@ -824,12 +937,23 @@ sub build {
     # generate PAT, SDT, PMT
     $self->tableBuilder($scheme);
 
+    # check if EIT referenced in cloud exist
+    foreach my $linger ( $raw->{cloud}->@* ) {
+        foreach ( keys $linger->{info}{eit}->%* ) {
+            $self->error("Cannot use undefined EIT [$_] in cloud") unless exists $tsHash->{$_};
+        }
+    }
+
     $scheme->{isValid} = scalar $self->error->@* == 0;
 
     # copy keys from raw
-    foreach (qw( source)) {
+    foreach (qw( source cloud)) {
         $scheme->{$_} = $raw->{$_};
     }
+
+    # the key->value store aka dictionary
+    $scheme->{key} = {};
+    $scheme->{key}{linger} = $raw->{linger} if exists $raw->{linger};
 
     $self->{scheme} = $scheme;
     return $scheme;
@@ -997,14 +1121,14 @@ sub restore {
     return $scheme;
 } ## end sub restore
 
-=head3 backupScheme ()
+=head3 backup ()
 
 Backup current scheme to archive in gzipped YAML string format.
 Return $target on success.
 
 =cut
 
-sub backupScheme {
+sub backup {
     my ($self) = @_;
 
     my $target = gmtime->strftime("%Y%m%d%H%M%S");
@@ -1017,7 +1141,7 @@ sub backupScheme {
         $logger->error("backup scheme [$target]");
         return;
     }
-} ## end sub backupScheme
+} ## end sub backup
 
 =head3 delete ( $target )
 
@@ -1071,9 +1195,17 @@ sub listScheme {
                 target      => $target,
             };
 
+            if ( exists $scheme->{key}{linger} ) {
+
+                # the server
+                $item->{linger} = $scheme->{key}{linger};
+
+                # our public key
+                $item->{public_key} = $self->cherry->getLingerKey();
+            } ## end if ( exists $scheme->{...})
+
             push( @list, $item );
         } ## end foreach my $target (@all)
-
         return \@list;
     } ## end if ( -d $path && -r _ ...)
     return;

@@ -23,7 +23,7 @@ ok( $scheme->cherry->resetDatabase(), "clean/init db" );
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) == 21 && !scalar(@$error), "load scheme to db" );
 
-my $backup = $scheme->backupScheme();
+my $backup = $scheme->backup();
 ok( $backup, "backup scheme" );
 
 ok( $scheme->restore($backup), "restore scheme" );

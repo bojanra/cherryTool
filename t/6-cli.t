@@ -4,7 +4,7 @@ use 5.024;
 use Cwd 'abs_path';
 use File::Basename;
 use Test::Cmd;
-use Test::More tests => 30;
+use Test::More tests => 33;
 
 BEGIN {
     `generateSampleScheduleData`;
@@ -17,6 +17,7 @@ my $test = Test::Cmd->new( prog => 'bin/cherryTool', workdir => '' );
 # scheme under test without extension
 my $sut        = 'basic';
 my $schemeFile = dirname( abs_path(__FILE__) ) . "/scheme/$sut.xls";
+my @schemeList;
 
 $test->run();
 is( $?, 0, "without switches" );
@@ -28,13 +29,14 @@ $test->run( args => '-h' );
 like( $test->stdout, qr/Usage/, "help" );
 
 $test->run( args => '-Q' );
-is( my $count = () = $test->stdout =~ m/MyISAM/g, 7, "db statistics" );
+is( my $count = () = $test->stdout =~ m/MyISAM/g, 9, "db statistics" );
 
 $test->run( args => '-c ' . $schemeFile, chdir => '.' );
 like( $test->stdout, qr/$sut.xls/, "compile scheme" );
 
 $test->run( args => "-L $sut.yaml", stdin => "yes\n", chdir => '.' );
 ok( $test->stdout =~ m/clean/i && $test->stdout =~ m/import \[$sut.xls\]/ && $test->stdout =~ /backup/, "clean and load scheme" );
+push( @schemeList, $1 ) if $test->stdout =~ /backup scheme \[(.+?)\]/s;
 
 $test->run( args => '-n' );
 like( $test->stdout, qr/$sut/, "last scheme" );
@@ -47,6 +49,7 @@ is( $?, 0, "delete rules" );
 
 $test->run( args => "-l $sut.yaml", stdin => "yes\n", chdir => '.' );
 ok( $test->stdout =~ m/import \[$sut.xls\]/ && $test->stdout =~ /backup/, "load scheme" );
+push( @schemeList, $1 ) if $test->stdout =~ /backup scheme \[(.+?)\]/s;
 
 $test->run( args => '-R' );
 is( $?, 0, "Report" );
@@ -105,6 +108,13 @@ SKIP: {
     ok( $test->stdout =~ /debian_version/m, "maintenanceTest success" );
     unlink( $m . '.bin' );
 } ## end SKIP:
+
+# delete backuped schemes from archive
+
+use_ok("cherryEpg::Scheme");
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
+
+is( scalar( map( { $scheme->delete($_) } @schemeList ) ), 2, "cleaning of archive" );
 
 # TODO
 # -v         use verbose output mode

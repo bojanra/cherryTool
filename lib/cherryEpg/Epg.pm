@@ -4,7 +4,8 @@ use 5.024;
 use utf8;
 use Carp;
 use cherryEpg::EIT;
-use DBI qw(:sql_types);
+use DBI         qw(:sql_types);
+use Digest::MD5 qw(md5_base64);
 use Encode;
 use IPC::Semaphore qw(SEM_UNDO);
 use IPC::SysV      qw(SEM_UNDO S_IRWXU IPC_CREAT ftok);
@@ -106,7 +107,7 @@ sub dropTables {
     return unless $dbh;
 
     $self->_lockdb();
-    $dbh->do('DROP TABLE IF EXISTS channel, eit, event, rule, section, version, log;');
+    $dbh->do('DROP TABLE IF EXISTS channel, eit, event, rule, section, version, log, dictionary, linger;');
     $self->_unlockdb();
 } ## end sub dropTables
 
@@ -200,6 +201,26 @@ sub initdb {
 
     $dbh->do(
         <<~"SQL"
+        CREATE TABLE dictionary (
+            id VARCHAR(16),
+            value VARCHAR(60),
+            PRIMARY KEY (id))
+            ENGINE=MyISAM;
+        SQL
+    );
+
+    $dbh->do(
+        <<~"SQL"
+        CREATE TABLE linger ( linger_id VARCHAR(40),
+            public_key TEXT,
+            info BLOB,
+            PRIMARY KEY( linger_id))
+            ENGINE = MYISAM;
+        SQL
+    );
+
+    $dbh->do(
+        <<~"SQL"
         CREATE TABLE log ( id INTEGER NOT NULL AUTO_INCREMENT,
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             level TINYINT,
@@ -283,6 +304,118 @@ sub version {
 
     return ${ $self->dbh->selectrow_arrayref("SELECT version()") }[0];
 } ## end sub version
+
+=head3 addKey ( $hashref)
+=head3 addKey ( key => value, key1 =>  value1)
+
+Add one or more keys to db dictionary table.
+
+=cut
+
+sub addKey {
+    my $self = shift;
+    my $input;
+
+    if ( scalar @_ == 1 ) {
+        $input = shift @_;
+    } else {
+        my (%data) = @_;
+        $input = \%data;
+    }
+
+    my $dbh = $self->dbh;
+    return unless $dbh;
+
+    my $replace = $dbh->prepare("REPLACE INTO dictionary VALUES ( ?, ?)");
+
+    my $count;
+    while ( my ( $key, $value ) = each %$input ) {
+        $replace->bind_param( 1, $key );
+        $replace->bind_param( 2, $value );
+        my $result = $replace->execute();
+        $count += 1 if $result && $result ne "0E0";
+    } ## end while ( my ( $key, $value...))
+    return $count;
+} ## end sub addKey
+
+=head3 listKey ( )
+=head3 listKey ( key1, key2)
+
+Read all or just specific keys from dictionary table.
+Return reference to hash.
+
+=cut
+
+sub listKey {
+    my ( $self, @list ) = @_;
+    my $dbh = $self->dbh;
+    return unless $dbh;
+
+    my $where = "";
+
+    if ( scalar @list ) {
+        $where = " WHERE id IN (" . join( ',', map {qq|'$_'|} @list ) . ")";
+    }
+
+    my %key = map { @{$_}[0] => @{$_}[1] } $dbh->selectall_array( "SELECT id, value FROM dictionary" . $where );
+
+    return \%key;
+} ## end sub listKey
+
+=head3 addLinger ( $site)
+
+Add or update linger referenced by $site in linger table.
+Fields:
+  $site->{linger_id} - text hash used as directory name and reference is missing generate from public key
+  $site->{public_key} - ed25519 public key
+  $site->{info} - hash
+
+The linger_id is used as primary key.
+Return site on success.
+
+=cut
+
+sub addLinger {
+    my ( $self, $arg ) = @_;
+    my $dbh = $self->dbh;
+    return unless $dbh;
+
+    if ( length( $arg->{public_key} ) != 68 ) {
+        return;
+    }
+
+    # generate hash if not defined
+    $arg->{linger_id} = uc( substr( md5_base64( $arg->{public_key} ), 10 ) ) unless $arg->{linger_id};
+
+    my $insertOrUpdate = $dbh->prepare("REPLACE INTO linger VALUES ( ?, ?, ?)");
+
+    $insertOrUpdate->bind_param( 1, $arg->{linger_id} );
+    $insertOrUpdate->bind_param( 2, $arg->{public_key} );
+    $insertOrUpdate->bind_param( 3, encode_json( $arg->{info} ), SQL_BLOB );
+
+    return $arg if $insertOrUpdate->execute();
+} ## end sub addLinger
+
+=head3 listLinger ( )
+
+Read all linger sites from table.
+Return reference to array of linger sites.
+
+=cut
+
+sub listLinger {
+    my ($self) = @_;
+    my $dbh = $self->dbh;
+    return unless $dbh;
+
+    my $list = $dbh->selectall_arrayref( "SELECT * FROM linger ORDER BY linger_id", { Slice => {} } );
+
+    foreach my $linger ( $list->@* ) {
+        $linger->{info} = decode_json( $linger->{info} );
+    }
+
+    return $list;
+} ## end sub listLinger
 
 =head3 healthCheck ( )
 
@@ -1617,28 +1750,46 @@ sub addScheme {
     my @error;
 
     foreach my $channel ( $scheme->{channel}->@* ) {
+        my $msg = "Channel: " . $channel->{channel_id} . " " . $channel->{name};
+
         if ( $self->addChannel($channel) ) {
-            push( @success, "Channel: " . $channel->{channel_id} . " " . $channel->{name} );
+            push( @success, $msg );
         } else {
-            push( @error, "Channel: " . $channel->{channel_id} . " " . $channel->{name} );
+            push( @error, $msg );
         }
     } ## end foreach my $channel ( $scheme...)
 
     foreach my $eit ( $scheme->{eit}->@* ) {
+        my $msg = "EIT: " . $eit->{eit_id} . " " . $eit->{pid};
+
         if ( $self->addEit($eit) ) {
-            push( @success, "EIT: " . $eit->{eit_id} . " " . $eit->{pid} );
+            push( @success, $msg );
         } else {
-            push( @error, "EIT: " . $eit->{eit_id} . " " . $eit->{pid} );
+            push( @error, $msg );
         }
     } ## end foreach my $eit ( $scheme->...)
 
     foreach my $rule ( $scheme->{rule}->@* ) {
+        my $msg = "Rule: " . $rule->{eit_id} . "-" . $rule->{channel_id};
+
         if ( $self->addRule($rule) ) {
-            push( @success, "Rule: " . $rule->{eit_id} . "-" . $rule->{channel_id} );
+            push( @success, $msg );
         } else {
-            push( @error, "Rule: " . $rule->{eit_id} . "-" . $rule->{channel_id} );
+            push( @error, $msg );
         }
     } ## end foreach my $rule ( $scheme->...)
+
+    $self->addKey( $scheme->{key}->%* ) if $scheme->{key};
+
+    foreach my $linger ( $scheme->{cloud}->@* ) {
+        my $msg = "Linger: " . ( $linger->{info}{site} // $linger->{linger_id} );
+
+        if ( $self->addLinger($linger) ) {
+            push( @success, $msg );
+        } else {
+            push( @error, $msg );
+        }
+    } ## end foreach my $linger ( $scheme...)
 
     return ( \@success, \@error );
 } ## end sub addScheme

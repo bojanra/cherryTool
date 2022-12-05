@@ -2,7 +2,7 @@
 
 use 5.024;
 use File::Rsync;
-use Test::More tests => 48;
+use Test::More tests => 49;
 
 BEGIN {
     use_ok("cherryEpg");
@@ -48,6 +48,8 @@ ok( $s->{isValid}, "build scheme" );
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) && !scalar(@$error), "load scheme" );
 
+my $backup = $scheme->backup();
+
 foreach my $channel ( $cherry->epg->listChannel()->@* ) {
     my $grab     = $cherry->grabChannel($channel);
     my $ingest   = $cherry->ingestChannel($channel);
@@ -55,3 +57,5 @@ foreach my $channel ( $cherry->epg->listChannel()->@* ) {
     ok( ref($grab) eq 'ARRAY' && scalar(@$grab) > 0 && scalar(@$ingest) && !scalar( @{ $$ingest[0]->{errorList} } ),
         "$parser test with channel $channel->{channel_id}" );
 } ## end foreach my $channel ( $cherry...)
+
+ok( $scheme->delete($backup), "delete scheme from archive" );

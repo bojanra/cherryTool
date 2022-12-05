@@ -144,7 +144,7 @@ get '/carousel/:target' => require_role cherryweb => sub {
     my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
-    my ( $a, undef, undef, undef, undef, $serialized ) = $player->load($target);
+    my ( $a, undef, undef, undef, undef, $serialized ) = $player->load( '/', $target );
 
     if ($$serialized) {
         my $gzipped = gzip($$serialized);
@@ -159,7 +159,7 @@ get '/dump/:target' => require_role cherryweb => sub {
     my $target = params->{target};
 
     my $player = cherryEpg::Player->new();
-    my $dump   = $player->dump($target);
+    my $dump   = $player->dump( '/', $target );
 
     send_file( $dump, filename => $target . '.txt', content_type => 'text/plain; charset=UTF-8' );
 };
@@ -221,7 +221,7 @@ ajax '/announce' => require_role cherryweb => sub {
 
 ajax '/carousel/browse' => require_role cherryweb => sub {
 
-    my $list = cherryEpg::Player->new()->list();
+    my $list = cherryEpg::Player->new()->list('/');
 
     # convert date to ISO 8601 for use with timeago
     foreach my $item ( $list->@* ) {
@@ -236,7 +236,7 @@ ajax '/carousel/delete' => require_role cherryweb => sub {
 
     my $player = cherryEpg::Player->new();
 
-    my $report = $player->delete($target);
+    my $report = $player->delete( '/', $target );
 
     send_as( JSON => { success => $report // 0, target => $target } );
 };
@@ -246,7 +246,7 @@ ajax '/carousel/pause' => require_role cherryweb => sub {
 
     my $player = cherryEpg::Player->new();
 
-    if ( $player->stop($target) ) {
+    if ( $player->stop( '/', $target ) ) {
         send_as( JSON => { success => 1, target => $target } );
     }
 
@@ -258,14 +258,14 @@ ajax '/carousel/play' => require_role cherryweb => sub {
 
     my $player = cherryEpg::Player->new();
 
-    if ( $player->arm( $player->load($target) ) ) {
+    if ( $player->arm( '/', $player->load( '/', $target ) ) ) {
 
-        my $report = $player->play($target);
+        my $report = $player->play( '/', $target );
 
         if ($report) {
             send_as( JSON => { success => 1, target => $target } );
         }
-    } ## end if ( $player->arm( $player...))
+    } ## end if ( $player->arm( '/'...))
 
     send_as( JSON => { success => 0 } );
 };
@@ -322,7 +322,7 @@ ajax '/carousel/save' => require_role cherryweb => sub {
         my $md5Reference = Digest::MD5::md5_hex( ${ $raw[5] } );
 
         if ( $md5 eq $md5Reference ) {
-            if ( $player->copy($file) ) {
+            if ( $player->copy( '/', $file ) ) {
                 unlink($file);
                 send_as( JSON => { success => 1 } );
             }
@@ -344,7 +344,7 @@ ajax '/carousel/upnsave' => require_role cherryweb => sub {
     my $player = cherryEpg::Player->new();
 
     foreach my $upload (@multi) {
-        if ( $player->load( $upload->tempname ) and my $target = $player->copy( $upload->tempname ) ) {
+        if ( $player->load( $upload->tempname ) and my $target = $player->copy( '/', $upload->tempname ) ) {
             push( @report, { success => 1, message => $upload->filename . ' saved', target => $target } );
         } else {
             push( @report, { success => 0, message => $upload->filename . ' failed' } );
@@ -516,7 +516,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     my $player = cherryEpg::Player->new();
 
     if ( $action ne 'loadScheme' and params->{deleteCarousel} ) {
-        push( @report, { success => defined $player->delete(), message => 'Delete carousel' } );
+        push( @report, { success => defined $player->delete('/'), message => 'Delete carousel' } );
     }
 
     if ( $action eq 'loadScheme' && !params->{stopCarousel} ) {
@@ -541,7 +541,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
 
     if ( $action eq 'loadScheme' ) {
         my ( $success, $error ) = $scheme->pushScheme();
-        $scheme->backupScheme();
+        $scheme->backup();
         push( @report, { success => $success, message => "Load scheme (" . $error->@* . " errors)" } );
         unlink($file);
     } ## end if ( $action eq 'loadScheme')
@@ -593,36 +593,48 @@ ajax '/ebudget' => require_role cherryweb => sub {
 
     my $cherry = cherryEpg->instance();
 
-    my $budget = $cherry->eventBudget();
+    if ( $cherry->isLinger() ) {
 
-    send_as(
-        JSON => {
-            status    => 3,
-            timestamp => $t->strftime(),
-        }
-        )
-        unless $budget;
+        send_as(
+            JSON => {
+                linger    => 1,
+                status    => 0,
+                timestamp => $t->strftime(),
+            }
+        );
+    } else {
 
-    # convert date to ISO 8601 for use with timeago and get overall
-    # worsed status
-    my $status = 0;
-    foreach my $channel (@$budget) {
-        $status = $channel->{status} if $status < $channel->{status};
-        if ( $channel->{update} ) {
-            my $t = localtime( $channel->{update} );
-            $channel->{update} = $t->datetime;
-        } else {
-            $channel->{update} = undef;
-        }
-    } ## end foreach my $channel (@$budget)
+        my $budget = $cherry->eventBudget();
 
-    send_as(
-        JSON => {
-            data      => $budget,
-            status    => $status,
-            timestamp => $t->strftime(),
-        }
-    );
+        send_as(
+            JSON => {
+                status    => 3,
+                timestamp => $t->strftime(),
+            }
+            )
+            unless $budget;
+
+        # convert date to ISO 8601 for use with timeago and get overall
+        # worsed status
+        my $status = 0;
+        foreach my $channel (@$budget) {
+            $status = $channel->{status} if $status < $channel->{status};
+            if ( $channel->{update} ) {
+                my $t = localtime( $channel->{update} );
+                $channel->{update} = $t->datetime;
+            } else {
+                $channel->{update} = undef;
+            }
+        } ## end foreach my $channel (@$budget)
+
+        send_as(
+            JSON => {
+                data      => $budget,
+                status    => $status,
+                timestamp => $t->strftime(),
+            }
+        );
+    } ## end else [ if ( $cherry->isLinger...)]
 };
 
 # ingest service eventdata file

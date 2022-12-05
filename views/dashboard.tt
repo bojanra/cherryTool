@@ -1,6 +1,6 @@
 <% INCLUDE menu.tt %>
 <div class="container">
-  <div id="dashBoard" class="panel panel-default">
+  <div id="dashBoard" class="panel panel-default hidden">
     <div class="panel-heading clearfix">
       <h3 class="panel-title pull-left">Event budget matrix</h3>
       <div class="input-group input-group-sm">
