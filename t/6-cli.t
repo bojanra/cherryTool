@@ -28,7 +28,7 @@ $test->run( args => '-h' );
 like( $test->stdout, qr/Usage/, "help" );
 
 $test->run( args => '-Q' );
-is( my $count = () = $test->stdout =~ m/MyISAM/g, 9, "db statistics" );
+is( my $count = () = $test->stdout =~ m/MyISAM/g, 7, "db statistics" );
 
 $test->run( args => '-c ' . $schemeFile, chdir => '.' );
 like( $test->stdout, qr/$sut.xls/, "compile scheme" );

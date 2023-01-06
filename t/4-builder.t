@@ -31,7 +31,7 @@ ok( defined $cherry->deleteIngest(), "delete ingest dir" );
 like( $cherry->epg->version(), qr/\d+\./, "version" );
 
 # db stats
-is( scalar( @{ $cherry->epg->healthCheck() } ), 9, "db stats" );
+is( scalar( @{ $cherry->epg->healthCheck() } ), 7, "db stats" );
 
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 

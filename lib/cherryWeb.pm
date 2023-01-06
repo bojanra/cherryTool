@@ -540,8 +540,8 @@ ajax '/scheme/action' => require_role cherryweb => sub {
     }
 
     if ( $action eq 'loadScheme' ) {
-        my ( $success, $error ) = $scheme->push();
-        $scheme->backup();
+        my ( $success, $error ) = $scheme->pushScheme();
+        $scheme->backupScheme();
         push( @report, { success => $success, message => "Load scheme (" . $error->@* . " errors)" } );
         unlink($file);
     } ## end if ( $action eq 'loadScheme')
