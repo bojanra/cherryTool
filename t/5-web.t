@@ -3,7 +3,7 @@
 use 5.024;
 use Mojo::Base -strict;
 use Test::Mojo;
-use Test::More tests => 53;
+use Test::More tests => 64;
 use Try::Tiny;
 
 BEGIN {
@@ -47,6 +47,60 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
     $t->ua->on( start => sub { my ( $ua, $tx ) = @_; $tx->req->headers->header( 'X-Requested-With' => 'XMLHttpRequest' ) } );
 
+    my $content = do {
+        local $/;
+        open( my $fh, '<', 't/scheme/simple.xls' ) || die;
+        <$fh>;
+    };
+    my $upload = { file => { content => $content, filename => 'simple.xls' } };
+    $t->post_ok( "/scheme/upload" => form => $upload )->status_is(200);
+
+    is( scalar $t->tx->res->json->{errorList}->@*, 0, "upload successful" );
+
+    my $mtime = $t->tx->res->json->{mtime};
+
+    $t->post_ok( "/scheme/validate" => form => { mtime => $mtime, description => 'test from WEB' } )->status_is(200)
+        ->json_is( '/success', 1 );
+
+    $t->post_ok(
+        '/scheme/action' => form => {
+            stopEIT        => 0,
+            stopCarousel   => 0,
+            deleteCarousel => 0,
+            resetDatabase  => 0,
+            deleteIngest   => 0,
+            reIngest       => 0,
+            importScheme   => 1,
+            grab           => 0,
+            ingest         => 0,
+            build          => 0,
+            action         => 'loadScheme',
+            mtime          => $mtime,
+        }
+    )->status_is(200);
+
+    $t->post_ok(
+        '/scheme/action' => form => {
+            stopEIT        => 1,
+            stopCarousel   => 1,
+            deleteCarousel => 1,
+            resetDatabase  => 1,
+            deleteIngest   => 1,
+            reIngest       => 1,
+            importScheme   => 1,
+            grab           => 1,
+            ingest         => 1,
+            build          => 1,
+            action         => 'maintain',
+        }
+    )->status_is(200);
+    my $success;
+
+    foreach ( $t->tx->res->json->@* ) {
+        $success += $_->{success};
+    }
+    is( $success, 6, "maintenance tasks" );
+
     $t->post_ok('/ebudget')->json_has('/timestamp')->json_has('/status')->json_has('/data');
     my $id = $t->tx->res->json('/data/0/id');
 
@@ -57,12 +111,12 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
     $t->post_ok( '/service/info' => form => { id => $id } )->status_is(200)->json_is( '/channel_id', $id );
     my $post = $t->tx->res->json('/post');
 
-    my $content = do {
+    $content = do {
         local $/;
-        open( my $fh, '<', 't/testData/TVXML.xml' ) || return;
+        open( my $fh, '<', 't/testData/TVXML.xml' ) || die;
         <$fh>;
     };
-    my $upload = { file => { content => $content, filename => 'sample.xml' } };
+    $upload = { file => { content => $content, filename => 'sample.xml' } };
     $t->post_ok( "/ingest/$post/$id" => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
     $id = 90;
@@ -71,7 +125,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
     $content = do {
         local $/;
-        open( my $fh, '<', 't/testData/SimpleSchedule.xls' ) || return;
+        open( my $fh, '<', 't/testData/SimpleSchedule.xls' ) || die;
         <$fh>;
     };
     $upload = { file => { content => $content, filename => 'Simple.xls' }, id => 90 };
@@ -91,7 +145,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
     $content = do {
         local $/;
-        open( my $fh, '<', 't/testData/SDT.ets.gz' ) || return;
+        open( my $fh, '<', 't/testData/SDT.ets.gz' ) || die;
         <$fh>;
     };
 
