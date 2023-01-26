@@ -327,15 +327,15 @@ sub parseService {
         }
 
         # tsid, sid and onid must be numbers
-        if (  !$field[1]
+        if (   !defined $field[1]
             || $field[1] !~ m|^\d+$|
-            || !$field[2]
+            || !defined $field[2]
             || $field[2] !~ m|^\d+$|
-            || !$field[3]
+            || !defined $field[3]
             || $field[3] !~ m|^\d+$| ) {
             $self->error("TSID, SID or ONID are not numbers in row [$sheetName:$rowCounter]");
             next;
-        } ## end if ( !$field[1] || $field...)
+        } ## end if ( !defined $field[1...])
 
         # segments must be numbers
         my $maxSegment = $field[4];
@@ -422,7 +422,7 @@ sub parseEIT {
         }
 
         # skip column name row
-        next if !$field[0] || $field[0] =~ m/tsid/i || $rowCounter == 1;
+        next if !defined $field[0] || $field[0] =~ m/tsid/i || $rowCounter == 1;
 
         # remove leading and trailing spaces, ', "
         foreach (@field) {
