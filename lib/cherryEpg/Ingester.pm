@@ -324,7 +324,7 @@ sub ingestData {
         } ## end if ( exists $event->{synopsis...})
 
         if ( defined $event->{parental_rating} ) {
-            if ( $event->{parental_rating} >= 4 ) {
+            if ( $event->{parental_rating} >= 3 ) {
                 my $parental_rating_descriptor;
                 $parental_rating_descriptor->{descriptor_tag} = 0x55;    # parental_rating_descriptor
 

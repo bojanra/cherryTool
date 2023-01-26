@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<PSI encoding="">
+  <TRANSPORT_STREAM id="770" on_id="8395">
+    <SERVICE id="8009" type="digital television" dvb_type="0x01" updated="2023-01-23T15:13:05Z">
+      <SERVICENAME lang="cze">Prima PLUS</SERVICENAME>
+      <EVENT id="1" reconcilekey="66671876" time="2023-01-21T05:00:00Z" duration="PT35M00S" ca="false">
+        <NAME lang="cze">Vůně barev </NAME>
+        <SHORT_DESCRIPTION lang="cze"></SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze" />
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="2" reconcilekey="66671879" time="2023-01-21T05:35:00Z" duration="PT50M00S" ca="false">
+        <NAME lang="cze">Nikdo není dokonalý</NAME>
+        <SHORT_DESCRIPTION lang="cze">Epizóda: NND 15./74/ Schmid J., Kořínek L. </SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Nevěříte? Přesvědčte se sami! Ke sledování úspěšného a oblíbeného pořadu vás zve Jiří Krampol a jeho hosté.</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, mono" dvb_type="0x02" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 4:3, 25 Hz" dvb_type="0x01" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="3" reconcilekey="66671880" time="2023-01-21T06:25:00Z" duration="PT55M00S" ca="false">
+        <NAME lang="cze">Show Jana Krause</NAME>
+        <SHORT_DESCRIPTION lang="cze"></SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Jan Kraus a to nejlepší z jeho úspěšné show! Zábavní hosté, témata bez cenzury a ta nejlepší late night show.</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="4" reconcilekey="66671904" time="2023-01-21T07:20:00Z" duration="PT01H20M00S" ca="false">
+        <NAME lang="cze">Cesty domů (87) (ST)</NAME>
+        <SHORT_DESCRIPTION lang="cze">Epizóda: Hlavně se neomlouvej </SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Domov je tam, kde na nás čeká láska. Bára se nevzdává, Hamzík ji nezlomí. Rodina ji podrží. Tereza přesvědčuje mámu, ať jde i s Filípkem pryč od Sluky. Ukáže se, že Sluková má nádor. Pacina by se chtěla stát paní Kosíkovou. Jak se k tomu postaví Petr? Úspěšný rodinný seriál. Hrají T. Kostková, M. Etzler, A. Švehlík, L. Potměšil, J. Smutná, P. Horváthová, P. Konáš, J. Zadražil, K. Špráchalová, V. Limr, K. Jandová, S. Postlerová, K. Leichtová, M. Písařík, J. Dolanský, L. Štěpánková, M. Šplechtová, P. Soukup, H. Ševčíková, J. Boušková, M. Dolinová, V. Poláčková, M. Magdová, P. Němec, L. Vítek, M. Leier, S. Havrda, T. Švejdová, A. Sikorová, A. Stovičková a další. Režie J. Polišenský. Pořad je opatřen skrytými titulky (ST)</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="5" reconcilekey="66671976" time="2023-01-21T08:40:00Z" duration="PT01H15M00S" ca="false">
+        <NAME lang="cze">Přístav II (5) (ST)</NAME>
+        <SHORT_DESCRIPTION lang="cze">Epizóda: Hlavně rychle </SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Marek Skála si do Přístavu udělá výlet se svojí bývalou, tedy Petrovou, třídou. Zábava je bujará a jedna ze spolužaček se snaží Petra sbalit, ale nevyjde jí to. Naopak se baví Drak. Holky se snaží balit i Šimáček, ale poněkud marně. Tereza se stále necítí dobře. Přepracovaná není jenom ona, ale také Ivana, které holky ze Zátoky pomáhají se šitím, aby vůbec stíhala. Terezino vyčerpání ale skončí dalším kolapsem. Hrají J. Kohák, F. Blažek, V. Hybnerová, M. Zounar, A. Stanková, P. Čtvrtníček, K. Hrachovcová, P. Řezníček, O. Želenská, V. Jiráček, N. Lichý, L. Potměšil a další. Režie Jaromír Polišenský. Pořad je opatřen skrytými titulky (ST)</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="6" reconcilekey="66672026" time="2023-01-21T09:55:00Z" duration="PT01H00M00S" ca="false">
+        <NAME lang="cze">Prima Partička</NAME>
+        <SHORT_DESCRIPTION lang="cze"></SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Na Primu se vrací oblíbená a nespoutaná Partička! Sledujte show, která srší humorem, improvizací a neskutečnými momenty, za kterými i letos budou stát Michal Suchánek, Richard Genzer, Daniel Dangl a Igor Chmela. Tentokrát navíc se speciálními hosty!.</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="7" reconcilekey="66672075" time="2023-01-21T10:55:00Z" duration="PT01H15M00S" ca="false">
+        <NAME lang="cze">Mordparta (7) (ST)</NAME>
+        <SHORT_DESCRIPTION lang="cze">Epizóda: Oběť </SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">ZÁVAŽNÉ ZLOČINY I DRAMATICKÉ OSOBNÍ PŘÍBĚHY VYŠETŘOVATELŮ KRIMINÁLNÍ POLICIE. 7. případ: vražda novináře, který nechtěl mlčet; místo činu: prezidentské apartmá jednoho nejmenovaného zámku; vyšetřuje: Mordparta - tým vyšetřovatelů ve složení: Kolumný alias Colombo (Jiří Bartoška), Kája (Vojta Kotek), Naďa (Markéta Plánková), Pavel (Pavel Batěk), Milan (Jiří Bábek). Další postavy a také podezřelí, mezi kterými se skrývá vrah: P. Štěpánek, M. Steinmasslová, J. Pidrmanová, K. Boková, A. Fialová, R. Fiala, A. Ernest, H. Baroňová, D. Choděrová a další. Scénář T. Bombík. Režie R. Švéda. Pořad je opatřen skrytými titulky (ST)</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+      <EVENT id="8" reconcilekey="66672124" time="2023-01-21T12:10:00Z" duration="PT01H10M00S" ca="false">
+        <NAME lang="cze">Autosalon.tv</NAME>
+        <SHORT_DESCRIPTION lang="cze"></SHORT_DESCRIPTION>
+        <DESCRIPTION lang="cze">Světové novinky, nelítostné testy, koncepty budoucnosti v tradičním motoristickém magazínu.</DESCRIPTION>
+        <AUDIO component_tag="18" description="zvuk, stereo (dvoukanálový)" dvb_type="0x03" lang="cze" />
+        <VIDEO component_tag="17" description="obraz, poměr stran 16:9, 25 Hz" dvb_type="0x03" lang="cze" />
+        <KIND dvb_content="0x00" user_nibble="0x00" />
+        <PARENTAL_RATING country="cze" dvb_rating="0x00" />
+      </EVENT>
+    </SERVICE>
+  </TRANSPORT_STREAM>
+</PSI>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv source-info-url="http://www.iecom.si/" source-info-name="IECom d.o.o." generator-info-name="XMLTV/$Id: iecom.si@2023-01-25T05:00:01 $">
+  <channel id="SLO1">
+    <display-name><![CDATA[Slovenija 1]]></display-name>
+  </channel>
+  <programme start="20230125051500 +00:00" stop="20230125054000 +00:00" channel="SLO1">
+    <title><![CDATA[Odmevi]]></title>
+    <title lang="sl"><![CDATA[Odmevi]]></title>
+    <sub-title lang="sl"><![CDATA[Odmevi]]></sub-title>
+    <desc lang="sl"><![CDATA[Originalni naslov: Odmevi; Kategorija: Informativni program; Žanr: Dnevno-informativna oddaja; Slovenija; 2023 Odmevi vsak delavnik ob 22.00 ponudijo sveže večerne novice ter analize najpomembnejših dogodkov dneva. Ozadja dogodkov in pojavov, prikrite podrobnosti in nove plati vznemirljivih zgodb predstavljajo novinarji in izbrani gosti, ki jih izprašajo voditelji oddaje ali pa se soočijo med seboj. V studiu damo besedo obema, oziroma toliko stranem, da si naši gledalci lahko ustvarijo čim bolj celostno podobo aktualnih dogajanj. Poleg tega pa še kratek pregled dnevnih svetovnih in domačih novic, ki ste jih morda zamudili ali preslišali čez dan.]]></desc>
+    <category lang="sl"><![CDATA[Informativni program]]></category>
+    <category lang="sl"><![CDATA[Dnevno-informativna oddaja]]></category>
+    <language lang="sl"><![CDATA[Slovenski]]></language>
+    <icon src="http://epg.iecom.si/index.php?action=download&amp;type=image&amp;id=722071" width="1280" height="720" />
+    <country lang="sl"><![CDATA[Slovenija]]></country>
+  </programme>
+  <programme start="20230125054000 +00:00" stop="20230125054500 +00:00" channel="SLO1">
+    <title><![CDATA[Šport]]></title>
+    <title lang="sl"><![CDATA[Šport]]></title>
+    <sub-title lang="sl"><![CDATA[Šport]]></sub-title>
+    <desc lang="sl"><![CDATA[Originalni naslov: Šport; Kategorija: Informativni program; Žanr: Šport; Slovenija; 2023 Šport je na sporedu vsak dan po Poročilih, po Dnevniku ter po Odmevih. Pregled športnih dogodkov bodo sodelavci športnega programa strnili v zadnji dnevnoinformativni oddaji, seznanili bodo z najnovejšimi dnevnimi rezultati ter izjavami, ne bodo pa pozabili tudi na prispevke aktualnih dogodkov z izjavami tekmovalcev. Osrednja dnevno-informativna oddaja je namenjena med drugim tudi najaktualnejšim dogodkom dne, rezultatom, izjavam in ozadjem s posameznih tekmovanj doma in v tujini.]]></desc>
+    <category lang="sl"><![CDATA[Informativni program]]></category>
+    <category lang="sl"><![CDATA[Šport]]></category>
+    <language lang="sl"><![CDATA[Slovenski]]></language>
+    <icon src="http://epg.iecom.si/index.php?action=download&amp;type=image&amp;id=722080" width="1280" height="720" />
+    <country lang="sl"><![CDATA[Slovenija]]></country>
+  </programme>
+  <programme start="20230125054500 +00:00" stop="20230125060000 +00:00" channel="SLO1">
+    <title><![CDATA[Superjelen Jani: Jani se počuti odveč]]></title>
+    <title lang="sl"><![CDATA[Superjelen Jani: Jani se počuti odveč]]></title>
+    <sub-title lang="sl"><![CDATA[Superjelen Jani: Jani se počuti odveč]]></sub-title>
+    <desc lang="sl"><![CDATA[Originalni naslov: Superjelen Jani: Jani se počuti odveč; Kategorija: Otroški in mladinski program; Žanr: Otroška oddaja; 2019 Jani Bernardu tre lešnike in skrbi, da Rudi ne zaide v težave. Župan Bernardu podari cel kup kikirikijev in postavi znake za prepoved. Težave so rešene! Jani se nenadoma počuti odveč …]]></desc>
+    <category lang="sl"><![CDATA[Otroški in mladinski program]]></category>
+    <category lang="sl"><![CDATA[Otroška oddaja]]></category>
+    <language lang="sl"><![CDATA[Slovenski]]></language>
+    <icon src="http://epg.iecom.si/index.php?action=download&amp;type=image&amp;id=1248172" width="1280" height="720" />
+  </programme>
+  <programme start="20230125060000 +00:00" stop="20230125070000 +00:00" channel="SLO1">
+    <title><![CDATA[Dobro jutro]]></title>
+    <title lang="sl"><![CDATA[Dobro jutro]]></title>
+    <sub-title lang="sl"><![CDATA[Dobro jutro]]></sub-title>
+    <desc lang="sl"><![CDATA[Originalni naslov: Dobro jutro; Kategorija: Razvedrilni program; Žanr: Zabavna oddaja; Slovenija; 2023 Izčrpne in kakovostne servisne informacije, koristni nasveti za vsakdanje življenje in raznovrstne razvedrilne vsebine za lepši začetek dneva. Oddaja Dobro jutro je oddaja gledalcev. S svojimi svetovalnimi, izobraževalnimi, razvedrilnimi in informativnimi vsebinami sledimo željam gledalcev vseh starostnih skupin. V večurnem živem in dinamičnem jutranjem programu, ki je na sporedu vsak delovni dan, se  prepleta studijski del z aktualnimi vklopi v živo z različnih koncev Slovenije. Raziskujemo teme, ki se dotikajo vsakdanjega življenja ljudi, in ponujamo najrazličnejše vsebine: od zdravstvenih, pravnih in kuharskih nasvetov, svetovanj o medosebnih odnosih, receptov iz domače lekarne do predstavljanj osupljivih življenjskih usod, vrtičkarskih in prehranskih nasvetov in atraktivnih nagradnih iger. 
+
+Oddaja Dobro jutro uvaja sodobne televizijske formate s poudarkom na kakovostnih vsebinah. Upoštevajoč delež televizijskih gledalcev je oddaja med najbolje gledanimi  oddajami nacionalne televizije. V letu 2014 so ustvarjalci oddaje prejeli eno najprestižnejših slovenskih medijskih priznanj: strokovnega Viktorja za najboljšo zabavno TV-oddajo.]]></desc>
+    <category lang="sl"><![CDATA[Razvedrilni program]]></category>
+    <category lang="sl"><![CDATA[Zabavna oddaja]]></category>
+    <language lang="sl"><![CDATA[Slovenski]]></language>
+    <icon src="http://epg.iecom.si/index.php?action=download&amp;type=image&amp;id=1120539" width="1280" height="720" />
+    <country lang="sl"><![CDATA[Slovenija]]></country>
+  </programme>
+</tv>

@@ -112,7 +112,7 @@ sub start_element {
     if ( $element->{Name} eq 'programme' ) {
         my $event = {};
 
-        # save the start and stop FIXME error handwling
+        # save the start and stop FIXME error handling
         # ISO 8601
         $event->{start} = try {
             if ( exists $element->{Attributes}{start} ) {
