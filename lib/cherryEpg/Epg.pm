@@ -357,7 +357,9 @@ sub listKey {
         $where = " WHERE id IN (" . join( ',', map {qq|'$_'|} @list ) . ")";
     }
 
-    my %key = map { @{$_}[0] => @{$_}[1] } $dbh->selectall_array( "SELECT id, value FROM dictionary" . $where );
+    my %key = try {
+        map { @{$_}[0] => @{$_}[1] } $dbh->selectall_array( "SELECT id, value FROM dictionary" . $where );
+    };
 
     return \%key;
 } ## end sub listKey
