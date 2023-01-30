@@ -413,7 +413,9 @@ sub listLinger {
     my $dbh = $self->dbh;
     return unless $dbh;
 
-    my $list = $dbh->selectall_arrayref( "SELECT * FROM linger ORDER BY linger_id", { Slice => {} } );
+    my $list = try {
+        $dbh->selectall_arrayref( "SELECT * FROM linger ORDER BY linger_id", { Slice => {} } );
+    };
 
     foreach my $linger ( $list->@* ) {
         $linger->{info} = decode_json( $linger->{info} );
