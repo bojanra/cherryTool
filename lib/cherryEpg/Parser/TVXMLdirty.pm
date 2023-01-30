@@ -3,11 +3,12 @@ package cherryEpg::Parser::TVXMLdirty;
 use 5.024;
 use utf8;
 use Moo;
+use Try::Tiny;
 use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 sub BUILD {
     my ( $self, $arg ) = @_;
@@ -60,7 +61,9 @@ sub parse {
         output  => $report
     );
 
-    $parser->parse( Source => { SystemId => $self->{source} } );
+    try {
+        $parser->parse( Source => { SystemId => $self->{source} } );
+    };
 
     # now we have multiple channels, let's select the requested one
     if ($channel) {

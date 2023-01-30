@@ -161,6 +161,7 @@ sub pushScheme {
     # build authorized_keys file and directories for synchronization Linger sites from cloud server
     $self->cherry->updateAuthorizedKeys();
     $self->cherry->updateSyncDirectory();
+    $self->cherry->installRrsync();
 
     # generate&play tables
     my $psigen = cherryEpg::Table->new();

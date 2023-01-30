@@ -135,7 +135,11 @@ sub getLingerKey {
     my $input  = $forced ? 'y' : 'n';
     my $logger = Log::Log4perl->get_logger("system");
 
-    my $keyfile = file( $self->config->{core}{basedir}, '.ssh', $KEYFILE );
+    my $sshDir = $self->getSSHDir();
+
+    return unless $sshDir;
+
+    my $keyfile = file( $sshDir, $KEYFILE );
 
     try {
         run3( "ssh-keygen -t ed25519 -N '' -f $keyfile -q", \$input, \$output, \$error );
@@ -168,20 +172,23 @@ sub updateAuthorizedKeys {
 
     my $logger = Log::Log4perl->get_logger("system");
 
-    my $knownhostsfile = file( $self->config->{core}{basedir}, '.ssh', 'authorized_keys' );
+    my $authorizedKeysFile = file( $self->config->{core}{basedir}, '.ssh', 'authorized_keys' );
 
     my @content;
 
+    my $fileExists;
+
     # read an existing file
-    if ( -e $knownhostsfile ) {
-        if ( open( my $file, '<', $knownhostsfile ) ) {
+    if ( -e $authorizedKeysFile ) {
+        $fileExists = 1;
+        if ( open( my $file, '<', $authorizedKeysFile ) ) {
             @content = <$file>;
             close($file);
         } else {
-            $logger->error("reading [$knownhostsfile]");
+            $logger->error("reading [$authorizedKeysFile]");
             return;
         }
-    } ## end if ( -e $knownhostsfile)
+    } ## end if ( -e $authorizedKeysFile)
 
     # remove existing entries
     @content = grep { !m/command.+shell/ } @content;
@@ -197,17 +204,37 @@ sub updateAuthorizedKeys {
         $count += 1;
     } ## end foreach my $linger ( $self->...)
 
+    return 0 if !$fileExists && !$count;
+
     # write file to disk
-    if ( open( my $file, '>', $knownhostsfile ) ) {
+    if ( $self->getSSHDir() && open( my $file, '>', $authorizedKeysFile ) ) {
         print( $file @content );
         close($file);
-        $logger->info("writing [$count] linger to [$knownhostsfile]");
+        $logger->info("writing [$count] linger to [$authorizedKeysFile]");
         return scalar @content;
     } else {
-        $logger->error("writing [$knownhostsfile]");
+        $logger->error("writing [$authorizedKeysFile]");
         return;
     }
 } ## end sub updateAuthorizedKeys
+
+=head3 getSSHDir()
+
+Return path to .ssh directory on success.
+
+=cut
+
+sub getSSHDir {
+    my ($self) = @_;
+
+    my $sshDir = dir( $self->config->{core}{basedir}, '.ssh' );
+
+    return $sshDir if -d $sshDir || mkdir($sshDir);
+
+    my $logger = Log::Log4perl->get_logger("system");
+    $logger->error("access to [.ssh] subdirectory");
+    return;
+} ## end sub getSSHDir
 
 =head3 installRrsync()
 
@@ -217,7 +244,7 @@ Return 1 on success.
 =cut
 
 sub installRrsync {
-    my ($sefl) = 0;
+    my ($self) = @_;
 
     my $rrsync = file( $ENV{'HOME'}, 'bin', 'rrsync' );
 
