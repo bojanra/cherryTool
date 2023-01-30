@@ -389,6 +389,9 @@ sub addLinger {
     # generate hash if not defined
     $arg->{linger_id} = uc( substr( md5_base64( $arg->{public_key} ), 10 ) ) unless $arg->{linger_id};
 
+    # prevent to have '/' in id
+    $arg->{linger_id} =~ tr|/|_|;
+
     my $insertOrUpdate = $dbh->prepare("REPLACE INTO linger VALUES ( ?, ?, ?)");
 
     $insertOrUpdate->bind_param( 1, $arg->{linger_id} );

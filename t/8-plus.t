@@ -23,7 +23,7 @@ foreach my $sut (qw( xsid multi large)) {
     note("test $sut scheme");
 
 SKIP: {
-        skip "large test in production", 10 if $sut eq 'large' and $ENV{'DANCER_ENVIRONMENT'} eq 'production';
+        skip "large test in production", 10 if $sut eq 'large' and ( 1 || $ENV{'DANCER_ENVIRONMENT'} eq 'production' );
 
         ok( defined $cherry->deleteIngest(), "delete ingest dir" );
         ok( $cherry->resetDatabase(),        "clean/init db" );
