@@ -83,6 +83,7 @@ sub rowHandler {
             /title/i    && do { $order->{$i} = 3; };
             /short/i    && do { $order->{$i} = 4; };
             /synopsis/i && do { $order->{$i} = 5; };
+            /image/i    && do { $order->{$i} = 6; };
             $i += 1;
         } ## end foreach (@cell)
         @mapping = sort { $order->{$a} <=> $order->{$b} } keys $order->%*;
@@ -91,8 +92,8 @@ sub rowHandler {
 
     return until @mapping;
 
-    #    0      1      2          3       4       5
-    my ( $date, $time, $duration, $title, $short, $synopsis ) =
+    #    0      1      2          3       4       5          6
+    my ( $date, $time, $duration, $title, $short, $synopsis, $image ) =
         map { $cell[$_] } @mapping;
     $time     //= '';
     $duration //= '';
@@ -169,7 +170,6 @@ sub rowHandler {
         return;
     }
 
-
     # build event
     my $event = {
         start    => $start->epoch,
@@ -178,6 +178,8 @@ sub rowHandler {
         subtitle => $short,
         synopsis => $synopsis,
     };
+
+    $event->{image} = $image if $image;
 
     return $event;
 } ## end sub rowHandler

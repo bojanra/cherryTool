@@ -379,6 +379,8 @@ sub ingestData {
             language    => $language
         };
 
+        $store->{image} = $event->{image} if exists $event->{image};
+
         if ( defined $self->epg->addEvent($store) ) {
             $result->{added} += 1;
         } else {

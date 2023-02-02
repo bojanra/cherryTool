@@ -15,6 +15,7 @@
     <title lang="en">Catchpoint 4, ep. 3.</title>
     <desc lang="en">White battle it out against TV presenters Sam Nixon and Mark Rhodes, attempting to catch giant pink balls to win cash for charity.</desc>
     <category lang="en">35</category>
+    <image>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Sam_Nixon_and_Mark_Rhodes_at_BAFTA_Children%27s_Academy_Awards_2015.jpg/1280px-Sam_Nixon_and_Mark_Rhodes_at_BAFTA_Children%27s_Academy_Awards_2015.jpg</image>
   </programme>
   <programme channel="bbc1.uk" start="20220510020000 +0200" stop="20220510020500 +0200">
     <title lang="en">Weather for the Week Ahead</title>
@@ -27,5 +28,6 @@
   <programme channel="bbc1.uk" start="20220510023000 +0200" stop="20220510030000 +0200">
     <title lang="en">BBC Wales Investigates, Families Fleeing War</title>
     <desc lang="en">Families ripped apart, and lives that will never be the same again. BBC Wales Investigates follows those families. A mother and her three children hide out amongst the ruins of Mariupol. Others describe the heartbreaking decisions they’ve been forced to make, to leave loved ones behind to fight - or just to survive.</desc>
+    <image>https://upload.wikimedia.org/wikipedia/commons/c/c4/Diwrnod_Agored_BBC_Cymru_Wales_Open_Day_-_geograph.org.uk_-_1600043.jpg</image>
   </programme>
 </tv>

@@ -235,6 +235,9 @@ SWITCH: for ( $element->{Name} ) {
             }
             return;
         };
+        /image/ && do {
+            $event->{image} = $value;
+        };
         /parentalrating/ && do {
             if ( $value =~ /(\d+)/ ) {
                 $value = $1 + 3;

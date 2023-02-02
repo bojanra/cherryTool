@@ -72,6 +72,8 @@ sub exportScheduleData {
                 }
             } ## end foreach my $descriptor ( $event...)
 
+            $eventDescription->{image}{content} = $event->{image} if exists $event->{image};
+
             push( $xml->{tv}{programme}->@*, $eventDescription );
         } ## end foreach my $event ( $self->...)
     } ## end foreach my $channel ( sort ...)
