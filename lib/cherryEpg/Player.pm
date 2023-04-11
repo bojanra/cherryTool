@@ -413,7 +413,7 @@ sub copy {
     my ( $self, $subdir, $filepath ) = @_;
 
     if ( -e $filepath ) {
-        my $LIMIT       = 10;
+        my $LIMIT       = 26;
         my $currentTime = gmtime->strftime("%Y%m%d%H%M%S");
         my $target;
         my $count = 0;
@@ -531,20 +531,20 @@ sub list {
     return;
 } ## end sub list
 
-=head3 dump()
+=head3 dump( $subdir, $target)
 
 Get target .cts or .ets and analyze it with dvbsnoop.
 
 =cut
 
 sub dump {
-    my ( $self, $target ) = @_;
+    my ( $self, $subdir, $target ) = @_;
 
     my $response;
     my $error;
 
     # try to get .cts
-    my ( undef, $ts ) = $self->decode($target);
+    my ( undef, $ts ) = $self->decode( $subdir, $target );
 
     if ( !$ts ) {
 
