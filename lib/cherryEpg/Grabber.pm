@@ -299,7 +299,14 @@ sub _curl {
             my $query    = $u->query    // '';
             my $fragment = $u->fragment // '';
             my $path     = $u->path;
-            $filename = $path . $query . $fragment;
+
+            # move the suffix in the path to the filename end
+            if ( $path =~ m|(.+)(\.[^.]+?)$| ) {
+                $filename = $1 . $query . $fragment . $2;
+            } else {
+                $filename = $path . $query . $fragment;
+            }
+
             $filename =~ s|^/||;
             $filename =~ tr|/|_|;
         } ## end else [ if ( $response_header ...)]

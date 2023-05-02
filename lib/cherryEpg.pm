@@ -1,4 +1,4 @@
-package cherryEpg v2.4.09;
+package cherryEpg v2.4.10;
 
 use 5.024;
 use utf8;
@@ -644,7 +644,7 @@ EITMULTI_LOOP:
 
     # mapping build EIT to linger sites subdir
     my $pathByEit = {};
-    map { $pathByEit->{ $_->{eit_id} } = $_->{list}[0]->{path} . '.cts' } $doneList->@*;
+    map { $pathByEit->{ $_->{eit_id} } = $_->{list}[0]->{path} . '.cts' if $_->{list}->@* } $doneList->@*;
     $self->makeSymbolicLink($pathByEit);
 
     return $doneList;
