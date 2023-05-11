@@ -5,7 +5,7 @@
 --iterations=2
 
 --maximum-line-length=130
---indent-columns=4
+--indent-columns=2
 --continuation-indentation=4
 --cuddled-else
 --maximum-consecutive-blank-lines=2

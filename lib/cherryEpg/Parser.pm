@@ -7,29 +7,29 @@ use Log::Log4perl;
 use Moo;
 
 has source => (
-    is  => 'ro',
-    isa => sub {
-        die "$_[0] file not found" unless -e $_[0];
-    },
-    required => 1,
+  is  => 'ro',
+  isa => sub {
+    die "$_[0] file not found" unless -e $_[0];
+  },
+  required => 1,
 );
 
 has logger => (
-    is       => 'ro',
-    required => 1,
+  is       => 'ro',
+  required => 1,
 );
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    my $filename = basename( $arg->{source} );
+  my $filename = basename( $arg->{source} );
 
-    $self->{report} = {
-        source    => $filename,
-        parser    => __PACKAGE__,
-        errorList => [],
-        eventList => [],
-    };
+  $self->{report} = {
+    source    => $filename,
+    parser    => __PACKAGE__,
+    errorList => [],
+    eventList => [],
+  };
 } ## end sub BUILD
 
 =head3 error( $format, @args)
@@ -39,10 +39,10 @@ Add a message to the report stack.
 =cut
 
 sub error {
-    my ($self) = shift;
+  my ($self) = shift;
 
-    push( @{ $self->{report}{errorList} }, sprintf( shift @_, @_ ) );
-    return;
+  push( @{ $self->{report}{errorList} }, sprintf( shift @_, @_ ) );
+  return;
 } ## end sub error
 
 =head3 parse( $parserOption)
@@ -56,10 +56,10 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    return $report;
+  return $report;
 
 } ## end sub parse
 

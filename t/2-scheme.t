@@ -5,7 +5,7 @@ use YAML::XS;
 use Test::More tests => 15;
 
 BEGIN {
-    use_ok("cherryEpg::Scheme");
+  use_ok("cherryEpg::Scheme");
 }
 
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );

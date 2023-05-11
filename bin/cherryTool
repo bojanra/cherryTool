@@ -103,9 +103,9 @@ my $getoptsSuccess = getopts( "ABc:CdfFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:vVwWxy
 say("cherryTool - $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
 
 pod2usage(
-    -verbose  => 99,
-    -exitval  => 0,
-    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+  -verbose  => 99,
+  -exitval  => 0,
+  -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
     )
     if exists $args{h} or !$getoptsSuccess;
 
@@ -148,521 +148,521 @@ serviceManipulator() if $multiCommand;
 exit;
 
 sub listCarousel {
-    my $player = cherryEpg::Player->new( verbose => $verbose );
+  my $player = cherryEpg::Player->new( verbose => $verbose );
 
-    my $list = $player->list('/');
-    my @item;
+  my $list = $player->list('/');
+  my @item;
 
-    format PLAYER_TOP =
+  format PLAYER_TOP =
     (flags: *-active playing, s-source .ets available, t-tmp file)           Bitrate  Size
 Flags Chunk           Title                         PID  Destination          [bps]   [byte]
 ---------------------------------------------------------------------------------------------
 .
-    format PLAYER =
+  format PLAYER =
  @ @@ @<<<<<<<<<<<<<< @<<<<<<<<<<<<<<<<<<<<<<<<<<< @>>>  @<<<<<<<<<<<<<<<<< @>>>>>>> @>>>>>>>
 @item
 .
 
-    format PLAYER_END =
+  format PLAYER_END =
 =============================================================================================
  @>>> active chunks
 @item
 .
 
-    $~ = "PLAYER";
-    $^ = "PLAYER_TOP";
-    $= = 60;
+  $~ = "PLAYER";
+  $^ = "PLAYER_TOP";
+  $= = 60;
 
-    my $countActive = 0;
+  my $countActive = 0;
 
-    foreach (@$list) {
-        @item = ();
-        $countActive += 1 if $_->{playing};
-        push( @item, $_->{playing} ? '*' : '' );
-        push( @item, $_->{ets}     ? 's' : '' );
-        push( @item, $_->{tmp}     ? 't' : '' );
-        push( @item, $_->{target} );
-        push( @item, $_->{meta}{title} // '?' );
-        push( @item, $_->{pid}         // '?' );
-        push( @item, $_->{meta}{dst}   // '?' );
+  foreach (@$list) {
+    @item = ();
+    $countActive += 1 if $_->{playing};
+    push( @item, $_->{playing} ? '*' : '' );
+    push( @item, $_->{ets}     ? 's' : '' );
+    push( @item, $_->{tmp}     ? 't' : '' );
+    push( @item, $_->{target} );
+    push( @item, $_->{meta}{title} // '?' );
+    push( @item, $_->{pid}         // '?' );
+    push( @item, $_->{meta}{dst}   // '?' );
 
-        if ( $_->{meta}{bitrate} ) {
-            push( @item, $_->{meta}{bitrate} );
-        } elsif ( $_->{meta}{interval} ) {
-            push( @item, int( ( $_->{size} * 8 ) / $_->{meta}{interval} * 1000 ) );
-        } else {
-            push( @item, '?' );
-        }
-        push( @item, $_->{size} // '?' );
-        write;
-    } ## end foreach (@$list)
-    @item = ($countActive);
-    $~    = "PLAYER_END";
+    if ( $_->{meta}{bitrate} ) {
+      push( @item, $_->{meta}{bitrate} );
+    } elsif ( $_->{meta}{interval} ) {
+      push( @item, int( ( $_->{size} * 8 ) / $_->{meta}{interval} * 1000 ) );
+    } else {
+      push( @item, '?' );
+    }
+    push( @item, $_->{size} // '?' );
     write;
+  } ## end foreach (@$list)
+  @item = ($countActive);
+  $~    = "PLAYER_END";
+  write;
 } ## end sub listCarousel
 
 sub addCarousel {
-    say("TBD");
+  say("TBD");
 }
 
 sub playCarousel {
-    say("TBD");
+  say("TBD");
 }
 
 sub stopCarousel {
-    my $player = cherryEpg::Player->new( verbose => $verbose );
-    if ( $args{Y} ) {
-        say("Stop playing ALL files in carousel");
-        exit 2 unless confirmed();
-        $player->stop('/');
-    } else {
-        say("TBD");
-    }
+  my $player = cherryEpg::Player->new( verbose => $verbose );
+  if ( $args{Y} ) {
+    say("Stop playing ALL files in carousel");
+    exit 2 unless confirmed();
+    $player->stop('/');
+  } else {
+    say("TBD");
+  }
 } ## end sub stopCarousel
 
 sub cleanCarousel {
-    my $player = cherryEpg::Player->new( verbose => $verbose );
-    say("Delete ALL files from carousel");
-    exit 2 unless confirmed();
-    $player->delete('/');
+  my $player = cherryEpg::Player->new( verbose => $verbose );
+  say("Delete ALL files from carousel");
+  exit 2 unless confirmed();
+  $player->delete('/');
 } ## end sub cleanCarousel
 
 sub checkSystem {
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    my $report = $cherry->report();
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  my $report = $cherry->report();
 
-    if ( $args{R} ) {
-        my $output = $cherry->format($report);
-        utf8::decode($output);
-        say $output;
-    }
+  if ( $args{R} ) {
+    my $output = $cherry->format($report);
+    utf8::decode($output);
+    say $output;
+  }
 
-    if ( $args{N} ) {
-        my $logger = get_logger('system');
+  if ( $args{N} ) {
+    my $logger = get_logger('system');
 
-        my @warning  = ();
-        my @critical = ();
-        foreach my $channel ( @{ $report->{modules}{epg}{report} } ) {
-            my $t = Time::Piece->localtime( $channel->{update} );
-            $channel->{message} =
-                "$channel->{name} [SID=$channel->{id}] last update " . ( $channel->{update} ? $t->strftime() : "NEVER" );
+    my @warning  = ();
+    my @critical = ();
+    foreach my $channel ( @{ $report->{modules}{epg}{report} } ) {
+      my $t = Time::Piece->localtime( $channel->{update} );
+      $channel->{message} =
+          "$channel->{name} [SID=$channel->{id}] last update " . ( $channel->{update} ? $t->strftime() : "NEVER" );
 
-            if ( $channel->{status} == 1 ) {
-                push( @warning, $channel->{message} );
-            } elsif ( $channel->{status} == 2 ) {
-                push( @critical, $channel->{message} );
-            }
-        } ## end foreach my $channel ( @{ $report...})
+      if ( $channel->{status} == 1 ) {
+        push( @warning, $channel->{message} );
+      } elsif ( $channel->{status} == 2 ) {
+        push( @critical, $channel->{message} );
+      }
+    } ## end foreach my $channel ( @{ $report...})
 
-        $logger->warn( "eventbudget WARNING for service", undef, undef, \@warning ) if scalar @warning;
-        $logger->error( "eventbudget ERROR for service", undef, undef, \@critical ) if scalar @critical;
-    } ## end if ( $args{N} )
+    $logger->warn( "eventbudget WARNING for service", undef, undef, \@warning ) if scalar @warning;
+    $logger->error( "eventbudget ERROR for service", undef, undef, \@critical ) if scalar @critical;
+  } ## end if ( $args{N} )
 } ## end sub checkSystem
 
 sub cleanupDatabase {
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    say("Cleanup database");
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  say("Cleanup database");
 
-    # delete old events up to yesterday
-    # delete log entries till start of previous month
-    $cherry->cleanup();
+  # delete old events up to yesterday
+  # delete log entries till start of previous month
+  $cherry->cleanup();
 } ## end sub cleanupDatabase
 
 sub cleanStockDirectory {
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    say("Delete ALL files from stock");
-    exit 2 unless confirmed();
-    $cherry->deleteStock();
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  say("Delete ALL files from stock");
+  exit 2 unless confirmed();
+  $cherry->deleteStock();
 } ## end sub cleanStockDirectory
 
 sub confirmed {
-    return 1 if $yes;
-    print(" Please confirm with <yes>: ");
-    my $input = <STDIN>;
-    chomp $input;
-    return $input eq 'yes';
+  return 1 if $yes;
+  print(" Please confirm with <yes>: ");
+  my $input = <STDIN>;
+  chomp $input;
+  return $input eq 'yes';
 } ## end sub confirmed
 
 sub getEnvInfo {
-    say( "cherryEpg: ", $cherryEpg::VERSION );
-    my $cherry = cherryEpg->instance( verbose => $verbose );
+  say( "cherryEpg: ", $cherryEpg::VERSION );
+  my $cherry = cherryEpg->instance( verbose => $verbose );
 
-    say( YAML::XS::Dump( $cherry->config ) );
+  say( YAML::XS::Dump( $cherry->config ) );
 } ## end sub getEnvInfo
 
 sub getDatabaseInfo {
-    my $cherry  = cherryEpg->instance( verbose => $verbose );
-    my $version = $cherry->epg->version();
-    my $report  = $cherry->epg->healthCheck();
+  my $cherry  = cherryEpg->instance( verbose => $verbose );
+  my $version = $cherry->epg->version();
+  my $report  = $cherry->epg->healthCheck();
 
-    say( "Database: ", $version );
-    my @fields;
-    format STAT_TOP =
+  say( "Database: ", $version );
+  my @fields;
+  format STAT_TOP =
 Table    Engine  Rows    Size         Create      Update      Check       Collation
 ---------------------------------------------------------------------------------------------
 .
-    format STAT =
+  format STAT =
 @<<<<<<  @>>>>>  @>>>>>  @>>>>>>>>>>  @<<<<<<<<<  @<<<<<<<<<  @<<<<<<<<<  @<<<<<<<<<<<<<<<<<<
 @fields
 .
 
-    $^ = "STAT_TOP";
-    $~ = "STAT";
-    $= = 60;
+  $^ = "STAT_TOP";
+  $~ = "STAT";
+  $= = 60;
 
-    foreach my $row ( @{$report} ) {
-        @fields = @$row;
-        $fields[6] = "-" if !$fields[6];
-        write;
-    }
+  foreach my $row ( @{$report} ) {
+    @fields = @$row;
+    $fields[6] = "-" if !$fields[6];
+    write;
+  }
 } ## end sub getDatabaseInfo
 
 sub inspect {
-    say("TBD");
+  say("TBD");
 }
 
 sub testLogger {
-    my ($message) = @_;
+  my ($message) = @_;
 
-    my $cherry = cherryEpg->instance( verbose => $verbose );
+  my $cherry = cherryEpg->instance( verbose => $verbose );
 
-    my $logger = get_logger('system');
-    $logger->error( $message, undef, undef, [$message] );
+  my $logger = get_logger('system');
+  $logger->error( $message, undef, undef, [$message] );
 } ## end sub testLogger
 
 sub applyMaintainerPackage {
-    my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
+  my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
 
-    if ( $mtainer->load( $args{j} ) ) {
-        say( $mtainer->pod );
-        exit 2 unless confirmed();
-        my $success = $mtainer->apply();
-        say $mtainer->output;
-        say $success ? "Success" : "Failed";
-        exit( $success ? 0 : 1 );
+  if ( $mtainer->load( $args{j} ) ) {
+    say( $mtainer->pod );
+    exit 2 unless confirmed();
+    my $success = $mtainer->apply();
+    say $mtainer->output;
+    say $success ? "Success" : "Failed";
+    exit( $success ? 0 : 1 );
 
-    } ## end if ( $mtainer->load( $args...))
+  } ## end if ( $mtainer->load( $args...))
 } ## end sub applyMaintainerPackage
 
 sub convertMaintainerPackage {
-    my ($filename) = @_;
+  my ($filename) = @_;
 
-    my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
+  my $mtainer = cherryEpg::Maintainer->new( verbose => $verbose );
 
-    if ( my $content = $mtainer->convert($filename) ) {
-        my $binFile = $filename . '.bin';
-        open( my $file, '>:raw', $binFile ) || die "Error writing to $binFile: $?";
-        print( $file $content );
-        close($file);
-        say( "  " . length($content) . " bytes written to $binFile" );
-    } else {
-        say("  Conversion failed");
-    }
+  if ( my $content = $mtainer->convert($filename) ) {
+    my $binFile = $filename . '.bin';
+    open( my $file, '>:raw', $binFile ) || die "Error writing to $binFile: $?";
+    print( $file $content );
+    close($file);
+    say( "  " . length($content) . " bytes written to $binFile" );
+  } else {
+    say("  Conversion failed");
+  }
 } ## end sub convertMaintainerPackage
 
 sub parallelGrabIngest {
-    my ($target) = @_;
+  my ($target) = @_;
 
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    say("Starting multi-grab/ingest on target: $target");
-    my $start  = time();
-    my $report = $cherry->parallelGrabIngestChannel( $target, 1, 1 );
-    my $end    = time();
-    say( sprintf( "Done: %i Spent: %0.02f s", scalar $report->@*, $end - $start ) );
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  say("Starting multi-grab/ingest on target: $target");
+  my $start  = time();
+  my $report = $cherry->parallelGrabIngestChannel( $target, 1, 1 );
+  my $end    = time();
+  say( sprintf( "Done: %i Spent: %0.02f s", scalar $report->@*, $end - $start ) );
 } ## end sub parallelGrabIngest
 
 sub parallelUpdate {
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    say "Building";
-    my $start = time();
-    $cherry->parallelUpdateEit();
-    my $end = time();
-    say( sprintf( "spent: %0.02f s", $end - $start ) );
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  say "Building";
+  my $start = time();
+  $cherry->parallelUpdateEit();
+  my $end = time();
+  say( sprintf( "spent: %0.02f s", $end - $start ) );
 } ## end sub parallelUpdate
 
 sub resetDatabase {
-    say("Empty all tables");
-    exit 2 unless confirmed();
-    my $cherry = cherryEpg->instance( verbose => $verbose );
+  say("Empty all tables");
+  exit 2 unless confirmed();
+  my $cherry = cherryEpg->instance( verbose => $verbose );
 
-    $cherry->resetDatabase();
+  $cherry->resetDatabase();
 } ## end sub resetDatabase
 
 sub resetRules {
-    say("Delete all output rules");
-    exit 2 unless confirmed();
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    $cherry->deleteRule();
+  say("Delete all output rules");
+  exit 2 unless confirmed();
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  $cherry->deleteRule();
 } ## end sub resetRules
 
 sub resetSectionVersionTable {
-    say("Clean section and version tables");
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    $cherry->deleteSection();
+  say("Clean section and version tables");
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  $cherry->deleteSection();
 }
 
 sub compileScheme {
-    my ($source) = @_;
+  my ($source) = @_;
 
-    my $doBackup;
+  my $doBackup;
 
-    say("Convert xls to yaml scheme:");
-    my ( $filename, $dirs, $suffix ) = fileparse( $source, qr/\.[^.]*/ );
+  say("Convert xls to yaml scheme:");
+  my ( $filename, $dirs, $suffix ) = fileparse( $source, qr/\.[^.]*/ );
 
-    if ( $filename and $suffix =~ m/^\.(xls|xlsx|ods)$/i and -e $source ) {
-        my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
-        $scheme->readXLS($source);
+  if ( $filename and $suffix =~ m/^\.(xls|xlsx|ods)$/i and -e $source ) {
+    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
+    $scheme->readXLS($source);
 
-        my $compiled = $scheme->build( $args{H} );
+    my $compiled = $scheme->build( $args{H} );
 
-        # check if the scheme was compiled for a selected host, defined by sheet name
-        my $target;
-        if ( $args{H} ) {
-            if ( $compiled->{target} eq $args{H} ) {
-                $target = $args{H};
-            } else {
-                say("  Scheme for target host not found!");
-                exit 1;
-            }
-        } else {
-            $target = $compiled->{target};
-        }
+    # check if the scheme was compiled for a selected host, defined by sheet name
+    my $target;
+    if ( $args{H} ) {
+      if ( $compiled->{target} eq $args{H} ) {
+        $target = $args{H};
+      } else {
+        say("  Scheme for target host not found!");
+        exit 1;
+      }
+    } else {
+      $target = $compiled->{target};
+    }
 
-        my $targetFile = $filename . ( $target ? "_" . $target : "" );
-        $targetFile .= ".yaml";
+    my $targetFile = $filename . ( $target ? "_" . $target : "" );
+    $targetFile .= ".yaml";
 
-        if ( scalar( @{ $scheme->error } ) ) {
-            say("  Errors during building and validation:");
-            say( join( "\n", map { $_ = "    " . $_; } @{ $scheme->error } ) );
-        }
+    if ( scalar( @{ $scheme->error } ) ) {
+      say("  Errors during building and validation:");
+      say( join( "\n", map { $_ = "    " . $_; } @{ $scheme->error } ) );
+    }
 
-        format COMPILE_TOP =
+    format COMPILE_TOP =
 Source file  Target file            Host         Channels  Outputs   Rules   Ignored   Errors
 ---------------------------------------------------------------------------------------------
 .
-        format COMPILE =
+    format COMPILE =
 @<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>   @>>>>>>   @>>>>>
 $filename.$suffix, $targetFile, $target // "-", scalar @{$compiled->{channel}}, scalar @{$compiled->{eit}}, scalar @{$compiled->{rule}}, $scheme->{raw}{countIgnored}, scalar( @{ $scheme->error })
 .
-        $^ = "COMPILE_TOP";
-        $~ = "COMPILE";
-        $= = 3;               # pagination for format
-        write;
+    $^ = "COMPILE_TOP";
+    $~ = "COMPILE";
+    $= = 3;               # pagination for format
+    write;
 
-        if ( !$compiled->{isValid} ) {
-            say("  Do you really want to generate scheme file? (Incorrect rows will be ignored)");
-            exit 2 unless confirmed();
-        }
-
-        my $report = $scheme->exportScheme($targetFile);
-    } else {
-        say("Incorrect input filename [$source] or file not found.\n");
-        exit 1;
+    if ( !$compiled->{isValid} ) {
+      say("  Do you really want to generate scheme file? (Incorrect rows will be ignored)");
+      exit 2 unless confirmed();
     }
+
+    my $report = $scheme->exportScheme($targetFile);
+  } else {
+    say("Incorrect input filename [$source] or file not found.\n");
+    exit 1;
+  }
 } ## end sub compileScheme
 
 sub importScheme {
-    my $cherry = cherryEpg->instance( verbose => $verbose );
-    my $filename;
-    if ( $args{L} ) {
-        $filename = $args{L};
-    } else {
-        $filename = $args{l};
-    }
-    if ( !-f $filename ) {
-        say("File not found!");
-        exit 1;
-    }
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+  my $filename;
+  if ( $args{L} ) {
+    $filename = $args{L};
+  } else {
+    $filename = $args{l};
+  }
+  if ( !-f $filename ) {
+    say("File not found!");
+    exit 1;
+  }
 
-    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
-    my $s      = $scheme->importScheme($filename);
+  my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
+  my $s      = $scheme->importScheme($filename);
 
-    if ( !$s ) {
-        say("Incorrect file format!");
-        exit 1;
-    }
+  if ( !$s ) {
+    say("Incorrect file format!");
+    exit 1;
+  }
 
-    format YAML_TOP =
+  format YAML_TOP =
 Import from file                                 Services  Outputs   Rules
 ---------------------------------------------------------------------------------------------
 .
-    format YAML =
+  format YAML =
 @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>
 $filename, scalar @{$s->{channel}}, scalar @{$s->{eit}}, scalar @{$s->{rule}}
 .
-    $~ = "YAML";
-    $^ = "YAML_TOP";
-    $= = 3;
-    write;
+  $~ = "YAML";
+  $^ = "YAML_TOP";
+  $= = 3;
+  write;
 
-    if ( $args{L} ) {
-        say "Clean database and import scheme from $args{L}";
-        say "All existing events will be lost";
-    } else {
-        say "Load scheme from $args{l}";
-        say "DELETE all rules. Service event data will NOT be modified!";
-    }
-    exit 2 unless confirmed();
-    $cherry->epg->initdb()  if $args{L};
-    $cherry->deleteIngest() if $args{L};
+  if ( $args{L} ) {
+    say "Clean database and import scheme from $args{L}";
+    say "All existing events will be lost";
+  } else {
+    say "Load scheme from $args{l}";
+    say "DELETE all rules. Service event data will NOT be modified!";
+  }
+  exit 2 unless confirmed();
+  $cherry->epg->initdb()  if $args{L};
+  $cherry->deleteIngest() if $args{L};
 
-    my ( $success, $error ) = $scheme->pushScheme();
-    $scheme->backup();
+  my ( $success, $error ) = $scheme->pushScheme();
+  $scheme->backup();
 
 } ## end sub importScheme
 
 sub listScheme {
-    my ($last) = @_;
+  my ($last) = @_;
 
-    my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
+  my $scheme = cherryEpg::Scheme->new( verbose => $verbose );
 
-    my $list = $scheme->listScheme();
-    my @item;
+  my $list = $scheme->listScheme();
+  my @item;
 
-    format SCHEME_TOP =
+  format SCHEME_TOP =
 Scheme          Description                           Source        Services  Outputs   Rules
 ---------------------------------------------------------------------------------------------
 .
-    format SCHEME =
+  format SCHEME =
 @<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<<  @>>>>>>>  @>>>>>>   @>>>>
 @item
 .
-    $~ = "SCHEME";
-    $^ = "SCHEME_TOP";
-    $= = 60;
+  $~ = "SCHEME";
+  $^ = "SCHEME_TOP";
+  $= = 60;
 
-    foreach (@$list) {
-        @item = @{$_}{qw|target description source channel eit rule|};
-        write;
-        return if $last;
-    }
+  foreach (@$list) {
+    @item = @{$_}{qw|target description source channel eit rule|};
+    write;
+    return if $last;
+  }
 } ## end sub listScheme
 
 sub serviceManipulator {
 
-    # Do something on one or multiple channels
-    my $cherry = cherryEpg->instance( verbose => $verbose );
+  # Do something on one or multiple channels
+  my $cherry = cherryEpg->instance( verbose => $verbose );
 
-    my $myChannelList;
-    if ( scalar(@ARGV) > 0 ) {
-        my $errorFlag = 0;
-        foreach my $channel_id (@ARGV) {
-            if ( $channel_id =~ /^\d+$/ ) {
-                my $channel = ${ $cherry->epg->listChannel($channel_id) }[0];
-                if ($channel) {
-                    push( @$myChannelList, $channel );
-                } else {
-                    say("channel $channel_id not defined");
-                    $errorFlag += 1;
-                }
-            } else {
-                say("$channel_id is not a valid channel id");
-                $errorFlag += 1;
-            }
-        } ## end foreach my $channel_id (@ARGV)
-        exit 1 if $errorFlag;
-    } else {
-        if ( $args{w} ) {
-            say("You are going to wipe all services from the system!");
-            exit 2 unless confirmed();
+  my $myChannelList;
+  if ( scalar(@ARGV) > 0 ) {
+    my $errorFlag = 0;
+    foreach my $channel_id (@ARGV) {
+      if ( $channel_id =~ /^\d+$/ ) {
+        my $channel = ${ $cherry->epg->listChannel($channel_id) }[0];
+        if ($channel) {
+          push( @$myChannelList, $channel );
+        } else {
+          say("channel $channel_id not defined");
+          $errorFlag += 1;
         }
-        $myChannelList = $cherry->epg->listChannel();
-    } ## end else [ if ( scalar(@ARGV) > 0)]
+      } else {
+        say("$channel_id is not a valid channel id");
+        $errorFlag += 1;
+      }
+    } ## end foreach my $channel_id (@ARGV)
+    exit 1 if $errorFlag;
+  } else {
+    if ( $args{w} ) {
+      say("You are going to wipe all services from the system!");
+      exit 2 unless confirmed();
+    }
+    $myChannelList = $cherry->epg->listChannel();
+  } ## end else [ if ( scalar(@ARGV) > 0)]
 
-    # walk over all channels
-    foreach my $channel (@$myChannelList) {
-        my $channel_id = $channel->{channel_id};
+  # walk over all channels
+  foreach my $channel (@$myChannelList) {
+    my $channel_id = $channel->{channel_id};
 
-        say("$channel->{name} [$channel_id]:");
+    say("$channel->{name} [$channel_id]:");
 
-        $cherry->purgeChannel($channel)       if $args{d};
-        $cherry->resetChannel($channel)       if $args{r};
-        $cherry->grabChannel($channel)        if $args{g};
-        $cherry->ingestChannel($channel)      if $args{i};
-        $cherry->ingestChannel( $channel, 1 ) if $args{I};
+    $cherry->purgeChannel($channel)       if $args{d};
+    $cherry->resetChannel($channel)       if $args{r};
+    $cherry->grabChannel($channel)        if $args{g};
+    $cherry->ingestChannel($channel)      if $args{i};
+    $cherry->ingestChannel( $channel, 1 ) if $args{I};
 
-        if ( $args{x} ) {
-            my $content =
-                $cherry->epg->exportScheduleData( [$channel], $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
-            my $filename = "service_" . $channel_id . ".xml";
+    if ( $args{x} ) {
+      my $content =
+          $cherry->epg->exportScheduleData( [$channel], $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
+      my $filename = "service_" . $channel_id . ".xml";
 
-            utf8::decode($content);
-            open( my $file, ">", $filename ) or die("Failed to open $filename for writing: $?");
-            print( $file $content );
-            close($file);
-            say("  $filename");
-        } ## end if ( $args{x} )
+      utf8::decode($content);
+      open( my $file, ">", $filename ) or die("Failed to open $filename for writing: $?");
+      print( $file $content );
+      close($file);
+      say("  $filename");
+    } ## end if ( $args{x} )
 
-        if ( $args{w} ) {
-            say(" wipe (All service data will be lost):");
-            if ( confirmed() ) {
-                $cherry->deleteChannel($channel_id);
-            }
-        } ## end if ( $args{w} )
-    } ## end foreach my $channel (@$myChannelList)
+    if ( $args{w} ) {
+      say(" wipe (All service data will be lost):");
+      if ( confirmed() ) {
+        $cherry->deleteChannel($channel_id);
+      }
+    } ## end if ( $args{w} )
+  } ## end foreach my $channel (@$myChannelList)
 } ## end sub serviceManipulator
 
 sub webServer {
-    my $port = 5000;
+  my $port = 5000;
 
-    my $limit = IPC::ConcurrencyLimit->new(
-        type      => 'Flock',
-        max_procs => 1,
-        path      => '/tmp/cherryWeb.flock',
+  my $limit = IPC::ConcurrencyLimit->new(
+    type      => 'Flock',
+    max_procs => 1,
+    path      => '/tmp/cherryWeb.flock',
+  );
+
+  my $id = $limit->get_lock;
+  if ( not $id ) {
+    say("cherryEPG web UI is already running. No lock.");
+    exit 1;
+  } else {
+    chdir;
+
+    my $runner = Plack::Runner->new;
+    $runner->parse_options(
+
+      "-p", $port,
+      "cherryTool/bin/app.psgi",
+      "--server", "Starlet",
+      "--no-default-middleware",
+      "--max_workers", 5,
+      "--host",        "127.0.0.1",
     );
-
-    my $id = $limit->get_lock;
-    if ( not $id ) {
-        say("cherryEPG web UI is already running. No lock.");
-        exit 1;
-    } else {
-        chdir;
-
-        my $runner = Plack::Runner->new;
-        $runner->parse_options(
-
-            "-p", $port,
-            "cherryTool/bin/app.psgi",
-            "--server", "Starlet",
-            "--no-default-middleware",
-            "--max_workers", 5,
-            "--host",        "127.0.0.1",
-        );
-        $runner->run();
-    } ## end else [ if ( not $id ) ]
+    $runner->run();
+  } ## end else [ if ( not $id ) ]
 } ## end sub webServer
 
 sub applyDescription {
-    my ($description) = @_;
+  my ($description) = @_;
 
-    my $cherry     = cherryEpg->instance( verbose => $verbose );
-    my $configFile = glob( $cherry->configFile );
+  my $cherry     = cherryEpg->instance( verbose => $verbose );
+  my $configFile = glob( $cherry->configFile );
 
-    # check if file exists
-    if ( $configFile and -e $configFile ) {
-        my $configuration = YAML::XS::LoadFile($configFile);
+  # check if file exists
+  if ( $configFile and -e $configFile ) {
+    my $configuration = YAML::XS::LoadFile($configFile);
 
-        if ($configuration) {
-            $configuration->{description} = $description;
-            if ( YAML::XS::DumpFile( $configFile, $configuration ) ) {
-                say "Description modified";
+    if ($configuration) {
+      $configuration->{description} = $description;
+      if ( YAML::XS::DumpFile( $configFile, $configuration ) ) {
+        say "Description modified";
 
-                # prepare symbolic link
-                say "Updated symbolic link"
-                    if symlink( "/var/lib/cherryepg/config.yml", "/var/lib/cherryepg/cherryTool/config_local.yml" );
+        # prepare symbolic link
+        say "Updated symbolic link"
+            if symlink( "/var/lib/cherryepg/config.yml", "/var/lib/cherryepg/cherryTool/config_local.yml" );
 
-                run3( "systemctl --user restart cherryWeb.service", \undef, \undef, \undef );
-                if ( $? == 0 ) {
-                    say("Service restarted");
-                    exit 0;
-                } else {
-                    say("Restart failed!");
-                    exit 1;
-                }
-            } ## end if ( YAML::XS::DumpFile...)
-        } ## end if ($configuration)
-    } ## end if ( $configFile and -e...)
+        run3( "systemctl --user restart cherryWeb.service", \undef, \undef, \undef );
+        if ( $? == 0 ) {
+          say("Service restarted");
+          exit 0;
+        } else {
+          say("Restart failed!");
+          exit 1;
+        }
+      } ## end if ( YAML::XS::DumpFile...)
+    } ## end if ($configuration)
+  } ## end if ( $configFile and -e...)
 
-    say("Description modification failed!");
-    exit 1;
+  say("Description modification failed!");
+  exit 1;
 } ## end sub applyDescription

@@ -11,9 +11,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.12';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $option)
@@ -44,33 +44,33 @@ sub BUILD {
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $handler = TVXML2Handler->new();
-    my $parser  = XML::Parser::PerlSAX->new(
-        Handler => $handler,
-        output  => $report
-    );
+  my $handler = TVXML2Handler->new();
+  my $parser  = XML::Parser::PerlSAX->new(
+    Handler => $handler,
+    output  => $report
+  );
 
-    # get the content
-    my $source = $self->getSource();
+  # get the content
+  my $source = $self->getSource();
 
-    # extract by channel_id == $option
-    $source = $self->extract( $source, $option ) if $option && $option ne '';
+  # extract by channel_id == $option
+  $source = $self->extract( $source, $option ) if $option && $option ne '';
 
-    my $content = join( '', $source->@* );
+  my $content = join( '', $source->@* );
 
-    # run the XML parser
-    try {
-        $parser->parse( Source => { String => $content } );
-    } catch {
-        my $error = shift;
-        $error =~ s/^\s*(.*)\s*$/$1/;
-        $self->error($error);
-    };
+  # run the XML parser
+  try {
+    $parser->parse( Source => { String => $content } );
+  } catch {
+    my $error = shift;
+    $error =~ s/^\s*(.*)\s*$/$1/;
+    $self->error($error);
+  };
 
-    return $report;
+  return $report;
 } ## end sub parse
 
 =head3 getSource()
@@ -81,16 +81,16 @@ sub parse {
 =cut
 
 sub getSource {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    my $input;
-    if ( open( my $input, '<:encoding(UTF-8)', $self->{source} ) ) {
+  my $input;
+  if ( open( my $input, '<:encoding(UTF-8)', $self->{source} ) ) {
 
-        my @all = <$input>;
-        return \@all;
-    } else {
-        return;
-    }
+    my @all = <$input>;
+    return \@all;
+  } else {
+    return;
+  }
 } ## end sub getSource
 
 =head3 extract( $list, $option)
@@ -101,60 +101,60 @@ sub getSource {
 =cut
 
 sub extract {
-    my ( $self, $list, $option ) = @_;
-    my @content;
-    my $current;
+  my ( $self, $list, $option ) = @_;
+  my @content;
+  my $current;
 
-    for ( $list->@* ) {
-        s/^\N{BOM}//;
-        if (/^<\?xml.*/) {
+  for ( $list->@* ) {
+    s/^\N{BOM}//;
+    if (/^<\?xml.*/) {
 
-            # save the header
-            push( @content, $_ );
-        } elsif (/<tv/) {
+      # save the header
+      push( @content, $_ );
+    } elsif (/<tv/) {
 
-            # save the header
-            push( @content, $_ );
-        } elsif (/<\/tv/) {
+      # save the header
+      push( @content, $_ );
+    } elsif (/<\/tv/) {
 
-            # save the header
-            push( @content, $_ );
-        } elsif (m|<channel.+id="(.+?)"><display-name>(.+?)</display-name>.*</channel>|) {
-            if ( $1 eq $option ) {
-                push( @content, $_ );
-            }
-        } elsif (/<channel.+id="(.+?)">/) {
-            if ( $1 eq $option ) {
-                $current = $1;
-                push( @content, $_ );
-            } else {
-                $current = undef;
-            }
-        } elsif (/<display-name.*>(.+)<\/display-name/) {
-            push( @content, $_ ) if $current;
-        } elsif (m|<programme.+channel="(.+?)">.*</programme>|) {
+      # save the header
+      push( @content, $_ );
+    } elsif (m|<channel.+id="(.+?)"><display-name>(.+?)</display-name>.*</channel>|) {
+      if ( $1 eq $option ) {
+        push( @content, $_ );
+      }
+    } elsif (/<channel.+id="(.+?)">/) {
+      if ( $1 eq $option ) {
+        $current = $1;
+        push( @content, $_ );
+      } else {
+        $current = undef;
+      }
+    } elsif (/<display-name.*>(.+)<\/display-name/) {
+      push( @content, $_ ) if $current;
+    } elsif (m|<programme.+channel="(.+?)">.*</programme>|) {
 
-            if ( $1 eq $option ) {
-                push( @content, $_ );
-            }
-        } elsif (/<programme.+channel="(.+?)"/) {
-            if ( $1 eq $option ) {
-                $current = $1;
-                push( @content, $_ );
-            } else {
-                $current = undef;
-            }
-        } elsif ( m|</programme>| or m|</channel>| ) {
-            push( @content, $_ ) if $current;
-            $current = undef;
-        } elsif ($current) {
+      if ( $1 eq $option ) {
+        push( @content, $_ );
+      }
+    } elsif (/<programme.+channel="(.+?)"/) {
+      if ( $1 eq $option ) {
+        $current = $1;
+        push( @content, $_ );
+      } else {
+        $current = undef;
+      }
+    } elsif ( m|</programme>| or m|</channel>| ) {
+      push( @content, $_ ) if $current;
+      $current = undef;
+    } elsif ($current) {
 
-            # just add line to buffer
-            push( @content, $_ );
-        }
-    } ## end for ( $list->@* )
+      # just add line to buffer
+      push( @content, $_ );
+    }
+  } ## end for ( $list->@* )
 
-    return \@content;
+  return \@content;
 } ## end sub extract
 
 package TVXML2Handler;
@@ -165,138 +165,138 @@ use Try::Tiny;
 use Carp qw( croak );
 
 sub new {
-    my $this  = shift;
-    my $class = ref($this) || $this;
-    my $self  = {};
+  my $this  = shift;
+  my $class = ref($this) || $this;
+  my $self  = {};
 
-    bless( $self, $class );
-    return $self;
+  bless( $self, $class );
+  return $self;
 } ## end sub new
 
 sub start_document {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    # this will be the list of events
-    $self->{eventList} = [];
+  # this will be the list of events
+  $self->{eventList} = [];
 
-    # and the possible error list
-    $self->{errorList} = [];
+  # and the possible error list
+  $self->{errorList} = [];
 } ## end sub start_document
 
 sub end_document {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{report} = $self->{'_parser'}->{output};
-    push( $self->{report}{eventList}->@*, $self->{eventList}->@* );
-    push( $self->{report}{errorList}->@*, $self->{errorList}->@* );
+  $self->{report} = $self->{'_parser'}->{output};
+  push( $self->{report}{eventList}->@*, $self->{eventList}->@* );
+  push( $self->{report}{errorList}->@*, $self->{errorList}->@* );
 } ## end sub end_document
 
 sub decode_timestamp {
-    my ( $self, $t ) = @_;
+  my ( $self, $t ) = @_;
 
-    return if !$t;
-    $t =~ s/://;
-    try {
-        Time::Piece->strptime( $t, "%Y%m%d%H%M%S %z" )->epoch;
-    };
+  return if !$t;
+  $t =~ s/://;
+  try {
+    Time::Piece->strptime( $t, "%Y%m%d%H%M%S %z" )->epoch;
+  };
 } ## end sub decode_timestamp
 
 sub start_element {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    if ( $element->{Name} eq 'programme' ) {
-        my $event = {};
+  if ( $element->{Name} eq 'programme' ) {
+    my $event = {};
 
-        # save start and stop
-        # ISO 8601
-        $event->{start} = $self->decode_timestamp( $element->{Attributes}{start} );
+    # save start and stop
+    # ISO 8601
+    $event->{start} = $self->decode_timestamp( $element->{Attributes}{start} );
 
-        # stop can be also end
-        $event->{stop} = $self->decode_timestamp( $element->{Attributes}{stop} )
-            // $self->decode_timestamp( $element->{Attributes}{end} );
+    # stop can be also end
+    $event->{stop} = $self->decode_timestamp( $element->{Attributes}{stop} )
+        // $self->decode_timestamp( $element->{Attributes}{end} );
 
-        $self->{currentEvent} = $event;
-    } ## end if ( $element->{Name} ...)
+    $self->{currentEvent} = $event;
+  } ## end if ( $element->{Name} ...)
 
-    # store current language
-    if ( $element->{Attributes}{lang} ) {
-        $self->{currentLang} = $element->{Attributes}{lang};
-    } else {
-        $self->{currentLang} = '';
-    }
+  # store current language
+  if ( $element->{Attributes}{lang} ) {
+    $self->{currentLang} = $element->{Attributes}{lang};
+  } else {
+    $self->{currentLang} = '';
+  }
 
-    $self->{currentData} = "";
+  $self->{currentData} = "";
 } ## end sub start_element
 
 sub characters {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{currentData} .= $element->{Data};
+  $self->{currentData} .= $element->{Data};
 }
 
 sub end_element {
-    my ( $self, $element ) = @_;
-    my $value = $self->{currentData};
-    my $event = $self->{currentEvent};
-    my $lang  = $self->{currentLang};
+  my ( $self, $element ) = @_;
+  my $value = $self->{currentData};
+  my $event = $self->{currentEvent};
+  my $lang  = $self->{currentLang};
 
-    $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
+  $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
 
 SWITCH: for ( $element->{Name} ) {
-        /programme/i && do {
+    /programme/i && do {
 
-            # add the event to the list
-            $self->addEvent();
-            return;
-        };
-        $_ eq "title" && do {
+      # add the event to the list
+      $self->addEvent();
+      return;
+    };
+    $_ eq "title" && do {
 
-            $event->{title} = $value;
-            return;
-        };
-        /sub-title/ && do {
+      $event->{title} = $value;
+      return;
+    };
+    /sub-title/ && do {
 
-            $event->{subtitle} = $value;
-            return;
-        };
-        /desc/i && do {
+      $event->{subtitle} = $value;
+      return;
+    };
+    /desc/i && do {
 
-            $event->{synopsis} = $value;
-            return;
-        };
-    } ## end SWITCH: for ( $element->{Name} )
-    return;
+      $event->{synopsis} = $value;
+      return;
+    };
+  } ## end SWITCH: for ( $element->{Name} )
+  return;
 } ## end sub end_element
 
 sub set_document_locator {
-    my ( $self, $params ) = @_;
-    $self->{'_parser'} = $params->{'Locator'};
+  my ( $self, $params ) = @_;
+  $self->{'_parser'} = $params->{'Locator'};
 }
 
 sub _error {
-    my $self = shift;
+  my $self = shift;
 
-    push( $self->{errorList}->@*, sprintf( shift, @_ ) );
+  push( $self->{errorList}->@*, sprintf( shift, @_ ) );
 }
 
 sub addEvent {
-    my $self  = shift;
-    my $event = $self->{currentEvent};
+  my $self  = shift;
+  my $event = $self->{currentEvent};
 
-    # check if all event data is complete and valid
-    my @missing;
-    push( @missing, "start" ) unless $event->{start};
-    push( @missing, "title" ) unless $event->{title};
+  # check if all event data is complete and valid
+  my @missing;
+  push( @missing, "start" ) unless $event->{start};
+  push( @missing, "title" ) unless $event->{title};
 
-    if (@missing) {
-        $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
-        return;
-    }
+  if (@missing) {
+    $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
+    return;
+  }
 
-    # push to final array
-    push( $self->{eventList}->@*, $event );
+  # push to final array
+  push( $self->{eventList}->@*, $event );
 
-    return 1;
+  return 1;
 } ## end sub addEvent
 
 =head1 AUTHOR

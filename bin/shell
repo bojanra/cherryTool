@@ -46,12 +46,12 @@ my %args;
 getopts( "ht", \%args ) or $args{h} = 1;
 
 if ( exists $args{h} ) {
-    say("shell - ver. $VERSION Copyright 2022 Bojan Ramsak");
-    pod2usage(
-        -verbose  => 99,
-        -exitval  => 0,
-        -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
-    );
+  say("shell - ver. $VERSION Copyright 2022 Bojan Ramsak");
+  pod2usage(
+    -verbose  => 99,
+    -exitval  => 0,
+    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+  );
 } ## end if ( exists $args{h} )
 
 my $linger_id    = shift @ARGV;
@@ -66,18 +66,18 @@ my $rrsyncPath = file( $ENV{'HOME'}, 'bin', 'rrsync' );
 my $logger = Log::Log4perl->get_logger("system");
 
 if ( !$linger_id ) {
-    $logger->error("missing linger_id");
+  $logger->error("missing linger_id");
 }
 
 if ( $args{t} ) {
-    exit( $cherry->markLinger($linger_id) == 1 ? 0 : 1 );
+  exit( $cherry->markLinger($linger_id) == 1 ? 0 : 1 );
 }
 
 if ( $origin =~ m/^rsync/ ) {
-    system("$rrsyncPath -ro $carouselPath");
-    $cherry->markLinger($linger_id) if $? == 0;
+  system("$rrsyncPath -ro $carouselPath");
+  $cherry->markLinger($linger_id) if $? == 0;
 } else {
-    exit 1;
+  exit 1;
 }
 
 exit 0;

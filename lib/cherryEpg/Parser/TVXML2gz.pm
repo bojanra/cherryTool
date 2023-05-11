@@ -18,21 +18,21 @@ our $VERSION = '0.12';
 =cut
 
 sub getSource {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    my $content = try {
-        gunzip_file( $self->{source} );
-    } catch {
-        $self->error(shift);
-        return;
-    };
-
-    if ($content) {
-        my @list = split( /\n/, $content );
-
-        return \@list;
-    }
+  my $content = try {
+    gunzip_file( $self->{source} );
+  } catch {
+    $self->error(shift);
     return;
+  };
+
+  if ($content) {
+    my @list = split( /\n/, $content );
+
+    return \@list;
+  }
+  return;
 } ## end sub getSource
 
 =head1 AUTHOR

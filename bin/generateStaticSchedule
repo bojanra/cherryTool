@@ -50,12 +50,12 @@ my %args;
 getopts( "hP:t:d:s:o:n:", \%args ) or $args{h} = 1;
 
 if ( exists $args{h} ) {
-    say("generateStaticSchedule - ver. $VERSION Copyright 2022 Bojan Ramsak");
-    pod2usage(
-        -verbose  => 99,
-        -exitval  => 0,
-        -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
-    );
+  say("generateStaticSchedule - ver. $VERSION Copyright 2022 Bojan Ramsak");
+  pod2usage(
+    -verbose  => 99,
+    -exitval  => 0,
+    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+  );
 } ## end if ( exists $args{h} )
 
 my $maxDays          = exists $args{d} ? $args{d} : 8;
@@ -69,47 +69,47 @@ my $title = decode( "utf8", $args{t} );
 my $data = generate();
 
 if ( exists $args{o} ) {
-    my $target = decode( "utf8", $args{o} );
-    if ( open( my $file, '>', $target ) ) {
-        my $dump = XMLout( $data, KeepRoot => 1, XMLDecl => 1 );
-        print( $file $dump );
-        close($file);
-        say( length($dump) . " bytes written to file" );
-        exit 0;
-    } else {
-        say("Saveing [$target] failed");
-        exit 1;
-    }
-} else {
-    say( XMLout( $data, KeepRoot => 1, XMLDecl => 1 ) );
+  my $target = decode( "utf8", $args{o} );
+  if ( open( my $file, '>', $target ) ) {
+    my $dump = XMLout( $data, KeepRoot => 1, XMLDecl => 1 );
+    print( $file $dump );
+    close($file);
+    say( length($dump) . " bytes written to file" );
     exit 0;
+  } else {
+    say("Saveing [$target] failed");
+    exit 1;
+  }
+} else {
+  say( XMLout( $data, KeepRoot => 1, XMLDecl => 1 ) );
+  exit 0;
 }
 
 sub generate {
 
-    my $data  = { epg => { event => [] } };
-    my $start = localtime();
-    $start = $start->truncate( to => 'day' );
+  my $data  = { epg => { event => [] } };
+  my $start = localtime();
+  $start = $start->truncate( to => 'day' );
 
-    # iterate over set segmentation
-    for ( my $eventCounter = 0 ; $eventCounter < $maxDays * 24 / $stdEventDuration ; $eventCounter++ ) {
-        my $t     = $start + ONE_HOUR * $stdEventDuration * $eventCounter;
-        my $event = {
-            ChannelName => [$channelName],
-            Start       => [ $t->datetime ],
-            Duration    => [ $stdEventDuration * 60 * 60 ]
-        };
+  # iterate over set segmentation
+  for ( my $eventCounter = 0 ; $eventCounter < $maxDays * 24 / $stdEventDuration ; $eventCounter++ ) {
+    my $t     = $start + ONE_HOUR * $stdEventDuration * $eventCounter;
+    my $event = {
+      ChannelName => [$channelName],
+      Start       => [ $t->datetime ],
+      Duration    => [ $stdEventDuration * 60 * 60 ]
+    };
 
-        if ( exists $args{t} ) {
-            $event->{Title} = [$title];
-        } else {
-            $event->{Title} = [ sprintf( "Event %03i", $eventCounter ) ];
-        }
+    if ( exists $args{t} ) {
+      $event->{Title} = [$title];
+    } else {
+      $event->{Title} = [ sprintf( "Event %03i", $eventCounter ) ];
+    }
 
-        $event->{Parental} = [ $args{P} ] if exists $args{P};
+    $event->{Parental} = [ $args{P} ] if exists $args{P};
 
-        push( @{ $data->{epg}{event} }, $event );
-    } ## end for ( my $eventCounter ...)
+    push( @{ $data->{epg}{event} }, $event );
+  } ## end for ( my $eventCounter ...)
 
-    return $data;
+  return $data;
 } ## end sub generate

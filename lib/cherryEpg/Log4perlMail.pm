@@ -34,74 +34,74 @@ use Time::Piece;
 use warnings;
 
 sub new {
-    my ( $class, @options ) = @_;
+  my ( $class, @options ) = @_;
 
-    my $self = {@options};
-    bless $self, $class;
+  my $self = {@options};
+  bless $self, $class;
 
-    return $self;
+  return $self;
 } ## end sub new
 
 sub log {
-    my ( $self, %params ) = @_;
+  my ( $self, %params ) = @_;
 
-    my ( $text, $channel, $eit, $info ) = @{ $params{'message'} };
+  my ( $text, $channel, $eit, $info ) = @{ $params{'message'} };
 
-    my $subject = "$params{'log4p_level'} from $params{'log4p_category'} on " . hostname . "\n";
-    my $content = "";
-    $content .= "cherryEpg on host " . hostname . " notification:\n";
-    $content .= "* $text" . ( $channel ? " (SID=$channel)" : "" ) . "\n";
-    if ($info) {
-        if ( ref($info) eq 'ARRAY' ) {
-            foreach (@$info) {
-                $content .= "  - $_\n";
-            }
-        } elsif ( ref($info) eq 'HASH' && exists $info->{errorList} ) {
-            my $list = $info->{errorList};
-            foreach my $error (@$list) {
-                if ( ref($error) eq '' ) {
-                    $content .= "  - " . $error . "\n";
-                } elsif ( ref($error) eq 'HASH' && exists $error->{error} && ref( $error->{error} ) eq 'ARRAY' ) {
-                    $content .= "  - " . join( ', ', @{ $error->{error} } ) . "\n";
-                }
-            } ## end foreach my $error (@$list)
-        } ## end elsif ( ref($info) eq 'HASH'...)
-    } ## end if ($info)
+  my $subject = "$params{'log4p_level'} from $params{'log4p_category'} on " . hostname . "\n";
+  my $content = "";
+  $content .= "cherryEpg on host " . hostname . " notification:\n";
+  $content .= "* $text" . ( $channel ? " (SID=$channel)" : "" ) . "\n";
+  if ($info) {
+    if ( ref($info) eq 'ARRAY' ) {
+      foreach (@$info) {
+        $content .= "  - $_\n";
+      }
+    } elsif ( ref($info) eq 'HASH' && exists $info->{errorList} ) {
+      my $list = $info->{errorList};
+      foreach my $error (@$list) {
+        if ( ref($error) eq '' ) {
+          $content .= "  - " . $error . "\n";
+        } elsif ( ref($error) eq 'HASH' && exists $error->{error} && ref( $error->{error} ) eq 'ARRAY' ) {
+          $content .= "  - " . join( ', ', @{ $error->{error} } ) . "\n";
+        }
+      } ## end foreach my $error (@$list)
+    } ## end elsif ( ref($info) eq 'HASH'...)
+  } ## end if ($info)
 
-    $content .= "\n# " . localtime()->datetime;
+  $content .= "\n# " . localtime()->datetime;
 
-    my $smtp = Net::SMTPS->new(%$self) or return carp " log4perl : failed connecting to the SMTP server ";
+  my $smtp = Net::SMTPS->new(%$self) or return carp " log4perl : failed connecting to the SMTP server ";
 
-    # split the username:password and run auth only with usernames defined and not space
-    my ( $username, $password ) = split( /:/, $self->{auth} );
-    if ( $username && $username !~ /^ +/ ) {
-        $smtp->auth( $username, $password // '' );
-    }
+  # split the username:password and run auth only with usernames defined and not space
+  my ( $username, $password ) = split( /:/, $self->{auth} );
+  if ( $username && $username !~ /^ +/ ) {
+    $smtp->auth( $username, $password // '' );
+  }
 
-    foreach my $t ( 'from', 'to', 'cc', 'bcc' ) {
-        if ( exists $self->{$t} ) {
-            my $s = $self->{$t};
-            $s = $1 if $s =~ /.*<(.+@.+)>/;
+  foreach my $t ( 'from', 'to', 'cc', 'bcc' ) {
+    if ( exists $self->{$t} ) {
+      my $s = $self->{$t};
+      $s = $1 if $s =~ /.*<(.+@.+)>/;
 
-            if ( $t eq 'from' ) {
-                $smtp->mail($s);
-            } else {
-                $smtp->$t($s);
-            }
-        } ## end if ( exists $self->{$t...})
-    } ## end foreach my $t ( 'from', 'to'...)
+      if ( $t eq 'from' ) {
+        $smtp->mail($s);
+      } else {
+        $smtp->$t($s);
+      }
+    } ## end if ( exists $self->{$t...})
+  } ## end foreach my $t ( 'from', 'to'...)
 
-    $smtp->data;
+  $smtp->data;
 
-    $smtp->datasend("From: $self->{from}\n");
-    $smtp->datasend("To: $self->{to}\n");
-    $smtp->datasend("Cc: $self->{cc}\n")   if exists( $self->{cc} )  && $self->{cc} ne '';
-    $smtp->datasend("Bcc: $self->{bcc}\n") if exists( $self->{bcc} ) && $self->{bcc} ne '';
-    $smtp->datasend("Subject: $subject");
-    $smtp->datasend("\n");
-    $smtp->datasend($content);
-    $smtp->dataend;
-    $smtp->quit;
+  $smtp->datasend("From: $self->{from}\n");
+  $smtp->datasend("To: $self->{to}\n");
+  $smtp->datasend("Cc: $self->{cc}\n")   if exists( $self->{cc} )  && $self->{cc} ne '';
+  $smtp->datasend("Bcc: $self->{bcc}\n") if exists( $self->{bcc} ) && $self->{bcc} ne '';
+  $smtp->datasend("Subject: $subject");
+  $smtp->datasend("\n");
+  $smtp->datasend($content);
+  $smtp->dataend;
+  $smtp->quit;
 } ## end sub log
 
 =head1 AUTHOR

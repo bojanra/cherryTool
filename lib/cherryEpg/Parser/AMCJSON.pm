@@ -13,9 +13,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.11';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -27,46 +27,46 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $content = try {
-        local $/;
-        open( my $fh, '<:encoding(UTF-8)', $self->{source} ) || return;
-        <$fh>;
-    };
+  my $content = try {
+    local $/;
+    open( my $fh, '<:encoding(UTF-8)', $self->{source} ) || return;
+    <$fh>;
+  };
 
-    if ( !$content ) {
-        $self->error("File empty");
-        return $report;
-    }
-
-    my $data = JSON::XS->new->decode($content);
-
-    if ( !$data ) {
-        $self->error("Content not in JSON format");
-        return $report;
-    }
-
-    foreach my $item ( @{$data} ) {
-        my $event;
-
-        if ( $item->{idopont} ) {
-            $event->{start} = try {
-                localtime->strptime( $item->{idopont}, "%Y-%m-%d %H:%M:%S" )->epoch;
-            } catch {
-                $self->error("start_time not valid format [$item->{idopont}]");
-            };
-        } ## end if ( $item->{idopont} )
-        $event->{title}    = $item->{cim}         if $item->{cim};
-        $event->{subtitle} = $item->{cim_eredeti} if $item->{cim_eredeti};
-        $event->{synopsis} = $item->{szoveg}      if $item->{szoveg};
-        $event->{synopsis} .= ' ' . $item->{gyartasi_ev} if $item->{gyartasi_ev};
-
-        push( @{ $report->{eventList} }, $event );
-    } ## end foreach my $item ( @{$data})
-
+  if ( !$content ) {
+    $self->error("File empty");
     return $report;
+  }
+
+  my $data = JSON::XS->new->decode($content);
+
+  if ( !$data ) {
+    $self->error("Content not in JSON format");
+    return $report;
+  }
+
+  foreach my $item ( @{$data} ) {
+    my $event;
+
+    if ( $item->{idopont} ) {
+      $event->{start} = try {
+        localtime->strptime( $item->{idopont}, "%Y-%m-%d %H:%M:%S" )->epoch;
+      } catch {
+        $self->error("start_time not valid format [$item->{idopont}]");
+      };
+    } ## end if ( $item->{idopont} )
+    $event->{title}    = $item->{cim}         if $item->{cim};
+    $event->{subtitle} = $item->{cim_eredeti} if $item->{cim_eredeti};
+    $event->{synopsis} = $item->{szoveg}      if $item->{szoveg};
+    $event->{synopsis} .= ' ' . $item->{gyartasi_ev} if $item->{gyartasi_ev};
+
+    push( @{ $report->{eventList} }, $event );
+  } ## end foreach my $item ( @{$data})
+
+  return $report;
 } ## end sub parse
 
 =head1 AUTHOR

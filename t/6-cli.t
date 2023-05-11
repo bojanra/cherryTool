@@ -7,9 +7,9 @@ use Test::Cmd;
 use Test::More tests => 33;
 
 BEGIN {
-    `generateSampleScheduleData`;
+  `generateSampleScheduleData`;
 
-    ok( $? == 0, "generate sample schedule data" );
+  ok( $? == 0, "generate sample schedule data" );
 }
 
 my $test = Test::Cmd->new( prog => 'bin/cherryTool', workdir => '' );
@@ -95,18 +95,18 @@ $test->run( args => '-T', stdin => "yes\n" );
 is( $?, 0, "reset db to empty state" );
 
 SKIP: {
-    skip "maintenance compiling and applying", 4 if $ENV{'DANCER_ENVIRONMENT'} eq 'production';
+  skip "maintenance compiling and applying", 4 if $ENV{'DANCER_ENVIRONMENT'} eq 'production';
 
-    my $m = 'bin/maintenanceTest';
-    unlink( $m . '.bin' );
-    $test->run( args => "-J $m" );
-    ok( $test->stdout =~ /bytes written/m, "compile maintenance package" );
-    ok( -e "$m.bin",                       "maintenance file exist" );
+  my $m = 'bin/maintenanceTest';
+  unlink( $m . '.bin' );
+  $test->run( args => "-J $m" );
+  ok( $test->stdout =~ /bytes written/m, "compile maintenance package" );
+  ok( -e "$m.bin",                       "maintenance file exist" );
 
-    $test->run( args => "-j $m.bin", stdin => "yes\n" );
-    ok( $? == 0,                            "maintenance package apply" );
-    ok( $test->stdout =~ /debian_version/m, "maintenanceTest success" );
-    unlink( $m . '.bin' );
+  $test->run( args => "-j $m.bin", stdin => "yes\n" );
+  ok( $? == 0,                            "maintenance package apply" );
+  ok( $test->stdout =~ /debian_version/m, "maintenanceTest success" );
+  unlink( $m . '.bin' );
 } ## end SKIP:
 
 # delete backuped schemes from archive

@@ -10,9 +10,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.22';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -32,39 +32,39 @@ If there is only a single programmee defined in the file no channel option is re
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $handler = Nova24XML->new();
-    my $parser  = XML::Parser::PerlSAX->new(
-        Handler => $handler,
-        output  => $report
-    );
+  my $handler = Nova24XML->new();
+  my $parser  = XML::Parser::PerlSAX->new(
+    Handler => $handler,
+    output  => $report
+  );
 
-    $parser->parse( Source => { SystemId => $self->{source} } );
+  $parser->parse( Source => { SystemId => $self->{source} } );
 
-    # now we have multiple channels, let's select the requested one
-    if ( defined $option ) {
+  # now we have multiple channels, let's select the requested one
+  if ( defined $option ) {
 
-        # select by parser option
-        if ( exists $report->{channel}{$option} ) {
-            $report->{eventList} = $report->{channel}{$option}{eventList};
-            $report->{option}    = $option;
-            delete $report->{channel};
-        } else {
-            push( @{ $report->{errorList} }, "Incorrect channel selection" );
-        }
-    } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 1 ) {
-
-        # if there is just a single channel we asume it's the right one
-        my $channel = ( values( %{ $report->{channel} } ) )[0];
-        $report->{eventList} = $channel->{eventList};
-        delete $report->{channel};
+    # select by parser option
+    if ( exists $report->{channel}{$option} ) {
+      $report->{eventList} = $report->{channel}{$option}{eventList};
+      $report->{option}    = $option;
+      delete $report->{channel};
     } else {
-        push( @{ $report->{errorList} }, "Missing channel selection after parser" );
+      push( @{ $report->{errorList} }, "Incorrect channel selection" );
     }
+  } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 1 ) {
 
-    return $report;
+    # if there is just a single channel we asume it's the right one
+    my $channel = ( values( %{ $report->{channel} } ) )[0];
+    $report->{eventList} = $channel->{eventList};
+    delete $report->{channel};
+  } else {
+    push( @{ $report->{errorList} }, "Missing channel selection after parser" );
+  }
+
+  return $report;
 } ## end sub parse
 
 package Nova24XML;
@@ -74,161 +74,161 @@ use Time::Piece;
 use Carp qw( croak );
 
 sub new {
-    my $this  = shift;
-    my $class = ref($this) || $this;
-    my $self  = {};
+  my $this  = shift;
+  my $class = ref($this) || $this;
+  my $self  = {};
 
-    bless( $self, $class );
-    return $self;
+  bless( $self, $class );
+  return $self;
 } ## end sub new
 
 sub start_document {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    # here we will store all program hashes
-    $self->{channel} = {};
+  # here we will store all program hashes
+  $self->{channel} = {};
 
-    # and the possible error list
-    $self->{errorList} = [];
+  # and the possible error list
+  $self->{errorList} = [];
 } ## end sub start_document
 
 sub end_document {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{report} = $self->{'_parser'}->{output};
+  $self->{report} = $self->{'_parser'}->{output};
 
-    # return all built program lists
-    $self->{report}{channel}   = $self->{channel};
-    $self->{report}{errorList} = $self->{errorList};
+  # return all built program lists
+  $self->{report}{channel}   = $self->{channel};
+  $self->{report}{errorList} = $self->{errorList};
 } ## end sub end_document
 
 sub start_element {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    if ( $element->{Name} eq 'programme' ) {
-        my $event = {};
+  if ( $element->{Name} eq 'programme' ) {
+    my $event = {};
 
-        # save the start and stop
-        # incorrect ISO 8601 20190707000000 +02:00 with colon
-        my $start = $element->{Attributes}{start};
+    # save the start and stop
+    # incorrect ISO 8601 20190707000000 +02:00 with colon
+    my $start = $element->{Attributes}{start};
 
-        # remove colon
-        $start =~ s/://;
+    # remove colon
+    $start =~ s/://;
 
-        $event->{start} = Time::Piece->strptime( $start, "%Y%m%d%H%M%S %z" )->epoch;
+    $event->{start} = Time::Piece->strptime( $start, "%Y%m%d%H%M%S %z" )->epoch;
 
-        # workaround to use attribute stop or end !!!
-        my $stop;
-        if ( exists $element->{Attributes}{stop} ) {
-            $stop = $element->{Attributes}{stop};
-        } elsif ( exists $element->{Attributes}{end} ) {
-            $stop = $element->{Attributes}{end};
-        }
-
-        # remove colon
-        $stop =~ s/://;
-
-        $event->{stop} = Time::Piece->strptime( $stop, "%Y%m%d%H%M%S %z" )->epoch;
-
-        $event->{channel} = $element->{Attributes}{channel};
-
-        $self->{currentEvent} = $event;
-    } elsif ( $element->{Name} =~ /title/i ) {
-
+    # workaround to use attribute stop or end !!!
+    my $stop;
+    if ( exists $element->{Attributes}{stop} ) {
+      $stop = $element->{Attributes}{stop};
+    } elsif ( exists $element->{Attributes}{end} ) {
+      $stop = $element->{Attributes}{end};
     }
 
-    # store current language
-    if ( $element->{Attributes}{lang} ) {
-        $self->{currentLang} = $element->{Attributes}{lang};
-    } else {
-        $self->{currentLang} = '';
-    }
+    # remove colon
+    $stop =~ s/://;
 
-    $self->{currentData} = "";
+    $event->{stop} = Time::Piece->strptime( $stop, "%Y%m%d%H%M%S %z" )->epoch;
+
+    $event->{channel} = $element->{Attributes}{channel};
+
+    $self->{currentEvent} = $event;
+  } elsif ( $element->{Name} =~ /title/i ) {
+
+  }
+
+  # store current language
+  if ( $element->{Attributes}{lang} ) {
+    $self->{currentLang} = $element->{Attributes}{lang};
+  } else {
+    $self->{currentLang} = '';
+  }
+
+  $self->{currentData} = "";
 } ## end sub start_element
 
 sub characters {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{currentData} .= $element->{Data};
+  $self->{currentData} .= $element->{Data};
 }
 
 sub end_element {
-    my ( $self, $element ) = @_;
-    my $value = $self->{currentData};
-    my $event = $self->{currentEvent};
-    my $lang  = $self->{currentLang};
+  my ( $self, $element ) = @_;
+  my $value = $self->{currentData};
+  my $event = $self->{currentEvent};
+  my $lang  = $self->{currentLang};
 
-    $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
+  $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
 
 SWITCH: for ( $element->{Name} ) {
-        /programme/i && do {
+    /programme/i && do {
 
-            # add the event to the list
-            $self->addEvent();
-            return;
-        };
-        $_ eq "title" && do {
+      # add the event to the list
+      $self->addEvent();
+      return;
+    };
+    $_ eq "title" && do {
 
-            # only set value if correct language or no language set
-            if ( $lang eq 'sl' or !exists $event->{title} ) {
-                $event->{title} = $value;
-            }
-            return;
-        };
-        /category/ && do {
+      # only set value if correct language or no language set
+      if ( $lang eq 'sl' or !exists $event->{title} ) {
+        $event->{title} = $value;
+      }
+      return;
+    };
+    /category/ && do {
 
-            # only set value if correct language or no language set
-            if ( $lang eq 'sl' or !exists $event->{subtitle} ) {
-                $event->{subtitle} = $value;
-            }
-            return;
-        };
-        /desc/i && do {
+      # only set value if correct language or no language set
+      if ( $lang eq 'sl' or !exists $event->{subtitle} ) {
+        $event->{subtitle} = $value;
+      }
+      return;
+    };
+    /desc/i && do {
 
-            # only set value if correct language or no language set
-            if ( $lang eq 'sl' or !exists $event->{synopsis} ) {
-                $event->{synopsis} = $value;
-            }
-            return;
-        };
-    } ## end SWITCH: for ( $element->{Name} )
-    return;
+      # only set value if correct language or no language set
+      if ( $lang eq 'sl' or !exists $event->{synopsis} ) {
+        $event->{synopsis} = $value;
+      }
+      return;
+    };
+  } ## end SWITCH: for ( $element->{Name} )
+  return;
 } ## end sub end_element
 
 sub set_document_locator {
-    my ( $self, $params ) = @_;
-    $self->{'_parser'} = $params->{'Locator'};
+  my ( $self, $params ) = @_;
+  $self->{'_parser'} = $params->{'Locator'};
 }
 
 sub _error {
-    my $self = shift;
+  my $self = shift;
 
-    push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
+  push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
 }
 
 sub addEvent {
-    my $self  = shift;
-    my $event = $self->{currentEvent};
+  my $self  = shift;
+  my $event = $self->{currentEvent};
 
-    # check if all event data is complete and valid
-    my @missing;
-    push( @missing, "start" )   unless defined $event->{start};
-    push( @missing, "title" )   unless defined $event->{title};
-    push( @missing, "channel" ) unless defined $event->{channel};
+  # check if all event data is complete and valid
+  my @missing;
+  push( @missing, "start" )   unless defined $event->{start};
+  push( @missing, "title" )   unless defined $event->{title};
+  push( @missing, "channel" ) unless defined $event->{channel};
 
-    if ( scalar @missing > 0 ) {
-        $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
-        return;
-    }
+  if ( scalar @missing > 0 ) {
+    $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
+    return;
+  }
 
-    my $channel = $event->{channel};
-    delete $event->{channel};
+  my $channel = $event->{channel};
+  delete $event->{channel};
 
-    # push to final array
-    push( @{ $self->{channel}{$channel}{eventList} }, $event );
+  # push to final array
+  push( @{ $self->{channel}{$channel}{eventList} }, $event );
 
-    return 1;
+  return 1;
 } ## end sub addEvent
 
 =head1 AUTHOR

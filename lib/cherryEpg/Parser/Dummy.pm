@@ -9,15 +9,15 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.21';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 sub parse {
-    my ( $self, $option ) = @_;
+  my ( $self, $option ) = @_;
 
-    return $self->{report};
+  return $self->{report};
 }
 
 =head1 AUTHOR

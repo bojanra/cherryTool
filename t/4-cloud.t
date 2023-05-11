@@ -7,8 +7,8 @@ use Path::Class;
 use File::Temp qw(tempfile);
 
 BEGIN {
-    use_ok("cherryEpg");
-    use_ok("cherryEpg::Scheme");
+  use_ok("cherryEpg");
+  use_ok("cherryEpg::Scheme");
 }
 
 my $cherry = cherryEpg->instance( verbose => 0 );
@@ -55,10 +55,10 @@ my $publicKey = $cherry->getLingerKey();
 ok( length($publicKey) > 30, "generate public key" );
 
 my $l = {
-    public_key => uc($publicKey),
-    info       => {
-        disabled => 1,
-    },
+  public_key => uc($publicKey),
+  info       => {
+    disabled => 1,
+  },
 };
 
 ok( $cherry->epg->addLinger($l), "add linger site" );
@@ -66,8 +66,8 @@ ok( $cherry->epg->addLinger($l), "add/update same site twice" );
 is( scalar $cherry->epg->listLinger()->@*, 1, "uniq public_key" );
 
 my $linger = {
-    public_key => $publicKey,
-    info       => {},
+  public_key => $publicKey,
+  info       => {},
 };
 
 ok( $linger = $cherry->epg->addLinger($linger), "add new linger site" );
@@ -88,9 +88,9 @@ ok( $cherry->installRrsync(),       "installRrsync" );
 
 # prepare a sample .cts file in the sync sub-directory
 my ( $fh, $fullPath ) = tempfile(
-    DIR    => dir( $cherry->config->{core}{carousel}, $linger->{linger_id} . '.linger' ),
-    SUFFIX => '.ctS',
-    UNLINK => 1
+  DIR    => dir( $cherry->config->{core}{carousel}, $linger->{linger_id} . '.linger' ),
+  SUFFIX => '.ctS',
+  UNLINK => 1
 );
 
 print( $fh "verify" );
@@ -106,9 +106,9 @@ is( $cherry->syncLinger(), 1, "synchronize file" );
 
 # get the filename
 if ( -e $theCopy ) {
-    is( unlink($theCopy), 1, "file synchronized, cleanup" );
+  is( unlink($theCopy), 1, "file synchronized, cleanup" );
 } else {
-    fail("file not synced");
+  fail("file not synced");
 }
 
 ok( $scheme->delete($backup), "delete scheme from archive" );

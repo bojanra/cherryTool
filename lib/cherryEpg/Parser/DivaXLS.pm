@@ -12,9 +12,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.23';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -26,121 +26,121 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $eBook = ReadData( $self->source );
+  my $eBook = ReadData( $self->source );
 
-    my $sheet = $eBook->[1];
+  my $sheet = $eBook->[1];
 
-    my $last;
+  my $last;
 
-    if ( !$sheet ) {
-        $self->error("Spreadsheet format not supported!");
-        return $report;
+  if ( !$sheet ) {
+    $self->error("Spreadsheet format not supported!");
+    return $report;
+  }
+
+  $report->{linecount} = $sheet->{maxrow};
+
+  foreach my $rowCounter ( 1 .. $sheet->{maxrow} ) {
+
+    # get cells from row
+    my (
+      $date, $time,  undef, $title,  undef,       $subtitle, undef, undef,
+      undef, $genre, undef, $actors, $originYear, $country,  $synopsis
+        )
+        = Spreadsheet::Read::row( $sheet, $rowCounter );
+
+    # skip rows without date and first row
+    next
+        if !defined $date
+        or $date eq ""
+        or $date =~ m/datum/i
+        or $date =~ m/date/i;
+
+    my ( $year, $month, $day, $hour, $min, $sec );
+
+    # convert date in different formats
+    if ( $date =~ m/^(\d{4})-(\d+)-(\d+)$/ ) {
+
+      # this is o.k. 2013-04-23
+      $year  = $1;
+      $month = $2;
+      $day   = $3;
+    } elsif ( $date =~ m/^(\d+)[\/\.](\d+)[\/\.](\d{4})$/ ) {
+
+      # convert from 03/01/2012
+      # or 03.05.2016
+      $year  = $3;
+      $month = $2;
+      $day   = $1;
+    } elsif ( $date =~ m/^(\d+)-(\d+)-(\d+)$/ ) {
+
+      # convert from 1-23-14    month-day-year
+      $year  = $3 + 2000;
+      $month = $1;
+      $day   = $2;
+    } else {
+      $self->error("Unknown date format [$rowCounter] $date");
+      next;
     }
 
-    $report->{linecount} = $sheet->{maxrow};
+    # add seconds to time
+    if ( $time =~ m/^(\d+):(\d+):?(\d*)$/ ) {
+      $hour = $1;
+      $min  = $2;
+      $sec  = ( defined $3 and $3 ne "" ) ? $3 : 0;
+    } else {
+      $self->error("Unknown time format [$rowCounter] $time");
+      next;
+    }
 
-    foreach my $rowCounter ( 1 .. $sheet->{maxrow} ) {
+    my $start = localtime->strptime( "$year-$month-$day $hour:$min:$sec", "%Y-%m-%d %H:%M:%S" );
 
-        # get cells from row
-        my (
-            $date, $time,  undef, $title,  undef,       $subtitle, undef, undef,
-            undef, $genre, undef, $actors, $originYear, $country,  $synopsis
-           )
-            = Spreadsheet::Read::row( $sheet, $rowCounter );
+    # correct TV schedule anomaly
+    if ( $start < $last ) {
+      $start += ONE_DAY;
+    }
 
-        # skip rows without date and first row
-        next
-            if !defined $date
-            or $date eq ""
-            or $date =~ m/datum/i
-            or $date =~ m/date/i;
+    $last = $start;
 
-        my ( $year, $month, $day, $hour, $min, $sec );
+    # build event
+    my $event = {
+      start => $start->epoch,
+      title => $title,
+    };
 
-        # convert date in different formats
-        if ( $date =~ m/^(\d{4})-(\d+)-(\d+)$/ ) {
+    if ( defined $subtitle && $subtitle ne "" ) {
+      $event->{subtitle} = $subtitle;
+    } else {
+      $event->{subtitle} = $genre;
+    }
 
-            # this is o.k. 2013-04-23
-            $year  = $1;
-            $month = $2;
-            $day   = $3;
-        } elsif ( $date =~ m/^(\d+)[\/\.](\d+)[\/\.](\d{4})$/ ) {
+    if ( defined $synopsis && $synopsis ne "" ) {
+      $synopsis =~ s/\n/ /gs;
+      $event->{synopsis} = $synopsis;
 
-            # convert from 03/01/2012
-            # or 03.05.2016
-            $year  = $3;
-            $month = $2;
-            $day   = $1;
-        } elsif ( $date =~ m/^(\d+)-(\d+)-(\d+)$/ ) {
+      if (  defined $country
+        and $country ne ""
+        and defined $originYear
+        and $originYear ne "" ) {
 
-            # convert from 1-23-14    month-day-year
-            $year  = $3 + 2000;
-            $month = $1;
-            $day   = $2;
-        } else {
-            $self->error("Unknown date format [$rowCounter] $date");
-            next;
-        }
+        # add country and year
+        $event->{synopsis} =~ s/\s*$/, $country $originYear/;
+      } ## end if ( defined $country ...)
 
-        # add seconds to time
-        if ( $time =~ m/^(\d+):(\d+):?(\d*)$/ ) {
-            $hour = $1;
-            $min  = $2;
-            $sec  = ( defined $3 and $3 ne "" ) ? $3 : 0;
-        } else {
-            $self->error("Unknown time format [$rowCounter] $time");
-            next;
-        }
+      if ( defined $actors && $actors ne "" ) {
 
-        my $start = localtime->strptime( "$year-$month-$day $hour:$min:$sec", "%Y-%m-%d %H:%M:%S" );
+        # add actors
+        $event->{synopsis} =~ s/\s*$/ - $actors/;
+      }
+    } ## end if ( defined $synopsis...)
 
-        # correct TV schedule anomaly
-        if ( $start < $last ) {
-            $start += ONE_DAY;
-        }
+    # push to array
+    push( @{ $report->{eventList} }, $event );
+  } ## end foreach my $rowCounter ( 1 ...)
 
-        $last = $start;
-
-        # build event
-        my $event = {
-            start => $start->epoch,
-            title => $title,
-        };
-
-        if ( defined $subtitle && $subtitle ne "" ) {
-            $event->{subtitle} = $subtitle;
-        } else {
-            $event->{subtitle} = $genre;
-        }
-
-        if ( defined $synopsis && $synopsis ne "" ) {
-            $synopsis =~ s/\n/ /gs;
-            $event->{synopsis} = $synopsis;
-
-            if (    defined $country
-                and $country ne ""
-                and defined $originYear
-                and $originYear ne "" ) {
-
-                # add country and year
-                $event->{synopsis} =~ s/\s*$/, $country $originYear/;
-            } ## end if ( defined $country ...)
-
-            if ( defined $actors && $actors ne "" ) {
-
-                # add actors
-                $event->{synopsis} =~ s/\s*$/ - $actors/;
-            }
-        } ## end if ( defined $synopsis...)
-
-        # push to array
-        push( @{ $report->{eventList} }, $event );
-    } ## end foreach my $rowCounter ( 1 ...)
-
-    return $report;
+  return $report;
 } ## end sub parse
 
 =head1 AUTHOR

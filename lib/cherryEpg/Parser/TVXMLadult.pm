@@ -15,12 +15,12 @@ To all events a parental rating descriptor with 18+ is added.
 =cut
 
 after 'parse' => sub {
-    my $output = shift;
-    my $report = $output->{report}->{eventList};
+  my $output = shift;
+  my $report = $output->{report}->{eventList};
 
-    foreach my $event ( @{$report} ) {
-        $event->{parental_rating} = 18;
-    }
+  foreach my $event ( @{$report} ) {
+    $event->{parental_rating} = 18;
+  }
 };
 
 =head1 AUTHOR

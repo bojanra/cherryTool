@@ -16,5 +16,5 @@ use cherryWeb;
 use Plack::Builder;
 
 builder {
-    mount '/' => cherryWeb->to_app;
+  mount '/' => cherryWeb->to_app;
 };

@@ -17,51 +17,51 @@ use base 'Log::Log4perl::Appender::Socket';
 # log4perl.appender.Graylog.warp_message = 0
 
 sub new {
-    my ( $class, %params ) = @_;
+  my ( $class, %params ) = @_;
 
-    $params{Proto} = 'udp';
+  $params{Proto} = 'udp';
 
-    my $self = $class->SUPER::new(%params);
-    bless $self, $class;
+  my $self = $class->SUPER::new(%params);
+  bless $self, $class;
 
-    return $self;
+  return $self;
 } ## end sub new
 
 sub _to_syslog_priority {
-    my ( $self, $level ) = @_;
+  my ( $self, $level ) = @_;
 
-    my $_table = {
-        'TRACE' => 7,
-        'DEBUG' => 6,
-        'INFO'  => 5,
-        'WARN'  => 4,
-        'ERROR' => 3,
-        'FATAL' => 2
-    };
-    return $_table->{$level};
+  my $_table = {
+    'TRACE' => 7,
+    'DEBUG' => 6,
+    'INFO'  => 5,
+    'WARN'  => 4,
+    'ERROR' => 3,
+    'FATAL' => 2
+  };
+  return $_table->{$level};
 } ## end sub _to_syslog_priority
 
 
 sub log {
-    my ( $self, %params ) = @_;
+  my ( $self, %params ) = @_;
 
-    my ( $text, $channel, $eit ) = @{ $params{message} };
+  my ( $text, $channel, $eit ) = @{ $params{message} };
 
-    my $gelf = {
-        version       => "1.0",
-        host          => hostname,
-        short_message => $text,
-        service       => $channel,
-        eit           => $eit,
-        timestamp     => time(),
-        level         => $self->_to_syslog_priority( $params{log4p_level} ),
-        source        => $params{log4p_category},
-    };
+  my $gelf = {
+    version       => "1.0",
+    host          => hostname,
+    short_message => $text,
+    service       => $channel,
+    eit           => $eit,
+    timestamp     => time(),
+    level         => $self->_to_syslog_priority( $params{log4p_level} ),
+    source        => $params{log4p_category},
+  };
 
-    my $json = encode_json($gelf);
-    $params{message} = gzip($json);
+  my $json = encode_json($gelf);
+  $params{message} = gzip($json);
 
-    return $self->SUPER::log(%params);
+  return $self->SUPER::log(%params);
 } ## end sub log
 
 =head1 AUTHOR

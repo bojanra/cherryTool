@@ -16,25 +16,25 @@ Multiple parser options may be separated by commas or "|"
 =cut
 
 around 'parse' => sub {
-    my ( $orig, $self, $parserOption ) = @_;
-    my $offset = 0;
+  my ( $orig, $self, $parserOption ) = @_;
+  my $offset = 0;
 
-    if ($parserOption) {
-        my @option = split( /[\|,]/, $parserOption );
-        $offset       = shift(@option);
-        $parserOption = join( ',', @option );
-        $parserOption = undef if $parserOption eq '';
-    } ## end if ($parserOption)
+  if ($parserOption) {
+    my @option = split( /[\|,]/, $parserOption );
+    $offset       = shift(@option);
+    $parserOption = join( ',', @option );
+    $parserOption = undef if $parserOption eq '';
+  } ## end if ($parserOption)
 
-    my $report = $orig->( $self, $parserOption );
+  my $report = $orig->( $self, $parserOption );
 
-    my $eventList = $report->{eventList};
+  my $eventList = $report->{eventList};
 
-    foreach my $event ( @{$eventList} ) {
-        $event->{start} += $offset * 60 * 60;
-        $event->{stop}  += $offset * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
-    }
-    return $report;
+  foreach my $event ( @{$eventList} ) {
+    $event->{start} += $offset * 60 * 60;
+    $event->{stop}  += $offset * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
+  }
+  return $report;
 };
 
 =head1 AUTHOR

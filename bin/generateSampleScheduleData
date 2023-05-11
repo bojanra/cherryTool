@@ -52,9 +52,9 @@ getopts( "hv", \%args ) or $args{h} = 1;
 say("generateSampleScheduleData - ver. $VERSION Copyright 2018 Bojan Ramsak");
 
 pod2usage(
-    -verbose  => 99,
-    -exitval  => 0,
-    -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
+  -verbose  => 99,
+  -exitval  => 0,
+  -sections => "SYNOPSIS|OPTIONS|DESCRIPTION"
     )
     if exists $args{h};
 
@@ -63,9 +63,9 @@ $verbose = 1 if exists $args{v};
 # define and check output directory
 my $path;
 if ( $#ARGV > -1 ) {
-    $path = shift @ARGV;
+  $path = shift @ARGV;
 } else {
-    $path = dir( $ENV{'HOME'}, 'stock' );
+  $path = dir( $ENV{'HOME'}, 'stock' );
 }
 die "Directory [$path] does not exist!" if !-d $path;
 
@@ -86,32 +86,31 @@ my @columnName = qw| Date Time Duration Title Short Synopsis |;
 $sp->addrow(@columnName);
 
 foreach my $event ( @{ $schedule->{tv}{programme} } ) {
-    my $start = localtime->strptime( $event->{start}, "%Y%m%d%H%M%S %z" );
-    my $stop  = localtime->strptime( $event->{stop},  "%Y%m%d%H%M%S %z" );
-    my @row   = (
-        $start->strftime("%d/%m/%y"),   $start->strftime("%H:%M:%S"),
-        $stop - $start,                 $event->{title}{content},
-        $event->{'sub-title'}{content}, $event->{desc}{content},
-    );
-    $sp->addrow(@row);
+  my $start = localtime->strptime( $event->{start}, "%Y%m%d%H%M%S %z" );
+  my $stop  = localtime->strptime( $event->{stop},  "%Y%m%d%H%M%S %z" );
+  my @row   = (
+    $start->strftime("%d/%m/%y"),   $start->strftime("%H:%M:%S"), $stop - $start, $event->{title}{content},
+    $event->{'sub-title'}{content}, $event->{desc}{content},
+  );
+  $sp->addrow(@row);
 } ## end foreach my $event ( @{ $schedule...})
 
 $sp->close();
 
 # Generate the TVXML schedule
 for ( my $sid = 1 ; $sid <= 45 ; $sid++ ) {
-    say("Generating [$sid] service data") if $verbose;
-    my $schedule = buildSchedule( $sid, $maxDays );
-    my $output   = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-    $output .= '<!DOCTYPE tv SYSTEM "http://127.0.0.1/xmltv.dtd">' . "\n";
-    my $xmlParser = MyXMLSimple->new( RootName => 'xml', KeepRoot => 1 );
-    $output .= $xmlParser->XMLout($schedule);
+  say("Generating [$sid] service data") if $verbose;
+  my $schedule = buildSchedule( $sid, $maxDays );
+  my $output   = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+  $output .= '<!DOCTYPE tv SYSTEM "http://127.0.0.1/xmltv.dtd">' . "\n";
+  my $xmlParser = MyXMLSimple->new( RootName => 'xml', KeepRoot => 1 );
+  $output .= $xmlParser->XMLout($schedule);
 
-    my $filePath = file( $path, sprintf( "schedule%02i.xml", $sid ) );
-    say($filePath);
-    open( my $file, ">", $filePath ) or die "Cannot open file [$filePath] for writing!";
-    print $file $output;
-    close($output);
+  my $filePath = file( $path, sprintf( "schedule%02i.xml", $sid ) );
+  say($filePath);
+  open( my $file, ">", $filePath ) or die "Cannot open file [$filePath] for writing!";
+  print $file $output;
+  close($output);
 } ## end for ( my $sid = 1 ; $sid...)
 
 =head1 SUBROUTINES/METHODS
@@ -123,79 +122,79 @@ Generate schedule data for channel with SID = $serviceId for next $days.
 =cut
 
 sub buildSchedule {
-    my ( $serviceId, $maxDays ) = @_;
+  my ( $serviceId, $maxDays ) = @_;
 
-    my $now       = time;
-    my $eventSize = $serviceId;
+  my $now       = time;
+  my $eventSize = $serviceId;
 
-    while ( $eventSize < 600 ) { $eventSize = $eventSize * 10; }
-    say("  $serviceId => $eventSize") if $verbose;
+  while ( $eventSize < 600 ) { $eventSize = $eventSize * 10; }
+  say("  $serviceId => $eventSize") if $verbose;
 
-    my $start      = ( int( $now / $eventSize ) ) * $eventSize;
-    my $eventCount = 0;
-    my $schedule   = {
-        'tv' => {
-            'generator-info-name' => 'cherryEpg - sample data http://demo.cherryhill.eu',
-            'channel'             => {
-                'id'           => $serviceId,
-                'display-name' => { content => "Service $serviceId" }
-            },
-            'programme' => []
-        }
+  my $start      = ( int( $now / $eventSize ) ) * $eventSize;
+  my $eventCount = 0;
+  my $schedule   = {
+    'tv' => {
+      'generator-info-name' => 'cherryEpg - sample data http://demo.cherryhill.eu',
+      'channel'             => {
+        'id'           => $serviceId,
+        'display-name' => { content => "Service $serviceId" }
+      },
+      'programme' => []
+    }
+  };
+
+  while ( ( $start + $eventCount * $eventSize ) < ( $now + $maxDays * 24 * 60 * 60 ) ) {
+    my $current       = gmtime( $start + $eventCount++ * $eventSize );
+    my $currentToHour = $current->epoch % ( 6 * 60 * 60 );
+    my $next          = gmtime( $start + $eventCount * $eventSize );
+    my $nextToHour    = $next->epoch % ( 6 * 60 * 60 );
+
+    my $sampleDataIndex = ( $current->epoch / $eventSize ) % $#{$sampleEvents} + 1;
+
+    if ( $currentToHour < $eventSize ) {
+      $current -= $currentToHour;
+      $sampleDataIndex = 0;
+    }
+    if ( $nextToHour < $eventSize ) {
+      $next -= $nextToHour;
+    }
+    say( "  sampleDataIndex = $sampleDataIndex ", ( $sampleDataIndex == 0 ? "News" : "" ) ) if $verbose;
+    say( "    ",                                  $current->strftime("%Y%m%d%H%M%S %z") )   if $verbose;
+
+    my $sample = ${$sampleEvents}[$sampleDataIndex];
+    my $e      = {
+      'title' => {
+        'lang'    => 'en',
+        'content' => ${$sample}[0],
+      },
+      'channel'   => $serviceId,
+      'start'     => $current->strftime("%Y%m%d%H%M%S %z"),
+      'stop'      => $next->strftime("%Y%m%d%H%M%S %z"),
+      'sub-title' => {
+        'lang'    => 'en',
+        'content' => ${$sample}[1],
+      },
+      'desc' => {
+        'lang'    => 'en',
+        'content' => ${$sample}[2],
+      },
     };
 
-    while ( ( $start + $eventCount * $eventSize ) < ( $now + $maxDays * 24 * 60 * 60 ) ) {
-        my $current       = gmtime( $start + $eventCount++ * $eventSize );
-        my $currentToHour = $current->epoch % ( 6 * 60 * 60 );
-        my $next          = gmtime( $start + $eventCount * $eventSize );
-        my $nextToHour    = $next->epoch % ( 6 * 60 * 60 );
+    if ( $serviceId % 12 == 0 ) {
+      $e->{parentalrating} = {
+        'country' => 'ger',
+        'content' => ( $sampleDataIndex % 14 ) + 4,
+      };
+    } ## end if ( $serviceId % 12 ==...)
 
-        my $sampleDataIndex = ( $current->epoch / $eventSize ) % $#{$sampleEvents} + 1;
+    if ( $serviceId % 5 == 0 ) {
+      $e->{category} = { content => ( ( ( $sampleDataIndex << 4 ) + $eventCount ) & 0xff ) };
+    }
 
-        if ( $currentToHour < $eventSize ) {
-            $current -= $currentToHour;
-            $sampleDataIndex = 0;
-        }
-        if ( $nextToHour < $eventSize ) {
-            $next -= $nextToHour;
-        }
-        say( "  sampleDataIndex = $sampleDataIndex ", ( $sampleDataIndex == 0 ? "News" : "" ) ) if $verbose;
-        say( "    ",                                  $current->strftime("%Y%m%d%H%M%S %z") )   if $verbose;
+    push( @{ $schedule->{tv}{programme} }, $e );
+  } ## end while ( ( $start + $eventCount...))
 
-        my $sample = ${$sampleEvents}[$sampleDataIndex];
-        my $e      = {
-            'title' => {
-                'lang'    => 'en',
-                'content' => ${$sample}[0],
-            },
-            'channel'   => $serviceId,
-            'start'     => $current->strftime("%Y%m%d%H%M%S %z"),
-            'stop'      => $next->strftime("%Y%m%d%H%M%S %z"),
-            'sub-title' => {
-                'lang'    => 'en',
-                'content' => ${$sample}[1],
-            },
-            'desc' => {
-                'lang'    => 'en',
-                'content' => ${$sample}[2],
-            },
-        };
-
-        if ( $serviceId % 12 == 0 ) {
-            $e->{parentalrating} = {
-                'country' => 'ger',
-                'content' => ( $sampleDataIndex % 14 ) + 4,
-            };
-        } ## end if ( $serviceId % 12 ==...)
-
-        if ( $serviceId % 5 == 0 ) {
-            $e->{category} = { content => ( ( ( $sampleDataIndex << 4 ) + $eventCount ) & 0xff ) };
-        }
-
-        push( @{ $schedule->{tv}{programme} }, $e );
-    } ## end while ( ( $start + $eventCount...))
-
-    return $schedule;
+  return $schedule;
 } ## end sub buildSchedule
 
 =head1 SUBROUTINES/METHODS
@@ -209,15 +208,15 @@ First element is 'News'.
 =cut
 
 sub readSampleData {
-    my @data;
+  my @data;
 
-    while (<DATA>) {
-        chomp;
-        my @splitted = split( /;/, $_ );
-        push( @data, \@splitted );
-    }
+  while (<DATA>) {
+    chomp;
+    my @splitted = split( /;/, $_ );
+    push( @data, \@splitted );
+  }
 
-    return \@data;
+  return \@data;
 } ## end sub readSampleData
 
 package MyXMLSimple;
@@ -226,15 +225,15 @@ use base 'XML::Simple';
 
 # Overriding the method here
 sub sorted_keys {
-    my ( $self, $name, $hashref ) = @_;
-    if ( $name eq 'programme' ) {
-        my @ordered      = ( 'title', 'sub-title', 'desc' );
-        my %ordered_hash = map { $_ => 1 } @ordered;
+  my ( $self, $name, $hashref ) = @_;
+  if ( $name eq 'programme' ) {
+    my @ordered      = ( 'title', 'sub-title', 'desc' );
+    my %ordered_hash = map { $_ => 1 } @ordered;
 
-        #set ordered tags in front of others
-        return @ordered, grep { not $ordered_hash{$_} } $self->SUPER::sorted_keys( $name, $hashref );
-    } ## end if ( $name eq 'programme')
-    return $self->SUPER::sorted_keys( $name, $hashref );    # for the rest, I don't care!
+    #set ordered tags in front of others
+    return @ordered, grep { not $ordered_hash{$_} } $self->SUPER::sorted_keys( $name, $hashref );
+  } ## end if ( $name eq 'programme')
+  return $self->SUPER::sorted_keys( $name, $hashref );    # for the rest, I don't care!
 
 } ## end sub sorted_keys
 

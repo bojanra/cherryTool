@@ -13,9 +13,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.13';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -27,53 +27,53 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $content = try {
-        local $/;
-        open( my $fh, '<:encoding(UTF-8)', $self->{source} ) || return;
-        <$fh>;
-    };
+  my $content = try {
+    local $/;
+    open( my $fh, '<:encoding(UTF-8)', $self->{source} ) || return;
+    <$fh>;
+  };
 
-    if ( !$content ) {
-        $self->error("File empty");
-        return $report;
-    }
-
-    my $data = JSON::XS->new->decode($content);
-
-    if ( !$data ) {
-        $self->error("Content not in JSON format");
-        return $report;
-    }
-
-    foreach my $item ( @{$data} ) {
-        my $event;
-
-        if ( $item->{start_time} ) {
-            $event->{start} = try {
-                localtime->strptime( $item->{start_time}, "%Y-%m-%dT%H:%M:%S" )->epoch;
-            } catch {
-                $self->error("start_time not valid format [$item->{start_time}]");
-            };
-        } ## end if ( $item->{start_time...})
-        if ( $item->{end_time} ) {
-            $event->{stop} = try {
-                localtime->strptime( $item->{end_time}, "%Y-%m-%dT%H:%M:%S" )->epoch;
-            } catch {
-                $self->error("end_time not valid format [$item->{end_time}]");
-            };
-        } ## end if ( $item->{end_time})
-        $event->{title}    = $item->{title}     if $item->{title};
-        $event->{subtitle} = $item->{sub_title} if $item->{sub_title};
-        $event->{synopsis} = $item->{live_desc} if $item->{live_desc};
-        $event->{id}       = $1                 if $item->{id_code} =~ m/(\d+)/;
-
-        push( @{ $report->{eventList} }, $event );
-    } ## end foreach my $item ( @{$data})
-
+  if ( !$content ) {
+    $self->error("File empty");
     return $report;
+  }
+
+  my $data = JSON::XS->new->decode($content);
+
+  if ( !$data ) {
+    $self->error("Content not in JSON format");
+    return $report;
+  }
+
+  foreach my $item ( @{$data} ) {
+    my $event;
+
+    if ( $item->{start_time} ) {
+      $event->{start} = try {
+        localtime->strptime( $item->{start_time}, "%Y-%m-%dT%H:%M:%S" )->epoch;
+      } catch {
+        $self->error("start_time not valid format [$item->{start_time}]");
+      };
+    } ## end if ( $item->{start_time...})
+    if ( $item->{end_time} ) {
+      $event->{stop} = try {
+        localtime->strptime( $item->{end_time}, "%Y-%m-%dT%H:%M:%S" )->epoch;
+      } catch {
+        $self->error("end_time not valid format [$item->{end_time}]");
+      };
+    } ## end if ( $item->{end_time})
+    $event->{title}    = $item->{title}     if $item->{title};
+    $event->{subtitle} = $item->{sub_title} if $item->{sub_title};
+    $event->{synopsis} = $item->{live_desc} if $item->{live_desc};
+    $event->{id}       = $1                 if $item->{id_code} =~ m/(\d+)/;
+
+    push( @{ $report->{eventList} }, $event );
+  } ## end foreach my $item ( @{$data})
+
+  return $report;
 } ## end sub parse
 
 =head1 AUTHOR

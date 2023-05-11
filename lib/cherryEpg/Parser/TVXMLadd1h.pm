@@ -15,13 +15,13 @@ Shift events 1 hour in future.
 =cut
 
 after 'parse' => sub {
-    my $output = shift;
-    my $report = $output->{report}->{eventList};
+  my $output = shift;
+  my $report = $output->{report}->{eventList};
 
-    foreach my $event ( @{$report} ) {
-        $event->{start} += 1 * 60 * 60;
-        $event->{stop}  += 1 * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
-    }
+  foreach my $event ( @{$report} ) {
+    $event->{start} += 1 * 60 * 60;
+    $event->{stop}  += 1 * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
+  }
 };
 
 =head1 AUTHOR

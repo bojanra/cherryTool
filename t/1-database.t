@@ -4,7 +4,7 @@ use 5.024;
 use Test::More tests => 4;
 
 BEGIN {
-    use_ok("cherryEpg");
+  use_ok("cherryEpg");
 }
 
 my $cherry = cherryEpg->instance();

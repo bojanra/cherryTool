@@ -5,13 +5,13 @@ use utf8;
 use Test::More tests => 44;
 
 BEGIN {
-    use_ok("cherryEpg");
-    use_ok("cherryEpg::Scheme");
-    use_ok("cherryEpg::Player");
+  use_ok("cherryEpg");
+  use_ok("cherryEpg::Scheme");
+  use_ok("cherryEpg::Player");
 
-    `generateSampleScheduleData`;
+  `generateSampleScheduleData`;
 
-    ok( $? == 0, "generate sample schedule data" );
+  ok( $? == 0, "generate sample schedule data" );
 } ## end BEGIN
 
 my $cherry = cherryEpg->instance( verbose => 0 );

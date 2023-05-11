@@ -10,9 +10,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.13';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -24,18 +24,18 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $handler = ReporTVXMLHandler->new();
-    my $parser  = XML::Parser::PerlSAX->new(
-        Handler => $handler,
-        output  => $report
-    );
+  my $handler = ReporTVXMLHandler->new();
+  my $parser  = XML::Parser::PerlSAX->new(
+    Handler => $handler,
+    output  => $report
+  );
 
-    $parser->parse( Source => { SystemId => $self->{source} } );
+  $parser->parse( Source => { SystemId => $self->{source} } );
 
-    return $report;
+  return $report;
 } ## end sub parse
 
 package ReporTVXMLHandler;
@@ -45,137 +45,137 @@ use Time::Piece;
 use Try::Tiny;
 
 sub new {
-    my $this  = shift;
-    my $class = ref($this) || $this;
-    my $self  = {};
+  my $this  = shift;
+  my $class = ref($this) || $this;
+  my $self  = {};
 
-    bless( $self, $class );
-    return $self;
+  bless( $self, $class );
+  return $self;
 } ## end sub new
 
 sub start_document {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    # this will be the list of events
-    $self->{eventList} = [];
+  # this will be the list of events
+  $self->{eventList} = [];
 
-    # and the possible error list
-    $self->{errorList} = [];
+  # and the possible error list
+  $self->{errorList} = [];
 } ## end sub start_document
 
 sub end_document {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{report}            = $self->{'_parser'}->{output};
-    $self->{report}{eventList} = $self->{eventList};
-    $self->{report}{errorList} = $self->{errorList};
-    $self->{report}{channel}   = $self->{Service};
+  $self->{report}            = $self->{'_parser'}->{output};
+  $self->{report}{eventList} = $self->{eventList};
+  $self->{report}{errorList} = $self->{errorList};
+  $self->{report}{channel}   = $self->{Service};
 } ## end sub end_document
 
 sub start_element {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    if ( $element->{Name} eq 'event_information' ) {
-        $self->{currentEvent} = {};
-    }
+  if ( $element->{Name} eq 'event_information' ) {
+    $self->{currentEvent} = {};
+  }
 
 
-    $self->{currentData} = "";
+  $self->{currentData} = "";
 } ## end sub start_element
 
 sub characters {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{currentData} .= $element->{Data};
+  $self->{currentData} .= $element->{Data};
 }
 
 sub end_element {
-    my ( $self, $element ) = @_;
-    my $value = $self->{currentData};
-    my $event = $self->{currentEvent};
+  my ( $self, $element ) = @_;
+  my $value = $self->{currentData};
+  my $event = $self->{currentEvent};
 
-    $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
+  $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
 
 SWITCH: for ( $element->{Name} ) {
-        /start_time/ && do {
-            $event->{start} = try {
-                gmtime->strptime( $value, "%Y/%m/%d %H:%M:%S" )->epoch;
-            } catch {
-                $self->_error("start_time not valid format [$value]");
-            };
-            return;
-        };
-        /duration/ && do {
-            if ( $value =~ /^(\d+):(\d+):(\d+)$/ ) {
-                my $hour   = $1;
-                my $minute = $2;
-                my $second = $3;
-                $event->{duration} = ( $hour * 60 + $minute ) * 60 + $second;
-            } else {
-                $self->_error("duration not valid format [$value]");
-            }
-            return;
-        };
-        /event_name/ && do {
-            $event->{title} = $value;
-            return;
-        };
-        /extended_event_descriptor/ && do {
-            $event->{synopsis} = $value;
-            return;
-        };
-        $_ eq 'rating' && do {
-            if ( $value =~ /(\d+)/ ) {
-                $event->{parental_rating} = ( $1 + 3 ) if $1 > 0;
-            } else {
-                $self->_error("parental_rating_descriptor not numeric [$value]");
-            }
-            return;
-        };
-        /content_type/ && do {
-            $event->{content} = $value;
-            return;
-        };
-        $_ eq 'event_information' && do {
+    /start_time/ && do {
+      $event->{start} = try {
+        gmtime->strptime( $value, "%Y/%m/%d %H:%M:%S" )->epoch;
+      } catch {
+        $self->_error("start_time not valid format [$value]");
+      };
+      return;
+    };
+    /duration/ && do {
+      if ( $value =~ /^(\d+):(\d+):(\d+)$/ ) {
+        my $hour   = $1;
+        my $minute = $2;
+        my $second = $3;
+        $event->{duration} = ( $hour * 60 + $minute ) * 60 + $second;
+      } else {
+        $self->_error("duration not valid format [$value]");
+      }
+      return;
+    };
+    /event_name/ && do {
+      $event->{title} = $value;
+      return;
+    };
+    /extended_event_descriptor/ && do {
+      $event->{synopsis} = $value;
+      return;
+    };
+    $_ eq 'rating' && do {
+      if ( $value =~ /(\d+)/ ) {
+        $event->{parental_rating} = ( $1 + 3 ) if $1 > 0;
+      } else {
+        $self->_error("parental_rating_descriptor not numeric [$value]");
+      }
+      return;
+    };
+    /content_type/ && do {
+      $event->{content} = $value;
+      return;
+    };
+    $_ eq 'event_information' && do {
 
-            # add the event to the list
-            $self->addEvent();
-            return;
-        };
-    } ## end SWITCH: for ( $element->{Name} )
-    return;
+      # add the event to the list
+      $self->addEvent();
+      return;
+    };
+  } ## end SWITCH: for ( $element->{Name} )
+  return;
 } ## end sub end_element
 
 sub set_document_locator {
-    my ( $self, $params ) = @_;
-    $self->{'_parser'} = $params->{'Locator'};
+  my ( $self, $params ) = @_;
+  $self->{'_parser'} = $params->{'Locator'};
 }
 
 sub _error {
-    my $self = shift;
+  my $self = shift;
 
-    push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
+  push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
 }
 
 sub addEvent {
-    my $self  = shift;
-    my $event = $self->{currentEvent};
+  my $self  = shift;
+  my $event = $self->{currentEvent};
 
-    # check if all event data is complete and valid
-    my @missing;
-    push( @missing, "start" ) unless defined $event->{start};
-    push( @missing, "title" ) unless defined $event->{title};
+  # check if all event data is complete and valid
+  my @missing;
+  push( @missing, "start" ) unless defined $event->{start};
+  push( @missing, "title" ) unless defined $event->{title};
 
-    if ( scalar @missing > 0 ) {
-        $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
-        return;
-    }
+  if ( scalar @missing > 0 ) {
+    $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
+    return;
+  }
 
-    # push to final array
-    push( @{ $self->{eventList} }, $event );
-    $event = {};
+  # push to final array
+  push( @{ $self->{eventList} }, $event );
+  $event = {};
 
-    return 1;
+  return 1;
 } ## end sub addEvent
 
 =head1 AUTHOR

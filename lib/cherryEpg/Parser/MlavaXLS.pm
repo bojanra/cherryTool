@@ -11,9 +11,9 @@ extends 'cherryEpg::Parser::SimpleXLS';
 our $VERSION = '0.13';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3
@@ -23,23 +23,23 @@ Remap original schedule data to next 7 days.
 =cut
 
 around 'parse' => sub {
-    my ( $orig, $self, $parserOption ) = @_;
+  my ( $orig, $self, $parserOption ) = @_;
 
-    my $report = $orig->( $self, $parserOption );
+  my $report = $orig->( $self, $parserOption );
 
-    my $eventList = $report->{eventList};
+  my $eventList = $report->{eventList};
 
-    my $now = localtime->epoch;
+  my $now = localtime->epoch;
 
-    foreach my $event ( @{$eventList} ) {
-        while ( $event->{start} < $now ) {
+  foreach my $event ( @{$eventList} ) {
+    while ( $event->{start} < $now ) {
 
-            # add week seconds
-            $event->{start} += 7 * 24 * 60 * 60;
-        }
-    } ## end foreach my $event ( @{$eventList...})
+      # add week seconds
+      $event->{start} += 7 * 24 * 60 * 60;
+    }
+  } ## end foreach my $event ( @{$eventList...})
 
-    return $report;
+  return $report;
 };
 
 =head1 AUTHOR

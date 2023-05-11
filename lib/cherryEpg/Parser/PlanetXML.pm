@@ -10,9 +10,9 @@ extends 'cherryEpg::Parser';
 our $VERSION = '0.15';
 
 sub BUILD {
-    my ( $self, $arg ) = @_;
+  my ( $self, $arg ) = @_;
 
-    $self->{report}{parser} = __PACKAGE__;
+  $self->{report}{parser} = __PACKAGE__;
 }
 
 =head3 parse( $parserOption)
@@ -24,18 +24,18 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-    my ( $self, $option ) = @_;
-    my $report = $self->{report};
+  my ( $self, $option ) = @_;
+  my $report = $self->{report};
 
-    my $handler = PlanetXMLHandler->new();
-    my $parser  = XML::Parser::PerlSAX->new(
-        Handler => $handler,
-        output  => $report
-    );
+  my $handler = PlanetXMLHandler->new();
+  my $parser  = XML::Parser::PerlSAX->new(
+    Handler => $handler,
+    output  => $report
+  );
 
-    $parser->parse( Source => { SystemId => $self->{source} } );
+  $parser->parse( Source => { SystemId => $self->{source} } );
 
-    return $report;
+  return $report;
 } ## end sub parse
 
 package PlanetXMLHandler;
@@ -45,123 +45,123 @@ use Time::Piece;
 use Carp qw( croak );
 
 sub new {
-    my $this  = shift;
-    my $class = ref($this) || $this;
-    my $self  = {};
+  my $this  = shift;
+  my $class = ref($this) || $this;
+  my $self  = {};
 
-    bless( $self, $class );
-    return $self;
+  bless( $self, $class );
+  return $self;
 } ## end sub new
 
 sub start_document {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    # this will be the list of events
-    $self->{eventList} = [];
+  # this will be the list of events
+  $self->{eventList} = [];
 
-    # and the possible error list
-    $self->{errorList} = [];
+  # and the possible error list
+  $self->{errorList} = [];
 } ## end sub start_document
 
 sub end_document {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{report}            = $self->{'_parser'}->{output};
-    $self->{report}{eventList} = $self->{eventList};
-    $self->{report}{errorList} = $self->{errorList};
+  $self->{report}            = $self->{'_parser'}->{output};
+  $self->{report}{eventList} = $self->{eventList};
+  $self->{report}{errorList} = $self->{errorList};
 } ## end sub end_document
 
 sub start_element {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    if ( $element->{Name} =~ /programme/i ) {
-        my $event;
+  if ( $element->{Name} =~ /programme/i ) {
+    my $event;
 
-        $self->{eventcount} += 1;
+    $self->{eventcount} += 1;
 
-        # save the start and stop
-        if ( exists $element->{Attributes}{start} ) {
-            $event->{start} = Time::Piece->strptime( $element->{Attributes}{start}, "%Y%m%d%H%M%S %z" )->epoch;
-        }
+    # save the start and stop
+    if ( exists $element->{Attributes}{start} ) {
+      $event->{start} = Time::Piece->strptime( $element->{Attributes}{start}, "%Y%m%d%H%M%S %z" )->epoch;
+    }
 
-        if ( exists $element->{Attributes}{stop} ) {
-            $event->{stop} = Time::Piece->strptime( $element->{Attributes}{stop}, "%Y%m%d%H%M%S %z" )->epoch;
-        }
+    if ( exists $element->{Attributes}{stop} ) {
+      $event->{stop} = Time::Piece->strptime( $element->{Attributes}{stop}, "%Y%m%d%H%M%S %z" )->epoch;
+    }
 
-        $self->{currentEvent} = $event;
-    } ## end if ( $element->{Name} ...)
+    $self->{currentEvent} = $event;
+  } ## end if ( $element->{Name} ...)
 
-    $self->{currentData} = "";
+  $self->{currentData} = "";
 } ## end sub start_element
 
 sub characters {
-    my ( $self, $element ) = @_;
+  my ( $self, $element ) = @_;
 
-    $self->{currentData} .= $element->{Data};
+  $self->{currentData} .= $element->{Data};
 }
 
 sub end_element {
-    my ( $self, $element ) = @_;
-    my $value = $self->{currentData};
-    my $event = $self->{currentEvent};
+  my ( $self, $element ) = @_;
+  my $value = $self->{currentData};
+  my $event = $self->{currentEvent};
 
-    $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
+  $self->{linecount} = $self->{_parser}->location()->{'LineNumber'};
 
 SWITCH: for ( $element->{Name} ) {
-        /programme/i && do {
+    /programme/i && do {
 
-            # add the event to the list
-            $self->addEvent();
-            return;
-        };
-        $_ eq "title" && do {
+      # add the event to the list
+      $self->addEvent();
+      return;
+    };
+    $_ eq "title" && do {
 
-            $event->{title} = $value;
-            return;
-        };
-        /sub-title/ && do {
+      $event->{title} = $value;
+      return;
+    };
+    /sub-title/ && do {
 
-            $event->{subtitle} = $value;
-            return;
-        };
-        /desc/i && do {
+      $event->{subtitle} = $value;
+      return;
+    };
+    /desc/i && do {
 
-            $event->{synopsis} = $value;
-            return;
-        };
-    } ## end SWITCH: for ( $element->{Name} )
-    return;
+      $event->{synopsis} = $value;
+      return;
+    };
+  } ## end SWITCH: for ( $element->{Name} )
+  return;
 } ## end sub end_element
 
 sub set_document_locator {
-    my ( $self, $params ) = @_;
-    $self->{'_parser'} = $params->{'Locator'};
+  my ( $self, $params ) = @_;
+  $self->{'_parser'} = $params->{'Locator'};
 }
 
 sub _error {
-    my $self = shift;
+  my $self = shift;
 
-    push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
+  push( @{ $self->{errorList} }, sprintf( shift, @_ ) );
 }
 
 sub addEvent {
-    my $self  = shift;
-    my $event = $self->{currentEvent};
+  my $self  = shift;
+  my $event = $self->{currentEvent};
 
-    # check if all event data is complete and valid
-    my @missing;
-    push( @missing, "start" ) unless defined $event->{start};
-    push( @missing, "title" ) unless defined $event->{title};
+  # check if all event data is complete and valid
+  my @missing;
+  push( @missing, "start" ) unless defined $event->{start};
+  push( @missing, "title" ) unless defined $event->{title};
 
-    if ( scalar @missing > 0 ) {
-        $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
-        return;
-    }
+  if ( scalar @missing > 0 ) {
+    $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
+    return;
+  }
 
-    # push to final array
-    push( @{ $self->{eventList} }, $event );
+  # push to final array
+  push( @{ $self->{eventList} }, $event );
 
-    return 1;
+  return 1;
 } ## end sub addEvent
 1;
 

@@ -11,13 +11,13 @@ use Moo;
 use Try::Tiny;
 
 has 'verbose' => (
-    is      => 'ro',
-    default => 0
+  is      => 'ro',
+  default => 0
 );
 
 has 'pod' => (
-    is      => 'rw',
-    default => ''
+  is      => 'rw',
+  default => ''
 );
 
 has 'name' => ( is => 'rw', );
@@ -32,36 +32,36 @@ Return 1 on success.
 =cut
 
 sub load {
-    my ( $self, $filepath ) = @_;
+  my ( $self, $filepath ) = @_;
 
-    my $zip = try {
-        local $/;
-        open( my $fh, '<:raw', $filepath ) || return;
-        <$fh>;
-    };
+  my $zip = try {
+    local $/;
+    open( my $fh, '<:raw', $filepath ) || return;
+    <$fh>;
+  };
 
-    $zip =~ s/^.+?!//;
-    my $plain = gunzip($zip);
+  $zip =~ s/^.+?!//;
+  my $plain = gunzip($zip);
 
-    return unless $plain;
+  return unless $plain;
 
-    my $fh = File::Temp->new( TEMPLATE => 'cherryMaintainXXXXX', DIR => '/tmp' );
+  my $fh = File::Temp->new( TEMPLATE => 'cherryMaintainXXXXX', DIR => '/tmp' );
 
-    print( $fh $plain );
-    close($fh);
+  print( $fh $plain );
+  close($fh);
 
-    return unless $self->check( $fh->filename );
+  return unless $self->check( $fh->filename );
 
-    $self->{fh} = $fh;
+  $self->{fh} = $fh;
 
-    $self->{pod} = $self->extractPod( $fh->filename );
+  $self->{pod} = $self->extractPod( $fh->filename );
 
-    # extract name
-    if ( $self->{pod} =~ /NAME\s*?\n\s*(.+)\s*$/m ) {
-        $self->{name} = $1;
-    }
+  # extract name
+  if ( $self->{pod} =~ /NAME\s*?\n\s*(.+)\s*$/m ) {
+    $self->{name} = $1;
+  }
 
-    return 1;
+  return 1;
 } ## end sub load
 
 =head3 extractPod( $filepath)
@@ -71,15 +71,15 @@ Run pod2text on $filepath and return POD
 =cut
 
 sub extractPod {
-    my ( $self, $filepath ) = @_;
+  my ( $self, $filepath ) = @_;
 
-    my $pod;
-    run3( "pod2text $filepath", \undef, \$pod, \undef );
+  my $pod;
+  run3( "pod2text $filepath", \undef, \$pod, \undef );
 
-    utf8::decode($pod);
+  utf8::decode($pod);
 
-    return if ( $? & 0xff );
-    return $pod;
+  return if ( $? & 0xff );
+  return $pod;
 } ## end sub extractPod
 
 =head3 apply( )
@@ -89,30 +89,30 @@ Run the maintenance script from temporary file.
 =cut
 
 sub apply {
-    my ($self) = @_;
+  my ($self) = @_;
 
-    my $filepath = $self->{fh}->filename;
-    my $output;
+  my $filepath = $self->{fh}->filename;
+  my $output;
 
-    # this is required to use the logger
-    my $cherry = cherryEpg->instance();
-    my $logger = get_logger('system');
+  # this is required to use the logger
+  my $cherry = cherryEpg->instance();
+  my $logger = get_logger('system');
 
-    run3( "perl $filepath", \undef, \$output, \undef );
+  run3( "perl $filepath", \undef, \$output, \undef );
 
-    utf8::decode($output);
+  utf8::decode($output);
 
-    my $report = [$output];
-    $self->{output} = $output;
-    my $name = $self->name // $filepath;
+  my $report = [$output];
+  $self->{output} = $output;
+  my $name = $self->name // $filepath;
 
-    if ($?) {
-        $logger->error( "Applying [$name] to the system", undef, undef, $report );
-        return;
-    } else {
-        $logger->info( "Applying [$name] to the system", undef, undef, undef );
-        return 1;
-    }
+  if ($?) {
+    $logger->error( "Applying [$name] to the system", undef, undef, $report );
+    return;
+  } else {
+    $logger->info( "Applying [$name] to the system", undef, undef, undef );
+    return 1;
+  }
 } ## end sub apply
 
 =head3 check( $filepath )
@@ -123,14 +123,14 @@ Return 1 on success.
 =cut
 
 sub check {
-    my ( $self, $filepath ) = @_;
+  my ( $self, $filepath ) = @_;
 
-    run3("perl -c $filepath");
+  run3("perl -c $filepath");
 
-    return if $?;
+  return if $?;
 
-    # success
-    return 1;
+  # success
+  return 1;
 } ## end sub check
 
 =head3 convert( $filepath )
@@ -140,14 +140,14 @@ Convert the provided file into maintenance package.
 =cut
 
 sub convert {
-    my ( $self, $filepath ) = @_;
+  my ( $self, $filepath ) = @_;
 
-    return unless -e $filepath;
-    return unless $self->check($filepath);
+  return unless -e $filepath;
+  return unless $self->check($filepath);
 
-    my $zip = 'This is a cherryEpg maintenance package. Do not modify!' . gzip_file($filepath);
+  my $zip = 'This is a cherryEpg maintenance package. Do not modify!' . gzip_file($filepath);
 
-    return $zip;
+  return $zip;
 } ## end sub convert
 
 =head1 AUTHOR
