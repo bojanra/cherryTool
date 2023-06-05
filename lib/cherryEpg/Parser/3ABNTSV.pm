@@ -1,4 +1,4 @@
-package cherryEpg::Parser::SynapseTSV;
+package cherryEpg::Parser::3ABNTSV;
 
 use 5.024;
 use utf8;
@@ -6,6 +6,7 @@ use Moo;
 use Time::Piece;
 use Time::Seconds;
 use Try::Tiny;
+use DateTime;
 
 extends 'cherryEpg::Parser';
 
@@ -49,7 +50,21 @@ sub parse {
     my ( $date, $time, $duration, $title, $synopsis ) = split( /\t/, $_ );
 
     $event->{start} = try {
-      localtime->strptime( $date . ' ' . $time, "%d-%m-%Y %H:%M:%S" )->epoch;
+      my $start = $date . ' ' . $time;
+
+      # day-month-year hour:minute:seconds
+      if ( $start =~ m/^(\d+)-(\d+)-(\d{4}) (\d+):(\d+):(\d+)$/ ) {
+        my $dt = DateTime->new(
+          day       => $1,
+          month     => $2,
+          year      => $3,
+          hour      => $4,
+          minute    => $5,
+          second    => $6,
+          time_zone => "America/Chicago",
+        );
+        return $dt->epoch;
+      } ## end if ( $start =~ m/^(\d+)-(\d+)-(\d{4}) (\d+):(\d+):(\d+)$/)
     };
 
     if ( $duration =~ m/^(\d+):(\d+):(\d+)$/ ) {
