@@ -15,6 +15,7 @@ use Gzip::Faster;
 use Path::Class;
 use Sys::Hostname;
 use Time::Piece;
+use JSON::XS qw();
 
 my $cherry = cherryEpg->instance();
 
@@ -947,7 +948,9 @@ get '/log/:id.json' => require_role cherryweb => sub {
       && $row->{info}{source} eq 'HASH'
       && $row->{info}{source}{blob};
 
-  send_as( JSON => $row->{info} );
+  # manual conversion to JSON allows to have canonical format
+  header( 'Content-Type' => 'application/json' );
+  return JSON::XS->new->utf8->canonical(1)->encode( $row->{info} );
 };
 
 # default route
@@ -958,7 +961,7 @@ any qr{.*} => sub {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019-2022 by Bojan Ramšak
+This software is copyright (c) 2019-2023 by Bojan Ramšak
 
 =head1 LICENSE
 

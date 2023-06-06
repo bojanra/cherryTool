@@ -191,6 +191,9 @@ sub ingestData {
 
     if ( $$eventList[$i]->{stop} && $$eventList[$i]->{stop} =~ /^\d+$/ ) {
 
+      # convert to number
+      $$eventList[$i]->{stop} += 0;
+
       # check if eventList overlap
       if ( $$eventList[ $i + 1 ]->{start} < $$eventList[$i]->{stop} ) {
 
@@ -207,9 +210,14 @@ sub ingestData {
     $i += 1;
   } ## end while ( $i < scalar(@$eventList...))
 
-  # what about the last event FIXME
-  # set the duration of the last event to 15 min.
-  if ( !$$eventList[-1]->{stop} || $$eventList[-1]->{stop} !~ /^\d+$/ ) {
+  # what about the last event
+  if ( $$eventList[-1]->{stop} && $$eventList[-1]->{stop} =~ /^\d+$/ ) {
+
+    # convert to number
+    $$eventList[-1]->{stop} += 0;
+  } else {
+
+    # set the duration of the last event to 15 min.
     $$eventList[-1]->{stop} = $$eventList[-1]->{start} + 15 * 60;
   }
 
@@ -494,18 +502,16 @@ sub processFile {
     # count the no events defined
     $errorCount = $result->{errorList}->@*;
 
+    # extract this values to keep number format in $result
+    my $addedCount   = $result->{added};
+    my $definedCount = $result->{defined};
+
     if ($errorCount) {
       $logger->warn(
-        "ingest ["
-            . $result->{added} . "/"
-            . ( $result->{defined} - $overlapCount )
-            . "] events with ["
-            . $errorCount
-            . "] error",
-        $self->{channel_id}, undef, $result
-      );
+        "ingest [" . $addedCount . "/" . ( $definedCount - $overlapCount ) . "] events with [" . $errorCount . "] error",
+        $self->{channel_id}, undef, $result );
     } else {
-      $logger->info( "ingest [" . $result->{added} . "/" . ( $result->{defined} - $overlapCount ) . "] events",
+      $logger->info( "ingest [" . $addedCount . "/" . ( $definedCount - $overlapCount ) . "] events",
         $self->{channel_id}, undef, $result );
     }
 

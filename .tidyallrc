@@ -17,3 +17,9 @@ argv = --html -s 2
 [JSBeautify css]
 select = public/css/app.css
 argv = --css -s 2
+
+[GenericTransformer / xml]
+select = none/t/testData/*.xml
+cmd = xmllint
+argv = --format
+ok_exit_codes = 0 1
