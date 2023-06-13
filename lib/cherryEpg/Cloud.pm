@@ -79,8 +79,6 @@ sub syncLinger {
   my $keyfile  = file( $self->config->{core}{basedir}, '.ssh', $KEYFILE );
   my $carousel = $self->config->{core}{carousel};
 
-#    $host = "192.168.1.1";
-
   my $command =
       "rsync -vrztL --delete --stats --timeout=45 -e 'ssh -i $keyfile -o StrictHostKeyChecking=no' $host:/*.ctS $carousel";
   my $output;
@@ -197,7 +195,7 @@ sub updateAuthorizedKeys {
   foreach my $linger ( $self->epg->listLinger()->@* ) {
     my $line =
           qq|command="LC_ALL=en_US.UTF-8 PERL5LIB=/var/lib/cherryepg/cherryTool/lib:/var/lib/cherryepg/perl5/lib/perl5 |
-        . qq|/var/lib/cherryepg/bin/shell $linger->{linger_id}"|
+        . qq|/var/lib/cherryepg/cherryTool/bin/shell $linger->{linger_id}"|
         . qq|,no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding |
         . qq|ssh-ed25519 $linger->{public_key} -\n|;
     push( @content, $line );
@@ -254,7 +252,7 @@ sub installRrsync {
   # Debian 11
   my $origin = '/usr/bin/rrsync';
   if ( -x $origin ) {
-    return link( $origin, $rrsync );
+    return symlink( $origin, $rrsync );
   }
 
   # Turnkey 16.1

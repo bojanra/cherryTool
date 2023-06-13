@@ -71,7 +71,7 @@ line parameters. The default location is C<$USER_HOME/config.yml>.
 
 =encoding utf8
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2023 by Bojan Ramšak
 
 =head1 LICENSE
 
