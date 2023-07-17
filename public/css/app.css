@@ -30,25 +30,14 @@ h3.panel-title {
   color: #000 !important;
 }
 
-.header {
-  background-color: #563f79;
-  background-image: linear-gradient(#563f79, #6e519b);
-  color: #f5f2f8;
-  margin-bottom: 30px;
-  margin-top: 0px;
-  padding-bottom: 50px;
-  padding-top: 65px;
-  text-align: center;
-}
-
 .footer {
   position: absolute;
   bottom: 0px;
   width: 100%;
   height: 20px;
   padding: 4px 0px 0px 0px;
-  background-color: #88c7f1;
-  color: #ffffff;
+  background-color: #88C7F1;
+  color: #FFFFFF;
 }
 
 .footer .container {
@@ -56,7 +45,7 @@ h3.panel-title {
 }
 
 .navbar {
-  background-color: #88c7f1;
+  background-color: #88C7F1;
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 0px;
@@ -74,48 +63,25 @@ h3.panel-title {
   padding: 0px 15px;
 }
 
-.navbar .navbar-brand {
-  color: #ffffff;
-}
-
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-  color: #ffffff;
-}
-
-.navbar-nav>.active>a,
-.navbar-nav>.active>a:hover,
-.navbar-nav>.active>a:focus {
-  background-color: #4e3b35;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .navbar .navbar-nav>li>a,
 .navbar .navbar-nav>li>a:focus {
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 20px;
 }
 
 .navbar .navbar-nav>li>a:hover {
   color: #000000;
-  background-color: #c2cccf;
+  background-color: #DDDDDD;
 }
 
 .dropdown-menu>li>a {
   font-weight: bold;
   font-size: 16px;
-}
-
-.navbar .navbar-nav>.font-success>a {
-  color: #5cb85c;
-}
-
-.navbar .navbar-nav>.font-danger>a {
-  color: #d9534f;
-}
-
-.navbar .navbar-nav>.font-warning>a {
-  color: #f0ae51;
 }
 
 .navbar-text {
@@ -157,8 +123,8 @@ h3.panel-title {
   margin-top: -9px;
   width: 17px;
   height: 17px;
-  border: 1px solid #ddd;
-  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  background: #FFFFFF;
   border-radius: 2px;
 }
 
@@ -170,7 +136,7 @@ h3.panel-title {
   top: 50%;
   margin-top: -7px;
   left: 2px;
-  color: #337ab7;
+  color: #337AB7;
   xtransition: all .2s;
 }
 
@@ -195,36 +161,30 @@ h3.panel-title {
 .custom-checkbox>[type="checkbox"]:disabled:not(:checked)+label:before,
 .custom-checkbox>[type="checkbox"]:disabled:checked+label:before {
   box-shadow: none;
-  background-color: #eeeeee;
-  border-color: #eeeeee;
+  background-color: #DDDDDD;
+  border-color: #DDDDDD;
   cursor: not-allowed;
   opacity: 1;
-  color: #dadada;
+  color: #DDDDDD;
 }
 
 .custom-checkbox>[type="checkbox"]:disabled:checked+label:after {
-  color: #8fcaff;
+  color: #88C7F1;
   cursor: not-allowed;
 }
 
 .custom-checkbox>[type="checkbox"]:disabled+label {
-  color: #aaa;
+  color: #DDDDDD;
   cursor: not-allowed;
 }
 
-.custom-checkbox>[type="checkbox"]:checked:focus+label:before,
-.custom-checkbox>[type="checkbox"]:not(:checked):focus+label:before {
-  border: 1px solid #66afe9;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-}
-
 .custom-checkbox>label:hover:before {
-  border: 1px solid #88D2FF !important;
+  border: 1px solid #88C7F1 !important;
 }
 
 .custom-checkbox>[type="checkbox"]:disabled:not(:checked)+label:hover:before,
 .custom-checkbox>[type="checkbox"]:disabled:checked+label:hover:before {
-  border: 1px solid #E4E4E4 !important;
+  border: 1px solid #DDDDDD !important;
 }
 
 .modal {
@@ -264,8 +224,8 @@ h3.panel-title {
 table.dataTable thead tr th {
   word-wrap: break-word;
   word-break: break-all;
-  background-color: #337ab7;
-  color: #fff;
+  background-color: #337AB7;
+  color: #FFFFFF;
 }
 
 table.dataTable tbody tr td {
@@ -330,7 +290,7 @@ div .alert {
 }
 
 .multicast div {
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .multicast div>div>a>div {
@@ -408,17 +368,17 @@ div.panel-heading div.btn-group {
 .table-log>tfoot>tr>th,
 .table-log>tbody>tr>td,
 .table-log>tfoot>tr>td {
-  padding: 2px 5px 2px 4px;
-  border: 1px solid #eee;
+  padding: 2px 5px 0px 4px;
+  border: 1px solid #FFFFFF;
 }
 
 .table-log>thead>tr>th,
 .table-log>thead>tr>td {
-  border: 1px solid #ddd;
+  border: 1px solid #FFFFFF;
 }
 
 .table-log {
-  border: 1px solid #ddd;
+  border: 1px solid #FFFFFF;
 }
 
 .table-condensed a:visited,
@@ -448,7 +408,7 @@ div.panel-heading div.btn-group {
 }
 
 .report i {
-  color: #000;
+  color: #000000;
 }
 
 .report span:first-of-type {
@@ -456,7 +416,7 @@ div.panel-heading div.btn-group {
   margin-left: 5px;
   margin-right: 5px;
   width: 8em;
-  color: #000;
+  color: #000000;
   font-weight: normal;
 }
 
@@ -524,11 +484,11 @@ h4 {
 }
 
 #browseReport .paused td {
-  color: #aaa;
+  color: #DDDDDD;
 }
 
 #browseReport button.btn-default {
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 #browseForm div.panel-body {
@@ -550,7 +510,7 @@ h3.panel-title {
 }
 
 #browseReport a {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .well {
@@ -564,7 +524,7 @@ h3 {
 .upload-area {
   width: 100%;
   height: 73px;
-  border: 2px dashed lightgray;
+  border: 2px dashed #DDDDDD;
   border-radius: 3px;
   margin: 0 auto;
   text-align: center;
@@ -588,9 +548,9 @@ h3 {
 }
 
 .alert-default {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #8c8c8c;
+  color: #000000;
+  background-color: #DDDDDD;
+  border-color: #DDDDDD;
 }
 
 .panel-heading .input-group-sm span,
@@ -620,7 +580,7 @@ h3 {
 }
 
 #serviceCtrl .list-group-item-info {
-  border: 1px solid #ddd;
+  border: 1px solid #DDDDDD;
   padding: 2px;
 }
 
