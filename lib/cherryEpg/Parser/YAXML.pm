@@ -7,7 +7,7 @@ use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.15';
+our $VERSION = '0.18';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -24,7 +24,7 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-  my ( $self, $option ) = @_;
+  my ( $self, $parserOption ) = @_;
   my $report = $self->{report};
 
   my $handler = YAXMLHandler->new();
@@ -34,6 +34,39 @@ sub parse {
   );
 
   $parser->parse( Source => { SystemId => $self->{source} } );
+
+  if ($parserOption) {
+    my ($offset) = split( /[\|,]/, $parserOption );
+
+    # offset can be
+    # +hhmm
+    # -hhmm
+    #  hhmm
+    # +hh:mm
+    # -hh:mm
+    #  hh:mm
+    if ( $offset =~ m/^\s*([+-]?\d{1,4})$/ ) {
+      $offset += 0;
+      my $sign = $offset < 0 ? -1 : 1;
+      $offset *= $sign;
+
+      $offset = $offset % 100 + int( $offset / 100 ) * 60;
+      $offset *= $sign;
+    } elsif ( $offset =~ m/^\s*(?<pm>[+-])?(?<hour>\d{1,2}):(?<minute>\d{1,2})$/ ) {
+      $offset = $+{minute} + 60 * $+{hour};
+      $offset *= ( $+{pm} // 0 eq '-' ? -1 : 1 );
+    } else {
+      $offset = undef;
+      push( $report->{errorList}->@*, "Parser option not valid: $parserOption" );
+    }
+
+    if ($offset) {
+      foreach my $event ( $report->{eventList}->@* ) {
+        $event->{start} += $offset * 60;
+        $event->{stop}  += $offset * 60 if $event->{stop};
+      }
+    } ## end if ($offset)
+  } ## end if ($parserOption)
 
   return $report;
 } ## end sub parse
