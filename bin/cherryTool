@@ -32,12 +32,12 @@ cherryTool - tool for managing cherryEpg environment
  -c xls     convert xls scheme file to yaml scheme
 
  -C         list content of carousel
+ -u file    add/upload .gz file to carousel  #TBD
  -U file '{meta}'   add/upload .ts file to carousel set dst, title and period/bitrate
             from meta in json format e.g. 
             '{"dst": "239.10.10.10:5500", "interval": 2000, "title": "demo"}'
- -u file    add/upload .gz file to carousel  #TBD
- -p chunk   play TS chunk                    #TBD
- -s chunk   stop TS chunk                    #TBD
+ -p chunk   play TS chunk
+ -s chunk   stop TS chunk
  -S         stop - ALL
  -Y         delete ALL from carousel directory - stop carousel
 
@@ -211,8 +211,21 @@ sub addCarousel {
 }
 
 sub playCarousel {
-  say("TBD");
-}
+  my ($target) = @_;
+  my $player = cherryEpg::Player->new( verbose => $verbose );
+  my $report;
+
+  say("Arming [$target]");
+  if ( $player->arm( '/', $player->load( '/', $target ) ) ) {
+    $report = $player->play( '/', $target );
+  }
+
+  if ($report) {
+    say("  Playing");
+  } else {
+    exit 1;
+  }
+} ## end sub playCarousel
 
 sub composeCarousel {
   my ($source) = @_;
@@ -233,7 +246,7 @@ sub composeCarousel {
   my $chunk  = $player->compose( $meta, $source );
 
   if ($chunk) {
-    say("$chunk - has been uploaded. Start playing!");
+    say("$chunk - has been uploaded. Please start playing!");
     exit 0;
   } else {
     exit 1;
@@ -242,12 +255,15 @@ sub composeCarousel {
 
 sub stopCarousel {
   my $player = cherryEpg::Player->new( verbose => $verbose );
-  if ( $args{Y} ) {
+
+  if ( $args{s} ) {
+    my $target = $args{s};
+    say("Stopping [$target]");
+    $player->stop( '/', $target );
+  } else {
     say("Stop playing ALL files in carousel");
     exit 2 unless confirmed();
     $player->stop('/');
-  } else {
-    say("TBD");
   }
 } ## end sub stopCarousel
 
