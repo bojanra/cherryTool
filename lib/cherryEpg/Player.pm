@@ -9,7 +9,8 @@ use File::Copy qw();
 use File::Glob ':nocase';
 use File::stat;
 use Gzip::Faster;
-use IPC::Run3     qw(run3);
+use IPC::Run3 qw(run3);
+use JSON::XS;
 use Log::Log4perl qw(get_logger);
 use Moo;
 use Path::Class;
@@ -401,44 +402,59 @@ sub play {
   return $destination;
 } ## end sub play
 
-=head3 copy( $subdir, $file)
+=head3 save( $subdir, $file)
+=head3 save( $subdir, $content)
 
-Import .ets $file by copying the $file with current timestamp to carousel.
-No errorchecking just copy!
+Save .ets $file by copying the $file with current timestamp to carousel $subdir or 
+just saving the $content.
+
+No errorchecking just copy and write!
 Return $target of new file.
 
 =cut
 
-sub copy {
-  my ( $self, $subdir, $filepath ) = @_;
+sub save {
+  my ( $self, $subdir, $source ) = @_;
 
-  if ( -e $filepath ) {
-    my $LIMIT       = 26;
-    my $currentTime = gmtime->strftime("%Y%m%d%H%M%S");
-    my $target;
-    my $count = 0;
-    my $zipFile;
+  my $currentTime = gmtime->strftime("%Y%m%d%H%M%S");
+  my $target;
+  my $count = 0;
+  my $zipFile;
+  my $LIMIT = 26;
 
-    # allow multiple file <LIMIT with same epoch
-    do {
-      $target  = $currentTime . chr( 97 + $count++ );
-      $zipFile = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $enhancedChunkExtension );
-    } while ( -e $zipFile and $count < $LIMIT );
+  # allow multiple file <LIMIT with same epoch
+  do {
+    $target  = $currentTime . chr( 97 + $count++ );
+    $zipFile = file( $self->cherry->config->{core}{carousel}, $subdir, $target . $enhancedChunkExtension );
+  } while ( -e $zipFile and $count < $LIMIT );
 
-    if ( $count == $LIMIT ) {
-      $logger->error("too many ETS file at same moment");
-      return;
-    }
+  if ( $count == $LIMIT ) {
+    $logger->error("too many ETS file at same moment");
+    return;
+  }
 
-    if ( File::Copy::copy( $filepath, $zipFile ) ) {
-      $logger->info("imported [$filepath] ETS file to [$target]");
+  if ( length($source) < 188 && -e $source ) {
+
+    # aka copy of existing ets
+    if ( File::Copy::copy( $source, $zipFile ) ) {
+      $logger->info("[$source] saved to [$target]");
       return $target;
     } else {
-      $logger->error("importing ETS file [$filepath] : $?");
+      $logger->error("copying [$source] : $?");
       return;
     }
-  } ## end if ( -e $filepath )
-} ## end sub copy
+  } else {
+
+    # save new content
+    return try {
+      gzip_to_file( $source, $zipFile );
+      return $target;
+    } catch {
+      $logger->error("saving to [$target] : $?");
+      return;
+    };
+  } ## end else [ if ( length($source) <...)]
+} ## end sub save
 
 =head3 list( $subdir)
 
@@ -549,7 +565,7 @@ sub dump {
   if ( !$ts ) {
 
     # or  from .ets
-    ( undef, undef, $ts ) = $self->load($target);
+    ( undef, undef, $ts ) = $self->load( $subdir, $target );
   }
 
   if ($ts) {
@@ -580,6 +596,77 @@ sub dump {
   } ## end if ($ts)
 } ## end sub dump
 
+=head3 compose( $meta, $chunkFile)
+
+Compose ets.gz file from $chunkFile and $meta. Save it to carousel.
+The $meta hash is validated. title, dst and interval/bitrate are required.
+ 
+Return $target of new file.
+
+=cut
+
+sub compose {
+  my ( $self, $meta, $chunkFile ) = @_;
+
+  # because of lazy loading we need to access cherry to get it loaded
+  my $cherry = $self->cherry;
+
+  if ( ref $meta ne "HASH"
+    or !$meta->{dst}
+    or !$meta->{title}
+    or !( $meta->{bitrate} || $meta->{interval} ) ) {
+
+    $logger->warn("incorrect/missing meta");
+    return;
+  } ## end if ( ref $meta ne "HASH"...)
+
+  my $file;
+  if ( !open( $file, '<', $chunkFile ) ) {
+
+    $logger->warn("open [$chunkFile]");
+    return;
+  }
+
+  my $data = do { local $/; <$file>; };
+  close($file);
+
+  if ( length($data) % 188 ) {
+
+    $logger->warn("size not multiple of 188 [$chunkFile]");
+    return;
+  }
+
+  # get list of used PID
+  my %pid;
+  my $i = 0;
+  my @asHex;
+  while ( my $packet = substr( $data, 188 * $i++, 188 ) ) {
+    $pid{ _getPID( \$packet ) } += 1;
+    push( @asHex, join( ' ', unpack( "(A2)*", unpack( "H*", $packet ) ) ) );
+  }
+  if ( keys %pid > 1 ) {
+
+    $logger->warn("not uniq PID [$chunkFile]");
+    return;
+  }
+
+  my $dump = YAML::XS::Dump( { 'hex' => \@asHex } );
+
+  # remove 3 leading hypens at the top
+  $dump =~ s/^\-\-\-\n//;
+
+  my $chunk = {
+    $meta->%*,
+    ts     => $data,
+    source => '#' x 112 . "\n" . $dump,
+  };
+
+  my $yaml   = YAML::XS::Dump($chunk);
+  my $target = $self->save( "/", $yaml );
+
+  return $target;
+} ## end sub compose
+
 sub _getPID {
   my ($ts) = @_;
 
@@ -592,7 +679,7 @@ sub _getPID {
 
 =encoding utf8
 
-This software is copyright (c) 2021-2022 by Bojan Ramšak
+This software is copyright (c) 2021-2023 by Bojan Ramšak
 
 =head1 LICENSE
 

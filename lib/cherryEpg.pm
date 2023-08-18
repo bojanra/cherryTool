@@ -1,4 +1,4 @@
-package cherryEpg v2.4.16;
+package cherryEpg v2.4.17;
 
 use 5.024;
 use utf8;
@@ -520,6 +520,7 @@ sub buildEit {
 
     $specs->{tdt} = 1 if $eit->{option}{TDT};
     $specs->{pcr} = 1 if $eit->{option}{PCR};
+    $specs->{title} .= ' - ' . $eit->{option}{TITLE} if $eit->{option}{TITLE};
 
     # limit bitrate
     if ( exists $eit->{option}{MAXBITRATE} and $eit->{option}{MAXBITRATE} ) {

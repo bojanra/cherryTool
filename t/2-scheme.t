@@ -2,7 +2,8 @@
 
 use 5.024;
 use YAML::XS;
-use Test::More tests => 15;
+use File::Path qw(remove_tree);
+use Test::More tests => 16;
 
 BEGIN {
   use_ok("cherryEpg::Scheme");
@@ -22,6 +23,8 @@ ok( $scheme->cherry->resetDatabase(), "clean/init db" );
 
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) == 21 && !scalar(@$error), "load scheme to db" );
+
+ok( remove_tree( $scheme->cherry->config->{core}{carousel} . "COMMON.linger" ), "clean carousel" );
 
 my $backup = $scheme->backup();
 ok( $backup, "backup scheme" );

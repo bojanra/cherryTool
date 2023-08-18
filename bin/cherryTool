@@ -32,11 +32,13 @@ cherryTool - tool for managing cherryEpg environment
  -c xls     convert xls scheme file to yaml scheme
 
  -C         list content of carousel
+ -U file '{meta}'   add/upload .ts file to carousel set dst, title and period/bitrate
+            from meta in json format e.g. 
+            '{"dst": "239.10.10.10:5500", "interval": 2000, "title": "demo"}'
  -u file    add/upload .gz file to carousel  #TBD
  -p chunk   play TS chunk                    #TBD
  -s chunk   stop TS chunk                    #TBD
  -S         stop - ALL
- -y chunk   delete TS chunk from carousel    #TBD
  -Y         delete ALL from carousel directory - stop carousel
 
  -G target  grab&ingest by target: all, daily, hourly, weekly
@@ -87,18 +89,20 @@ use cherryEpg::Maintainer;
 use File::Basename;
 use Getopt::Std;
 use IPC::ConcurrencyLimit;
-use IPC::Run3     qw(run3);
+use IPC::Run3 qw(run3);
+use JSON::XS;
 use Log::Log4perl qw(get_logger);
 use Plack::Runner;
 use Pod::Usage;
 use Time::HiRes qw( time );
 use Time::Piece;
+use Try::Tiny;
 use YAML::XS;
 use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:CdfFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:vVwWxyYZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:CdfFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:U:vVwWxyYZ:", \%args );
 
 say("cherryTool - $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
 
@@ -140,6 +144,7 @@ $args{p}                 && playCarousel( $args{p} );
 ( $args{S} or $args{s} ) && stopCarousel();
 $args{W}                 && webServer();
 $args{K}                 && applyDescription( $args{K} );
+$args{U}                 && composeCarousel( $args{U} );
 
 ( $args{g} || $args{i} || $args{I} || $args{r} || $args{w} || $args{d} || $args{x} ) && do { $multiCommand = 1 };
 
@@ -208,6 +213,34 @@ sub addCarousel {
 sub playCarousel {
   say("TBD");
 }
+
+sub composeCarousel {
+  my ($source) = @_;
+
+  use DDP;
+
+  # take the json string from tail of command string
+  my $json = join( ' ', @ARGV );
+
+  say("Upload chunk with {meta data} to carousel");
+
+  my $meta = try {
+    return JSON::XS->new->utf8->decode($json);
+  } catch {
+    say("  Input meta data not valid JSON string!");
+    exit 2;
+  };
+
+  my $player = cherryEpg::Player->new( verbose => $verbose );
+  my $chunk  = $player->compose( $meta, $source );
+
+  if ($chunk) {
+    say("$chunk - has been uploaded. Start playing!");
+    exit 0;
+  } else {
+    exit 1;
+  }
+} ## end sub composeCarousel
 
 sub stopCarousel {
   my $player = cherryEpg::Player->new( verbose => $verbose );

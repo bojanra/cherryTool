@@ -5,7 +5,7 @@ use utf8;
 use File::Temp qw( tempfile tempdir);
 use Gzip::Faster;
 use Path::Class;
-use Test::More tests => 32;
+use Test::More tests => 40;
 use YAML::XS;
 
 BEGIN {
@@ -24,7 +24,6 @@ my $meta = {
   interval => 2000,
   source   => "table source as text",
 };
-
 
 my ( $fh, $filename ) = tempfile( TEMPLATE => 'testXXXX', UNLINK => 1, SUFFIX => '.ets.gz' );
 
@@ -53,7 +52,6 @@ $dirname =~ s|^.+/||;
 
 foreach my $testdir ( '/', $dirname ) {
 
-#foreach my $testdir ( '/') {
   note("testing $testdir");
 
   my $carouselPath = dir( $player->cherry->config->{core}{carousel}, $testdir );
@@ -62,10 +60,18 @@ foreach my $testdir ( '/', $dirname ) {
 
   ok( defined $player->delete($testdir), "delete carousel" );
 
-  my $copied = $player->copy( $testdir, $filename );
+  my $copied = $player->save( $testdir, $filename );
   ok( -e file( $carouselPath, $copied . '.ets.gz' ), "copy .ets.gz" );
 
-  my $x       = $player->copy( $testdir, $filename );
+  my $dummyContent = "--TEST--";
+  my $saved        = $player->save( $testdir, $dummyContent );
+  my $path         = file( $carouselPath, $saved . '.ets.gz' );
+  ok( -e $path, "save content to .ets.gz" );
+
+  my $data = gunzip_file($path);
+  is( $data, $dummyContent, "content is correct" );
+
+  my $x       = $player->save( $testdir, $filename );
   my @forTest = $player->load( $testdir, $copied );
 
   ok( $player->arm( $testdir, @forTest ), "arm temp file" );
@@ -87,6 +93,69 @@ foreach my $testdir ( '/', $dirname ) {
 } ## end foreach my $testdir ( '/', ...)
 
 ok( defined $player->delete('/'), "delete carousel - cleanup" );
+
+# generate cts.gz from ts ¸
+{
+  # simple chunk
+  my ( $dh, $tsfile ) = tempfile( TEMPLATE => 'chunkXXXX', UNLINK => 1, SUFFIX => '.ts' );
+  binmode($dh);
+  my $ts = pack( "CnC", 0x47, 55, 13 ) . ( '.' x 184 );
+  $ts .= $ts;
+  print( $dh $ts );
+  close($dh);
+
+  my $generated = $player->compose( {
+      title    => "Simple title",
+      interval => 2000,
+      dst      => "239.10.10.10:5500",
+    },
+    $tsfile
+  );
+  ok( -e file( $player->cherry->config->{core}{carousel}, $generated . '.ets.gz' ), "compose .ets.gz" );
+
+  $player->delete('/');
+
+  # detect incorrect meta
+  ok(
+    !$player->compose( {
+        title    => "Simple title",
+        interval => 2000,
+      },
+      $tsfile
+    ),
+    "detect incorrect meta - missing dst"
+  );
+
+  ok(
+    !$player->compose( {
+        title => "Simple title",
+        dst   => "239.10.10.10:5500",
+      },
+      $tsfile
+    ),
+    "detect incorrect meta - missing interval"
+  );
+
+  ( $dh, $tsfile ) = tempfile( TEMPLATE => 'chunkXXXX', UNLINK => 1, SUFFIX => '.ts' );
+  binmode($dh);
+
+  # chunk with 2 different PIDs
+  $ts = pack( "CnC", 0x47, 55, 13 ) . ( '.' x 184 );
+  $ts .= pack( "CnC", 0x47, 234, 13 ) . ( '.' x 184 );
+  print( $dh $ts );
+  close($dh);
+
+  ok(
+    !$player->compose( {
+        title    => "Simple title",
+        interval => 2000,
+        dst      => "239.10.10.10:5500",
+      },
+      $tsfile
+    ),
+    "detect different PID"
+  );
+};
 
 my $testfile = "DEMO";
 
@@ -124,3 +193,5 @@ $serialized = YAML::XS::Dump( {
 
 gzip_to_file( $serialized, $filename );
 ok( !$player->load($filename), "failed load .ets.gz w/missing ts" );
+
+done_testing;

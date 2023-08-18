@@ -323,7 +323,7 @@ ajax '/carousel/save' => require_role cherryweb => sub {
     my $md5Reference = Digest::MD5::md5_hex( ${ $raw[5] } );
 
     if ( $md5 eq $md5Reference ) {
-      if ( $player->copy( '/', $file ) ) {
+      if ( $player->save( '/', $file ) ) {
         unlink($file);
         send_as( JSON => { success => 1 } );
       }
@@ -345,7 +345,7 @@ ajax '/carousel/upnsave' => require_role cherryweb => sub {
   my $player = cherryEpg::Player->new();
 
   foreach my $upload (@multi) {
-    if ( $player->load( $upload->tempname ) and my $target = $player->copy( '/', $upload->tempname ) ) {
+    if ( $player->load( $upload->tempname ) and my $target = $player->save( '/', $upload->tempname ) ) {
       push( @report, { success => 1, message => $upload->filename . ' saved', target => $target } );
     } else {
       push( @report, { success => 0, message => $upload->filename . ' failed' } );

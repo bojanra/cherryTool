@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
 use 5.024;
+use File::Path qw(remove_tree);
 use Mojo::Base -strict;
 use Test::Mojo;
-use Test::More tests => 65;
+use Test::More tests => 75;
 use Try::Tiny;
 
 BEGIN {
@@ -60,6 +61,12 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
   my $mtime = $t->tx->res->json->{mtime};
 
+  $t->post_ok('/scheme/browse')->status_is( 200, "list scheme" );
+  my @list = $t->tx->res->json->@*;
+
+  # delte last uploaded scheme
+  $t->post_ok( "/scheme/delete" => form => { target => $list[0]->{target} } )->json_is( '/success', 1, "Delete scheme 1" );
+
   $t->post_ok( "/scheme/validate" => form => { mtime => $mtime, description => 'test from WEB' } )->status_is(200)
       ->json_is( '/success', 1 );
 
@@ -78,7 +85,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
       action         => 'loadScheme',
       mtime          => $mtime,
     }
-  )->status_is(200);
+  )->status_is( 200, "import scheme" );
 
   $t->post_ok(
     '/scheme/action' => form => {
@@ -132,9 +139,16 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
   $upload = { file => { content => $content, filename => 'Simple.xls' }, id => 90 };
   $t->post_ok( "/ingest/$post/$id" => form => $upload )->status_is(200)->json_is( '/success', 1 );
 
+  # load scheme list
+  $t->post_ok('/scheme/browse')->status_is( 200, "list scheme" );
+  @list = $t->tx->res->json->@*;
+
+  # delte last uploaded scheme
+  $t->post_ok( "/scheme/delete" => form => { target => $list[0]->{target} } )->json_is( '/success', 1, "Delete scheme 1" );
+
   # clean pid=17
   $t->post_ok('/carousel/browse')->status_is(200);
-  my @list = grep { $_->{pid} == 17 } $t->tx->res->json->@*;
+  @list = grep { $_->{pid} == 17 } $t->tx->res->json->@*;
 
   subtest 'Delete chunks' => sub {
     foreach my $chunk (@list) {
@@ -180,4 +194,6 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
   $t->get_ok('/report.json')->status_is(200)->json_has('/timestamp');
 }
 
-ok( $scheme->delete($backup), "delete scheme from archive" );
+ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
+ok( $cherry->deleteStock(),                                                       "clean stock dir" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );

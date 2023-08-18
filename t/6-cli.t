@@ -3,8 +3,10 @@
 use 5.024;
 use Cwd 'abs_path';
 use File::Basename;
+use File::Path qw(remove_tree);
+use File::Temp qw(tempfile);
 use Test::Cmd;
-use Test::More tests => 33;
+use Test::More tests => 39;
 
 BEGIN {
   `generateSampleScheduleData`;
@@ -82,11 +84,25 @@ $test->run( args => '-C' );
 is( $?,                           0, "list carousel" );
 is( ( $test->stdout =~ tr/\*// ), 4, "list carousel correct" );
 
+
+# simple chunk
+my ( $dh, $tsfile ) = tempfile( TEMPLATE => 'chunkXXXX', UNLINK => 1, SUFFIX => '.ts' );
+binmode($dh);
+my $ts = pack( "CnC", 0x47, 55, 13 ) . ( '.' x 184 );
+print( $dh $ts );
+close($dh);
+
+$test->run( args => qq|-U $tsfile '{"dst": "239.10.10.10:5500", "interval": 2000, "title": "fake"}'| );
+is( $?, 0, "upload ts file with meta" );
+
+$test->run( args => '-C' );
+ok( $test->stdout =~ m/fake/s, "verify upload" );
+
 $test->run( args => '-f' );
 is( $?, 0, "delete sections" );
 
 $test->run( args => '-D', stdin => "yes\n" );
-is( $?, 0, "delete ingest" );
+is( $?, 0, "clean ingest" );
 
 $test->run( args => '-O', stdin => "yes\n" );
 is( $?, 0, "cleanup database - delete old entries" );
@@ -110,11 +126,18 @@ SKIP: {
 } ## end SKIP:
 
 # delete backuped schemes from archive
-
 use_ok("cherryEpg::Scheme");
-my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
+my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 1 ], "cherryEpg::Scheme" );
 
 is( scalar( map( { $scheme->delete($_) } @schemeList ) ), 2, "cleaning of archive" );
+
+# clean stock
+$test->run( args => '-Ay' );
+is( scalar( () = glob( $scheme->cherry->{config}{core}{stock} . "*" ) ), 0, "clean stock dir" );
+
+ok( defined $scheme->cherry->deleteIngest(),                                            "clean ingest dir" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ),       "delete carousel" );
+ok( defined remove_tree( $scheme->cherry->config->{core}{scheme}, { keep_root => 1 } ), "clean scheme dir" );
 
 # TODO
 # -v         use verbose output mode

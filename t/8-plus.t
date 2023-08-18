@@ -1,8 +1,10 @@
 #!/usr/bin/perl
 
 use 5.024;
+use utf8;
+use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 35;
+use Test::More tests => 38;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -25,7 +27,7 @@ foreach my $sut (qw( xsid multi large)) {
 SKIP: {
     skip "large test in production", 10 if $sut eq 'large' and ( 1 || $ENV{'DANCER_ENVIRONMENT'} eq 'production' );
 
-    ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+    ok( defined $cherry->deleteIngest(), "clean ingest dir" );
     ok( $cherry->resetDatabase(),        "clean/init db" );
 
     # read, build load scheme
@@ -57,4 +59,6 @@ SKIP: {
   } ## end SKIP:
 } ## end foreach my $sut (qw( xsid multi large))
 
-
+ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
+ok( $cherry->deleteStock(),                                                       "clean stock dir" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );

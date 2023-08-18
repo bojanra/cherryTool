@@ -1,8 +1,10 @@
 #!/usr/bin/perl
 
 use 5.024;
+use utf8;
+use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 53;
+use Test::More tests => 56;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -36,7 +38,7 @@ subtest "copy sample schedule data" => sub {
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 
 my $sut = 'parser';
-ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 ok( $cherry->resetDatabase(),        "clean/init db" );
 
 # read, build load scheme
@@ -58,4 +60,8 @@ foreach my $channel ( $cherry->epg->listChannel()->@* ) {
     "$parser test with channel $channel->{channel_id}" );
 } ## end foreach my $channel ( $cherry...)
 
-ok( $scheme->delete($backup), "delete scheme from archive" );
+ok( $scheme->delete($backup),                                                     "delete scheme from archive" );
+ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
+ok( $cherry->deleteStock(),                                                       "clean stock dir" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );
+

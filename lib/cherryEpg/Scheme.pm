@@ -21,7 +21,6 @@ use Time::Piece;
 use Try::Tiny;
 use YAML::XS;
 use open ':std', ':encoding(utf8)';
-no warnings 'experimental';
 
 my $archiveExtension = '.yaml.gz';
 
@@ -470,8 +469,8 @@ sub parseEIT {
       foreach (@list) {
         my ( $key, $value ) = split(/ *= */);
         my $uKey = uc($key);
-        my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT LINGERONLY);
-        if ( $uKey ~~ @list ) {
+        my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT LINGERONLY TITLE );
+        if ( grep { $uKey eq $_ } @list ) {
           $value += 0 if $value && $value =~ /^\d+$/;
           $option{$uKey} = defined $value ? $value : 1;
         } else {
@@ -572,7 +571,7 @@ sub parseCloud {
         my ( $key, $value ) = split(/ *= */);
         my $uKey = uc($key);
         my @list = qw(DISABLED);
-        if ( $uKey ~~ @list ) {
+        if ( grep { $uKey eq $_ } @list ) {
           $value += 0 if $value && $value =~ /^\d+$/;
           $info{option}{$uKey} = defined $value ? $value : 1;
         } else {

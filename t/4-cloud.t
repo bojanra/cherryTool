@@ -2,9 +2,10 @@
 
 use 5.024;
 use utf8;
-use Test::More tests => 39;
-use Path::Class;
+use File::Path qw(remove_tree);
 use File::Temp qw(tempfile);
+use Path::Class;
+use Test::More tests => 45;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -20,8 +21,8 @@ isa_ok( $cherry, "cherryEpg" );
 # initialize the database structure
 ok( $cherry->epg->initdb(), "init db structure" );
 
-# delete ingest
-ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+# clean ingest
+ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 
@@ -35,7 +36,7 @@ delete $s->{source};
 ok( $s->{isValid}, "build scheme" );
 
 ok( $cherry->resetDatabase(),        "clean/init db" );
-ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 
 my $mykey = { salomon => 'skiing', goliah => 'fighting', godot => 99 };
 $cherry->epg->addKey($mykey);
@@ -72,7 +73,6 @@ my $linger = {
 
 ok( $linger = $cherry->epg->addLinger($linger), "add new linger site" );
 is( scalar $cherry->epg->listLinger()->@*, 2, "count sites" );
-
 cmp_ok( $cherry->updateAuthorizedKeys(), ">=", 2, "grant access" );
 
 open( my $file, "<", $ENV{HOME} . "/.ssh/authorized_keys" ) || diag "Failed opening authorized_keys file";
@@ -82,9 +82,8 @@ close($file);
 is( scalar( grep {/command/} @row ), 2, "writing authorized_keys file" );
 
 ok( $cherry->markLinger( $linger->{linger_id} ), "update mark" );
-
-ok( $cherry->updateSyncDirectory(), "create sync directory" );
-ok( $cherry->installRrsync(),       "installRrsync" );
+ok( $cherry->updateSyncDirectory(),              "create sync directory" );
+ok( $cherry->installRrsync(),                    "installRrsync" );
 
 # prepare a sample .cts file in the sync sub-directory
 my ( $fh, $fullPath ) = tempfile(
@@ -118,8 +117,6 @@ ok( $scheme->readXLS("t/scheme/cloud.xls"), "read .xls" );
 
 ok( $scheme->build()->{isValid}, "valid cloud scheme" );
 
-#p $scheme;
-
 ok( $cherry->resetDatabase(), "clean/init db" );
 
 my ( $success, $error ) = $scheme->pushScheme();
@@ -136,14 +133,25 @@ ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
 
 # delete carousel
 my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
-ok( defined $player->delete(), "delete carousel" );
+ok( defined $player->delete('/'), "delete carousel" );
 
 # multi make/build
 isa_ok( $cherry->parallelUpdateEit(), "ARRAY", "make eit" );
 
-#say `find /var/lib/cherryepg/carousel/ | sort`;
 say `ls -lR /var/lib/cherryepg/carousel/`;
 
+# read, build scheme just to remove linger dir
+ok( $scheme->readXLS("t/scheme/sample.xls"), "read .xls" );
+
+ok( $scheme->build()->{isValid}, "valid scheme" );
+ok( $cherry->resetDatabase(),    "clean/init db" );
+$scheme->pushScheme();
+
 ok( $scheme->delete($backup), "delete scheme from archive" );
+
+# clean afterwards
+ok( $cherry->deleteIngest(),                                                    "clean ingest dir" );
+ok( $player->delete('/'),                                                       "clean carousel" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel} . "COMMON.linger" ), "remove linger carousel" );
 
 done_testing;

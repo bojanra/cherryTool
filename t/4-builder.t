@@ -2,7 +2,8 @@
 
 use 5.024;
 use utf8;
-use Test::More tests => 44;
+use File::Path qw(remove_tree);
+use Test::More tests => 47;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -15,7 +16,6 @@ BEGIN {
 } ## end BEGIN
 
 my $cherry = cherryEpg->instance( verbose => 0 );
-my $sut;
 my $target;
 my $channel;
 
@@ -24,8 +24,8 @@ isa_ok( $cherry, "cherryEpg" );
 # initialize the database structure
 ok( $cherry->epg->initdb(), "init db structure" );
 
-# delete ingest
-ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+# clean ingest
+ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 
 # version
 like( $cherry->epg->version(), qr/\d+\./, "version" );
@@ -36,8 +36,7 @@ is( scalar( @{ $cherry->epg->healthCheck() } ), 9, "db stats" );
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 
 # read, build load scheme for testing SDT, PAT and PMT building
-$sut = "psi";
-ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
+ok( $scheme->readXLS("t/scheme/psi.xls"), "read .xls" );
 
 my $s = $scheme->build();
 
@@ -55,10 +54,10 @@ my $count = scalar( $cherry->epg->listChannel()->@* );
 my $grab  = $cherry->parallelGrabIngestChannel( "all", 1, 1 );
 ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
 
-# delete carousel
+# clean carousel
 my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
 
-ok( defined $player->delete(), "delete carousel" );
+ok( defined $player->delete(), "clean carousel" );
 
 # multi make/build
 isa_ok( $cherry->parallelUpdateEit(), "ARRAY", "make eit" );
@@ -86,11 +85,10 @@ cmp_ok( $cherry->uptime(), '>', 1, "uptime" );
 
 like( $cherry->format(), qr/cherryTaster/, "Text report" );
 
-ok( $scheme->delete($backup), "delete scheme from archive" );
+ok( $scheme->delete($backup), "clean archive" );
 
 # read, build load scheme
-$sut = "simple";
-ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
+ok( $scheme->readXLS("t/scheme/simple.xls"), "read .xls" );
 
 my $s = $scheme->build();
 
@@ -98,8 +96,8 @@ ok( $s->{isValid}, "build scheme" );
 
 ok( $cherry->resetDatabase(), "clean/init db" );
 
-# delete ingest
-ok( defined $cherry->deleteIngest(), "delete ingest dir" );
+# clean ingest
+ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) && !scalar(@$error), "load scheme to db" );
@@ -122,10 +120,10 @@ $channel = ${ $cherry->epg->listChannel() }[0];
 my $result = $cherry->resetChannel($channel);
 ok( $result, "Reset done for $channel->{name}" );
 
-# delete carousel
+# clean  carousel
 my $player = new_ok( 'cherryEpg::Player' => [ verbose => 0 ], "cherryEpg::Player" );
 
-ok( defined $player->delete('/'), "delete carousel" );
+ok( defined $player->delete('/'), "clean carousel" );
 
 # test building
 my $eit = $cherry->epg->listEit()->@[0];
@@ -136,3 +134,12 @@ ok( $cherry->deleteSection(), "reset section and version table" );
 
 # multi make/build
 isa_ok( $cherry->parallelUpdateEit(), "ARRAY", "make eit" );
+
+# clean afterwards
+ok( $cherry->deleteStock(),  "clean stock dir" );
+ok( $cherry->deleteIngest(), "clean ingest dir" );
+
+# the carousel is left for demo purposes
+ok( remove_tree( $scheme->cherry->config->{core}{carousel} . "COMMON.linger" ), "remove linger carousel" );
+
+
