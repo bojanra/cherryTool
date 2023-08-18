@@ -217,8 +217,6 @@ sub playCarousel {
 sub composeCarousel {
   my ($source) = @_;
 
-  use DDP;
-
   # take the json string from tail of command string
   my $json = join( ' ', @ARGV );
 
