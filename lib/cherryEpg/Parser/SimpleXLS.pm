@@ -48,6 +48,8 @@ sub parse {
 
   $report->{linecount} = $sheet->{maxrow};
 
+  $self->{mapping} = [];
+
   foreach my $i ( 1 .. $sheet->{maxrow} ) {
 
     my $event = $self->rowHandler( $sheet, $i );
@@ -64,18 +66,17 @@ sub rowHandler {
 
   my @cell = Spreadsheet::Read::row( $sheet, $rowCounter );
 
-  state @mapping;
-
   # there must be at least 6 columns
   return unless ( scalar @cell >= 6 );
 
   # try to find the header row
-  if ( !@mapping && ( join( '', @cell ) =~ /date/i ) ) {
+  if ( !$self->{mapping}->@* && ( join( '', @cell ) =~ /date/i ) ) {
+
+    my $i = 0;
 
     # find the requested columns and generate a maptable
     my $order = {};
     foreach (@cell) {
-      state $i = 0;
 
       /date/i     && do { $order->{$i} = 0; };
       /time/i     && do { $order->{$i} = 1; };
@@ -86,15 +87,16 @@ sub rowHandler {
       /image/i    && do { $order->{$i} = 6; };
       $i += 1;
     } ## end foreach (@cell)
-    @mapping = sort { $order->{$a} <=> $order->{$b} } keys $order->%*;
-    return;
-  } ## end if ( !@mapping && ( join...))
+    $self->{mapping} = [ sort { $order->{$a} <=> $order->{$b} } keys $order->%* ];
 
-  return until @mapping;
+    return;
+  } ## end if ( !$self->{mapping}...)
+
+  return until $self->{mapping}->@*;
 
   #    0      1      2          3       4       5          6
   my ( $date, $time, $duration, $title, $short, $synopsis, $image ) =
-      map { $cell[$_] } @mapping;
+      map { $cell[$_] } $self->{mapping}->@*;
   $time     //= '';
   $duration //= '';
   $title    //= '';
