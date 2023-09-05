@@ -686,7 +686,9 @@ sub addEvent {
 
   # bind blob and insert event
   $insert->bind_param( 1, encode_json($event), SQL_BLOB );
-  if ( $insert->execute() ) {
+
+  # capture also errors during insert
+  if ( try { $insert->execute() } ) {
     return $event->{id};
   } else {
     return;
