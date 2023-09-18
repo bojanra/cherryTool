@@ -604,12 +604,12 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 .
 
   format REPORT_EPG =
-      @>>>>>  @<<<<<<<<<<<<<<<  @<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+      @>>>>>>>  @<<<<<<<<<<<<<<<  @<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @fields
 .
 
   format REPORT_EPG_HEADER =
-    - id      channel_name      status    last_update
+    - id        channel_name      status    last_update
 .
 
   format REPORT_CAROUSEL_HEADER =

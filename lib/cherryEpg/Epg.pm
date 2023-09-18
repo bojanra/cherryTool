@@ -1351,7 +1351,7 @@ sub getEit {
   # get the pid number of the destination chunk
   $pid = $dbh->selectrow_array( "SELECT pid FROM eit WHERE eit_id=$eit_id", undef );
 
-  return unless $pid;
+  return unless defined $pid;
 
   my $eit = shift( $self->listEit($eit_id)->@* );
 
