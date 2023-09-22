@@ -4,6 +4,7 @@ use 5.024;
 use utf8;
 use Moo;
 use XML::Parser::PerlSAX;
+use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
@@ -17,9 +18,12 @@ sub BUILD {
 
 =head3 parse( $parserOption)
 
-Do the file processing and return a reference to hash with keys
-- errorList => array with troubles during parsing
-- eventList => array of events found
+ Do the file processing and return standard hash.
+
+ The input XML contains text inside of <![CDATA[ ...text...]]>. Thus the XML markup inside 
+ is not correctly parsed. 
+ Therefore we first remove the <![CDATA[ ...]]> and the process the corrected XML with the 
+ XML parser.
 
 =cut
 
@@ -33,12 +37,28 @@ sub parse {
     output  => $report
   );
 
-  $parser->parse( Source => { SystemId => $self->{source} } );
+  # get the content
+  my $source = $self->load();
+
+  # filter out the <![CDATA[ ...]]> when it contains &amp;
+  map {s/<!\[CDATA\[(.*&amp;.*)\]\]>/$1/} $source->@*;
+
+  my $content = join( '', $source->@* );
+
+  # run the XML parser
+  try {
+    $parser->parse( Source => { String => $content } );
+  } catch {
+    my $error = shift;
+    $error =~ s/^\s*(.*)\s*$/$1/;
+    $self->error($error);
+  };
 
   return $report;
 } ## end sub parse
 
 package BDataXMLHandler;
+use utf8;
 use strict;
 use warnings;
 use Time::Piece;
@@ -121,10 +141,16 @@ sub end_element {
       }
       return;
     };
-    /TitleEnglish/ && do {
+    /^TitleEnglish/ && do {
       return unless $value;
 
       $event->{title} = $value;
+      return;
+    };
+    /SubTitleEnglish/ && do {
+      return unless $value;
+
+      $event->{subtitle} = $value;
       return;
     };
     /TitleArabic/ && do {

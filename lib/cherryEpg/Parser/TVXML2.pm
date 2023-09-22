@@ -54,7 +54,7 @@ sub parse {
   );
 
   # get the content
-  my $source = $self->getSource();
+  my $source = $self->load();
 
   # extract by channel_id == $option
   $source = $self->extract( $source, $option ) if $option && $option ne '';
@@ -72,26 +72,6 @@ sub parse {
 
   return $report;
 } ## end sub parse
-
-=head3 getSource()
-
- Prepare the source to be used.
- Return referene to array of lines.
-
-=cut
-
-sub getSource {
-  my ($self) = @_;
-
-  my $input;
-  if ( open( my $input, '<:encoding(UTF-8)', $self->{source} ) ) {
-
-    my @all = <$input>;
-    return \@all;
-  } else {
-    return;
-  }
-} ## end sub getSource
 
 =head3 extract( $list, $option)
 

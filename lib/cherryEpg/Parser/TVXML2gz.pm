@@ -10,18 +10,18 @@ extends 'cherryEpg::Parser::TVXML2';
 
 our $VERSION = '0.12';
 
-=head3 getSource()
+=head3 load()
 
  Unzip the source.
  Return referene to array of lines.
 
 =cut
 
-sub getSource {
+sub load {
   my ($self) = @_;
 
   my $content = try {
-    gunzip_file( $self->{source} );
+    gunzip_file( $self->source );
   } catch {
     $self->error(shift);
     return;
@@ -33,7 +33,7 @@ sub getSource {
     return \@list;
   }
   return;
-} ## end sub getSource
+} ## end sub load
 
 =head1 AUTHOR
 

@@ -2,9 +2,9 @@ package cherryEpg::Parser;
 
 use 5.024;
 use utf8;
+use Moo;
 use File::Basename;
 use Log::Log4perl;
-use Moo;
 
 has source => (
   is  => 'ro',
@@ -34,7 +34,7 @@ sub BUILD {
 
 =head3 error( $format, @args)
 
-Add a message to the report stack.
+  Add a message to the report stack.
 
 =cut
 
@@ -47,11 +47,11 @@ sub error {
 
 =head3 parse( $parserOption)
 
-Do the file processing and return a reference to hash with keys
-- errorList => array with troubles during parsing
-- eventList => array of events found TIME MUST BE in GMT
-- parser => parser name,
-- source => source filename
+  Do the file processing and return a reference to hash with keys
+  - errorList => array with troubles during parsing
+  - eventList => array of events found TIME MUST BE in GMT
+  - parser => parser name,
+  - source => source filename
 
 =cut
 
@@ -63,9 +63,30 @@ sub parse {
 
 } ## end sub parse
 
+=head3 load()
+
+  Read the content of the file $self->source as array of lines.
+  Return referene to array of lines.
+
+=cut
+
+sub load {
+  my ($self) = @_;
+
+  my $input;
+  if ( open( my $input, '<:encoding(UTF-8)', $self->source ) ) {
+
+    my @all = <$input>;
+
+    return \@all;
+  } else {
+    return;
+  }
+} ## end sub load
+
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2023 by Bojan Ramšak
 
 =head1 LICENSE
 
