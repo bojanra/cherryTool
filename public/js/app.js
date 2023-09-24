@@ -1342,6 +1342,7 @@ function SchemePanel() {
         $('#actionBody .alert').addClass('hidden');
 
         $('#actionBody button[name=loadScheme]').removeClass('hidden');
+        $('#actionBody button[name=allActions]').removeClass('hidden');
         $('#actionBody button[name=maintain]').addClass('hidden');
 
         $('#parseReport').empty();
@@ -1471,6 +1472,7 @@ function SchemePanel() {
         $('#actionBody .alert').addClass('hidden');
 
         $('#actionBody button[name=loadScheme]').removeClass('hidden');
+        $('#actionBody button[name=allActions]').removeClass('hidden');
         $('#actionBody button[name=maintain]').addClass('hidden');
       } else {
         $('#reportSpan').html('Failed to continue with activation ').removeClass('hidden');
@@ -1482,6 +1484,10 @@ function SchemePanel() {
 
   $('#actionBody button').on('click', (event) => {
     var action = event.delegateTarget.name;
+    if (action == 'allActions') {
+      $('#actionBody input[type=checkbox]').prop('checked', true);
+      action = 'loadScheme';
+    }
     var data = {};
     $.each($('#actionBody input'), (i, check) => {
       data[check.id] = $(check).is(':checked') ? 1 : 0;
@@ -1553,6 +1559,7 @@ function SchemePanel() {
     $('#importScheme').parent().addClass('hidden');
     $('#stopEIT').parent().addClass('hidden');
     $('#actionBody button[name=loadScheme]').addClass('hidden');
+    $('#actionBody button[name=allActions]').addClass('hidden');
     $('#actionBody button[name=maintain]').removeClass('hidden');
 
     $('#actionBody .clearfix').removeClass('hidden');

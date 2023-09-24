@@ -208,6 +208,7 @@
               </div>
               <span class="clearfix">
                 <button type="button" name="loadScheme" class="btn btn-success pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Activate</strong> scheme</button>
+                <button type="button" name="allActions" class="btn btn-warning pull-right"><i class="glyphicon glyphicon-play"></i> <strong>Activate</strong> scheme with <strong>All</strong> actions</button>
                 <button type="button" name="maintain" class="btn btn-success pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> <strong>Go</strong> for it</button>
               </span>
             </li>
