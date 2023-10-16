@@ -205,7 +205,7 @@ SQL
 
   $dbh->do( <<"SQL");
         CREATE TABLE log ( id INTEGER NOT NULL AUTO_INCREMENT,
-            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            timestamp TIMESTAMP DEFAULT UTC_TIMESTAMP,
             level TINYINT,
             category TINYINT,
             text TEXT,
@@ -1661,7 +1661,7 @@ sub getLogList {
 
   # get rows
   $sql =
-        "SELECT timestamp, CASE "
+        "SELECT CONVERT_TZ(timestamp,'+00:00','SYSTEM') as timestamp, CASE "
       . "WHEN category = 0 THEN 'grabber' "
       . "WHEN category = 1 THEN 'ingester' "
       . "WHEN category = 2 THEN 'builder' "

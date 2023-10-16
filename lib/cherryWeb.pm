@@ -713,12 +713,14 @@ ajax '/service/info' => require_role cherryweb => sub {
     $result->{option} = '';
   }
 
+  my $now = time();
+
   # get events
-  my $eventList = $cherry->epg->listEvent( $channel_id, undef, undef, time() );
+  my $eventList = $cherry->epg->listEvent( $channel_id, undef, undef, $now );
   splice( $eventList->@*, 2 );
 
   # if present is missing
-  if ( $eventList->@* == 0 || $eventList->@* > 0 && $eventList->[0]->{start} > time() ) {
+  if ( $eventList->@* == 0 || $eventList->@* > 0 && $eventList->[0]->{start} > $now ) {
 
     # this is not the present event
     unshift( $eventList->@*, {} );
