@@ -80,7 +80,7 @@ sub new {
   my ( $this, $language_code, $country_code ) = @_;
   my $class = ref($this) || $this;
 
-  # set primary language_code od default
+  # set primary language_code to default
   my $self = {
     language_code => $language_code // 'en',
     country_code  => $country_code,

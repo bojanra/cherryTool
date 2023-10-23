@@ -1,115 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE tv SYSTEM "http://xmltv.cvs.sourceforge.net/viewvc/xmltv/xmltv/xmltv.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "http://xmltv.cvs.sourceforge.net/viewvc/xmltv/xmltv/xmltv.dtd">
 <tv source-info-url="https://nova24tv.si/" source-info-name="Nova 24TV" generator-info-name="XMLTV/$Id: nova24tv.si@2019-07-07T20:38:12+02:00 $">
-
-    <channel id="nova24tv">
-        <display-name>Nova 24TV</display-name>
-    </channel>
-
-    <programme start="20190706000000 +02:00" end="20190706001500 +02:00" channel="nova24tv">
-<title lang="sl">Pregled svet</title>
-<desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
-<desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
-<category lang="sl">Informativni program</category>
-<category lang="sl">Informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706001500 +02:00" end="20190706004500 +02:00" channel="nova24tv">
-<title lang="sl">Pregled svet</title>
-<desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
-<desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
-<category lang="sl">Informativni program</category>
-<category lang="sl">Informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706004500 +02:00" end="20190706060000 +02:00" channel="nova24tv">
-<title lang="sl">Blok novic</title>
-<desc lang="sl"><![CDATA[V dinamičnih blokih novic si lahko ogledate aktualne dogodke doma in po svetu.]]></desc>
-<desc lang="sl"><![CDATA[V dinamičnih blokih novic si lahko ogledate aktualne dogodke doma in po svetu.]]></desc>
-<category lang="sl">Informativni program</category>
-<category lang="sl">Dnevno-informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706060000 +02:00" end="20190706064000 +02:00" channel="nova24tv">
-<title lang="sl">Večerne novice</title>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
+  <channel id="nova24tv">
+    <display-name>Nova 24TV</display-name>
+  </channel>
+  <programme start="20190706000000 +02:00" end="20190706001500 +02:00" channel="nova24tv">
+    <title lang="sl">Pregled svet</title>
+    <desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
+    <desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706001500 +02:00" end="20190706004500 +02:00" channel="nova24tv">
+    <title lang="sl">Pregled svet</title>
+    <desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
+    <desc lang="sl"><![CDATA[Pregled novic tekočega tedna iz sveta.]]></desc>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706004500 +02:00" end="20190706060000 +02:00" channel="nova24tv">
+    <title lang="sl">Blok novic</title>
+    <desc lang="sl"><![CDATA[V dinamičnih blokih novic si lahko ogledate aktualne dogodke doma in po svetu.]]></desc>
+    <desc lang="sl"><![CDATA[V dinamičnih blokih novic si lahko ogledate aktualne dogodke doma in po svetu.]]></desc>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Dnevno-informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_LOGO-Nova24TV_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706060000 +02:00" end="20190706064000 +02:00" channel="nova24tv">
+    <title lang="sl">Večerne novice</title>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
 Voditelji: Jure Ferjan, Aleksandra Jug, Aleksander Pozvek in Aleksander Rant.]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Dnevno-informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706064000 +02:00" end="20190706072000 +02:00" channel="nova24tv">
-<title lang="sl">Večerne novice</title>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Dnevno-informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706064000 +02:00" end="20190706072000 +02:00" channel="nova24tv">
+    <title lang="sl">Večerne novice</title>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
 Voditelji: Jure Ferjan, Aleksandra Jug, Aleksander Pozvek in Aleksander Rant.]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Dnevno-informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706072000 +02:00" end="20190706080000 +02:00" channel="nova24tv">
-<title lang="sl">Večerne novice</title>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
-<desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Dnevno-informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706072000 +02:00" end="20190706080000 +02:00" channel="nova24tv">
+    <title lang="sl">Večerne novice</title>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.]]></desc>
+    <desc lang="sl"><![CDATA[Vse o dogajanju doma in po svetu. Vsak dan od ponedeljka do petka ob 19.30 uri.
 Voditelji: Jure Ferjan, Aleksandra Jug, Aleksander Pozvek in Aleksander Rant.]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Dnevno-informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706080000 +02:00" end="20190706090000 +02:00" channel="nova24tv">
-<title lang="sl">TV prodaja</title>
-<desc lang="sl"><![CDATA[TV prodaja]]></desc>
-<desc lang="sl"><![CDATA[TV prodaja]]></desc>
-<category lang="sl">Propagandni program</category>
-<category lang="sl">TV prodaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_tv-prodaja_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706090000 +02:00" end="20190706100000 +02:00" channel="nova24tv">
-<title lang="sl">Objektiv</title>
-<desc lang="sl"><![CDATA[Politika. Gospodarstvo. Družba in mediji. V objektivu bomo z gosti kritično in analitično komentirali najpomembnejše dogodke. Vsak petek ob 20.10.]]></desc>
-<desc lang="sl"><![CDATA[Politika. Gospodarstvo. Družba in mediji. V objektivu bomo z gosti kritično in analitično komentirali najpomembnejše dogodke. Vsak petek ob 20.10.
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Dnevno-informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_hitre-novice_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706080000 +02:00" end="20190706090000 +02:00" channel="nova24tv">
+    <title lang="sl">TV prodaja</title>
+    <desc lang="sl"><![CDATA[TV prodaja]]></desc>
+    <desc lang="sl"><![CDATA[TV prodaja]]></desc>
+    <category lang="sl">Propagandni program</category>
+    <category lang="sl">TV prodaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_tv-prodaja_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706090000 +02:00" end="20190706100000 +02:00" channel="nova24tv">
+    <title lang="sl">Objektiv</title>
+    <desc lang="sl"><![CDATA[Politika. Gospodarstvo. Družba in mediji. V objektivu bomo z gosti kritično in analitično komentirali najpomembnejše dogodke. Vsak petek ob 20.10.]]></desc>
+    <desc lang="sl"><![CDATA[Politika. Gospodarstvo. Družba in mediji. V objektivu bomo z gosti kritično in analitično komentirali najpomembnejše dogodke. Vsak petek ob 20.10.
 Voditelj: Jure Ferjan]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Pogovorna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_objektiv_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706100000 +02:00" end="20190706110000 +02:00" channel="nova24tv">
-<title lang="sl">Moje zdravje</title>
-<desc lang="sl"><![CDATA[TV prodaja - Moje zdravje]]></desc>
-<desc lang="sl"><![CDATA[TV prodaja - Moje zdravje]]></desc>
-<previously-shown />
-<category lang="sl">Propagandni program</category>
-<category lang="sl">TV prodaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_moje-zdravje_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706110000 +02:00" end="20190706110500 +02:00" channel="nova24tv">
-<title lang="sl">Časovni stroj</title>
-<desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
-<desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
-<premiere/>
-<category lang="sl">Kulturno-umetniški program</category>
-<category lang="sl">Kultura</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_časovni-stroj_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706110500 +02:00" end="20190706115000 +02:00" channel="nova24tv">
-<title lang="sl">Tema dneva</title>
-<sub-title lang="sl">ponedeljek</sub-title>
-<desc lang="sl"><![CDATA[Pogovor o aktualnih družbeno političnih temah. Od ponedeljka do četrtka ob 21.05.
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Pogovorna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_objektiv_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706100000 +02:00" end="20190706110000 +02:00" channel="nova24tv">
+    <title lang="sl">Moje zdravje</title>
+    <desc lang="sl"><![CDATA[TV prodaja - Moje zdravje]]></desc>
+    <desc lang="sl"><![CDATA[TV prodaja - Moje zdravje]]></desc>
+    <previously-shown/>
+    <category lang="sl">Propagandni program</category>
+    <category lang="sl">TV prodaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_moje-zdravje_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706110000 +02:00" end="20190706110500 +02:00" channel="nova24tv">
+    <title lang="sl">Časovni stroj</title>
+    <desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
+    <desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
+    <premiere/>
+    <category lang="sl">Kulturno-umetniški program</category>
+    <category lang="sl">Kultura</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_časovni-stroj_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706110500 +02:00" end="20190706115000 +02:00" channel="nova24tv">
+    <title lang="sl">Tema dneva</title>
+    <sub-title lang="sl">ponedeljek</sub-title>
+    <desc lang="sl"><![CDATA[Pogovor o aktualnih družbeno političnih temah. Od ponedeljka do četrtka ob 21.05.
 Voditelja: Aleksander Pozvek in Luka Svetina.]]></desc>
-<desc lang="sl"><![CDATA[Pogovor o aktualnih družbeno političnih temah. Od ponedeljka do četrtka ob 21.05.
+    <desc lang="sl"><![CDATA[Pogovor o aktualnih družbeno političnih temah. Od ponedeljka do četrtka ob 21.05.
 Voditelja: Aleksander Pozvek in Luka Svetina.]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Dnevno-informativna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_tema-dneva_01.jpg" width="1280" height="720" />
-</programme><programme start="20190706115000 +02:00" end="20190706124500 +02:00" channel="nova24tv">
-<title lang="sl">Dialog</title>
-<desc lang="sl"><![CDATA[Vsak ponedeljek ob 20.10 oddaja Dialog. Voditelj: Aleksander Rant]]></desc>
-<desc lang="sl"><![CDATA[Vsak ponedeljek ob 20.10 oddaja Dialog. Voditelj: Aleksander Rant]]></desc>
-<previously-shown />
-<category lang="sl">Informativni program</category>
-<category lang="sl">Pogovorna oddaja</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2018/08/SPORED-Nova24TV-Dialog-1280x720.jpg" width="1280" height="720" />
-</programme><programme start="20190706124500 +02:00" end="20190706125000 +02:00" channel="nova24tv">
-<title lang="sl">Časovni stroj</title>
-<desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
-<desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
-<previously-shown />
-<category lang="sl">Kulturno-umetniški program</category>
-<category lang="sl">Kultura</category>
-<icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_časovni-stroj_01.jpg" width="1280" height="720" />
-</programme></tv>
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Dnevno-informativna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_tema-dneva_01.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706115000 +02:00" end="20190706124500 +02:00" channel="nova24tv">
+    <title lang="sl">Dialog</title>
+    <desc lang="sl"><![CDATA[Vsak ponedeljek ob 20.10 oddaja Dialog. Voditelj: Aleksander Rant]]></desc>
+    <desc lang="sl"><![CDATA[Vsak ponedeljek ob 20.10 oddaja Dialog. Voditelj: Aleksander Rant]]></desc>
+    <previously-shown/>
+    <category lang="sl">Informativni program</category>
+    <category lang="sl">Pogovorna oddaja</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2018/08/SPORED-Nova24TV-Dialog-1280x720.jpg" width="1280" height="720"/>
+  </programme>
+  <programme start="20190706124500 +02:00" end="20190706125000 +02:00" channel="nova24tv">
+    <title lang="sl">Časovni stroj</title>
+    <desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
+    <desc lang="sl"><![CDATA[Kaj vse se je zgodilo na današnji dan. Avtor: Aleksander Rant]]></desc>
+    <previously-shown/>
+    <category lang="sl">Kulturno-umetniški program</category>
+    <category lang="sl">Kultura</category>
+    <icon src="https://nova24tv.si/wp-content/uploads/2017/06/razpored_časovni-stroj_01.jpg" width="1280" height="720"/>
+  </programme>
+</tv>

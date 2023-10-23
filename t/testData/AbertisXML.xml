@@ -1,1191 +1,136 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<BroadcastData creationDate="20190429223020">
-	<ProviderInfo>
-		<ProviderId>AbertisXML</ProviderId>
-		<ProviderName>AbertisXML</ProviderName>
-	</ProviderInfo>
-	<ScheduleData>
-		<ChannelPeriod beginTime="20190429223000" endTime="20190507072749">
-			<ChannelId>El Punt Avui</ChannelId>
-			<Event beginTime="20190429223000" duration="37620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430090008" duration="984">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430091743" duration="2374">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430100000" duration="7200">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430120307" duration="1263">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Gaudeix la festa</Name>
-						<ShortDescription/>
-						<Description>Les falles són una festa valenciana que ja tomba el món sencer. A Catalunya se'n fan a Gavà i també anem fins al País Valencià per viure-les de prop.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430123019" duration="5400">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430140224" duration="1616">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430143056" duration="1590">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Mireia Rourera entrevista Óscar de la Cruz</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430150000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430160000" duration="7200">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430180306" duration="485">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Banc dels Aliments, tones de solidaritat</Name>
-						<ShortDescription/>
-						<Description>En aquesta primera càpsula, descobrirem com va néixer el Banc dels Aliments de Barcelona, qui el va crear i els pilars bàsics de la seva carta fundacional. També coneixerem el testimoni dels voluntaris més antics i sabrem quantes tones d'aliments reparteix actualment.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430181500" duration="720">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430183011" duration="1610">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430185959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430193000" duration="900">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430194632" duration="2408">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430203000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430210010" duration="1720">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Lluís Llort entrevista a Xavir Ramiro, il·lustrador i actual president de l'APIC</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430213033" duration="900">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430214708" duration="2386">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190430223000" duration="44820">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501110022" duration="900">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501111604" duration="2400">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501120000" duration="3765">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Jajajazz</Name>
-						<ShortDescription/>
-						<Description>Reemissió del concert de Gabriel Amargant dins del cicle Jajajazz.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501131020" duration="275">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Banc dels Aliments, tones de solidaritat</Name>
-						<ShortDescription/>
-						<Description>Nescafé.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501131511" duration="1590">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Mireia Rourera entrevista Óscar de la Cruz</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501134459" duration="2520">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501143011" duration="1720">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Lluís Llort entrevista a Xavir Ramiro, il·lustrador i actual president de l'APIC</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501145959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501160006" duration="1561">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501162959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501173112" duration="1554">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Festa de l'Arbre del Maig i Ball del Cornut 2019</Name>
-						<ShortDescription/>
-						<Description>La festa de l'Arbre del Maig i el Ball del Cornut, és una activitat declarada Festa Tradicional d'Interès Nacional per la Generalitat de Catalunya l'any 1999. Com marca la tradició, l'arbre s'alça enmig d'una gran expectació amb l'esforç dels veïns del poble fins a presidir el centre de la vila de Cornellà. A través d'aquest programa descobrirem els detalls d'aquesta festa amb segles d'història i en veurem els moments més destacat de l'edició d'enguany. Els orígens de la tradició de l'arbre de maig es remunten a l'època medieval, i la documentació del segle XV en testimonia un gran arrelament arreu de Catalunya. Originàriament es tractava d'una tradició estretament vinculada al món rural, duta a terme com a ritual per a la veneració dels esperits de la naturalesa, amb l'objectiu d'aconseguir, a partir del sacrifici d'un arbre, que el conjunt oferís un any de prosperitat i abundància. Al llarg dels segles aquest significat ha anat evolucionant, però sempre mantenint-se com un acte festiu on el vincle entre l'home i la naturalesa és l'element central, vincle representat per l'arbre, anomenat "el Maig".</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501180000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501185959" duration="3600">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Mostra Igualada 2019</Name>
-						<ShortDescription/>
-						<Description>Reemissió de l'espectacle 'Planeta M.Art' de Marcel Gros dins la Mostra Igualada 2019. </Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501200459" duration="3120">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501205959" duration="1605">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Territori Contemporàni</Name>
-						<ShortDescription/>
-						<Description>Proposta de programa televisiu que recorre les comarques catalanes per conèixer i descobrir a través d'històries d'artistes, creadors i agents de la cultura contemporània narrades en primera persona, l'enorme potencial que brolla rere el conjunt de plataformes de difusió i promoció cultural que opera en el nostre territori. La idea és crear un entramat de vides encadenades que expliquin què es mou i com bull la cultura a comarques, tot entenent per cultura aquell tot interdisciplinari susceptible d'incloure manifestacions de pintura, escultura, art sonor, escriptura, dansa, poesia, fotografia, dibuix, vídeo, arquitectura, intervencions efímeres, projectes pedagògics, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501212959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501220007" duration="1645">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Paisatges encreuats</Name>
-						<ShortDescription/>
-						<Description>Avui ens deixem portar per les paraules de mossèn Cinto Verdaguer. Passejarem entremig de pobles que estan repartits per la plana, veurem el riu Segre que creua tota la vall Cerdana i ens adonarem que aquí hi ha un paisatge agrícola i forestal que manté part del seu llegat històric. Però també obrirem els pulmons per respirar aquest aire net i sa...</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190501223000" duration="41220">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502100000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502103000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502110000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502113000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502120000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502130004" duration="1645">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Paisatges encreuats</Name>
-						<ShortDescription/>
-						<Description>Avui ens deixem portar per les paraules de mossèn Cinto Verdaguer. Passejarem entremig de pobles que estan repartits per la plana, veurem el riu Segre que creua tota la vall Cerdana i ens adonarem que aquí hi ha un paisatge agrícola i forestal que manté part del seu llegat històric. Però també obrirem els pulmons per respirar aquest aire net i sa...</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502133000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502142959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Territori Contemporàni</Name>
-						<ShortDescription/>
-						<Description>Proposta de programa televisiu que recorre les comarques catalanes per conèixer i descobrir a través d'històries d'artistes, creadors i agents de la cultura contemporània narrades en primera persona, l'enorme potencial que brolla rere el conjunt de plataformes de difusió i promoció cultural que opera en el nostre territori. La idea és crear un entramat de vides encadenades que expliquin què es mou i com bull la cultura a comarques, tot entenent per cultura aquell tot interdisciplinari susceptible d'incloure manifestacions de pintura, escultura, art sonor, escriptura, dansa, poesia, fotografia, dibuix, vídeo, arquitectura, intervencions efímeres, projectes pedagògics, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502145959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502160000" duration="1600">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Viure des de l'Essència</Name>
-						<ShortDescription/>
-						<Description>Entrevistes a professionals de diferents àmbits i disciplines, des d'artistes, passant per esportistes, docents, terapeutes, metges... amb l'objectiu de compartir la part més íntima i humana de cada personatge i conèixer així l'essència de la seva vida. Entre altres, aquesta temporada es compta amb les entrevistes a Xevi Verdaguer, Martí i Mau Boada, Lolita Bosch, Teresa Costa, Mercè Aranega, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502162943" duration="1720">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Lluís Llort entrevista a Xavir Ramiro, il·lustrador i actual president de l'APIC</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502165959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502180005" duration="1625">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Territori Contemporàni</Name>
-						<ShortDescription/>
-						<Description>Proposta de programa televisiu que recorre les comarques catalanes per conèixer i descobrir a través d'històries d'artistes, creadors i agents de la cultura contemporània narrades en primera persona, l'enorme potencial que brolla rere el conjunt de plataformes de difusió i promoció cultural que opera en el nostre territori. La idea és crear un entramat de vides encadenades que expliquin què es mou i com bull la cultura a comarques, tot entenent per cultura aquell tot interdisciplinari susceptible d'incloure manifestacions de pintura, escultura, art sonor, escriptura, dansa, poesia, fotografia, dibuix, vídeo, arquitectura, intervencions efímeres, projectes pedagògics, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502183000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502190000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502193000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502200000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502205959" duration="1746">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Xavier Castillón entrevista a Cris Juanico</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502212959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502220015" duration="1638">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190502223000" duration="41220">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503100000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503103000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503110000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503112959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503120004" duration="1200">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>7 Dies</Name>
-						<ShortDescription/>
-						<Description>Dirigit i presentat per Jordi Molet, '7 dies' és un magazín d'entrevistes a personatges d'actualitat. Pel programa, hi desfilen cada setmana tres protagonistes rellevants del món de la política, la cultura, l'economia, la salut, els esports...</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503122044" duration="1200">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>7 Dies</Name>
-						<ShortDescription/>
-						<Description>Dirigit i presentat per Jordi Molet, '7 dies' és un magazín d'entrevistes a personatges d'actualitat. Pel programa, hi desfilen cada setmana tres protagonistes rellevants del món de la política, la cultura, l'economia, la salut, els esports...</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503124129" duration="1065">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>7 Dies</Name>
-						<ShortDescription/>
-						<Description>Dirigit i presentat per Jordi Molet, '7 dies' és un magazín d'entrevistes a personatges d'actualitat. Pel programa, hi desfilen cada setmana tres protagonistes rellevants del món de la política, la cultura, l'economia, la salut, els esports...</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503125959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503140012" duration="1746">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Xavier Castillón entrevista a Cris Juanico</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503143000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503150000" duration="1642">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Torna-la a Tocar, Sam</Name>
-						<ShortDescription/>
-						<Description>Magazine de cinema, presentat i dirigit pel crític de cinema Pitu Anaya. Programa on setmanalment es presenten les estrenes més destacades de la setmana a les sales de cinema, les efemèrides de la historia del cinema , anècdotes, així com tot allò relacionat amb el setè art.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503152959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503160002" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Teló de Fons</Name>
-						<ShortDescription/>
-						<Description>Programa dedicat a les arts escèniques. Això comprèn dansa, teatre, música i circ i alhora tot allò que se surt de les classificacions més tradicionals, entenent l'art com a multidisciplinari i no encasellat en una disciplina concreta. Neix amb la vocació de ser un espai de reflexió sobre el món cultural i més concretament l'escènic, donant veu a tots aquells professionals que estan treballant per a exhibir les seves creacions a Catalunya. Donar veu a companyies consolidades o emergents, als circuits principals de Barcelona o arreu del territori català és un dels objectius principals de 'Teló de fons'. També posa especial atenció en els principals festivals que se celebren a diferents localitats catalanes, com Fira Tàrrega, Temporada Alta de Girona, Sismògraf, Trapezi o la Mostra d'Igualada. L'estructura del programa gira a l'entorn d'un eix temàtic concret, al voltant del qual els diferents protagonistes reflexionen i, indirectament, ens mostren l'actualitat dels muntatges que estan representant.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503162957" duration="1666">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Teló de Fons</Name>
-						<ShortDescription/>
-						<Description>Programa dedicat a les arts escèniques. Això comprèn dansa, teatre, música i circ i alhora tot allò que se surt de les classificacions més tradicionals, entenent l'art com a multidisciplinari i no encasellat en una disciplina concreta. Neix amb la vocació de ser un espai de reflexió sobre el món cultural i més concretament l'escènic, donant veu a tots aquells professionals que estan treballant per a exhibir les seves creacions a Catalunya. Donar veu a companyies consolidades o emergents, als circuits principals de Barcelona o arreu del territori català és un dels objectius principals de 'Teló de fons'. També posa especial atenció en els principals festivals que se celebren a diferents localitats catalanes, com Fira Tàrrega, Temporada Alta de Girona, Sismògraf, Trapezi o la Mostra d'Igualada. L'estructura del programa gira a l'entorn d'un eix temàtic concret, al voltant del qual els diferents protagonistes reflexionen i, indirectament, ens mostren l'actualitat dels muntatges que estan representant.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503165959" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503180005" duration="1630">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Personalitats de diversos àmbits es converteixen en Protagonistes del programa i conversen amb un/a periodista d'El Punt Avui TV. Les entrevistes aborden temes relacionats amb la professió de cada convidat.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503183000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503185959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503192959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503200000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503205954" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503213005" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Torna-la a Tocar, Sam</Name>
-						<ShortDescription/>
-						<Description>Magazine de cinema, presentat i dirigit pel crític de cinema Pitu Anaya. Programa on setmanalment es presenten les estrenes més destacades de la setmana a les sales de cinema, les efemèrides de la historia del cinema , anècdotes, així com tot allò relacionat amb el setè art.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503215951" duration="1652">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Teló de Fons</Name>
-						<ShortDescription/>
-						<Description>Programa dedicat a les arts escèniques. Això comprèn dansa, teatre, música i circ i alhora tot allò que se surt de les classificacions més tradicionals, entenent l'art com a multidisciplinari i no encasellat en una disciplina concreta. Neix amb la vocació de ser un espai de reflexió sobre el món cultural i més concretament l'escènic, donant veu a tots aquells professionals que estan treballant per a exhibir les seves creacions a Catalunya. Donar veu a companyies consolidades o emergents, als circuits principals de Barcelona o arreu del territori català és un dels objectius principals de 'Teló de fons'. També posa especial atenció en els principals festivals que se celebren a diferents localitats catalanes, com Fira Tàrrega, Temporada Alta de Girona, Sismògraf, Trapezi o la Mostra d'Igualada. L'estructura del programa gira a l'entorn d'un eix temàtic concret, al voltant del qual els diferents protagonistes reflexionen i, indirectament, ens mostren l'actualitat dels muntatges que estan representant.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190503222959" duration="41220">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504100000" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Torna-la a Tocar, Sam</Name>
-						<ShortDescription/>
-						<Description>Magazine de cinema, presentat i dirigit pel crític de cinema Pitu Anaya. Programa on setmanalment es presenten les estrenes més destacades de la setmana a les sales de cinema, les efemèrides de la historia del cinema , anècdotes, així com tot allò relacionat amb el setè art.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504102959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Teló de Fons</Name>
-						<ShortDescription/>
-						<Description>Programa dedicat a les arts escèniques. Això comprèn dansa, teatre, música i circ i alhora tot allò que se surt de les classificacions més tradicionals, entenent l'art com a multidisciplinari i no encasellat en una disciplina concreta. Neix amb la vocació de ser un espai de reflexió sobre el món cultural i més concretament l'escènic, donant veu a tots aquells professionals que estan treballant per a exhibir les seves creacions a Catalunya. Donar veu a companyies consolidades o emergents, als circuits principals de Barcelona o arreu del territori català és un dels objectius principals de 'Teló de fons'. També posa especial atenció en els principals festivals que se celebren a diferents localitats catalanes, com Fira Tàrrega, Temporada Alta de Girona, Sismògraf, Trapezi o la Mostra d'Igualada. L'estructura del programa gira a l'entorn d'un eix temàtic concret, al voltant del qual els diferents protagonistes reflexionen i, indirectament, ens mostren l'actualitat dels muntatges que estan representant.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504110000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504115959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Personalitats de diversos àmbits es converteixen en Protagonistes del programa i conversen amb un/a periodista d'El Punt Avui TV. Les entrevistes aborden temes relacionats amb la professió de cada convidat.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504122959" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Personalitats de diversos àmbits es converteixen en Protagonistes del programa i conversen amb un/a periodista d'El Punt Avui TV. Les entrevistes aborden temes relacionats amb la professió de cada convidat.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504130000" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504140017" duration="5589">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Redifusió de les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504153326" duration="3760">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Redifusió de les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504163607" duration="4861">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Redifusió de les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504180048" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504190048" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Viure des de l'Essència</Name>
-						<ShortDescription/>
-						<Description>Programa d'entrevistes que cada setmana acostarà el perfil més personal de personatges destacats. Conduït i dirigit per l'actriu i comunicadora de Sant Celoni, Glòria Montasell.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504193048" duration="1800">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504200205" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Viure des de l'Essència</Name>
-						<ShortDescription/>
-						<Description>Programa d'entrevistes que cada setmana acostarà el perfil més personal de personatges destacats. Conduït i dirigit per l'actriu i comunicadora de Sant Celoni, Glòria Montasell.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190504203048" duration="43020">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505083045" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Viure des de l'Essència</Name>
-						<ShortDescription/>
-						<Description>Programa d'entrevistes que cada setmana acostarà el perfil més personal de personatges destacats. Conduït i dirigit per l'actriu i comunicadora de Sant Celoni, Glòria Montasell.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505090048" duration="4920">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Missa de Montserrat</Name>
-						<ShortDescription/>
-						<Description>Missa conventual des de l'Abadia de Montserrat.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505102548" duration="1920">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505110048" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Protagonistes</Name>
-						<ShortDescription/>
-						<Description>Personalitats de diversos àmbits es converteixen en Protagonistes del programa i conversen amb un/a periodista d'El Punt Avui TV. Les entrevistes aborden temes relacionats amb la professió de cada convidat.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505113047" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505123104" duration="19618">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Redifusió de les sessions del judici del procés al Tribunal Suprem.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505180048" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>En Joc</Name>
-						<ShortDescription/>
-						<Description>El programa del cap de setmana esportiu. Repassarem àmpliament la jornada amb especial importància per als grans esports del país: futbol, bàsquet, hoquei patins, handbol i waterpolo. Els resultats, les classificacions i els protagonistes de les competicions analitzats per periodistes especialitzats en cada esport. Un programa que també explica les diferents cites esportives de caràcter excepcional realitzades durant el cap de setmana.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505190048" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>En Joc</Name>
-						<ShortDescription/>
-						<Description>El programa del cap de setmana esportiu. Repassarem àmpliament la jornada amb especial importància per als grans esports del país: futbol, bàsquet, hoquei patins, handbol i waterpolo. Els resultats, les classificacions i els protagonistes de les competicions analitzats per periodistes especialitzats en cada esport. Un programa que també explica les diferents cites esportives de caràcter excepcional realitzades durant el cap de setmana.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505193048" duration="1800">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505200205" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Gaudeix la Festa</Name>
-						<ShortDescription/>
-						<Description>El programa vol donar a conèixer els diferents actors i agents de la cultura patrimonial festiva, repassant les festes populars i tradicionals més importants del calendari festiu, amb una sèrie de reportatges i entrevistes.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190505203048" duration="41220">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506080049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506083050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506090050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506093050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506100049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506103049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506110050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506113050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Ben Trobats (redifusió)</Name>
-						<ShortDescription/>
-						<Description>Magazín matinal dirigit i presentat per Clara Tena. El programa inclou entrevistes a personatges anònims amb molta història per explicar, espectacle, humor, misteri, gastronomia i fins i tot invents! Però, a més, vol comptar amb la participació dels espectadors, que cal que opinin però també... que cantin! Un magazín on tothom és ben trobat!</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506120050" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506130049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Territori Contemporàni</Name>
-						<ShortDescription/>
-						<Description>Proposta de programa televisiu que recorre les comarques catalanes per conèixer i descobrir a través d'històries d'artistes, creadors i agents de la cultura contemporània narrades en primera persona, l'enorme potencial que brolla rere el conjunt de plataformes de difusió i promoció cultural que opera en el nostre territori. La idea és crear un entramat de vides encadenades que expliquin què es mou i com bull la cultura a comarques, tot entenent per cultura aquell tot interdisciplinari susceptible d'incloure manifestacions de pintura, escultura, art sonor, escriptura, dansa, poesia, fotografia, dibuix, vídeo, arquitectura, intervencions efímeres, projectes pedagògics, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506133049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506140050" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506150049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Viure des de l'Essència</Name>
-						<ShortDescription/>
-						<Description>Entrevistes a professionals de diferents àmbits i disciplines, des d'artistes, passant per esportistes, docents, terapeutes, metges... amb l'objectiu de compartir la part més íntima i humana de cada personatge i conèixer així l'essència de la seva vida. Entre altres, aquesta temporada es compta amb les entrevistes a Xevi Verdaguer, Martí i Mau Boada, Lolita Bosch, Teresa Costa, Mercè Aranega, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506153050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Teló de Fons</Name>
-						<ShortDescription/>
-						<Description>Programa dedicat a les arts escèniques. Això comprèn dansa, teatre, música i circ i alhora tot allò que se surt de les classificacions més tradicionals, entenent l'art com a multidisciplinari i no encasellat en una disciplina concreta. Neix amb la vocació de ser un espai de reflexió sobre el món cultural i més concretament l'escènic, donant veu a tots aquells professionals que estan treballant per a exhibir les seves creacions a Catalunya. Donar veu a companyies consolidades o emergents, als circuits principals de Barcelona o arreu del territori català és un dels objectius principals de 'Teló de fons'. També posa especial atenció en els principals festivals que se celebren a diferents localitats catalanes, com Fira Tàrrega, Temporada Alta de Girona, Sismògraf, Trapezi o la Mostra d'Igualada. L'estructura del programa gira a l'entorn d'un eix temàtic concret, al voltant del qual els diferents protagonistes reflexionen i, indirectament, ens mostren l'actualitat dels muntatges que estan representant.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506160049" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506170049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506173049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Connecti.cat</Name>
-						<ShortDescription/>
-						<Description>'Connecti.cat' és un programa basat en les connexions en directe, de dilluns a divendres. Lligat a l'actualitat però no informatiu. Destinat a donar a conèixer i difondre realitats i també a entretenir l'espectador/a. Busca l'aprofundiment, la curiositat, l'altra cara, donant protagonisme a realitats grans i petites que permeten conèixer i viatjar a tots els racons del país.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506180049" duration="3420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506190050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Territori Contemporàni</Name>
-						<ShortDescription/>
-						<Description>Proposta de programa televisiu que recorre les comarques catalanes per conèixer i descobrir a través d'històries d'artistes, creadors i agents de la cultura contemporània narrades en primera persona, l'enorme potencial que brolla rere el conjunt de plataformes de difusió i promoció cultural que opera en el nostre territori. La idea és crear un entramat de vides encadenades que expliquin què es mou i com bull la cultura a comarques, tot entenent per cultura aquell tot interdisciplinari susceptible d'incloure manifestacions de pintura, escultura, art sonor, escriptura, dansa, poesia, fotografia, dibuix, vídeo, arquitectura, intervencions efímeres, projectes pedagògics, etc.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506193049" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506200050" duration="1620">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Caminant per Catalunya</Name>
-						<ShortDescription/>
-						<Description>Programa d'excursions fetes per tot el territori català.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-			<Event beginTime="20190506203049" duration="39420">
-				<EpgProduction>
-					<EpgText language="spa">
-						<Name>Informació Territorial</Name>
-						<ShortDescription/>
-						<Description>Informació territorial.</Description>
-					</EpgText>
-				</EpgProduction>
-			</Event>
-		</ChannelPeriod>
-	</ScheduleData>
+<BroadcastData creationDate="20231023000000">
+  <ProviderInfo>
+    <ProviderId>AbertisXML</ProviderId>
+    <ProviderName>AbertisXML</ProviderName>
+  </ProviderInfo>
+  <ScheduleData>
+    <ChannelPeriod beginTime="20231023000000" endTime="20231101072749">
+      <ChannelId>El Punt Avui</ChannelId>
+      <Event beginTime="20231023000000" duration="37620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Informació Territorial</Name>
+            <ShortDescription/>
+            <Description>Informació territorial.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023090008" duration="984">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
+            <ShortDescription/>
+            <Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023091743" duration="2374">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O (redifusió)</Name>
+            <ShortDescription/>
+            <Description>L'anàlisi del judici del procés al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldrà les qüestions més importants de cada sessió, comptarem con los advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
+            <AgeClassification>12</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023100000" duration="7200">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
+            <ShortDescription/>
+            <Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023120307" duration="1263">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Gaudeix la festa</Name>
+            <ShortDescription/>
+            <Description>Les falles són una festa valenciana que ja tomba el món sencer. A Catalunya se'n fan a Gavà i també anem fins al País Valencià per viure-les de prop.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023123019" duration="5400">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
+            <ShortDescription/>
+            <Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023140224" duration="1616">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Caminant per Catalunya</Name>
+            <ShortDescription/>
+            <Description>Programa d'excursions fetes per tot el territori català.</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023143056" duration="1590">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Protagonistes (redifusió)</Name>
+            <ShortDescription/>
+            <Description>Mireia Rourera entrevista Óscar de la Cruz</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023150000" duration="3420">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Informació Territorial</Name>
+            <ShortDescription/>
+            <Description>Informació territorial.</Description>
+            <AgeClassification>7</AgeClassification>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023160000" duration="7200">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
+            <ShortDescription/>
+            <Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023180306" duration="485">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Banc dels Aliments, tones de solidaritat</Name>
+            <ShortDescription/>
+            <Description>En aquesta primera càpsula, descobrirem com va néixer el Banc dels Aliments de Barcelona, qui el va crear i els pilars bàsics de la seva carta fundacional. També coneixerem el testimoni dels voluntaris més antics i sabrem quantes tones d'aliments reparteix actualment.</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023181500" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
+            <ShortDescription/>
+            <Description>Emissió íntegrament i en directe les sessions del judici del procés al Tribunal Suprem.</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231023183011" duration="1610">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>Caminant per Catalunya</Name>
+            <ShortDescription/>
+            <Description>Programa d'excursions fetes per tot el territori català.</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+    </ChannelPeriod>
+  </ScheduleData>
 </BroadcastData>

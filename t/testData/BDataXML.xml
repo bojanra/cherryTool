@@ -1,77 +1,77 @@
 <BroadcastData timestamp="20230421081055">
-	<SourceId>AbsoluteBMS</SourceId>
-	<ListingData>
-		<Event>
-			<Cover></Cover>
-			<StartDateTime>2023-09-22T05:00:00.000+0000</StartDateTime>
-			<StartDate>2023-09-22</StartDate>
-			<StartTime>05:00:00</StartTime>
-			<Duration>00:30:00</Duration>
-			<EndDateTime>2023-09-22T05:30:00.000+0000</EndDateTime>
-			<EndDate>2023-09-22</EndDate>
-			<EndTime>05:30:00</EndTime>
+  <SourceId>AbsoluteBMS</SourceId>
+  <ListingData>
+    <Event>
+      <Cover></Cover>
+      <StartDateTime>2023-09-22T05:00:00.000+0000</StartDateTime>
+      <StartDate>2023-09-22</StartDate>
+      <StartTime>05:00:00</StartTime>
+      <Duration>00:30:00</Duration>
+      <EndDateTime>2023-09-22T05:30:00.000+0000</EndDateTime>
+      <EndDate>2023-09-22</EndDate>
+      <EndTime>05:30:00</EndTime>
       <TitleEnglish><![CDATA[The title &amp;quot;within quotes&amp;quot;]]></TitleEnglish>
-			<TitleEnglish><![CDATA[At The Cross VCI S01]]></TitleEnglish>
-			<DescriptionEnglish><![CDATA[Hymns and meditations about the cross and Jesus' salvation by &amp;quot;Better Life Team&amp;quot;]]></DescriptionEnglish>
-			<TitleArabic>عند الصليب</TitleArabic>
-			<DescriptionArabic><![CDATA[يقدم فريق الحياة الأفضل في هذا البرنامج، تأملات وترانيم حول الصليب وخلاص يسوع لنا.]]></DescriptionArabic>
-		</Event>
-		<Event>
-			<Cover></Cover>
-			<StartDateTime>2023-09-22T05:30:00.000+0000</StartDateTime>
-			<StartDate>2023-09-22</StartDate>
-			<StartTime>05:30:00</StartTime>
-			<Duration>00:30:00</Duration>
-			<EndDateTime>2023-09-22T06:00:00.000+0000</EndDateTime>
-			<EndDate>2023-09-22</EndDate>
-			<EndTime>06:00:00</EndTime>
+      <TitleEnglish><![CDATA[At The Cross VCI S01]]></TitleEnglish>
+      <DescriptionEnglish><![CDATA[Hymns and meditations about the cross and Jesus' salvation by &amp;quot;Better Life Team&amp;quot;]]></DescriptionEnglish>
+      <TitleArabic>عند الصليب</TitleArabic>
+      <DescriptionArabic><![CDATA[يقدم فريق الحياة الأفضل في هذا البرنامج، تأملات وترانيم حول الصليب وخلاص يسوع لنا.]]></DescriptionArabic>
+    </Event>
+    <Event>
+      <Cover></Cover>
+      <StartDateTime>2023-09-22T05:30:00.000+0000</StartDateTime>
+      <StartDate>2023-09-22</StartDate>
+      <StartTime>05:30:00</StartTime>
+      <Duration>00:30:00</Duration>
+      <EndDateTime>2023-09-22T06:00:00.000+0000</EndDateTime>
+      <EndDate>2023-09-22</EndDate>
+      <EndTime>06:00:00</EndTime>
       <TitleEnglish><![CDATA[هل هذه عربية؟ &amp;dash;]]></TitleEnglish>
-			<DescriptionEnglish><![CDATA[The Visual Bible: The Book of Acts adapted precisely Word for Word based on the Good News Translation Bible.]]></DescriptionEnglish>
-			<TitleArabic>أعمال الرسل</TitleArabic>
-			<DescriptionArabic><![CDATA[The Visual Bible: The Book of Acts adapted precisely Word for Word based on the Good News Translation Bible.]]></DescriptionArabic>
-		</Event>
-		<Event>
-			<Cover></Cover>
-			<StartDateTime>2023-09-22T06:00:00.000+0000</StartDateTime>
-			<StartDate>2023-09-22</StartDate>
-			<StartTime>06:00:00</StartTime>
-			<Duration>00:15:00</Duration>
-			<EndDateTime>2023-09-22T06:15:00.000+0000</EndDateTime>
-			<EndDate>2023-09-22</EndDate>
-			<EndTime>06:15:00</EndTime>
-			<TitleEnglish><![CDATA[The Box of The Priest S01]]></TitleEnglish>
-			<DescriptionEnglish><![CDATA[Throughout this program, we will try to convey some of the stories and situations the way they happened and reflect in a quick and simple way on the spiritual truth lost in those stories and events. The most important is to show the opinion of Jesus in what happened and what is happening and how the Word of God in the Holy Bible corrects the path, straightens the curves and puts people on the right teachings, the behaviour changes and the faith becomes a healthy and mature one.]]></DescriptionEnglish>
-			<TitleArabic>صندوق الخوري</TitleArabic>
-			<DescriptionArabic><![CDATA[ع دروب الخدمة الكهنوتية والرعوية، بيعيش الخوري ظروف ومواقف ما بتنتسى، لأنّا بتعكس واقع الحالة الروحيّة، ومرّات لأنّا بتحرّك الإيمان الفاتر  عند شخص معيّن أو عند الجماعة الكنسيّة، وبتفتّح عينَين الخوري الخادم ع الحاجة أو ع النقص بالمعرفة وبالخبرة عند الناس اللي عم يخدمن.
+      <DescriptionEnglish><![CDATA[The Visual Bible: The Book of Acts adapted precisely Word for Word based on the Good News Translation Bible.]]></DescriptionEnglish>
+      <TitleArabic>أعمال الرسل</TitleArabic>
+      <DescriptionArabic><![CDATA[The Visual Bible: The Book of Acts adapted precisely Word for Word based on the Good News Translation Bible.]]></DescriptionArabic>
+    </Event>
+    <Event>
+      <Cover></Cover>
+      <StartDateTime>2023-09-22T06:00:00.000+0000</StartDateTime>
+      <StartDate>2023-09-22</StartDate>
+      <StartTime>06:00:00</StartTime>
+      <Duration>00:15:00</Duration>
+      <EndDateTime>2023-09-22T06:15:00.000+0000</EndDateTime>
+      <EndDate>2023-09-22</EndDate>
+      <EndTime>06:15:00</EndTime>
+      <TitleEnglish><![CDATA[The Box of The Priest S01]]></TitleEnglish>
+      <DescriptionEnglish><![CDATA[Throughout this program, we will try to convey some of the stories and situations the way they happened and reflect in a quick and simple way on the spiritual truth lost in those stories and events. The most important is to show the opinion of Jesus in what happened and what is happening and how the Word of God in the Holy Bible corrects the path, straightens the curves and puts people on the right teachings, the behaviour changes and the faith becomes a healthy and mature one.]]></DescriptionEnglish>
+      <TitleArabic>صندوق الخوري</TitleArabic>
+      <DescriptionArabic><![CDATA[ع دروب الخدمة الكهنوتية والرعوية، بيعيش الخوري ظروف ومواقف ما بتنتسى، لأنّا بتعكس واقع الحالة الروحيّة، ومرّات لأنّا بتحرّك الإيمان الفاتر  عند شخص معيّن أو عند الجماعة الكنسيّة، وبتفتّح عينَين الخوري الخادم ع الحاجة أو ع النقص بالمعرفة وبالخبرة عند الناس اللي عم يخدمن.
 بهالبرنامج رح نحاول ننقل البعض من هالقصص وهالمواقف متل ما حدثت، وندلّ بشكل سريع ومبسّط على الحقيقة الروحية الضايعة بهالقصص وهالأحداث، والأهم نشوف وننقل رأي يسوع باللي صار وعم بيصير، وكيف كلمة الله بالكتاب المقدس بتصحّح المسار ]]></DescriptionArabic>
-		</Event>
-		<Event>
-			<Cover></Cover>
-			<StartDateTime>2023-09-22T06:15:00.000+0000</StartDateTime>
-			<StartDate>2023-09-22</StartDate>
-			<StartTime>06:15:00</StartTime>
-			<Duration>00:15:00</Duration>
-			<EndDateTime>2023-09-22T06:30:00.000+0000</EndDateTime>
-			<EndDate>2023-09-22</EndDate>
-			<EndTime>06:30:00</EndTime>
-			<TitleEnglish><![CDATA[My Day Is Yours VCI S01]]></TitleEnglish>
-			<DescriptionEnglish><![CDATA[Reflections for young people to benefit them in their practical lives]]></DescriptionEnglish>
-			<TitleArabic>يومي ليك</TitleArabic>
-			<DescriptionArabic><![CDATA[تأملات للشباب تفيدهم في حياتهم العملية]]></DescriptionArabic>
-		</Event>
-		<Event>
-			<Cover></Cover>
-			<StartDateTime>2023-09-22T06:30:00.000+0000</StartDateTime>
-			<StartDate>2023-09-22</StartDate>
-			<StartTime>06:30:00</StartTime>
-			<Duration>00:15:00</Duration>
-			<EndDateTime>2023-09-22T06:45:00.000+0000</EndDateTime>
-			<EndDate>2023-09-22</EndDate>
-			<EndTime>06:45:00</EndTime>
-			<TitleEnglish><![CDATA[Jacob's Stories S03]]></TitleEnglish>
-			<DescriptionEnglish><![CDATA[Jacob, the story teller meets some people in the Egyptian countryside and tells them stories of the Bible and how God dealt with the various personalities of the bible and with his people throughout the ages. Then he contemplates the usefulness and application of what was written for us in our life.]]></DescriptionEnglish>
-			<TitleArabic>حكاوي العم يعقوب</TitleArabic>
-			<DescriptionArabic><![CDATA[يلتقي العم يعقوب ببعض الأشخاص في الريف المصري ويقص عليهم قصص الكتاب المقدس وكيف تعامل الله مع شخصيات الكتاب المختلفة ومع شعبه علي مر العصور. ثم يتأمل في فائدة وتطبيق ما كُتب لنا في حياتنا.]]></DescriptionArabic>
-		</Event>
+    </Event>
+    <Event>
+      <Cover></Cover>
+      <StartDateTime>2023-09-22T06:15:00.000+0000</StartDateTime>
+      <StartDate>2023-09-22</StartDate>
+      <StartTime>06:15:00</StartTime>
+      <Duration>00:15:00</Duration>
+      <EndDateTime>2023-09-22T06:30:00.000+0000</EndDateTime>
+      <EndDate>2023-09-22</EndDate>
+      <EndTime>06:30:00</EndTime>
+      <TitleEnglish><![CDATA[My Day Is Yours VCI S01]]></TitleEnglish>
+      <DescriptionEnglish><![CDATA[Reflections for young people to benefit them in their practical lives]]></DescriptionEnglish>
+      <TitleArabic>يومي ليك</TitleArabic>
+      <DescriptionArabic><![CDATA[تأملات للشباب تفيدهم في حياتهم العملية]]></DescriptionArabic>
+    </Event>
+    <Event>
+      <Cover></Cover>
+      <StartDateTime>2023-09-22T06:30:00.000+0000</StartDateTime>
+      <StartDate>2023-09-22</StartDate>
+      <StartTime>06:30:00</StartTime>
+      <Duration>00:15:00</Duration>
+      <EndDateTime>2023-09-22T06:45:00.000+0000</EndDateTime>
+      <EndDate>2023-09-22</EndDate>
+      <EndTime>06:45:00</EndTime>
+      <TitleEnglish><![CDATA[Jacob's Stories S03]]></TitleEnglish>
+      <DescriptionEnglish><![CDATA[Jacob, the story teller meets some people in the Egyptian countryside and tells them stories of the Bible and how God dealt with the various personalities of the bible and with his people throughout the ages. Then he contemplates the usefulness and application of what was written for us in our life.]]></DescriptionEnglish>
+      <TitleArabic>حكاوي العم يعقوب</TitleArabic>
+      <DescriptionArabic><![CDATA[يلتقي العم يعقوب ببعض الأشخاص في الريف المصري ويقص عليهم قصص الكتاب المقدس وكيف تعامل الله مع شخصيات الكتاب المختلفة ومع شعبه علي مر العصور. ثم يتأمل في فائدة وتطبيق ما كُتب لنا في حياتنا.]]></DescriptionArabic>
+    </Event>
   </ListingData>
 </BroadcastData>

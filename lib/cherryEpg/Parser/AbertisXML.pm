@@ -7,7 +7,7 @@ use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.11';
+our $VERSION = '0.21';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -24,10 +24,13 @@ Do the file processing and return a reference to hash with keys
 =cut
 
 sub parse {
-  my ( $self, $option ) = @_;
+  my ( $self, $parserOption ) = @_;
   my $report = $self->{report};
 
-  my $handler = AbertisXMLHandler->new();
+  # get values
+  my ($country_code) = split( /,/, $parserOption // '' );
+
+  my $handler = AbertisXMLHandler->new($country_code);
   my $parser  = XML::Parser::PerlSAX->new(
     Handler => $handler,
     output  => $report
@@ -45,9 +48,10 @@ use Time::Piece;
 use Carp qw( croak );
 
 sub new {
-  my $this  = shift;
+  my ( $this, $country_code ) = @_;
   my $class = ref($this) || $this;
-  my $self  = {};
+
+  my $self = { country_code => $country_code, };
 
   bless( $self, $class );
   return $self;
@@ -121,16 +125,23 @@ SWITCH: for ( $element->{Name} ) {
       $event->{title} = $value;
       return;
     };
-    /ShortDescription/ && do {
+    $_ eq "ShortDescription" && do {
       return if $value eq '';
 
       $event->{subtitle} = $value;
       return;
     };
-    /Description/ && do {
+    $_ eq "Description" && do {
       return if $value eq '';
 
       $event->{synopsis} = $value;
+      return;
+    };
+    $_ eq "AgeClassification" && do {
+      return if $value eq '';
+
+      # the ingester accepts absolute age
+      $event->{parental_rating} = $value + 3;
       return;
     };
   } ## end SWITCH: for ( $element->{Name} )
@@ -156,6 +167,9 @@ sub addEvent {
   my @missing;
   push( @missing, "start" ) unless defined $event->{start};
   push( @missing, "title" ) unless defined $event->{title};
+
+  # use scheme configuration if defined
+  $event->{country_code} = $self->{country_code} if $self->{country_code};
 
   if ( scalar @missing > 0 ) {
     $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );
