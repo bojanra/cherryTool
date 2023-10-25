@@ -137,16 +137,43 @@ SWITCH: for ( $element->{Name} ) {
       $event->{synopsis} = $value;
       return;
     };
+    /(Genre|Subgenre|UserByte)/ && do {
+      $value = 0 if $value eq '';
+
+      $event->{ lc($1) } = toNum($value);
+      return;
+    };
     $_ eq "AgeClassification" && do {
       return if $value eq '';
 
-      # the ingester accepts absolute age
-      $event->{parental_rating} = $value + 3;
+      my $parentalRating = toNum($value);
+
+      if ( defined $parentalRating ) {
+
+        # the ingester accepts absolute age
+        $event->{parental_rating} = $parentalRating + 3;
+      } else {
+        $self->_error( "Incorrect AgeClassification [$value] line " . $self->{linecount} );
+      }
       return;
     };
   } ## end SWITCH: for ( $element->{Name} )
   return;
 } ## end sub end_element
+
+# try to decode any known number format
+sub toNum {
+  my $x = shift;
+  if ( $x =~ /^0[b][01]+$/i ) {
+    return oct($x);
+  } elsif ( $x =~ /^0x[0-9a-f]+$/i ) {
+    return hex($x);
+  } elsif ( $x =~ /^(\d+)$/ ) {
+    return $x + 0;
+  } else {
+    return;
+  }
+} ## end sub toNum
 
 sub set_document_locator {
   my ( $self, $params ) = @_;
@@ -170,6 +197,17 @@ sub addEvent {
 
   # use scheme configuration if defined
   $event->{country_code} = $self->{country_code} if $self->{country_code};
+
+  # build the content descriptior
+  if ( defined $event->{genre} && defined $event->{subgenre} ) {
+
+    my $item = { nibble => ( ( ( $event->{genre} & 0x0f ) << 4 ) + ( $event->{subgenre} & 0x0f ) ) };
+
+    $item->{user} = ( $event->{userbyte} & 0xff ) if defined $event->{userbyte};
+
+    push( $event->{content}->@*, $item );
+    delete( @$event{qw( genre subgenre userbyte)} );
+  } ## end if ( defined $event->{...})
 
   if ( scalar @missing > 0 ) {
     $self->_error( "Missing or incorrect input data [" . join( ' ', @missing ) . "] line " . $self->{linecount} );

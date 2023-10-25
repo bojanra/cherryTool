@@ -224,12 +224,19 @@ SWITCH: for ( $element->{Name} ) {
       return;
     };
     /category/i && do {
-      if ( $value =~ /^0b[01]+$/i ) {
-        push( $event->{content}->@*, oct($value) );
+
+      if ( $value =~ /^0[b][01]+$/i ) {
+        $value = oct($value);
       } elsif ( $value =~ /^0x[0-9a-f]+$/i ) {
-        push( $event->{content}->@*, hex($value) );
+        $value = hex($value);
       } elsif ( $value =~ /^(\d+)$/ ) {
-        push( $event->{content}->@*, $value + 0 );
+        $value = $value + 0;
+      } else {
+        $value = undef;
+      }
+
+      if ( defined $value ) {
+        push( $event->{content}->@*, { nibble => $value } );
       } else {
         $self->_error( "category not numeric [$value] in line " . $self->{linecount} );
       }

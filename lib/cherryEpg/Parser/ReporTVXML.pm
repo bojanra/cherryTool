@@ -133,7 +133,7 @@ SWITCH: for ( $element->{Name} ) {
       return;
     };
     /content_type/ && do {
-      $event->{content} = $value;
+      $event->{content}{nibble} = $value;
       return;
     };
     $_ eq 'event_information' && do {

@@ -179,7 +179,7 @@ SWITCH: for ( $element->{Name} ) {
       $self->{currentProgramInfo}{keyword} = $value;
       $value = lc($value);
       if ( exists $content{$value} ) {
-        $self->{currentProgramInfo}{content} = $content{$value};
+        $self->{currentProgramInfo}{content}{nibble} = $content{$value};
       }
       return;
     };

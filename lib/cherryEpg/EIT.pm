@@ -390,8 +390,8 @@ sub getContentDescriptorBin {
   my $descriptor_length;
 
   my $substruct = '';
-  foreach my $nibbles ( $descriptor->{list}->@* ) {
-    $substruct .= pack( "CC", $nibbles, 0 );
+  foreach my $item ( $descriptor->{list}->@* ) {
+    $substruct .= pack( "CC", $item->{nibble}, $item->{user} // 0 );
   }
   $descriptor_length = length($substruct);
   return pack( "CCa*", $descriptor_tag, $descriptor_length, $substruct );

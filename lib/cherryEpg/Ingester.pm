@@ -354,20 +354,37 @@ sub ingestData {
       $content_descriptor->{descriptor_tag} = 0x54;    # content descriptor
       $content_descriptor->{list}           = [];
 
-      if ( !ref $event->{content} ) {
+      if ( ref( $event->{content} ) ne 'ARRAY' ) {
 
-        # convert scalar to array
+        # put single hash in array
         $event->{content} = [ $event->{content} ];
       }
 
       if ( ref $event->{content} eq 'ARRAY' ) {
-        foreach my $code ( $event->{content}->@* ) {
-          if ( $code =~ m/^\d+$/ && $code >= 0 && $code <= 0xff ) {
-            push( $content_descriptor->{list}->@*, $code );
-          } else {
-            push( $event->{error}->@*, "invalid content descriptor [$code] - ignored" );
+        foreach my $item ( $event->{content}->@* ) {
+          my $valid;
+
+          if ( exists $item->{nibble} ) {
+            my $code = $item->{nibble};
+            if ( $code =~ m/^\d+$/ && $code >= 0 && $code <= 0xff ) {
+              $valid = 1;
+            } else {
+              push( $event->{error}->@*, "invalid content descriptor [$code] - ignored" );
+            }
+          } ## end if ( exists $item->{nibble...})
+          if ( exists $item->{user} ) {
+            my $code = $item->{user};
+            if ( $code =~ m/^\d+$/ && $code >= 0 && $code <= 0xff ) {
+            } else {
+              $valid = 0;
+              push( $event->{error}->@*, "invalid content descriptor [$code] - ignored" );
+            }
+          } ## end if ( exists $item->{user...})
+
+          if ($valid) {
+            push( $content_descriptor->{list}->@*, $item );
           }
-        } ## end foreach my $code ( $event->...)
+        } ## end foreach my $item ( $event->...)
 
         push( @descriptors, $content_descriptor ) if $content_descriptor->{list}->@*;
       } else {

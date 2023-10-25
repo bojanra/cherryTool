@@ -1,133 +1,777 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<BroadcastData creationDate="20231023000000">
+<?xml version="1.0" encoding="UTF-8"?>
+<BroadcastData creationDate="20231023201842">
   <ProviderInfo>
-    <ProviderId>AbertisXML</ProviderId>
-    <ProviderName>AbertisXML</ProviderName>
+    <ProviderId>Tuya La Janda</ProviderId>
+    <ProviderName>Tuya La Janda</ProviderName>
   </ProviderInfo>
   <ScheduleData>
-    <ChannelPeriod beginTime="20231023000000" endTime="20231101072749">
-      <ChannelId>El Punt Avui</ChannelId>
-      <Event beginTime="20231023000000" duration="37620">
+    <ChannelPeriod beginTime="20231023195700" endTime="20231025081100">
+      <ChannelId>Tuya La Janda</ChannelId>
+      <Event beginTime="20231023195700" duration="2220">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Informaci� Territorial</Name>
-            <ShortDescription/>
-            <Description>Informaci� territorial.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>MÁS DE CERCA (PROGRAMA 843)</Name>
+            <ShortDescription>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </ShortDescription>
+            <Description>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </Description>
+            <AgeClassification>15</AgeClassification>
+            <Genre>1</Genre>
+            <Subgenre>3</Subgenre>
+            <UserByte>45</UserByte>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023090008" duration="984">
+      <Event beginTime="20231023203400" duration="3540">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O (redifusi�)</Name>
-            <ShortDescription/>
-            <Description>L'an�lisi del judici del proc�s al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldr� les q�estions m�s importants de cada sessi�, comptarem amb els advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>MÁS DE CERCA (PROGRAMA 843)</Name>
+            <ShortDescription>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </ShortDescription>
+            <Description>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </Description>
+            <AgeClassification>0x0</AgeClassification>
+            <Genre/>
+            <Subgenre/>
+            <UserByte/>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023091743" duration="2374">
+      <Event beginTime="20231023213300" duration="300">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O (redifusi�)</Name>
-            <ShortDescription/>
-            <Description>L'an�lisi del judici del proc�s al Tribunal Suprem, a L'illa de Robinson. Un advocat especialitzat resoldr� les q�estions m�s importants de cada sessi�, comptarem con los advocats Jaume Alonso-Cuevillas i Gonzalo Boye i parlarem amb familiars i protagonistes relacionats amb el judici als nou encausats per l'1-O.</Description>
-            <AgeClassification>12</AgeClassification>
+            <Name>EL TIEMPO DEL LUNES POR LA AEMET</Name>
+            <ShortDescription>La Agencia Estatal de Meteorología te ofrece la predicción metorológica para los próximos días. </ShortDescription>
+            <Description>La Agencia Estatal de Meteorología te ofrece la predicción metorológica para los próximos días. </Description>
+            <AgeClassification>0xA</AgeClassification>
+            <Genre/>
+            <Subgenre/>
+            <UserByte>0x12</UserByte>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023100000" duration="7200">
+      <Event beginTime="20231023213800" duration="1800">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-            <ShortDescription/>
-            <Description>Emissi� �ntegrament i en directe les sessions del judici del proc�s al Tribunal Suprem.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>TÚ MANDAS</Name>
+            <ShortDescription>El programa más divertido de Tuya TV donde podrás enviar tus fotos y vídeos para Raquel Ramírez las comenté. Envía tu whatsapp al 661818178</ShortDescription>
+            <Description>El programa más divertido de Tuya TV donde podrás enviar tus fotos y vídeos para Raquel Ramírez las comenté. Envía tu whatsapp al 661818178</Description>
+            <AgeClassification>0xF</AgeClassification>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023120307" duration="1263">
+      <Event beginTime="20231023220800" duration="1980">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Gaudeix la festa</Name>
-            <ShortDescription/>
-            <Description>Les falles s�n una festa valenciana que ja tomba el m�n sencer. A Catalunya se'n fan a Gav� i tamb� anem fins al Pa�s Valenci� per viure-les de prop.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>DENTRO DEL ÁREA EDICIÓN CHICLANA CF</Name>
+            <ShortDescription>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el UD Tomares - Chiclana CF. </ShortDescription>
+            <Description>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el UD Tomares - Chiclana CF. </Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023123019" duration="5400">
+      <Event beginTime="20231023224100" duration="2160">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-            <ShortDescription/>
-            <Description>Emissi� �ntegrament i en directe les sessions del judici del proc�s al Tribunal Suprem.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>DENTRO DEL AREA EDICIÓN CONIL CF</Name>
+            <ShortDescription>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el Ceuta B - Conil CF</ShortDescription>
+            <Description>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el Ceuta B - Conil CF</Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023140224" duration="1616">
+      <Event beginTime="20231023231700" duration="2160">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Caminant per Catalunya</Name>
-            <ShortDescription/>
-            <Description>Programa d'excursions fetes per tot el territori catal�.</Description>
+            <Name>MÁS DE CERCA (PROGRAMA 843)</Name>
+            <ShortDescription>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </ShortDescription>
+            <Description>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023143056" duration="1590">
+      <Event beginTime="20231023235300" duration="2340">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Protagonistes (redifusi�)</Name>
-            <ShortDescription/>
-            <Description>Mireia Rourera entrevista �scar de la Cruz</Description>
+            <Name>MÁS DE CERCA (PROGRAMA 843)</Name>
+            <ShortDescription>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </ShortDescription>
+            <Description>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023150000" duration="3420">
+      <Event beginTime="20231024003200" duration="1860">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Informaci� Territorial</Name>
-            <ShortDescription/>
-            <Description>Informaci� territorial.</Description>
-            <AgeClassification>7</AgeClassification>
+            <Name>TÚ MANDAS</Name>
+            <ShortDescription>El programa más divertido de Tuya TV donde podrás enviar tus fotos y vídeos para Raquel Ramírez las comenté. Envía tu whatsapp al 661818178</ShortDescription>
+            <Description>El programa más divertido de Tuya TV donde podrás enviar tus fotos y vídeos para Raquel Ramírez las comenté. Envía tu whatsapp al 661818178</Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023160000" duration="7200">
+      <Event beginTime="20231024010300" duration="1980">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-            <ShortDescription/>
-            <Description>Emissi� �ntegrament i en directe les sessions del judici del proc�s al Tribunal Suprem.</Description>
+            <Name>DENTRO DEL ÁREA EDICIÓN CHICLANA CF</Name>
+            <ShortDescription>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el UD Tomares - Chiclana CF. </ShortDescription>
+            <Description>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el UD Tomares - Chiclana CF. </Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023180306" duration="485">
+      <Event beginTime="20231024013600" duration="2220">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Banc dels Aliments, tones de solidaritat</Name>
-            <ShortDescription/>
-            <Description>En aquesta primera c�psula, descobrirem com va n�ixer el Banc dels Aliments de Barcelona, qui el va crear i els pilars b�sics de la seva carta fundacional. Tamb� coneixerem el testimoni dels voluntaris m�s antics i sabrem quantes tones d'aliments reparteix actualment.</Description>
+            <Name>DENTRO DEL AREA EDICIÓN CONIL CF</Name>
+            <ShortDescription>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el Ceuta B - Conil CF</ShortDescription>
+            <Description>El análisis pormenorizado de las jugadas del partido de la jornada. 
+Hoy, todo lo que pasó en el Ceuta B - Conil CF</Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023181500" duration="720">
+      <Event beginTime="20231024021300" duration="1800">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>L'Illa de Robinson, Especial Judici 1-O</Name>
-            <ShortDescription/>
-            <Description>Emissi� �ntegrament i en directe les sessions del judici del proc�s al Tribunal Suprem.</Description>
+            <Name>01 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>01 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>01 842 MÁS DE CERCA 20102023</Description>
           </EpgText>
         </EpgProduction>
       </Event>
-      <Event beginTime="20231023183011" duration="1610">
+      <Event beginTime="20231024024300" duration="720">
         <EpgProduction>
           <EpgText language="spa">
-            <Name>Caminant per Catalunya</Name>
-            <ShortDescription/>
-            <Description>Programa d'excursions fetes per tot el territori catal�.</Description>
+            <Name>02 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>02 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>02 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024025500" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024032100" duration="300">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_21_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_21_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_21_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024032600" duration="780">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024033900" duration="2460">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>03 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>03 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>03 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024042000" duration="2040">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024045400" duration="1620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024052100" duration="240">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_22_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_22_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_22_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024052500" duration="900">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Name>
+            <ShortDescription># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</ShortDescription>
+            <Description># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024054000" duration="780">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024055300" duration="2040">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 LAS COSAS DE JUANINO</Name>
+            <ShortDescription>06 LAS COSAS DE JUANINO</ShortDescription>
+            <Description>06 LAS COSAS DE JUANINO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024062700" duration="1860">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>01 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>01 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024065800" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>02 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>02 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024071000" duration="1980">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>03 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>03 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>03 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024074300" duration="2220">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>17 A TU SALUD 01022022</Name>
+            <ShortDescription>17 A TU SALUD 01022022</ShortDescription>
+            <Description>17 A TU SALUD 01022022</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024082000" duration="1440">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 330 TU MANDAS 20102023</Name>
+            <ShortDescription>01 330 TU MANDAS 20102023</ShortDescription>
+            <Description>01 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024084400" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 330 TU MANDAS 20102023</Name>
+            <ShortDescription>02 330 TU MANDAS 20102023</ShortDescription>
+            <Description>02 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024091000" duration="1680">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 ACTO CENTENARIO CRUZ ROJA CONIL</Name>
+            <ShortDescription>01 ACTO CENTENARIO CRUZ ROJA CONIL</ShortDescription>
+            <Description>01 ACTO CENTENARIO CRUZ ROJA CONIL</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024093800" duration="2460">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 ACTO CENTENARIO CRUZ ROJA CONIL</Name>
+            <ShortDescription>02 ACTO CENTENARIO CRUZ ROJA CONIL</ShortDescription>
+            <Description>02 ACTO CENTENARIO CRUZ ROJA CONIL</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024101900" duration="2160">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024105500" duration="1620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024112200" duration="360">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_22_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_22_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_22_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024112800" duration="540">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024113700" duration="1080">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Name>
+            <ShortDescription># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</ShortDescription>
+            <Description># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024115500" duration="3300">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 CEUTA - CONIL 22102023</Name>
+            <ShortDescription>01 CEUTA - CONIL 22102023</ShortDescription>
+            <Description>01 CEUTA - CONIL 22102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024125000" duration="3660">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 CEUTA - CONIL 22102023</Name>
+            <ShortDescription>02 CEUTA - CONIL 22102023</ShortDescription>
+            <Description>02 CEUTA - CONIL 22102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024135100" duration="2160">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024142700" duration="1440">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 330 TU MANDAS 20102023</Name>
+            <ShortDescription>01 330 TU MANDAS 20102023</ShortDescription>
+            <Description>01 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024145100" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 330 TU MANDAS 20102023</Name>
+            <ShortDescription>02 330 TU MANDAS 20102023</ShortDescription>
+            <Description>02 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024151700" duration="1800">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>01 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>01 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024154700" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>02 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>02 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024155900" duration="2040">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>03 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>03 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>03 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024163300" duration="1620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024170000" duration="300">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_22_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_22_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_22_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024170500" duration="900">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Name>
+            <ShortDescription># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</ShortDescription>
+            <Description># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024172000" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024173200" duration="1920">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>05 LAS COSAS DE JUANINO</Name>
+            <ShortDescription>05 LAS COSAS DE JUANINO</ShortDescription>
+            <Description>05 LAS COSAS DE JUANINO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024180400" duration="1980">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 LAS COSAS DE JUANINO</Name>
+            <ShortDescription>06 LAS COSAS DE JUANINO</ShortDescription>
+            <Description>06 LAS COSAS DE JUANINO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024183700" duration="1860">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>01 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>01 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024190800" duration="780">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>02 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>02 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024192100" duration="1980">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>03 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>03 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>03 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024195400" duration="1440">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 330 TU MANDAS 20102023</Name>
+            <ShortDescription>01 330 TU MANDAS 20102023</ShortDescription>
+            <Description>01 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024201800" duration="1620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 330 TU MANDAS 20102023</Name>
+            <ShortDescription>02 330 TU MANDAS 20102023</ShortDescription>
+            <Description>02 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024204500" duration="2100">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 COMO LA VIDA 15092023</Name>
+            <ShortDescription>01 COMO LA VIDA 15092023</ShortDescription>
+            <Description>01 COMO LA VIDA 15092023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024212000" duration="2220">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024215700" duration="1740">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>326 TU MANDAS 16102023</Name>
+            <ShortDescription>326 TU MANDAS 16102023</ShortDescription>
+            <Description>326 TU MANDAS 16102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024222600" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024225200" duration="360">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_22_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_22_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_22_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024225800" duration="480">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#CONIL IZADO BANDERA ACCC</Name>
+            <ShortDescription>#CONIL IZADO BANDERA ACCC</ShortDescription>
+            <Description>#CONIL IZADO BANDERA ACCC</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024230600" duration="900">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Name>
+            <ShortDescription># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</ShortDescription>
+            <Description># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024232100" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024233300" duration="420">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>SUPERMAR Y LA PESCA ARTESANAL MEDIA_OPP72</Name>
+            <ShortDescription>SUPERMAR Y LA PESCA ARTESANAL MEDIA_OPP72</ShortDescription>
+            <Description>SUPERMAR Y LA PESCA ARTESANAL MEDIA_OPP72</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231024234000" duration="1860">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>01 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>01 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025001100" duration="720">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>02 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>02 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025002300" duration="2040">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>03 842 MÁS DE CERCA 20102023</Name>
+            <ShortDescription>03 842 MÁS DE CERCA 20102023</ShortDescription>
+            <Description>03 842 MÁS DE CERCA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025005700" duration="1500">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 330 TU MANDAS 20102023</Name>
+            <ShortDescription>01 330 TU MANDAS 20102023</ShortDescription>
+            <Description>01 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025012200" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 330 TU MANDAS 20102023</Name>
+            <ShortDescription>02 330 TU MANDAS 20102023</ShortDescription>
+            <Description>02 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025014800" duration="2700">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025023300" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>TUYA NOTICIAS 20102023</Name>
+            <ShortDescription>TUYA NOTICIAS 20102023</ShortDescription>
+            <Description>TUYA NOTICIAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025025900" duration="360">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>2023_10_22_12_00_boletin1_tv</Name>
+            <ShortDescription>2023_10_22_12_00_boletin1_tv</ShortDescription>
+            <Description>2023_10_22_12_00_boletin1_tv</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025030500" duration="420">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#CONIL IZADO BANDERA ACCC</Name>
+            <ShortDescription>#CONIL IZADO BANDERA ACCC</ShortDescription>
+            <Description>#CONIL IZADO BANDERA ACCC</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025031200" duration="900">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Name>
+            <ShortDescription># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</ShortDescription>
+            <Description># CHICLANA SEMANA DEL ESTERO DESPESQUE Y ENTREGA DORADA DE ORO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025032700" duration="660">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>#VEJER EXPOSICION 37 FRAN CABEZAS</Name>
+            <ShortDescription>#VEJER EXPOSICION 37 FRAN CABEZAS</ShortDescription>
+            <Description>#VEJER EXPOSICION 37 FRAN CABEZAS</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025033800" duration="1380">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 330 TU MANDAS 20102023</Name>
+            <ShortDescription>01 330 TU MANDAS 20102023</ShortDescription>
+            <Description>01 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025040100" duration="1560">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 330 TU MANDAS 20102023</Name>
+            <ShortDescription>02 330 TU MANDAS 20102023</ShortDescription>
+            <Description>02 330 TU MANDAS 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025042700" duration="2220">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 COMO LA VIDA 20102023</Name>
+            <ShortDescription>06 COMO LA VIDA 20102023</ShortDescription>
+            <Description>06 COMO LA VIDA 20102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025050400" duration="2160">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 843 MÁS DE CERCA 23102023</Name>
+            <ShortDescription>01 843 MÁS DE CERCA 23102023</ShortDescription>
+            <Description>01 843 MÁS DE CERCA 23102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025054000" duration="2100">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 843 MÁS DE CERCA 23102023</Name>
+            <ShortDescription>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </ShortDescription>
+            <Description>El programa magacín donde Guillermo Ortiz y su equipo te ofrece la actualidad del día, temas de interés y secciones para mejorar cada día. </Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025061500" duration="2040">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>06 LAS COSAS DE JUANINO</Name>
+            <ShortDescription>06 LAS COSAS DE JUANINO</ShortDescription>
+            <Description>06 LAS COSAS DE JUANINO</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025064900" duration="3300">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>01 CEUTA - CONIL 22102023</Name>
+            <ShortDescription>01 CEUTA - CONIL 22102023</ShortDescription>
+            <Description>01 CEUTA - CONIL 22102023</Description>
+          </EpgText>
+        </EpgProduction>
+      </Event>
+      <Event beginTime="20231025074400" duration="1620">
+        <EpgProduction>
+          <EpgText language="spa">
+            <Name>02 CEUTA - CONIL 22102023</Name>
+            <ShortDescription>02 CEUTA - CONIL 22102023</ShortDescription>
+            <Description>02 CEUTA - CONIL 22102023</Description>
           </EpgText>
         </EpgProduction>
       </Event>
