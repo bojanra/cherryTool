@@ -186,7 +186,11 @@ sub getSections {
   my $sections = {};
 
   my $last_section_number = $#{ $self->{sections} };
-  my $num_segments        = int( $last_section_number / 8 );
+
+  # there must be at least 1 section in the segment
+  $last_section_number = 0 if $last_section_number < 0;
+
+  my $num_segments = int( $last_section_number / 8 );
 
   my $current_segment = 0;
 
@@ -198,6 +202,14 @@ sub getSections {
     while ( $i >= 0 and !defined $self->{sections}[ $current_segment * 8 + $i ] ) {
       --$i;
     }
+
+    # create empty section if none found
+    if ( $i == -1 ) {
+
+      $self->{sections}[ $current_segment * 8 ] = '';
+      $i = 0;
+    }
+
     my $segment_last_section_number = $i + $current_segment * 8;
 
     # iterate over sections in this segment and add them to final hash

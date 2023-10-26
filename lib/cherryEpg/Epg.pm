@@ -1118,7 +1118,7 @@ sub updateEitPresent {
   ++$last_version_number;
 
   # Prepare the new sections
-  my $sections = $present_following->getSections($last_version_number);
+  my $section = $present_following->getSections($last_version_number);
 
   $self->_lockdb();
 
@@ -1135,9 +1135,9 @@ SQL
         $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id}, ?, ?)"
   );
 
-  foreach my $section_number ( keys %$sections ) {
+  foreach my $section_number ( keys %$section ) {
     $insert->bind_param( 1, $section_number );
-    $insert->bind_param( 2, $sections->{$section_number}, SQL_BLOB );
+    $insert->bind_param( 2, $section->{$section_number}, SQL_BLOB );
     $insert->execute();
   }
 
@@ -1293,7 +1293,7 @@ sub updateEitSchedule {
     ++$last_version_number;
 
     # Prepare the new sections
-    my $sections = $schedule->getSections($last_version_number);
+    my $section = $schedule->getSections($last_version_number);
 
     $self->_lockdb();
 
@@ -1311,9 +1311,9 @@ SQL
 
     # return unless $insert;
 
-    foreach my $section_number ( keys %$sections ) {
+    foreach my $section_number ( keys %$section ) {
       $insert->bind_param( 1, $section_number );
-      $insert->bind_param( 2, $sections->{$section_number}, SQL_BLOB );
+      $insert->bind_param( 2, $section->{$section_number}, SQL_BLOB );
       $insert->execute();
     }
 
