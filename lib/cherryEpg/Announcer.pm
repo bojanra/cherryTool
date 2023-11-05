@@ -55,16 +55,7 @@ Return setting.
 sub announcerLoad {
   my ($self) = @_;
 
-  if ( -e $self->announcerFile ) {
-    my $a = YAML::XS::LoadFile( $self->announcerFile );
-    if ( ref $a eq 'HASH' ) {
-      $self->{announcer} = $a;
-      return $a;
-    }
-  } ## end if ( -e $self->announcerFile)
-
-  # return empty
-  return {
+  my $status = {
     present => {
       text    => "",
       publish => 0
@@ -74,6 +65,18 @@ sub announcerLoad {
       publish => 0
     }
   };
+
+  if ( -e $self->announcerFile ) {
+    my $a = YAML::XS::LoadFile( $self->announcerFile );
+    if ( ref $a eq 'HASH' ) {
+      $status = { $status->%*, $a->%*, };
+    }
+  } ## end if ( -e $self->announcerFile)
+
+  # convert text to numbers
+  map { $_->{publish} += 0; } @$status{ 'present', 'following' };
+
+  return $status;
 } ## end sub announcerLoad
 
 =head3 announcerInsert( $following, $event)
