@@ -109,7 +109,10 @@ sub parse {
       next;
     } else {
       $event->{start} = $t->epoch;
-    }
+
+      # stupid bugfix of incoming data
+      next if $event->{start} <= 1000;
+    } ## end else [ if ( !$t ) ]
 
     $self->smartCorrect($event);
 
