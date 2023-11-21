@@ -1568,12 +1568,13 @@ sub getSectionFrequency {
 
   # according to some scandinavian and australian specification we use following
   # repetition rate:
-  # EITsched actual 1 day      - every 10s
-  # EITsched actual other days - every 30s
-  # EITsched other 1 day       - every 30s
-  # EITsched other other days  - every 30s
-  # THE FREQUENCY FOR PRESENT/FOLLOWING TABLE 0x4e AND 0x4f IS DEFINED IN THE CALLING SUBROUTINE
-  return ceil( $timeFrame / 10 ) if ( $table_id == 0x50 ) and ( $section_number < ( 1 * 24 / 3 ) );
+  # EITa p/f            0x4e  - every 2s  defined in calling subroutine
+  # EITo p/f            0x4f  - every 2s
+  # EITa sch first day        - every 10s
+  # EITa sch other days       - every 30s
+  # EITo sch first day        - every 30s
+  # EITo sch other other days - every 30s
+  return ceil( $timeFrame / 10 ) if ( $table_id == 0x50 ) and ( $section_number <= ( 1 * 24 / 3 ) );
   return ceil( $timeFrame / 30 );
 } ## end sub getSectionFrequency
 
