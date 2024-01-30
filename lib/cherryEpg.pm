@@ -1,4 +1,4 @@
-package cherryEpg v2.4.32;
+package cherryEpg v2.5.1;
 
 use 5.024;
 use utf8;
@@ -503,9 +503,11 @@ sub buildEit {
   if ( !defined $report->{update} ) {
     $logger->error( "build EIT", undef, $eit_id );
   } elsif ( $report->{update} || !$player->isPlaying( $subdir, $filename ) ) {
-    my $interval = 30;
 
-    my $pes = $epg->getEit( $eit->{eit_id}, $interval );
+    # unless specified use default timeFrame for builing
+    my $timeFrame = $self->config->{core}{timeFrame} // 29;
+
+    my $pes = $epg->getEit( $eit->{eit_id}, $timeFrame );
 
     my $dst = $eit->{output};
 
@@ -513,7 +515,7 @@ sub buildEit {
     $dst =~ s|^udp://||;
 
     my $specs = {
-      interval => $interval * 1000,    # must be in ms
+      interval => $timeFrame * 1000,    # must be in ms
       dst      => $dst,
       title    => "Dynamic EIT"
     };
@@ -525,9 +527,9 @@ sub buildEit {
     # limit bitrate
     if ( exists $eit->{option}{MAXBITRATE} and $eit->{option}{MAXBITRATE} ) {
       my $maxBitrate     = $eit->{option}{MAXBITRATE};
-      my $currentBitrate = int( length($pes) * 8 / $interval );
+      my $currentBitrate = int( length($pes) * 8 / $timeFrame );
       if ( $currentBitrate > $maxBitrate ) {
-        delete $specs->{interval};
+        delete $specs->{timeFrame};
         $specs->{bitrate} = $maxBitrate + 0;
         $logger->info( "MaxBitrate protection activated ($currentBitrate bps > $maxBitrate bps)", undef, $eit_id );
       }

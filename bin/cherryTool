@@ -86,6 +86,7 @@ use 5.024;
 use utf8;
 use cherryEpg;
 use cherryEpg::Maintainer;
+use cherryEpg::Inspector;
 use File::Basename;
 use Getopt::Std;
 use IPC::ConcurrencyLimit;
@@ -104,7 +105,7 @@ my %args;
 
 my $getoptsSuccess = getopts( "ABc:CdfFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:U:vVwWxyYZ:", \%args );
 
-say("cherryTool - $cherryEpg::VERSION Copyright 2022 Bojan Ramšak");
+say("cherryTool - $cherryEpg::VERSION Copyright 2024 Bojan Ramšak");
 
 pod2usage(
   -verbose  => 99,
@@ -365,8 +366,22 @@ Table    Engine  Rows    Size         Create      Update      Check       Collat
 } ## end sub getDatabaseInfo
 
 sub inspect {
-  say("TBD");
-}
+  my ($chunk) = @_;
+
+  my $cherry    = cherryEpg->instance( verbose => $verbose );
+  my $inspector = cherryEpg::Inspector->new( verbose => $verbose );
+  $inspector->timeFrame = $cherry->config->{core}{timeFrame} if $cherry->config->{core}{timeFrame};
+
+  foreach my $file ( $chunk, $cherry->config->{core}{carousel} . $chunk, $cherry->config->{core}{carousel} . $chunk . ".cts" ) {
+
+    next unless -e $file;
+    $inspector->load($file);
+    say $inspector->report;
+    exit 0;
+  } ## end foreach my $file ( $chunk, ...)
+  say("File not found!");
+  exit 1;
+} ## end sub inspect
 
 sub testLogger {
   my ($message) = @_;

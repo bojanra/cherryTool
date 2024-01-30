@@ -44,8 +44,7 @@ ok( $cherry->resetDatabase(),        "clean/init db" );
 # read, build load scheme
 ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
 
-my $s = $scheme->build();
-ok( $s->{isValid}, "build scheme" );
+ok( $scheme->build()->{isValid}, "build scheme" );
 
 my ( $success, $error ) = $scheme->pushScheme();
 ok( scalar(@$success) && !scalar(@$error), "load scheme" );

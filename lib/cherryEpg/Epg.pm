@@ -1334,7 +1334,7 @@ SQL
 
 Build final EIT from all sections in table for given $eit_id and $timeFrame.
 
-Return the complete TS chunk to be played within the timeframe.
+Return the complete TS chunk to be played within the timeFrame.
 Return undef on error.
 
 =cut
@@ -1344,8 +1344,8 @@ sub getEit {
   my $dbh = $self->dbh;
   return unless $dbh;
   return unless defined $eit_id;
+  return unless defined $timeFrame;
 
-  $timeFrame //= 30;    # this is the time frame for which we are building the fragment of the TS
   my $pid;
 
   # get the pid number of the destination chunk
@@ -1361,7 +1361,7 @@ sub getEit {
         section.service_id = rule.service_id AND section.original_network_id = rule.original_network_id
         AND section.transport_stream_id = rule.transport_stream_id ) WHERE rule.eit_id = $eit_id AND
         ((rule.actual = 1 AND (section.table_id = 78 OR section.table_id & 240 = 80)) OR
-        (rule.actual = 0 AND (section.table_id = 79 OR section.table_id & 240 = 96))) ORDER BY RAND()"
+        (rule.actual = 0 AND (section.table_id = 79 OR section.table_id & 240 = 96))) ORDER BY OCTET_LENGTH(dump) DESC"
   );
   $sel->execute();
 
@@ -1372,7 +1372,7 @@ sub getEit {
     present   => { packetCount => 0, mts => '' },
     following => { packetCount => 0, mts => '' }
   );
-  my $pfFrequency = ceil( $timeFrame / 1.7 );    # DON'T CHANGE THIS, IT IS THE BASIC CYCLE
+  my $pfFrequency = ceil( $timeFrame / 1.8 );    # DON'T CHANGE THIS, IT IS THE BASIC CYCLE
                                                  # the repetition period must be at least 2s by
 
   my @otherSections;
@@ -1410,7 +1410,7 @@ sub getEit {
     $allPacketCount += $section->{frequency} * $section->{size};
   } ## end while ( $sel->fetch )
 
-  # minimum number of packets between sections with same table_id/service_id
+  # minimum number of packets between sections with same table_id/service_id (25ms)
   my $minPacketGap = ceil( $allPacketCount / ( $timeFrame * 40 ) );
 
   # calculate available space for other sections than present following
@@ -1442,16 +1442,15 @@ sub getEit {
       $section->{last} = \$lastOccur->{ $section->{table_id} }{ $section->{service_id} };
     }
 
-#        printf( " sid: %2i table: %4i spacing: %3i freq: %4i\n", $section->{service_id}, $section->{table_id}, $section->{spacing}, $section->{frequency});
   } ## end foreach my $section (@otherSections)
 
-#    printf( " all: %4i netto: %4i gap: %4i mingap: %4i rest: %4i\n", $allPacketCount, $nettoSpace, $interPfGap, $minPacketGap, $nettoSpace-$pfFrequency*$interPfGap);
-
   # let's build the stream
-  my $pfCount             = 2 * $pfFrequency;
-  my $finalMts            = '';
-  my $finalMtsPacketCount = 0;
-  my $gapSpace            = 0;
+  my $pfCount                       = 2 * $pfFrequency;
+  my $finalMts                      = '';
+  my $finalMtsPacketCount           = 0;
+  my $gapSpace                      = 0;
+  my $numInsertedPacketsInIteration = 0;
+
   while ( $pfCount > 0 ) {
 
     # put alternating present and following mts in the stream
@@ -1473,40 +1472,38 @@ sub getEit {
       $gapSpace = $allPacketCount - $finalMtsPacketCount;
     }
 
-    my $sectionCount                  = 0;
-    my $numInsertedPacketsInIteration = 0;
+    my $sectionCount = 0;
 
-    # allow initial sorting of sections
-    my $j = -1;
-
-#        printf( " filling j: %3i gapspace: %3i pfcount: %2i sum: %3i all: %3i #sections: %3i\n", $j, $gapSpace, $pfCount, $finalMtsPacketCount, $allPacketCount, $#otherSections);
     while ( $gapSpace > 0 && $finalMtsPacketCount < $allPacketCount && scalar @otherSections > 0 ) {
 
-      # sort only at the begin and if we have inserted all packed once
-      if ( $j == -1 || $j > $#otherSections ) {
+      my $j = 0;
 
-        # correct counters for sections just before sort - optimization
-        if ($numInsertedPacketsInIteration) {
-          foreach my $section (@otherSections) {
-            $section->{nextApply} -= $numInsertedPacketsInIteration if $section->{played};
-          }
-          $numInsertedPacketsInIteration = 0;
-        } ## end if ($numInsertedPacketsInIteration)
+      # correct counters for sections just before sort - optimization
+      if ($numInsertedPacketsInIteration) {
+        foreach my $section (@otherSections) {
+          $section->{nextApply} -= $numInsertedPacketsInIteration if $section->{played};
+        }
+        $numInsertedPacketsInIteration = 0;
+      } ## end if ($numInsertedPacketsInIteration)
 
-        # sort sections by number when it has to apply, frequency and size
-        @otherSections = sort {
-                 $a->{nextApply} <=> $b->{nextApply}
-              || $b->{frequency} <=> $a->{frequency}
-              || ${ $a->{last} } <=> ${ $b->{last} }
-        } @otherSections;
-        $j = 0;
-      } ## end if ( $j == -1 || $j > ...)
+      # sort sections by number when it has to apply, frequency and size
+      @otherSections = sort {
+               $a->{nextApply} <=> $b->{nextApply}
+            || $b->{frequency} <=> $a->{frequency}
+            || ${ $a->{last} } <=> ${ $b->{last} }
+      } @otherSections;
 
       my $border = $finalMtsPacketCount - 2 * $minPacketGap;
       $border = 0 if $border < 0;
 
-      while ( $j < $#otherSections && ${ $otherSections[$j]->{last} } > $border ) {
-        $j = $j + 1;
+      # find section from other service to achive minPacketGap
+      my $other = $j;
+      while ( $other < $#otherSections && ${ $otherSections[$other]->{last} } > $border ) {
+        $other += 1;
+      }
+      if ( $otherSections[$other]->{last} != $otherSections[$j]->{last} ) {
+
+        $j = $other;
       }
 
       $sectionCount += 1;
@@ -1523,20 +1520,13 @@ sub getEit {
       $finalMtsPacketCount += $numInsertedPackets;
       ${ $otherSections[$j]->{last} } = $finalMtsPacketCount;
 
-#            printf( " j: %3i size: %2i gapspace: %3i pfcount: %2i sum: %3i all: %3i\n", $j, $otherSections[$j]->{size}, $gapSpace, $pfCount, $finalMtsPacketCount, $allPacketCount);
-
       # if all repetitions have been done, remove section from pool
       if ( $otherSections[$j]->{frequency} == 0 ) {
-
-#                printf( " played: %3i section_id: %3i service_id: %3i\n", $otherSections[$j]->{played}, $otherSections[$j]->{section_number}, $otherSections[$j]->{service_id});
         splice( @otherSections, $j, 1 );    # remove finished sections
       }
 
       # sum up all inserted packets before next sort
       $numInsertedPacketsInIteration += $numInsertedPackets;
-
-      $j += 1;
-
     } ## end while ( $gapSpace > 0 && ...)
   } ## end while ( $pfCount > 0 )
 
@@ -1555,16 +1545,13 @@ sub getEit {
 =head3 getSectionFrequency( $table_id, $section_number, $timeFrame)
 
 Make lookup by $table_id and $section_number and return how often this section
-has to be repeated in the given interval. Default interval ($timeFrame) is 60 seconds.
+has to be repeated in the given interval. The $timeFrame must be in seconds.
 
 =cut
 
 sub getSectionFrequency {
   my ( $self, $table_id, $section_number, $timeFrame ) = @_;
-  my $dbh = $self->dbh;
-  return unless $dbh;
-
-  $timeFrame //= 60;
+  return unless $timeFrame;
 
   # according to some scandinavian and australian specification we use following
   # repetition rate:
@@ -1574,7 +1561,7 @@ sub getSectionFrequency {
   # EITa sch other days       - every 30s
   # EITo sch first day        - every 30s
   # EITo sch other other days - every 30s
-  return ceil( $timeFrame / 10 ) if ( $table_id == 0x50 ) and ( $section_number <= ( 1 * 24 / 3 ) );
+  return ceil( $timeFrame / 10 ) if ( $table_id == 0x50 ) and ( $section_number <= ( 1 * 24 / 3 * 8 ) );
   return ceil( $timeFrame / 30 );
 } ## end sub getSectionFrequency
 
@@ -1791,7 +1778,7 @@ sub _unfreezeEvent {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 
