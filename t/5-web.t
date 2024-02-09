@@ -4,7 +4,7 @@ use 5.024;
 use File::Path qw(remove_tree);
 use Mojo::Base -strict;
 use Test::Mojo;
-use Test::More tests => 75;
+use Test::More tests => 80;
 use Try::Tiny;
 
 BEGIN {
@@ -42,7 +42,8 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
 
   $t->get_ok('/')->status_is(401);
 
-  $t->get_ok( '/' => form => { __auth_extensible_username => 'nonvalid', __auth_extensible_password => 'user' } )->status_is(401);
+  $t->post_ok( '/' => form => { __auth_extensible_username => 'nonvalid', __auth_extensible_password => 'user' } )
+      ->status_is(401);
 
   $t->post_ok( '/' => form => { __auth_extensible_username => 'cherry', __auth_extensible_password => 'amarena' } )
       ->status_is(302);
@@ -109,8 +110,74 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
   }
   is( $success, 6, "maintenance tasks" );
 
+  $t->post_ok(
+    '/log' => form => {
+      "draw"                      => "1",
+      "columns[0][data]"          => "",
+      "columns[0][name]"          => "",
+      "columns[0][searchable]"    => "true",
+      "columns[0][orderable]"     => "false",
+      "columns[0][search][value]" => "",
+      "columns[0][search][regex]" => "false",
+      "columns[1][data]"          => "timestamp",
+      "columns[1][name]"          => "",
+      "columns[1][searchable]"    => "true",
+      "columns[1][orderable]"     => "false",
+      "columns[1][search][value]" => "",
+      "columns[1][search][regex]" => "false",
+      "columns[2][data]"          => "category",
+      "columns[2][name]"          => "",
+      "columns[2][searchable]"    => "true",
+      "columns[2][orderable]"     => "false",
+      "columns[2][search][value]" => "",
+      "columns[2][search][regex]" => "false",
+      "columns[3][data]"          => "level",
+      "columns[3][name]"          => "",
+      "columns[3][searchable]"    => "true",
+      "columns[3][orderable]"     => "false",
+      "columns[3][search][value]" => "",
+      "columns[3][search][regex]" => "false",
+      "columns[4][data]"          => "text",
+      "columns[4][name]"          => "",
+      "columns[4][searchable]"    => "true",
+      "columns[4][orderable]"     => "false",
+      "columns[4][search][value]" => "",
+      "columns[4][search][regex]" => "false",
+      "columns[5][data]"          => "channel",
+      "columns[5][name]"          => "",
+      "columns[5][searchable]"    => "true",
+      "columns[5][orderable]"     => "false",
+      "columns[5][search][value]" => "",
+      "columns[5][search][regex]" => "false",
+      "columns[6][data]"          => "eit_id",
+      "columns[6][name]"          => "",
+      "columns[6][searchable]"    => "true",
+      "columns[6][orderable]"     => "false",
+      "columns[6][search][value]" => "",
+      "columns[6][search][regex]" => "false",
+      "start"                     => "0",
+      "length"                    => "306",
+      "search[value]"             => "",
+      "search[regex]"             => "false",
+      "category"                  => "0,1,2,3,4",
+      "level"                     => "2"
+    }
+  )->status_is(200)->json_has('/data');
+
+  my $element;
+  foreach ( $t->tx->res->json->{data}->@* ) {
+    if ( $_->{hasinfo} ) {
+      $element = $_;
+      last;
+    }
+    diag "*";
+  } ## end foreach ( $t->tx->res->json...)
+
+  my $id = $element->{id};
+  $t->get_ok("/log/$id.json")->status_is(200);    #->json_has('/timestamp');
+
   $t->post_ok('/ebudget')->json_has('/timestamp')->json_has('/status')->json_has('/data');
-  my $id = $t->tx->res->json('/data/0/id');
+  $id = $t->tx->res->json('/data/0/id');
 
   $t->post_ok('/log')->json_has('/recordsTotal')->json_has('/recordsFiltered');
 

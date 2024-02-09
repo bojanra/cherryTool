@@ -40,6 +40,8 @@ sub load {
     <$fh>;
   };
 
+  return unless $zip;
+
   $zip =~ s/^.+?!//;
   my $plain = gunzip($zip);
 
@@ -74,9 +76,10 @@ sub extractPod {
   my ( $self, $filepath ) = @_;
 
   my $pod;
-  run3( "pod2text $filepath", \undef, \$pod, \undef );
+  run3( "pod2text $filepath", \undef, \$pod, \undef, { binmode_stdout => ':encoding(UTF-8)' } );
 
-  utf8::decode($pod);
+  # workaround as STDOUT mode is overwritten by run3
+  binmode( STDOUT, ':encoding(UTF-8)' );
 
   return if ( $? & 0xff );
   return $pod;
@@ -98,9 +101,10 @@ sub apply {
   my $cherry = cherryEpg->instance();
   my $logger = get_logger('system');
 
-  run3( "perl $filepath", \undef, \$output, \undef );
+  run3( "perl $filepath", \undef, \$output, \undef, { binmode_stdout => ':encoding(UTF-8)' } );
 
-  utf8::decode($output);
+  # workaround as STDOUT mode is overwritten by run3
+  binmode( STDOUT, ':encoding(UTF-8)' );
 
   my $report = [$output];
   $self->{output} = $output;
@@ -126,6 +130,9 @@ sub check {
   my ( $self, $filepath ) = @_;
 
   run3("perl -c $filepath");
+
+  # workaround as STDOUT mode is overwritten by run3
+  binmode( STDOUT, ':encoding(UTF-8)' );
 
   return if $?;
 

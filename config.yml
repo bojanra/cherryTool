@@ -32,6 +32,7 @@ plugins:
     no_login_handler: 1
     login_page_handler: 'cherryWeb::loginPageHandler'
     permission_denied_page_handler: 'cherryWeb::permissionDeniedPageHandler'
+    denied_page: 403.tt
     realms:
       config_unix:
         provider: Unix  # roles are system groups

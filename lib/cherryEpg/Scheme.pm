@@ -76,7 +76,14 @@ sub readXLS {
   my $isEitSheet;
   my $isCloudSheet;
 
-  my $eBook = ReadData( $file, parser => "xls" );
+  my $eBook = try {
+    ReadData( $file, parser => "xls" );
+  };
+
+  if ( !$eBook ) {
+    $self->error("Invalid input file");
+    return;
+  }
 
   my $allSheets = $eBook->[0]{sheet};
 

@@ -6,7 +6,6 @@ use cherryEpg::Maintainer;
 use cherryEpg::Scheme;
 use cherryEpg;
 use Dancer2;
-use Dancer2::Plugin::Ajax;
 use Dancer2::Plugin::Auth::Extensible;
 use DBI qw(:sql_types);
 use Digest::MD5;
@@ -23,11 +22,6 @@ my $CHERRY_TEMPDIR = File::Temp->newdir( 'cherry_XXXXXX', TMPDIR => 1, CLEANUP =
 
 hook before => sub {
 
-};
-
-hook permission_denied => sub {
-  app->destroy_session;
-  redirect request->path;
 };
 
 hook before_template_render => sub {
@@ -122,7 +116,7 @@ get '/export/:id.xml' => sub {
 
   return "" unless $list;
 
-  header( 'Content-Type' => 'application/xml' );
+  response_header( 'Content-Type' => 'application/xml' );
   return $cherry->epg->exportScheduleData( $list, $cherry->config->{core}{exportIP} );
 };
 
@@ -165,9 +159,9 @@ get '/dump/:target' => require_role cherryweb => sub {
   send_file( $dump, filename => $target . '.txt', content_type => 'text/plain; charset=UTF-8' );
 };
 
-# from here on there are the AJAX handlers
+# from here on there are the 'AJAX' handlers
 # status
-ajax '/status' => require_role cherryweb => sub {
+post '/status' => require_role cherryweb => sub {
   my $report = cherryEpg->instance()->report();
 
   # correct timestamp/uptime format display with TIMEAGO
@@ -179,7 +173,7 @@ ajax '/status' => require_role cherryweb => sub {
   send_as( JSON => $report );
 };
 
-ajax '/announce' => require_role cherryweb => sub {
+post '/announce' => require_role cherryweb => sub {
 
   my $config = params->{config};
 
@@ -220,7 +214,7 @@ ajax '/announce' => require_role cherryweb => sub {
   } ## end else [ if ($config) ]
 };
 
-ajax '/carousel/browse' => require_role cherryweb => sub {
+post '/carousel/browse' => require_role cherryweb => sub {
 
   my $list = cherryEpg::Player->new()->list('/');
 
@@ -232,7 +226,7 @@ ajax '/carousel/browse' => require_role cherryweb => sub {
   send_as( JSON => $list );
 };
 
-ajax '/carousel/delete' => require_role cherryweb => sub {
+post '/carousel/delete' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $player = cherryEpg::Player->new();
@@ -242,7 +236,7 @@ ajax '/carousel/delete' => require_role cherryweb => sub {
   send_as( JSON => { success => $report // 0, target => $target } );
 };
 
-ajax '/carousel/pause' => require_role cherryweb => sub {
+post '/carousel/pause' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $player = cherryEpg::Player->new();
@@ -254,7 +248,7 @@ ajax '/carousel/pause' => require_role cherryweb => sub {
   send_as( JSON => { success => 0 } );
 };
 
-ajax '/carousel/play' => require_role cherryweb => sub {
+post '/carousel/play' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $player = cherryEpg::Player->new();
@@ -271,7 +265,7 @@ ajax '/carousel/play' => require_role cherryweb => sub {
   send_as( JSON => { success => 0 } );
 };
 
-ajax '/carousel/upload' => require_role cherryweb => sub {
+post '/carousel/upload' => require_role cherryweb => sub {
   my $upload = request->upload('file');
 
   if ( !$upload ) {
@@ -312,7 +306,7 @@ ajax '/carousel/upload' => require_role cherryweb => sub {
   send_as( JSON => $report );
 };
 
-ajax '/carousel/save' => require_role cherryweb => sub {
+post '/carousel/save' => require_role cherryweb => sub {
   my $md5 = params->{md5};
 
   my $file = session 'chunkFile';
@@ -334,7 +328,7 @@ ajax '/carousel/save' => require_role cherryweb => sub {
   send_as( JSON => { success => 0 } );
 };
 
-ajax '/carousel/upnsave' => require_role cherryweb => sub {
+post '/carousel/upnsave' => require_role cherryweb => sub {
   my @multi = request->upload('file');
 
   if ( !scalar @multi ) {
@@ -355,7 +349,7 @@ ajax '/carousel/upnsave' => require_role cherryweb => sub {
   send_as( JSON => \@report );
 };
 
-ajax '/scheme/upload' => require_role cherryweb => sub {
+post '/scheme/upload' => require_role cherryweb => sub {
   my $upload = request->upload('file');
 
   if ( !$upload ) {
@@ -404,7 +398,7 @@ ajax '/scheme/upload' => require_role cherryweb => sub {
   send_as( JSON => $report );
 };
 
-ajax '/scheme/browse' => require_role cherryweb => sub {
+post '/scheme/browse' => require_role cherryweb => sub {
 
   my $list = cherryEpg::Scheme->new()->listScheme();
 
@@ -416,7 +410,7 @@ ajax '/scheme/browse' => require_role cherryweb => sub {
   send_as( JSON => $list );
 };
 
-ajax '/scheme/validate' => require_role cherryweb => sub {
+post '/scheme/validate' => require_role cherryweb => sub {
   my $description = params->{description};
   my $mtime       = params->{mtime};
 
@@ -442,7 +436,7 @@ ajax '/scheme/validate' => require_role cherryweb => sub {
   send_as( JSON => { success => 0 } );
 };
 
-ajax '/scheme/prepare' => require_role cherryweb => sub {
+post '/scheme/prepare' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $scheme = cherryEpg::Scheme->new();
@@ -479,7 +473,7 @@ ajax '/scheme/prepare' => require_role cherryweb => sub {
   send_as( JSON => $report );
 };
 
-ajax '/scheme/action' => require_role cherryweb => sub {
+post '/scheme/action' => require_role cherryweb => sub {
   my $action = params->{action};
   my $file;
   my $scheme;
@@ -567,7 +561,7 @@ ajax '/scheme/action' => require_role cherryweb => sub {
   send_as( JSON => \@report );
 };
 
-ajax '/scheme/delete' => require_role cherryweb => sub {
+post '/scheme/delete' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $scheme = cherryEpg::Scheme->new();
@@ -578,7 +572,7 @@ ajax '/scheme/delete' => require_role cherryweb => sub {
 };
 
 # current configuration
-ajax '/scheme' => require_role cherryweb => sub {
+post '/scheme' => require_role cherryweb => sub {
   my $active = shift cherryEpg::Scheme->new()->listScheme()->@*;
 
   if ($active) {
@@ -589,7 +583,7 @@ ajax '/scheme' => require_role cherryweb => sub {
 };
 
 # show event budget for future/past
-ajax '/ebudget' => require_role cherryweb => sub {
+post '/ebudget' => require_role cherryweb => sub {
   my $t = localtime;
 
   my $cherry = cherryEpg->instance();
@@ -697,7 +691,7 @@ post '/ingest/:hash/:id' => sub {
 };
 
 # return service info
-ajax '/service/info' => require_role cherryweb => sub {
+post '/service/info' => require_role cherryweb => sub {
   my $channel_id = params->{id};
 
   my $cherry = cherryEpg->instance();
@@ -756,14 +750,14 @@ ajax '/service/info' => require_role cherryweb => sub {
 };
 
 # show ringelspiel statistics
-ajax '/carousel' => require_role cherryweb => sub {
+post '/carousel' => require_role cherryweb => sub {
   my $cherry = cherryEpg->instance();
 
   send_as( JSON => $cherry->ringelspiel );
 };
 
 # browse log
-ajax '/log' => require_role cherryweb => sub {
+post '/log' => require_role cherryweb => sub {
   my $draw     = params->{draw}     // 99;
   my $start    = params->{start}    // 0;
   my $limit    = params->{'length'} // 0;
@@ -794,7 +788,7 @@ ajax '/log' => require_role cherryweb => sub {
 };
 
 # working with the repo
-ajax '/git' => require_role cherryweb => sub {
+post '/git' => require_role cherryweb => sub {
 
   my $status = params->{update} // 0;
 
@@ -893,7 +887,7 @@ ajax '/git' => require_role cherryweb => sub {
 };
 
 # working with the repo
-ajax '/maintenance' => require_role cherryweb => sub {
+post '/maintenance' => require_role cherryweb => sub {
   my $upload = request->upload('file');
 
   if ( !$upload ) {
@@ -951,7 +945,7 @@ get '/log/:id.json' => require_role cherryweb => sub {
       && $row->{info}{source}{blob};
 
   # manual conversion to JSON allows to have canonical format
-  header( 'Content-Type' => 'application/json' );
+  response_header( 'Content-Type' => 'application/json' );
   return JSON::XS->new->utf8->canonical(1)->encode( $row->{info} );
 };
 
@@ -963,7 +957,7 @@ any qr{.*} => sub {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019-2023 by Bojan Ramšak
+This software is copyright (c) 2019-2024 by Bojan Ramšak
 
 =head1 LICENSE
 

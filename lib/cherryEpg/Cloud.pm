@@ -80,7 +80,7 @@ sub syncLinger {
   my $carousel = $self->config->{core}{carousel};
 
   my $command =
-      "rsync -vrztL --delete --stats --timeout=45 -e 'ssh -i $keyfile -o StrictHostKeyChecking=no' $host:/*.ctS $carousel";
+      "rsync -vrzt --delete --stats --timeout=45 -e 'ssh -i $keyfile -o StrictHostKeyChecking=no' $host:/*.ctS $carousel";
   my $output;
   my $error;
 
