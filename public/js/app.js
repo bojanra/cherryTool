@@ -703,11 +703,13 @@ function SystemInfo() {
       }
       $('#systemStatus').html('Failed. Please reload!');
       $('#systemStatus').removeClass('label-default').addClass('label-danger');
+      $('#systemOS').html('');
       $('#systemVersion').html('');
       $('#systemEPG').html('');
       $('#systemPlayout').html('');
       $('#systemNTP').html('');
       $('#systemDatabase').html('');
+      $('#systemInternet').html('');
       $('#systemWebgrab').html('');
       $('#systemAnnouncer').html('');
     });
@@ -729,9 +731,11 @@ function SystemInfo() {
       block += `<span class="label label-primary">${key}: ${no}</span>\n`;
     });
     $('#systemVersion').html(block);
+    $('#systemOS').html(this.generateBlock(report.modules.system, false));
     $('#systemEPG').html(this.generateBlock(report.modules.epg, true));
     $('#systemPlayout').html(this.generateBlock(report.modules.playout, false));
     $('#systemNTP').html(this.generateBlock(report.modules.ntp, false));
+    $('#systemInternet').html(this.generateBlock(report.modules.internet, true));
     $('#systemDatabase').html(this.generateBlock(report.modules.database, false));
     $('#systemLinger').html(this.generateBlock(report.modules.linger, true));
     if (report.modules.announcer) {
@@ -751,7 +755,10 @@ function SystemInfo() {
     if (skipDetails !== true) {
       $.each(Object.keys(data.report).sort(), function(i, key) {
         var x = data.report[key];
-        if (typeof x == 'number' || typeof x == 'string') {
+        if (typeof x == 'object') {
+          let options = JSON.stringify(x, null, 4).replace(/[{}",]/g, '').replace(/\n/g, '<br/>');
+          block += `${key}: ` + options;
+        } else if (typeof x == 'number' || typeof x == 'string') {
           block += `${key}:${x}<br/>`;
         }
       });
@@ -1128,7 +1135,7 @@ function CarouselPanel() {
     event.stopPropagation();
   });
 
-  $('.upload-area').on('drop', (event) => {
+  $('html').on('drop', (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -1699,7 +1706,7 @@ function SchemePanel() {
     event.stopPropagation();
   });
 
-  $('.upload-area').on('drop', (event) => {
+  $('html').on('drop', (event) => {
     event.preventDefault();
     event.stopPropagation();
 

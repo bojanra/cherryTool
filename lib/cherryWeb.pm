@@ -957,7 +957,7 @@ any qr{.*} => sub {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019-2024 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 

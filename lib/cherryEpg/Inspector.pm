@@ -556,7 +556,7 @@ sub reportBuild {
   my $requiredGap = ceil( $self->{packetCount} * 25 / 1000 / $self->{timeFrame} );
 
   format HEAD =
--- cherryEPG Inspector - Copyright 2014-2024 Bojan Ramsak -----------------------------------
+-- cherryEPG Inspector - Copyright 2024 Bojan Ramsak ----------------------------------------
 Source: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   Date: @>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 $self->{source}, localtime->strftime()
 Sections total: @>>>>>>>   Timeframe: @>>>>s     Min. required actual p/f section gap is 25ms

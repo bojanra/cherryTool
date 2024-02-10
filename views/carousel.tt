@@ -8,12 +8,10 @@
             <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; Browse carousel</h4>
             <p class="list-group-item-text">List available TS chunks</p>
           </button>
-          <a href="https://api.cherryhill.eu/psigen/" target="_blank">
-            <button class="list-group-item" id="wMenuNew">
-              <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp; Generate new chunk</h4>
-              <p class="list-group-item-text">Open psiGen - online PSI/SI builder in new window</p>
-            </button>
-          </a>
+          <button class="list-group-item" id="wMenuGenerator" onclick="window.open('https://api.cherryhill.eu/psigen/', '_blank').focus();">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-plane"></span>&nbsp; Generate TS chunk</h4>
+            <p class="list-group-item-text">Open psiGen - online PSI/SI builder in new window</p>
+          </button>
           <button class="list-group-item" id="wMenuUpload">
             <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span> Carousel upload wizard</h4>
             <p class="list-group-item-text">Load enhanced TS chunk from local machine</p>

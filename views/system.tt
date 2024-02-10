@@ -22,12 +22,32 @@
       </li>
       <li class="list-group-item">
         <h4 class="list-group-item-heading">
+          System
+          <a href="#" data-toggle="tooltip" title="General system information">
+            <i class="glyphicon glyphicon-question-sign"></i>
+          </a>
+        </h4>
+        <p id="systemOS" class="list-group-item-text">
+        </p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">
           NTP time
           <a href="#" data-toggle="tooltip" title="Check if system clock is synchronized to NTP server.">
             <i class="glyphicon glyphicon-question-sign"></i>
           </a>
         </h4>
         <p id="systemNTP" class="list-group-item-text">
+        </p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">
+          Internet connection
+          <a href="#" data-toggle="tooltip" title="Test internet connection by downloading file">
+            <i class="glyphicon glyphicon-question-sign"></i>
+          </a>
+        </h4>
+        <p id="systemInternet" class="list-group-item-text">
         </p>
       </li>
       <li class="list-group-item">

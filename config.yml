@@ -51,6 +51,9 @@ core:
       threshold:
         warning: 3
         critical: 2
+    internet:
+      url: https://getsamplefiles.com/download/jpg/sample-4.jpg
+      timeout: 1
 log4perl:  |-
   log4perl.logger                    = ${LOGLEVEL}, Screen, Dbs
   log4perl.oneMessagePerAppender     = 1

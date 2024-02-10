@@ -679,7 +679,7 @@ sub _getPID {
 
 =encoding utf8
 
-This software is copyright (c) 2021-2023 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 

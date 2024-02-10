@@ -1,4 +1,4 @@
-package cherryEpg v2.5.2;
+package cherryEpg v2.5.5;
 
 use 5.024;
 use utf8;
@@ -655,7 +655,7 @@ EITMULTI_LOOP:
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019-2022 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 

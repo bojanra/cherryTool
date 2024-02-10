@@ -1,7 +1,6 @@
 requires 'perl', '5.24.1';
 requires 'Authen::Simple::PAM', '>=0.2';
 requires 'Dancer2', '>=0.300005';
-requires 'Dancer2::Plugin::Ajax', '>=0.400000';
 requires 'Dancer2::Plugin::Auth::Extensible', '>=0.710';
 requires 'Data::Validate::IP', '>=0.27';
 requires 'Digest::CRC', '>=0.23';

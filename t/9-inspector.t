@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 
-use 5.012;
-use Path::Class;
-use Test::More 'no_plan';
+use 5.024;
+use utf8;
+use File::Path qw(remove_tree);
+use Test::More tests => 17;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -24,7 +25,6 @@ ok( $cherry->epg->initdb(), "init db structure" );
 ok( defined $cherry->deleteIngest(), "clean ingest dir" );
 
 # read, build load scheme
-
 my $scheme = cherryEpg::Scheme->new( verbose => 0 );
 ok( $scheme->readXLS("t/scheme/$sut.xls"), "read .xls" );
 
@@ -47,6 +47,12 @@ my $inspect = new_ok( 'cherryEpg::Inspector' => [ verbose => 1 ], 'cherryEpg::In
 
 ok( $inspect->load('/var/lib/cherryepg/carousel/eit_033.cts'), "Loading&parsing" );
 
-diag $inspect->report;
+my $report = $inspect->report;
+
+ok( $report =~ /Total packets/m, "Valid report" );
+
+ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
+ok( $cherry->deleteStock(),                                                       "clean stock dir" );
+ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );
 
 done_testing;

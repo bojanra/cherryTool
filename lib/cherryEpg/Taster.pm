@@ -3,6 +3,8 @@ package cherryEpg::Taster;
 use 5.024;
 use utf8;
 use cherryEpg::Git;
+use File::Temp qw( tempfile unlink0);
+use IPC::Run3  qw(run3);
 use JSON::XS;
 use Moo::Role;
 use Net::Curl::Easy qw(:constants );
@@ -20,18 +22,22 @@ Readonly my $UNKNOWN  => 3;
 
 after BUILD => sub {
   my ( $self, $arg ) = @_;
+  my $taster = $self->{config}{core}{taster};
 
   # number of days in future to check default
-  $self->{eventbudget}{days} //= 7;
+  $taster->{eventbudget}{days} //= 7;
 
   # this is the interval of days where EIT data must be defined, if not -> warning
-  $self->{eventbudget}{threshold}{warning} //= 3;
+  $taster->{eventbudget}{threshold}{warning} //= 3;
 
   # this is the interval of days where EIT data must be defined, if not -> critical
   # 1 - today
   # 2 - today and tomorrow
-  $self->{eventbudget}{threshold}{critical} //= 2;
+  $taster->{eventbudget}{threshold}{critical} //= 2;
 
+  # check internet connection
+  $taster->{internet}{url}     //= "https://getsamplefiles.com/download/jpg/sample-4.jpg";
+  $taster->{internet}{timeout} //= 5;
 };    ## end sub BUILD
 
 =head3 eventBudget ( )
@@ -42,7 +48,7 @@ Report the eventbudget for all channels for n days in future(pos) or past (neg) 
 
 sub eventBudget {
   my ( $self, $days ) = @_;
-  $days = $days // $self->{eventbudget}{days};
+  $days = $days // $self->{config}{core}{taster}{eventbudget}{days};
   my @report;
 
   my $lastUpdate = $self->epg->listChannelLastUpdate();
@@ -58,9 +64,9 @@ sub eventBudget {
     my $status = $OK;
     my $day    = 0;
     while ( $status < $CRITICAL and $day <= $#$count ) {
-      if ( $day < $self->{eventbudget}{threshold}{critical} and $$count[$day] == 0 ) {
+      if ( $day < $self->{config}{core}{taster}{eventbudget}{threshold}{critical} and $$count[$day] == 0 ) {
         $status = $CRITICAL;
-      } elsif ( $day < $self->{eventbudget}{threshold}{warning} and $$count[$day] == 0 ) {
+      } elsif ( $day < $self->{config}{core}{taster}{eventbudget}{threshold}{warning} and $$count[$day] == 0 ) {
         $status = $WARNING;
       } else {
         $$count[$day] += 0;
@@ -222,7 +228,7 @@ Report installed version numbers
 sub versionReport {
   my ($self) = @_;
 
-  #debian
+  # debian
   my $deb = try {
     `dpkg -s cherryepg 2>&1`;
   };
@@ -233,11 +239,20 @@ sub versionReport {
     $deb = undef;
   }
 
+  # os
+  my $os = try {
+    `cat /etc/issue`;
+  };
+
+  $os =~ s/\\[nl]//g;
+  $os =~ s/\s*$//g;
+
   my $report = {
     package     => $deb,
     cherryEpg   => $cherryEpg::VERSION . '',
     ringelspiel => $self->ringelspiel->{version},
     branch      => cherryEpg::Git->new()->branch,
+    os          => $os,
   };
 
   return $report;
@@ -398,6 +413,138 @@ sub ntpReport {
   } ## end else [ if ($success) ]
 } ## end sub ntpReport
 
+=head3 internetReport ()
+
+Check internet connection 
+
+=cut
+
+sub internetReport {
+  my ($self) = @_;
+
+  my $taster  = $self->{config}{core}{taster};
+  my $timeout = $taster->{internet}{timeout};
+  my ( $fh, $tempfile ) = tempfile( TEMPLATE => 'downloadXXXXX', TMPDIR => 1, UNLINK => 1 );
+  my $common = "-t 1 --timeout=$timeout -O $tempfile";
+
+  my $url = $taster->{internet}{url};
+  my $err = "-";
+
+  $url = $taster->{internet}{url};
+  run3( "wget $common $url", \undef, \undef, \$err );
+
+  unlink0( $fh, $tempfile );
+
+  if ( $? != 0 ) {
+    if ( $err =~ /unable to resolve host address/m ) {
+      return { status => $WARNING, message => "DNS Lookup failed" };
+    } else {
+      return { status => $CRITICAL, message => "No connection" };
+    }
+  } else {
+    return { status => $OK, message => "Connected" };
+  }
+} ## end sub internetReport
+
+=head3 systemReport ( )
+
+Report system ntp status
+
+=cut
+
+sub systemReport {
+  my ($self) = @_;
+
+  my $report;
+  my $status  = $OK;
+  my $message = "Stable";
+
+  # ip interfaces
+  my $ip = try {
+    `ip -f inet addr show | grep brd`;
+  };
+
+  while ( $ip =~ /inet (.+) brd.+ (.+)$/gm ) {
+    $report->{network}{$2} = $1;
+  }
+
+  my $route = try {
+    `ip route`;
+  };
+
+  $route =~ s/\n/\r/gm;
+
+  $report->{network}{route} = $route;
+
+
+  # cpuinfo
+  my $cpuinfo = try {
+    `cat /proc/cpuinfo`;
+  };
+
+  my @line = split( /\n/, $cpuinfo );
+  my ($model) = grep( {/model name/} @line );
+
+  if ( $model =~ m/model name\s*: (.+)$/ ) {
+    $report->{cpu}{model} = $1;
+  }
+
+  my $count = grep {/processor/} @line;
+  $report->{cpu}{cores} = $count;
+
+  # diskspace
+  my $workdir = try {
+    `df --output=avail -B 1 "$self->{config}{core}{basedir}" | tail -n 1`;
+  };
+
+  chomp $workdir;
+  $report->{diskspace}{home} = $workdir;
+
+  my $tmpdir = try {
+    `df --output=avail -B 1 "/tmp" | tail -n 1`;
+  };
+
+  chomp $tmpdir;
+  $report->{diskspace}{tmp} = $tmpdir;
+
+  # load
+  my $load = try {
+    `cat /proc/loadavg`;
+  };
+
+  if ( $load =~ m/^(\d+\.\d+\s\d+\.\d+\s\d+\.\d+)\s/ ) {
+    $report->{load} = $1;
+  }
+
+  # memory
+  my $meminfo = try {
+    `cat /proc/meminfo`;
+  };
+
+  @line = split( /\n/, $meminfo );
+  my $element;
+
+  foreach (@line) {
+    if (/(.+):\s+(\d+) kb/i) {
+      $element->{$1} = $2;
+    }
+  }
+
+  my @keys = qw( MemTotal MemAvailable );
+  foreach (@keys) {
+    my $name = lc $_;
+    $name =~ s/mem//;
+    $report->{memory}{$name} = $element->{$_};
+
+  } ## end foreach (@keys)
+
+  return {
+    status  => $status,
+    message => $message,
+    report  => $report,
+  };
+} ## end sub systemReport
+
 =head3 eventBudgetReport ( )
 
 Report Epg builder status.
@@ -502,8 +649,10 @@ sub report {
     version   => $self->versionReport(),
     modules   => {
       ntp      => $self->ntpReport(),
+      system   => $self->systemReport(),
       playout  => $self->ringelspielReport(),
       database => $self->databaseReport(),
+      internet => $self->internetReport(),
     },
     uptime => $self->uptime(),
   };
@@ -566,7 +715,7 @@ sub format {
   my $output = "";
 
   format REPORT_TOP =
--- cherryTaster - Copyright 2014-2022 Bojan Ramsak            --- SYSTEM INFO --
+-- cherryTaster - Copyright 2024 Bojan Ramsak                 --- SYSTEM INFO --
 Hostname: @<<<<<<<<<<<<<<<<<<   Date : @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
           hostname,           $reportTime
 Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -583,17 +732,26 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   format REPORT_GROUP =
 --------------------------------------------------------------------------------
-@<< @<<<<<<<<<<<<: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-($status != 0 ? '!!!' : ''), $group, $msg
+@<@<<<<<<<<<<<<: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+($status != 0 ? '!' : ''), $group, $msg
 .
 
   format REPORT =
-    - @<<<<<<<<<<: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  - @<<<<<<<<<<: ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @fields
+~~               ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$fields[1]
+.
+
+  format REPORT_SUB =
+    - @<<<<<<<<: ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+@fields
+~~               ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$fields[1]
 .
 
   format REPORT_DATABASE =
-    - @<<<<<<<<<<: @>>>>>>> rows
+  - @<<<<<<<<<<: @>>>>>>> rows
 @fields
 .
 
@@ -637,6 +795,59 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   $~      = "REPORT_GROUP";
   write;
   $~ = "REPORT";
+  foreach my $key ( sort keys %{$data} ) {
+    @fields = ( $key, $data->{$key} // '-' );
+    write;
+  }
+
+  $group = "system";
+  $errorCount += 1 if $modules->{$group}->{status} != 0;
+  $status = $modules->{$group}->{status};
+  $msg    = $modules->{$group}->{message};
+  $data   = $modules->{$group}->{report};
+  $~      = "REPORT_GROUP";
+  write;
+
+  foreach my $key ( sort keys %{$data} ) {
+    my $value;
+
+    if ( ref( $data->{$key} ) eq 'HASH' && keys( $data->{$key}->%* ) ) {
+
+      # for more than 1 level of keys
+      $~      = "REPORT";
+      @fields = ( $key, '' );
+      write;
+
+      $~ = "REPORT_SUB";
+      foreach ( sort keys $data->{$key}->%* ) {
+        @fields = ( $_, $data->{$key}{$_} );
+        write;
+      }
+    } else {
+
+      # standard
+      if ( ref( $data->{$key} ) eq 'ARRAY' ) {
+        $value = join( "\r", sort( $data->{$key}->@* ) );
+      } elsif ( $data->{$key} ) {
+        $value = $data->{$key};
+      } else {
+        $value = '-';
+      }
+      $~      = "REPORT";
+      @fields = ( $key, $value );
+      write;
+    } ## end else [ if ( ref( $data->{$key...}))]
+  } ## end foreach my $key ( sort keys...)
+
+  $group = "internet";
+  $errorCount += 1 if $modules->{$group}->{status} != 0;
+  $status = $modules->{$group}->{status};
+  $msg    = $modules->{$group}->{message};
+  $data   = $modules->{$group}->{report};
+  $~      = "REPORT_GROUP";
+  write;
+  $~ = "REPORT";
+
   foreach my $key ( sort keys %{$data} ) {
     @fields = ( $key, $data->{$key} // '-' );
     write;
@@ -773,7 +984,7 @@ Uptime  : @<<<<<<<<<<<<<<<<<<   Since: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 
