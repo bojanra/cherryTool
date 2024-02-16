@@ -8,7 +8,7 @@ use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.20';
+our $VERSION = '0.21';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -236,14 +236,11 @@ SWITCH: for ( $element->{Name} ) {
       } elsif ( $value =~ /^(\d+)$/ ) {
         $value = $value + 0;
       } else {
-        $value = undef;
+        $self->_error( "category not numeric [" . ( $value // '' ) . "] in line " . $self->{linecount} );
+        return;
       }
 
-      if ( defined $value ) {
-        push( $event->{content}->@*, { nibble => $value } );
-      } else {
-        $self->_error( "category not numeric [$value] in line " . $self->{linecount} );
-      }
+      push( $event->{content}->@*, { nibble => $value } );
       return;
     };
     /image/ && do {
@@ -253,7 +250,7 @@ SWITCH: for ( $element->{Name} ) {
       if ( $value =~ /(\d+)/ ) {
         $value = $1 + 3;
       } else {
-        $self->_error( "parental_rating_descriptor not numeric [$value] in line " . $self->{linecount} );
+        $self->_error( "parental_rating_descriptor not numeric [" . ( $value // '' ) . "] in line " . $self->{linecount} );
         return;
       }
 
