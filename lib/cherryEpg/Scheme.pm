@@ -881,6 +881,10 @@ sub build {
     my $ruleById = {};
     my $eitInUse = {};
 
+    if ( !exists $raw->{rule} || scalar( $raw->{rule}->@* ) == 0 ) {
+      $self->error("NOAUTORULE is set but no RULES defined");
+    }
+
     foreach my $in ( $raw->{rule}->@* ) {
       my $id     = $in->{channel_id};
       my $eit_id = $in->{eit_id};

@@ -430,7 +430,6 @@ sub internetReport {
   my $url = $taster->{internet}{url};
   my $err = "-";
 
-  $url = $taster->{internet}{url};
   run3( "wget $common $url", \undef, \undef, \$err );
 
   unlink0( $fh, $tempfile );
@@ -652,10 +651,12 @@ sub report {
       system   => $self->systemReport(),
       playout  => $self->ringelspielReport(),
       database => $self->databaseReport(),
-      internet => $self->internetReport(),
     },
     uptime => $self->uptime(),
   };
+
+  # disable internet checking if url = "";
+  $report->{modules}{internet} = $self->internetReport() if $self->{config}{core}{taster}{internet}{url};
 
   if ( $self->isLinger ) {
     $report->{modules}{linger} = $self->lingerReport();
@@ -840,18 +841,20 @@ $fields[1]
   } ## end foreach my $key ( sort keys...)
 
   $group = "internet";
-  $errorCount += 1 if $modules->{$group}->{status} != 0;
-  $status = $modules->{$group}->{status};
-  $msg    = $modules->{$group}->{message};
-  $data   = $modules->{$group}->{report};
-  $~      = "REPORT_GROUP";
-  write;
-  $~ = "REPORT";
-
-  foreach my $key ( sort keys %{$data} ) {
-    @fields = ( $key, $data->{$key} // '-' );
+  if ( exists $modules->{$group} ) {
+    $errorCount += 1 if $modules->{$group}->{status} != 0;
+    $status = $modules->{$group}->{status};
+    $msg    = $modules->{$group}->{message};
+    $data   = $modules->{$group}->{report};
+    $~      = "REPORT_GROUP";
     write;
-  }
+    $~ = "REPORT";
+
+    foreach my $key ( sort keys %{$data} ) {
+      @fields = ( $key, $data->{$key} // '-' );
+      write;
+    }
+  } ## end if ( exists $modules->...)
 
   $group = "ntp";
   $errorCount += 1 if $modules->{$group}->{status} != 0;

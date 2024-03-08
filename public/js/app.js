@@ -752,18 +752,22 @@ function SystemInfo() {
 
   this.generateBlock = (data, skipDetails) => {
     var block = '<a href="#" data-toggle="tooltip" title="';
-    if (skipDetails !== true) {
-      $.each(Object.keys(data.report).sort(), function(i, key) {
-        var x = data.report[key];
-        if (typeof x == 'object') {
-          let options = JSON.stringify(x, null, 4).replace(/[{}",]/g, '').replace(/\n/g, '<br/>');
-          block += `${key}: ` + options;
-        } else if (typeof x == 'number' || typeof x == 'string') {
-          block += `${key}:${x}<br/>`;
-        }
-      });
+    if (data) {
+      if (skipDetails !== true) {
+        $.each(Object.keys(data.report).sort(), function(i, key) {
+          var x = data.report[key];
+          if (typeof x == 'object') {
+            let options = JSON.stringify(x, null, 4).replace(/[{}",]/g, '').replace(/\n/g, '<br/>');
+            block += `${key}: ` + options;
+          } else if (typeof x == 'number' || typeof x == 'string') {
+            block += `${key}:${x}<br/>`;
+          }
+        });
+      }
+      block += `"><span class="label ${data.status === 0 ? 'label-success' : (data.status === 1 ? 'label-warning' : 'label-danger')}">${data.message}</span></a>`;
+    } else {
+      block += `"><span class="label label-primary">Check disabled</span></a>`;
     }
-    block += `"><span class="label ${data.status === 0 ? 'label-success' : (data.status === 1 ? 'label-warning' : 'label-danger')}">${data.message}</span></a>`;
     return block;
   };
 
