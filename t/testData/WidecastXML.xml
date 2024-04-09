@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><WIDECAST_DVB>
+	<channel name="FILM HITS">
+		<Event id="0" start_time="2024-03-26 07:10:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Edhe dielli është yll">Dramë, romance</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Sun Is Also a Star"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Romantiku Daniel bie në dashuri me Natashën e cila nuk beson aspak tek dashuria. Ai i kërkon vetëm 24 orë kohë, për t'i ndërruar mendjen.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="1" start_time="2024-03-26 08:50:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Dhuntia e errët">Fantashkencë, thriller</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Darkest Minds  "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Amandla Stenberg, Mandy Moore. Pasi adoleshentët me fuqi misterioze ndalohen nga qeveria, Rubi, një nga më të fuqishmet, arratiset dhe bashkohet me një grup të larguarish, në një rezistencë për të marrë në dorë e fatit të tyre...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="2" start_time="2024-03-26 10:35:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Zonjat me të zeza">Dramë, komedi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Ladies in Black"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Julia Ormond. Në verën e vitit 1959, nën sfondin e ndryshimeve kulturore të Australisë, një vajzë e turpshme nis një punë verore në një dyqan prestigjoz. Atje ajo takohet me 'Zonjat me të zeza', të cilat do t'ia ndryshojnë jetën përgjithmonë.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="3" start_time="2024-03-26 12:20:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Verbuar nga drita">Dramë, komedi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Blinded by the Light"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Në Anglinë e vitit 1987, një adoleshent me prejardhje pakistaneze mëson të jetojë jetën, të mirëkuptojë familjen dhe të gjejë zërin e tij nëpërmjet muzikës së yllit të rrokut amerikan, Bruce Springsteen.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="4" start_time="2024-03-26 14:15:00" duration="7500">
+			<short_event_descriptor lang="alb" name="Thor 3: Ragnarok">Aksion, fantazi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Thor 3  Ragnarok "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Chris Hemsworth, Tom Hiddleston. I burgosur në anën tjetë të universit, Thor vihet në një garë kundër kohës për të ndalur Ragnarokun &#8212; shkatërrimin e Tokës dhe fundin e qytetërimit të Asgardit nga e pamëshirshmja Hela.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text>Thor, imprisoned on the other side of the universe, must race against time to get back to stop Ragnarok&#8212;the destruction of his world and the end of Asgardian civilisation</text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="5" start_time="2024-03-26 16:20:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Mister në Venecia"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="A Haunting in Venice"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kenneth Branagh, Michelle Yeoh, Jamie Dornan, Riccardo Scamarcio. Bazuar në romanin e Agatha Christie. Në Venedikun e frikshëm, pas Luftës së Dytë Botërore, dedektivi Hercule Poirot, tani në pension, bindet nga një mikeshë e vjetër për të shkuar sëbashku në një festë. Por kur një nga të ftuarit vritet, i takon përsëri detektivit Poirot, për të zbuluar vrasësin.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="6" start_time="2024-03-26 18:05:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Pinoku i Guilermo del Toros"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Guillermo del Toro's Pinocchio"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Regjisori fitues i çmimit "Oskar" Guillermo del Toro, sjell një version ndryshe, të historisë klasike nga Carlo Collodi. 10 vjet pas vdekjes së djalit të tij, drugdhendësi Xhepeto, i mbytur nga pikëllimi, krijon një djalë të ri, nga një pemë pishe. I ardhur në një botë fashizmi dhe shfrytëzimi, Pinoku mundohet të bëjë atë që i është thënë, por me karakterin e tij, e ka të vështirë të bindet.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="7" start_time="2024-03-26 20:00:00" duration="6600">
+			<short_event_descriptor lang="alb" name="Qentë e luftës">Krim, histori e vërtetë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="War Dogs"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Bazuar në historinë e dy të rinjve, trafikantë armësh, që fituan nga Pentagoni një kontratë 300 milionë dollarë për të furnizuar aleatët amerikanë në Afganistan me armë që vinin edhe nga Shqipëria, përfshirë këtu tragjedinë e Gërdecit.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="8" start_time="2024-03-26 21:50:00" duration="6600">
+			<short_event_descriptor lang="alb" name="Buzëqeshja"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Smile"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Pas një incidenti traumatik që përfshiu një pacienten e saj, Dr. Rose fillon të përjetojë dukuri të frikshme, të cilat ajo nuk mund t'i shpjegojë. Tani Rose, duhet të përballet me të kaluarën e saj shqetësuese, në mënyrë që t'i mbijetojë një realiteti të ri dhe të tmerrshëm.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">15</parental_rating_descriptor>
+		</Event>
+		<Event id="9" start_time="2024-03-26 23:40:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Kalorësit e Drejtësisë"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Riders of Justice aka Retfaerdighedens Ryttere"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Mads Mikkelsen. Markus kthehet nga një mision ushtarak për t'u kujdesur për të bijën pasi gruaja e tij humbet jetën në një aksident treni. Por kur Oto, një matematikan fanatik, i mbijetuar i aksidentit, troket në derën e tij me prova se përplasja e trenit ishte një sulm i planifikuar me kujdes, Markus fillon një mision të nxitur nga hakmarrja për të gjetur përgjegjësit.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="10" start_time="2024-03-27 01:35:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Treni për në Busan 2: Gadishulli">Aksion, horror, thriller</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Train to Busan Presents Peninsula "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Tetë vjet pasi një apokalips zombish shkatërroi gadishullin Korean, një ushtar që arriti t'i mbijetonte kaosit, dërgohet përsëri në zonën e infektuar për të marrë një kamion plot me para. Por atje ai do të hasë papritur të mbijetuar...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="11" start_time="2024-03-27 03:30:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Vrasjet e Kartolinave">Thriller, krim, dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Postcard Killings "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Jeffrey Dean Morgan, Famke Janssen. Një detektiv njujorkez heton vdekjen brutale të vajzës dhe dhëndrit të tij në Londër. Kur mëson se çifte të tjera në Europë patën të njëjtin fat me ta, ai garon me kohën për të ndalur vrasjet.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="10"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="12" start_time="2024-03-27 05:10:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Dy Metra Larg Teje">Dramë romantike</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Five Feet Apart"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Haley Lu Richardson, Cole Sprouse. Bazuar në histori të vërtetë. Dy të rinj të dashuruar që vuajnë nga fibroza cistike, përpiqen të ruajnë lidhjen e tyre edhe pse sëmundja i detyron të mbajnë distancë sigurie nga njëri-tjetri.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="13" start_time="2024-03-27 07:05:00" duration="13800">
+			<short_event_descriptor lang="alb" name="Skuadra e drejtesise nga Zak Snaider">Aksion, Aventurë, Fantazi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Zack Snyders Justice League "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Henry Cavill, Ben Affleck, Gal Gadot, Amy Adams. Bruce Wayne është i vendosur të sigurojë që sakrifica përfundimtare e Supermenit të mos jetë e kotë. Me ndihmën e Diana Prince, ai rekruton një ekip superheronjsh për të mbrojtur botën nga një rrezik i afërt katastrofik.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="14" start_time="2024-03-27 10:55:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Kthimi i Benit">Dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Ben Is Back "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Julia Roberts, Lucas Hedges. Dashuria pa kushte e një nëne do të sprovohet ndërsa ajo bën gjithçka që mundet për ta mbajtur të birin larg botës së drogës, pasi kthehet në shtëpi nga rehabilitimi.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="15" start_time="2024-03-27 12:35:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Pakti i Mbrëmjes së Maturës"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Prom Pact"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Gjimnazistja Mandi Jang ka një ëndërr dhe vetëm një qëllim: të pranohet në universitetin Harvard. Kur merr vesh se ajo është ende në listë pritjeje, Mandi vendos të kërkojë ndihmë nga personi që ajo e urren më shumë në shkollë, bukuroshi Graham Lansing.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="16" start_time="2024-03-27 14:15:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Ëndrra e Neitit"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Better Nate Than Ever"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Një film muzikor, bazuar në romanin e vlerësuar.  13 vjeçari Nate Foster, ëndërron të bëhet një yll i madh në Broadway. Ai dhe shoqja e tij më e mirë Libbi, organizojnë një udhëtim të guximshëm drejt qytetit të Nju Jorkut për të marrë pjesë në audicionin e muzikalit "Lilo dhe Stiç".</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="17" start_time="2024-03-27 15:45:00" duration="7500">
+			<short_event_descriptor lang="alb" name="Gruaja E Kopshtit Zoologjik ">Biografi, dramë, luftë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Zookeepers Wife "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Jessica Chastain, Johan Heldenbergh. Historia e vërtetë e kujdestarëve të kopshtit zoologjik të Vrashavës, Antonina and Jan Zabinski, të cilët ndihmuan në shpëtimin e qindra njerëzve dhe kafshëve gjatë pushtimit nazist.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text>The Zookeeper's Wife tells the account of keepers of the Warsaw Zoo, Antonina and Jan Zabinski, who helped save hundreds of people and animals during the German invasion.</text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="18" start_time="2024-03-27 17:50:00" duration="7800">
+			<short_event_descriptor lang="alb" name="Krijuesi"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Creator"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Mes një lufte të ardhshme midis racës njerëzore dhe Inteligjencës Artificiale, Joshua, një ish-agjent i forcave speciale, (John David Washington) rekrutohet për të gjetur dhe shkatërruar armën misterioze të IA, që ka fuqinë për t'i dhënë fund luftës dhe vetë njerëzimit. Por, arma është një robot, në formën e një djali të vogël, shumë të dashur.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="19" start_time="2024-03-27 20:00:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Pasi u njohëm 5"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="After Everything"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Bazuar në best-seller-in e Anna Todd, vjen kapitulli i fundit, dedikuar sagës së një dashurie të pamundur. Me frymëzimim e humbur dhe dhimbjen e ndarjes nga Tesa, shkrimtari Hardin, udhëton drejt Portugalisë, për të korrigjuar gabimet e së kaluarës. Ai kupton se duhet të ndryshojë sjelljen e tij, përpara se të angazhohet për më tej me Tesën.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="20" start_time="2024-03-27 21:30:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Në tokën e shenjtorëve dhe mëkatarëve"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="In the Land of Saints and Sinners"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Irlandë, 1970. I etur për të lënë pas të kaluarën e tij të errët, ish-vrasësi Finbar Murphy (Liam Neeson) bën një jetë të qetë, larg dhunës politike që ka pushtuar pjesën tjetër të vendit. Kur një bandë e pamëshirshme terroristësh mbërrin, ai duhet të zgjedhë: të zbulojë identitetin e tij sekret apo do të mbrojë miqtë dhe fqinjët e tij.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="21" start_time="2024-03-27 23:15:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Beketi"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Beckett"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>John David Washington. Pas një aksidenti tragjik me makinë në Greqi, Beket, një turist amerikan, e gjen veten në qendër të një komploti të rrezikshëm politik dhe në arrati për të shpëtuar jetën e tij.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="22" start_time="2024-03-28 01:00:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Nata e djallit 4: Çelësi i fundit">Horror, mister</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Insidious: The Last Key"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Psiokologia brilante Elis, përballet me horrorin e saj më të madh, kur i duhet të kthehet në shtëpinë ku u rrit, aty ku filloi terrori.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="23" start_time="2024-03-28 02:40:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Mjeshtri i parasë">Thriller</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Money Monster "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>George Clooney, Julia Roberts. Drejtpërdrejt në televizion me programin e tyre 'Mjeshtri i parasë', drejtuesi Li Gejts dhe producentja Pati Fen, përballen me një situatë të rrezikshme kur merren peng nga një njeri që ka humbur gjithçka.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="24" start_time="2024-03-28 04:20:00" duration="5100">
+			<short_event_descriptor lang="alb" name="Jeta sekrete e kafshëve 2">Vizatimor, komedi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Secret Life of Pets 2"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kevin Hart, Harrison Ford, Patton Oswalt. Njihuni me jetët emocionale të kafshëve shtëpiake, lidhjen e thellë midis tyre dhe familjarëve që i duan, si dhe se çfarë bëjnë në të vërtetë kafshët shtëpiake kur të zotët nuk janë në shtëpi.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="25" start_time="2024-03-28 05:45:00" duration="7800">
+			<short_event_descriptor lang="alb" name="Armiqtë më të mirë">Dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Best of Enemies 2019  "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>T.P. Henson, S. Rockwell. Bazuar në histori të vërtetë. Ann Atwater, aktiviste e guximshme e të drejtave të njeriut, përballet më C.P. Ellis, drejtues lokal i 'Ku Klux Klan-it' për çështjen e ndarjes racore të shkollës në Durham, në 1971-shin.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="26" start_time="2024-03-28 07:55:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Jete letrash">Dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Paper Lives"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Mehmeti menaxhon një depo mbeturinash për riciklimin e letrës në një zonë të varfër të Stambollit. Ai është i respektuar në lagje dhe i gatshëm të ndihmojë të tjerët, veçanërisht fëmijët e pastrehë dhe adoleshentët. Një ditë, Mehmeti gjen një djalë tetë vjeç në mes të grumbullit të letrave. Burri vendos ta ndihmojë për të gjetur prindërit e tij, pa e kuptuar se sa i lidhur është me këtë fëmijë...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="27" start_time="2024-03-28 09:35:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Per djemte qe kam dashur: P.S Ende ju dua"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="To All the Boys PS I Still Love You "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Lana Condor, Noah Centineo, Jordan Fisher. Pasi zyrtarizon lidhjen me Piter Kavinskin, Lara Xhin përjeton emocionet e vërteta të dashurisë së parë. Por gjerat bëhen disi të nderlikuara kur një tjetër marrës i letrave të saj të dashurisë, kthen përgjigje paparitur: pëlqimi i vjetër i saj, Xhon Ambros MekKlaren...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="6"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="28" start_time="2024-03-28 11:15:00" duration="6300">
+			<short_event_descriptor lang="alb" name="E imja përgjithmonë">Dramë, Romancë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Forever My Girl"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Pasi lë nusen në altar për të ndjekur ëndrren për famë dhe pasuri, këngëtari i suksesshëm i muzikës kauntri, Liam Peixh rikthehet në vendlindje. Por këtë herë ai duhët të zgjedhë, midis dashurisë dhe famës...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="29" start_time="2024-03-28 13:00:00" duration="7200">
+			<short_event_descriptor lang="alb" name="Të kapësh yjet"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="A Million Miles Away"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Një film biografik mbi Jose Hernandez (Michael Peña). Një burrë me një ëndërr të madhe: prekjen e yjeve. Si arriti djali i një emgranti Meksikan, nga punëtor ferme, të bëhej inxhinier dhe astronaut. Një histori e këmbënguljes, sakrificës dhe vendosmërisë për të realizuar një ëndërr në dukje të pamundur.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="30" start_time="2024-03-28 15:00:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Çetoja, palo mbret">Komedi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Cetto ce senzadubbiamente "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Me Antonio Albanese. Çetoja prej vitesh ka brakstisur Politikën dhe Italinë dhe jeton i lumtur në Gjermani. Por kur tezja e tij, pranë vdekjes e kërkon me ngulm, ai rikthehet për të zbuluar se është djali i princit të Kalabrisë...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="31" start_time="2024-03-28 16:30:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Everesti, jeti i vogël">Vizatimor, aventurë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Abominable"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kur adoleshentja Yi zbulon një Jeti të ri në çatinë e banesës së saj në Shanghai, ajo dhe dy miqtë e saj trazovaçë nisin një aventurë emocionuese për të bashkuar krijesën magjike me familjen e tij, në pikën më të lartë të Tokës.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="32" start_time="2024-03-28 18:00:00" duration="7200">
+			<short_event_descriptor lang="alb" name="Bota Xhurasik: Rënia e mbretërisë">Fantashkencë, aventurë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Jurassic World: Fallen Kingdom"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Chris Pratt, Bryce Dallas Howard. Kur vullkani i fjetur i ishullit Nublar nis të zgjohet, Ouen dhe Kler ndërrmarin një ekspeditë për të shpëtuar dinozaurët e mbetur nga një katastrofë që mund t'i zhdukë sërish...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="33" start_time="2024-03-28 20:00:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Kejti"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Kate"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Mary Elizabeth Winstead, Woody Harrelson. Pasi e helmojnë në detyrën e saj të fundit, një vrasëse e pamëshirshme në Tokio, ka më pak se 24 orë për të zbuluar dhe për tu hakmarrë ndaj vrasësit të saj. Në orët e fundit të jetës, ajo krijon një lidhje të papritur me vajzën e një prej viktimave të hershme...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="34" start_time="2024-03-28 21:40:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Mister në Venecia"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="A Haunting in Venice"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kenneth Branagh, Michelle Yeoh, Jamie Dornan, Riccardo Scamarcio. Bazuar në romanin e Agatha Christie. Në Venedikun e frikshëm, pas Luftës së Dytë Botërore, dedektivi Hercule Poirot, tani në pension, bindet nga një mikeshë e vjetër për të shkuar sëbashku në një festë. Por kur një nga të ftuarit vritet, i takon përsëri detektivit Poirot, për të zbuluar vrasësin.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="35" start_time="2024-03-28 23:20:00" duration="7800">
+			<short_event_descriptor lang="alb" name="Veriori"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Northman  "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Nga regjisori vizionar Robert Eggers. Me Alexander Skarsgård, Nicole Kidman, Claes Bang, Anya Taylor-Joy, Ethan Hawke, Björk, Willem Dafoe. Një film epik, mbushur me aksion, që ndjek ngjarjet e një princi të ri Viking, i cili ka vetëm një qëllim, të hakmerret për vdekjen e babait të tij...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="36" start_time="2024-03-29 01:30:00" duration="5100">
+			<short_event_descriptor lang="alb" name="Gjuetia">Horror, thriller, aksion</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Hunt "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Hilary Swank, Betty Gilpin, Emma Roberts. Dymbëdhjetë të panjohur zgjohen në një fushë dhe shpejt kuptojnë se ata janë përzgjedhur për të qenë pretë e një grupi të pasurish elitarë, të cilët gjuajnë për sport.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="37" start_time="2024-03-29 02:55:00" duration="8700">
+			<short_event_descriptor lang="alb" name="Gardelina">Dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Goldfinch"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Ansel Elgort, Nicole Kidman. Bazuar në romanin fitues të çmimit 'Pulitzer'. Jeta e 13-vjeçarit Theo ndryshon krejtësisht rrjedhë kur nëna e tij vritet nga një bombë gjatë vizitës së tyre në Muzeun Metropolitan të Artit.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="38" start_time="2024-03-29 05:20:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Gruaja që ecën përpara">Dramë, biografi</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Woman Walks Ahead"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Jessica Chastain. Piktorja Nju Jorkeze Catherine Weldon, udhëton drejt Dakotës në vitet 1880, për të pikturuar portretin një udhëheqësi të madh indian. Ajo do të bëhet përkrahëse e të drejtave të fisit indian dhe luftës për tokat e tyre.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="39" start_time="2024-03-29 07:00:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Bastisja e shtëpisë"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Intrusion"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Një çift (Freida Pinto, Logan Marshall-Green) transferohet në një qytet të vogël, në shtëpinë e tyre të ëndrrave. Por kur një ditë shtëpia e tyre bastiset, gruaja e traumatizuar nis të dyshojë, se njerëzit që e rrethojnë mund të mos jenë ata që duken dhe se rreziku i vërtetë sapo ka filluar...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="1"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="40" start_time="2024-03-29 08:30:00" duration="7200">
+			<short_event_descriptor lang="alb" name="Lanski"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Lansky"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Me Harvey Keitel, Sam Worthington. Bazuar në jetën e Meyer Lansky, gangsterit famëkeq që e ktheu krimin në një biznes miliarda dollarësh, por që nuk u kap kurrë nga FBI-ja. Deri kur, ai  i kërkon gazetarit Devid Ston që të shkruajë historinë e tij...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="10"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="41" start_time="2024-03-29 10:30:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Megan Livi">Biografi, dramë</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Megan Leavey"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kate Mara. Bazuar në historinë e vërtetë të një marinseje të re, lidhja e së cilës me një qen të ushtrisë shpëton shumë jetë gjatë misioneve të tyre në Irak.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text>Based on the true life story of a young Marine corporal whose unique discipline and bond with her military combat dog saved many lives during their deployment in Iraq.</text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="42" start_time="2024-03-29 12:25:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Gënjeshtarja"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Not Okay"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Dani, një vajzë e re ambicioze (Zoey Deutch), bëhet e famshme në rrjetet sociale, kur paraqitet si e mbijetuara e një sulmi vdekjeprurës. Por shpejt mëson, se fama në internet, ka një çmim të tmerrshëm.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="43" start_time="2024-03-29 14:10:00" duration="6900">
+			<short_event_descriptor lang="alb" name="Fati i Loganëve">Komedi, krim</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Logan Lucky"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Channing Tatum, Adam Driver. Në përpjekje për të ndryshuar fatin e keq të familjes, vëllezërit Xhimi dhe Klajd Logan, përpiqen të realizojnë një grabitje spektakolare gjatë një gare të makinave 'Nascar'.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="10"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="44" start_time="2024-03-29 16:05:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Truproja i pavarur"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Freelance"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Një mundësi e artë i vjen gazetares Claire Wellington (Alison Brie), që të intervistojë një diktator të pamëshirshëm (Juan Pablo Raba). Për sigurinë e saj punësohet si truprojë një ish oficer i mërzitur me punën në zyrë (John Cena). Por në mes të intervistës, shpërthen një grusht shteti ushtarak dhe të tre detyrohen të arratisen drejt xhunglës.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="45" start_time="2024-03-29 17:50:00" duration="7800">
+			<short_event_descriptor lang="alb" name="Gran Turismo"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Gran Turismo"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Me Orlando Bloom dhe David Harbor. Bazuar në historinë e vërtetë të Jann Mardenborough (Archie Madekwe), i cili pasionin e tij për të luajtur video-lojën Gran Turismo, e bën realitet për garat e vërteta. Nga një lojëtar virtual, ai zbret në pistë përballë pilotëve më të shpejtë të botës. Falë aftësive të  tij virtuale, ai do të bëhet fitues i disa garave shumë të rëndësishme me Nissan.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="46" start_time="2024-03-29 20:00:00" duration="6300">
+			<short_event_descriptor lang="alb" name="Furi shkaterruese">Fantashkencë, aksion</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Rampage"></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Dwayne Johnson. Kur një eksperimen gjenetik shndërron kafshët në krijesa gjigante agresive, shkencëtari Davis lufton te gjejë një kurë për të parandaluar një katastrofë globale dhe për të shpëtuar një gorillë, që dikur ishte miku i tij</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">10</parental_rating_descriptor>
+		</Event>
+		<Event id="47" start_time="2024-03-29 21:45:00" duration="5700">
+			<short_event_descriptor lang="alb" name="Encanto"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Encanto "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kandidat për 3 çmime Oskar. Anëtarët e familjes së jashtëzakonshme Madrigal, jetojnë në një shtëpi magjike në malet Kolumbiane. Por një ditë, Mirabela, e vetmja anëtare e Madrigalëve pa asnjë dhunti, zbulon se magjia e familjes rrezikon të zhduket. Tani ajo, është e vetmja që mund të bëjë dicka, për ta shpëtuar magjinë...</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">9</parental_rating_descriptor>
+		</Event>
+		<Event id="48" start_time="2024-03-29 23:20:00" duration="6000">
+			<short_event_descriptor lang="alb" name="Plumbi i humbur 2: Kthimi"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Lost Bullet 2 aka Lost Bullet 2 Back for More "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Regjisor Guillaume Pierret. Pas vdekjes së Charras, policët Lino dhe Julia, formojnë njësinë e re të narkotikëve. I vendosur për të gjetur vrasësit e vëllait dhe mentorit të tij, Lino vazhdon hetimin dhe nuk do të lejojë askënd ta pengojë.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text>Regjisor Guillaume Pierret. Pas vdekjes së Charras, policët Lino dhe Julia formojnë njësinë e re të narkotikëve. I vendosur për të gjetur vrasësit e vëllait dhe mentorit të tij, Lino vazhdon hetimin dhe nuk do të lejojë askënd ta pengojë.</text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="7"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="49" start_time="2024-03-30 01:00:00" duration="5400">
+			<short_event_descriptor lang="alb" name="Në kurth me aligatorët">Horror</short_event_descriptor>
+			<short_event_descriptor lang="eng" name="Crawl  "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Kaya Scodelario. Ndërsa uragani i kategorisë 5 vërshon drejt Florides, Haley nixton të gjejë të atin, të cilin e gjen të bllokuar në bodrumin e shtëpisë. Ndërsa niveli i ujit rritet, ata zbulojnë se stuhia është problemi i tyre më i vogël.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="0"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+		<Event id="50" start_time="2024-03-30 02:30:00" duration="6086">
+			<short_event_descriptor lang="alb" name="Kush gënjen më mirë"></short_event_descriptor>
+			<short_event_descriptor lang="eng" name="The Good Liar "></short_event_descriptor>
+			<extended_event_descriptor lang="alb">
+				<text>Helen Mirren, Ian McKellen. Bazuar në romanin me të njëjtin titull. Mashtruesi profesionist Roi ka pikasur shenjestrën e tij të fundit: një grua të ve me pasuri miliona dollarësh. Plani i tij për t'i marrë asaj gjithçka, has vështirësi të papritura.</text>
+			</extended_event_descriptor>
+			<extended_event_descriptor lang="eng">
+				<text></text>
+			</extended_event_descriptor>
+			<content_descriptor nibble1="1" nibble2="10"/>
+			<parental_rating_descriptor country_code="alb">12</parental_rating_descriptor>
+		</Event>
+	</channel>
+</WIDECAST_DVB>
