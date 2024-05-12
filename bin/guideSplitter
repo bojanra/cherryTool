@@ -52,7 +52,7 @@ sub run {
 
   getopts( "hle", \%args );
 
-  say("guideSplitter - ver. $VERSION Copyright 1 Bojan Ramsak");
+  say("guideSplitter - ver. $VERSION Copyright Bojan Ramsak");
 
   pod2usage(
     -verbose  => 99,

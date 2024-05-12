@@ -4,12 +4,11 @@ use 5.024;
 use utf8;
 use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 58;
+use Test::More tests => 60;
 
 BEGIN {
   use_ok("cherryEpg");
   use_ok("cherryEpg::Scheme");
-
 }
 
 my $cherry = cherryEpg->instance( verbose => 0 );
@@ -63,4 +62,3 @@ ok( $scheme->delete($backup),                                                   
 ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
 ok( $cherry->deleteStock(),                                                       "clean stock dir" );
 ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );
-
