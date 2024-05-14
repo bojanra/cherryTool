@@ -44,6 +44,7 @@ core:
   lang: en
   exportIP: 127.10.10.9
   parallelTasks: 16    # number of parallel tasks when grabbing/ingesting and building
+  disableTimeout: 0    # disable alarm timer when running parallel tasks
   taster:
     webgrab:
     eventbudget:

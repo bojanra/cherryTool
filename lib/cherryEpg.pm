@@ -1,4 +1,4 @@
-package cherryEpg v2.5.9;
+package cherryEpg v2.5.10;
 
 use 5.024;
 use utf8;
@@ -608,7 +608,7 @@ sub parallelUpdateEit {
   };
 
   # stop all after timeout
-  alarm(55);
+  alarm(55) unless $self->config->{core}{disableTimeout};
 
   my $doneList      = [];
   my $parallelTasks = $self->config->{core}{parallelTasks} // 3;
