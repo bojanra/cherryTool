@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser::SimpleXLS';
 
-our $VERSION = '0.28';
+our $VERSION = '0.30';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -23,18 +23,17 @@ sub rowHandler {
 
   my @cell = Spreadsheet::Read::row( $sheet, $rowCounter );
 
-  state @mapping;
-
   # there must be at least 6 columns
   return unless ( scalar @cell >= 6 );
 
   # try to find the header row
-  if ( !@mapping && ( join( '', @cell ) =~ /datum/i ) ) {
+  if ( !$self->{mapping}->@* && ( join( '', @cell ) =~ /datum/i ) ) {
 
     # find the requested columns and generate a maptable
     my $order = {};
+    my $i     = 0;
+
     foreach (@cell) {
-      state $i = 0;
 
       /datum/i     && do { $order->{$i} = 0; };
       /ura/i       && do { $order->{$i} = 1; };
@@ -44,16 +43,16 @@ sub rowHandler {
       /voditelji/i && do { $order->{$i} = 5; };
       $i += 1;
     } ## end foreach (@cell)
-    @mapping = sort { $order->{$a} <=> $order->{$b} } keys $order->%*;
+    $self->{mapping} = [ sort { $order->{$a} <=> $order->{$b} } keys $order->%* ];
     return;
-  } ## end if ( !@mapping && ( join...))
+  } ## end if ( !$self->{mapping}...)
 
-  return until @mapping;
+  return until $self->{mapping}->@*;
 
   # map the read fields in the correct order
   #    0      1      2       3       4          5
   my ( $date, $time, $title, $short, $synopsis, $voditelji ) =
-      map { $cell[$_] } @mapping;
+      map { $cell[$_] } $self->{mapping}->@*;
   $time      //= '';
   $title     //= '';
   $short     //= '';
@@ -139,7 +138,7 @@ sub rowHandler {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 

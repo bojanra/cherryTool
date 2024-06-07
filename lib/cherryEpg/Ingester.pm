@@ -332,6 +332,9 @@ sub ingestData {
     } ## end if ( exists $event->{synopsis...})
 
     if ( defined $event->{parental_rating} ) {
+
+      # parental rating input value is direct minimum age
+      # we subtract 3 according to specification of descriptor
       if ( $event->{parental_rating} >= 3 ) {
         my $parental_rating_descriptor;
         $parental_rating_descriptor->{descriptor_tag} = 0x55;    # parental_rating_descriptor
@@ -638,7 +641,7 @@ sub _prepareTextField {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019 by Bojan Ramšak
+This software is copyright (c) 2024 by Bojan Ramšak
 
 =head1 LICENSE
 

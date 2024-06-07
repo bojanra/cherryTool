@@ -43,7 +43,7 @@
       <li class="list-group-item">
         <h4 class="list-group-item-heading">
           Internet connection
-          <a href="#" data-toggle="tooltip" title="Test internet connection by downloading file">
+          <a href="#" data-toggle="tooltip" title="Check internet connection">
             <i class="glyphicon glyphicon-question-sign"></i>
           </a>
         </h4>
