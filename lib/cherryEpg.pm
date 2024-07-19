@@ -1,4 +1,4 @@
-package cherryEpg v2.5.11;
+package cherryEpg v2.5.12;
 
 use 5.024;
 use utf8;
@@ -107,6 +107,21 @@ sub BUILD {
     carp("Initialization of logging system failed");
   };
 
+  $SIG{__WARN__} = sub {
+    return if $^S;    # we're in an eval or try
+
+    chomp( my $msg = shift );
+    Log::Log4perl->get_logger("system")->warn($msg);
+  };
+
+  $SIG{__DIE__} = sub {
+    return if $^S;               # we're in an eval or try
+    die @_ if not defined $^S;
+
+    chomp( my $msg = shift );
+    Log::Log4perl->get_logger("system")->fatal($msg);
+    die "$msg\n";
+  }
 } ## end sub BUILD
 
 =head3 epgInstance( )

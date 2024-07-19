@@ -9,7 +9,7 @@ use Time::Seconds;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.23';
+our $VERSION = '0.24';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -137,12 +137,12 @@ sub _end {
 
       my $t = localtime->strptime( "$year/$month/$day", "%Y/%m/%d" );
 
-      if ( ( $self->{now} - $t ) > ONE_MONTH ) {
+      if ( $month == 1 && $self->{now}->mon == 12 ) {
 
         # if we are around new year increase year
         $year += 1;
         $t = Time::Piece->strptime( "$year/$month/$day", "%Y/%m/%d" );
-      } ## end if ( ( $self->{now} - ...))
+      } ## end if ( $month == 1 && $self...)
 
       $self->{weekday}{ $self->{navField} } = $t;
     } ## end if ( $self->{text} =~ ...)

@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.31';
+our $VERSION = '0.32';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -72,7 +72,7 @@ sub rowHandler {
     # H         I        J     K         L      M      N        O
     $program, $season, $num, $episode, undef, $game, $rating, $year
       )
-      = Spreadsheet::Read::cellrow( $sheet, $rowCounter );
+      = Spreadsheet::Read::row( $sheet, $rowCounter );
 
   return if $rawDate eq "Date";
 
