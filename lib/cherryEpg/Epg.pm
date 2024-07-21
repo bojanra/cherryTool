@@ -1392,7 +1392,10 @@ sub getEit {
     $section->{section_number} = $_section_number;
 
     # skip schedule tables for other service if "SEMIMESH" option set
-    next if ( $_table_id & 240 ) == 96 and $eit->{option}{SEMIMESH} and $eit->{option}{SEMIMESH} == 1;
+    next if ( $_table_id & 0xf0 ) == 0x60 and $eit->{option}{SEMIMESH} and $eit->{option}{SEMIMESH} == 1;
+
+    # skip schedule tables except 0x61 for other services
+    next if ( $_table_id & 0xf0 ) == 0x60 and $_table_id != 0x60 and $eit->{option}{OPTIMESH} and $eit->{option}{OPTIMESH} == 1;
 
     # p/f table have a higher repetition rate (every 2s) and therefore are grouped separate
     if ( $_table_id == 0x4e || $_table_id == 0x4f ) {

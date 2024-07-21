@@ -476,7 +476,7 @@ sub parseEIT {
       foreach (@list) {
         my ( $key, $value ) = split(/ *= */);
         my $uKey = uc($key);
-        my @list = qw( NOMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT LINGERONLY TITLE );
+        my @list = qw( NOMESH OPTIMESH SEMIMESH PCR TDT TSID MAXBITRATE COPY PAT SDT PMT LINGERONLY TITLE );
         if ( grep { $uKey eq $_ } @list ) {
           $value += 0 if $value && $value =~ /^\d+$/;
           $option{$uKey} = defined $value ? $value : 1;
@@ -637,6 +637,8 @@ sub parseConf {
       $raw->{extendedSID} = $field[1] ? 1 : 0;
     } elsif ( $field[0] =~ m /^semimesh$/i ) {
       $raw->{semimesh} = $field[1] ? 1 : 0;
+    } elsif ( $field[0] =~ m /^optimesh$/i ) {
+      $raw->{optimesh} = $field[1] ? 1 : 0;
     } elsif ( $field[0] =~ m /^description$/i ) {
       $raw->{description} = $field[1];
     } elsif ( $field[0] =~ m /^noautorule$/i ) {
@@ -849,6 +851,7 @@ sub build {
 
       # update options from CONF sheet
       $eit->{option}{SEMIMESH} = $raw->{semimesh} if $raw->{semimesh} and !defined $eit->{option}{SEMIMESH};
+      $eit->{option}{OPTIMESH} = $raw->{optimesh} if $raw->{optimesh} and !defined $eit->{option}{OPTIMESH};
 
       push( $scheme->{eit}->@*, $eit );
 
@@ -922,6 +925,7 @@ sub build {
 
       # update options from CONF sheet
       $eit->{option}{SEMIMESH} = $raw->{semimesh} if $raw->{semimesh} and !defined $eit->{option}{SEMIMESH};
+      $eit->{option}{OPTIMESH} = $raw->{optimesh} if $raw->{optimesh} and !defined $eit->{option}{OPTIMESH};
 
       push( $scheme->{eit}->@*, $eit );
     } ## end foreach my $eit_id ( sort {...})
