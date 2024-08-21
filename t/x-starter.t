@@ -3,7 +3,7 @@
 use 5.024;
 use utf8;
 use File::Path qw(remove_tree);
-use Test::More tests => 47;
+use Test::More tests => 48;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -112,8 +112,11 @@ ok( scalar( $grab->@* ) == $count, "multi-grab/ingest" );
 
 # export schedule to XML
 $channel = $cherry->epg->listChannel()->@[0];
-my $content = $cherry->epg->exportScheduleData( [$channel], "localhost", "eng" );
+my $content = $cherry->epg->export2XMLTV( [$channel], "localhost", "eng" );
 ok( $content && length($content) > 30000, "export channel in XMLTV format" );
+
+my $csv = $cherry->epg->export2CSV($channel);
+ok( $csv && length($csv) > 30000, "export channel in CSV format" );
 
 # reset/remove md5 file
 $channel = ${ $cherry->epg->listChannel() }[0];

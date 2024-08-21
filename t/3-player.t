@@ -82,7 +82,7 @@ foreach my $testdir ( '/', $dirname ) {
   # list carousel
   my @list = $player->list($testdir)->@*;
   ok( scalar @list == 2,     "list carousel" );
-  ok( $list[0]->{duplicate}, "detect duplcates" );
+  ok( $list[0]->{duplicate}, "detect duplicates" );
 
   # check if playing
   ok( $player->isPlaying( $testdir,  $copied ), "test playing" );

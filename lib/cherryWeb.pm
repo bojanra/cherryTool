@@ -100,16 +100,16 @@ get '/report.:format' => sub {
 
 # get events for single, group or all channels in xmltv format
 get '/export/:id.xml' => sub {
-  my $id = params->{id};
+  my $channel_id = params->{id};
 
   my $cherry = cherryEpg->instance();
 
   my $list;
 
-  if ( $id eq "all" ) {
+  if ( $channel_id eq "all" ) {
     $list = $cherry->epg->listChannel();
-  } elsif ( $id =~ m/^\d+$/ ) {
-    $list = $cherry->epg->listChannel($id);
+  } elsif ( $channel_id =~ m/^\d+$/ ) {
+    $list = $cherry->epg->listChannel($channel_id);
   } else {
     send_error( "Not allowed", 404 );
   }
@@ -117,7 +117,20 @@ get '/export/:id.xml' => sub {
   return "" unless $list;
 
   response_header( 'Content-Type' => 'application/xml' );
-  return $cherry->epg->exportScheduleData( $list, $cherry->config->{core}{exportIP} );
+  return $cherry->epg->export2XMLTV( $list, $cherry->config->{core}{exportIP} );
+};
+
+# get events for single channel in standard or custom csv format
+get '/export/:id.csv' => sub {
+  my $channel_id = params->{id};
+  my $custom     = params->{custom};
+
+  my $cherry = cherryEpg->instance();
+
+  my $channel = $cherry->epg->listChannel($channel_id)->[0];
+
+  response_header( 'Content-Type' => 'text/csv; charset=UTF-8' );
+  return $cherry->epg->export2CSV( $channel, $custom );
 };
 
 # download scheme by target
@@ -639,7 +652,10 @@ post '/ingest/:hash/:id' => sub {
   my $upload     = request->upload('file');
   my $response   = { success => 0 };
 
+  my $cherry = cherryEpg->instance();
+
   my $channel = $cherry->epg->listChannel($channel_id)->[0];
+
   if ( $channel && $channel->{post} && $channel->{post} eq $hash ) {
     if ($upload) {
       if ( ref($upload) ne 'ARRAY' ) {
@@ -655,7 +671,6 @@ post '/ingest/:hash/:id' => sub {
         my $filename = $file->filename;
         my $tempname = $file->tempname;
         my $cherry   = cherryEpg->instance();
-        my $channel  = $cherry->epg->listChannel($channel_id)->[0];
 
         if ( !$grabber->move( $tempname, $filename ) ) {
           $failed += 1;
@@ -697,14 +712,14 @@ post '/service/info' => require_role cherryweb => sub {
   my $cherry = cherryEpg->instance();
 
   # get info
-  my $result = $cherry->epg->listChannel($channel_id)->[0];
-  my $last   = $cherry->epg->listChannelLastUpdate();
+  my $channel = $cherry->epg->listChannel($channel_id)->[0];
+  my $last    = $cherry->epg->listChannelLastUpdate();
 
   # extract parser option from parser string
-  if ( $result->{parser} =~ s/\?(.*)$// ) {
-    $result->{option} = $1;
+  if ( $channel->{parser} =~ s/\?(.*)$// ) {
+    $channel->{option} = $1;
   } else {
-    $result->{option} = '';
+    $channel->{option} = '';
   }
 
   my $now = time();
@@ -743,10 +758,10 @@ post '/service/info' => require_role cherryweb => sub {
   } ## end foreach my $event ( $eventList...)
 
 
-  $result->{last}   = localtime( $last->{$channel_id}{timestamp} )->strftime();
-  $result->{events} = $eventList;
+  $channel->{last}   = localtime( $last->{$channel_id}{timestamp} )->strftime();
+  $channel->{events} = $eventList;
 
-  send_as( JSON => $result );
+  send_as( JSON => $channel );
 };
 
 # show ringelspiel statistics

@@ -88,8 +88,13 @@
           <div class="col-md-2">
             <h4>Export</h4>
             <a class="btn btn-primary" id="exportXML"><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
-            <a class="btn btn-default" id="exportCSV" disabled><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
-            <a class="btn btn-primary" id="exportALL" target="_blank"><i class="glyphicon glyphicon-shopping-cart"></i> All</a>
+            <div class="input-group">
+              <input id="exportParam" type="text" class="form-control" aria-describedby="export parameter" placeholder="default">
+              <span class="input-group-btn">
+                <a class="btn btn-primary" id="exportCSV"><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
+              </span>
+            </div><!-- /input-group -->
+            <a class="btn btn-success" id="exportALL"><i class="glyphicon glyphicon-shopping-cart"></i> All</a>
           </div>
         </div>
       </li>

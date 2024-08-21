@@ -523,7 +523,7 @@ sub listChannel {
 
 List all channels and last time they were updated.
 
-Return reference to array on success.
+Return reference to hash on success.
 
 =cut
 

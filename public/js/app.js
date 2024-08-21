@@ -165,9 +165,21 @@ function ServiceMatrix(log) {
         'curl -F file=@oneFile.xml ' + fullURL + "\n" +
         'curl -F file=@schedule1.xml -F file=@schedule2.xml ' + fullURL
       );
+
+      $('#exportParam').on('keyup change', (e) => {
+        const p = e.currentTarget.value;
+        let url = '/export/' + data.channel_id + '.csv';
+
+        if (p != '') {
+          url += '?custom=' + p;
+        }
+        $('#exportCSV').prop('href', url);
+      });
+
+      $('#exportParam').trigger("change");
+
       $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
       $('#exportXML').prop('target', '_' + data.channel_id);
-      $('#exportCSV').prop('href', '/export/' + data.channel_id + '.csv');
       $('#exportCSV').prop('target', '_' + data.channel_id);
       $('#exportALL').prop('href', '/export/all.xml');
       $('#exportALL').prop('target', '_all');

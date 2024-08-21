@@ -5,7 +5,7 @@ use utf8;
 use Moo::Role;
 use Time::Local;
 
-=head3 exportScheduleData( $list, $url)
+=head3 export2XMLTV( $list, $url)
 
 Export schedule data for $list of channels in xml format.
 Use $url as source and $language for descriptors.
@@ -13,7 +13,7 @@ Return xml serialized string.
 
 =cut
 
-sub exportScheduleData {
+sub export2XMLTV {
   my ( $self, $list, $url ) = @_;
   $url //= "127.0.0.1";
 
@@ -83,7 +83,118 @@ sub exportScheduleData {
   utf8::encode($output);
 
   return $output;
-} ## end sub exportScheduleData
+} ## end sub export2XMLTV
+
+
+=head3 export2CSV( $channel, $custom)
+
+Export schedule data for $channel in CSV format.
+Set $custom for nonstandard columns.
+
+This is done without using Text::CSV beacuse the module is not part of standard cherryEpg distribution
+and using it would break backward compatibility because of missing module.
+
+Return string.
+
+=cut
+
+sub export2CSV {
+  my ( $self, $channel, $custom ) = @_;
+
+  my @list;
+
+  foreach my $event ( $self->listEvent( $channel->{channel_id} )->@* ) {
+
+    my @row;
+
+    if ( !$custom ) {
+
+      # default columns
+      # add column header
+      push( @list, '"Date","Time","Duration","Title","Short","Synopsis","Parental"' ) unless @list;
+
+      @row = (
+        Time::Piece->new( $event->{start} )->strftime("%d/%m/%Y"),
+        Time::Piece->new( $event->{start} )->strftime("%H:%M:%S"),
+        Time::Piece->new( $event->{stop} )->epoch -Time::Piece->new( $event->{start} )->epoch,
+        $event->{title},
+        $event->{subtitle},
+        $event->{synopsis}
+      );
+
+      foreach my $descriptor ( $event->{descriptors}->@* ) {
+        next unless $descriptor->{descriptor_tag} == 85;
+        my $item = shift( $descriptor->{list}->@* );
+        if ($item) {
+          push( @row, $item->{rating} );
+          last;
+        }
+      } ## end foreach my $descriptor ( $event...)
+    } elsif ( $custom =~ /stn/i ) {
+
+      # customized CSV format
+      # add column header
+      push( @list,
+        '"start_date","start_time","end_date","end_time","repeat_type","repeat_interval","repeat_count","repeat_start_date","repeat_end_on","repeat_end_after","repeat_never","repeat_by","repeat_on_sun","repeat_on_mon","repeat_on_tue","repeat_on_wed","repeat_on_thu","repeat_on_fri","repeat_on_sat","title","description","allDay","url","organizer","venue","resources","color","backgroundColor","textColor","borderColor","location","available","privacy","image","thumbnail","actors","tags","language","invitation","invitation_event_id","invitation_creator_id","invitation_response","free_busy"'
+          )
+          unless @list;
+
+      @row = (
+        Time::Piece->new( $event->{start} )->strftime("%d/%m/%Y"),
+        Time::Piece->new( $event->{start} )->strftime("%H:%M:%S"),
+        Time::Piece->new( $event->{stop} )->strftime("%d/%m/%Y"),
+        Time::Piece->new( $event->{stop} )->strftime("%H:%M:%S"),
+        'none',
+        1,
+        0,
+        Time::Piece->new( $event->{start} )->strftime("%d/%m/%Y"),
+        Time::Piece->new( $event->{stop} )->strftime("%d/%m/%Y"),
+        0,
+        0,
+        '',
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        $event->{title},
+        $event->{synopsis},
+        'on',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        1,
+        'public',
+        '',
+        '',
+        '',
+        '',
+        'english',
+        1,
+        '',
+        '',
+        'pending',
+        'free',
+      );
+
+    } ## end elsif ( $custom =~ /stn/i)
+
+    map( { s/\n/ /g; } @row ) if @row;
+
+    # escape all double quotes and put all but numbers in double quotes
+    push( @list, join( ',', map { m/^\d+$/ ? $_ : '"' . (s/\"/\"\"/rg) . '"' } @row ) ) if @row;
+  } ## end foreach my $event ( $self->...)
+
+  return join( "\n", @list );
+} ## end sub export2CSV
 
 1;
 
