@@ -84,6 +84,14 @@ sub rowHandler {
     } catch {
       $self->error( "date not in format DD.MM.YYYY in row %i [%s]", $rowCounter, $date );
     };
+  } elsif ( $date =~ m|^(\d{4})-(\d+)-(\d+)| ) {
+
+    # yyyy-mm-dd
+    $start = try {
+      localtime->strptime( $date, "%Y-%m-%d" );
+    } catch {
+      $self->error( "date not in format YYYY-MM-DD in row %i [%s]", $rowCounter, $date );
+    };
   } elsif ( $date =~ m|^(\d+)/(\d+)/(\d{4})| ) {
 
     # dd/mm/yyyy
@@ -99,7 +107,7 @@ sub rowHandler {
     return;
   }
 
-  if ( $time =~ m/^(\d+)[:\.](\d+)$/ ) {
+  if ( $time =~ m/^\s*(\d+)[:\.](\d+)$/ ) {
 
     # hh:mm
     # hh.mm
@@ -118,6 +126,10 @@ sub rowHandler {
     $self->error( "time format unknown in row %i [%s]", $rowCounter, $time );
     return;
   }
+
+  utf8::decode($synopsis);
+  utf8::decode($title);
+  utf8::decode($short);
 
   # build event
   my $event = {

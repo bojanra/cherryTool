@@ -94,7 +94,7 @@
                 <a class="btn btn-primary" id="exportCSV"><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
               </span>
             </div><!-- /input-group -->
-            <a class="btn btn-success" id="exportALL"><i class="glyphicon glyphicon-shopping-cart"></i> All</a>
+            <a class="btn btn-success" id="exportALL"><i class="glyphicon glyphicon-shopping-cart"></i> All - XMLTV</a>
           </div>
         </div>
       </li>
