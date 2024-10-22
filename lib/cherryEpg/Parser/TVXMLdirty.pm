@@ -20,12 +20,15 @@ sub BUILD {
 
 Do the file processing and return a reference to hash with keys
  - errorList => array with troubles during parsing
- - eventList => array of events found TIME MUST BE in GMT
+ - eventList => array of events found TIME MUST BE in GMT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 The "dirty" in the parsername means, that the parser is less strict and has more options.
 e.g. Time format is less strict therefore also 
    start="20210220023000 +00:00" or
-   start="20210220023000 00:00" is accepted.
+   start="20210220023000 00:00" or 
+   start="1729546200" epoch in seconds
+   start="1729546200401" epoch in seconds or milliseconds
+   is accepted
 
 The parser accepts multiple options separated by commas in the $parserOption field.
 {channel_id},{language_code},{country_code}
@@ -138,8 +141,12 @@ sub decode_timestamp {
   my ( $self, $t ) = @_;
 
   return if !$t;
-  $t =~ s/://;                       # remove colon from timezone
-  $t =~ s/(\d)\s?(\d{4})$/$1+$2/;    # insert missing plus in front of timezone
+
+  return $t        if $t =~ m/^\d{10}$/;    # epoch in seconds
+  return $t / 1000 if $t =~ m/^\d{13}$/;    # epoch in milliseconds
+
+  $t =~ s/://;                              # remove colon from timezone
+  $t =~ s/(\d)\s?(\d{4})$/$1+$2/;           # insert missing plus in front of timezone
 
   try {
     Time::Piece->strptime( $t, "%Y%m%d%H%M%S %z" )->epoch;
