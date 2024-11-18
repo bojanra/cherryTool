@@ -1,4 +1,4 @@
-package cherryEpg v2.5.17;
+package cherryEpg v2.5.18;
 
 use 5.024;
 use utf8;
@@ -112,7 +112,7 @@ sub BUILD {
 
     chomp( my $msg = shift );
     Log::Log4perl->get_logger("system")->warn($msg);
-  };
+  }; ## end sub
 
   $SIG{__DIE__} = sub {
     return if $^S;               # we're in an eval or try
@@ -121,7 +121,7 @@ sub BUILD {
     chomp( my $msg = shift );
     Log::Log4perl->get_logger("system")->fatal($msg);
     die "$msg\n";
-  }
+  } ## end sub
 } ## end sub BUILD
 
 =head3 epgInstance( )

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TitanTV xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" value="FullSchedule" error="OK" utcOffset="0" observesDls="false" startTimeUtc="2024-11-03T00:00:00" duration="P28D" xmlns="http://www.titantv.com/">
+  <Channel channelId="2033319" channelNumber="1" callsign="DAYSTARINTL" network="DAYSTAR" isNextGen="false" tsid="0">
+    <Logo description="Channel Logo">https://cdn.titantv.com/kicUJIzA_8ktGLVIjFKjjhXblBpmChxydKEYCF-SLxU.png</Logo>
+    <Show startTimeUtc="2024-11-17T09:30:00" endTimeUtc="2024-11-17T10:00:00" adjustedstartTime="2024-11-17T09:30:00" adjustedEndTime="2024-11-17T10:00:00" duration="PT30M" eventId="382352458" programId="9390858" parentProgramId="1121205">
+      <Title lang="eng">The Jewish Jesus</Title>
+      <EpisodeTitle lang="eng">The Lens of Eternity: Receive an Eternal Perspective</EpisodeTitle>
+      <Description lang="eng">Exploring the concept of a perspective that is more eternal and beyond the scope of the present, Rabbi Schneider discusses how this perspective can place the self in a higher dimension.</Description>
+      <Description lang="eng">Rabbi Schneider discusses the benefits of exploring the concept of a perspective that is more eternal and beyond the scope of the present.</Description>
+      <ShowType>Series</ShowType>
+      <Cast role="Host">Kirt Schneider</Cast>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Kirt Schneider">https://www.daystar.com/shows/the-jewish-jesus/</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6Nxxct5bBXJfnKWXWIZpnMwgBaY.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T10:00:00" endTimeUtc="2024-11-17T10:30:00" adjustedstartTime="2024-11-17T10:00:00" adjustedEndTime="2024-11-17T10:30:00" duration="PT30M" eventId="381476339" programId="9316428" parentProgramId="7690698" year="2024" seasonNumber="2024" seasonEpisodeNumber="3" originalAirDate="2024-03-31">
+      <Title lang="eng">Healing Time with Dr. Doug Weiss</Title>
+      <EpisodeTitle lang="eng">Men Make Men #4</EpisodeTitle>
+      <Description lang="eng">A man can show how their influence within a community and by serving that community helps make the people around them stronger and that influence can be determined through personal strengths and interests.</Description>
+      <Description lang="eng">A man can show how their influence within a community and by serving that community helps make the people around them stronger.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating />
+      <WebLink category="Program Info" linkText="Healing Time with Dr. Doug Weiss">https://daystar.com/doug-weiss</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6NxxciYQ0vdhAvZLYaaA6p_KJCo.png</Image>
+    </Show>
+    <Show startTimeUtc="2024-11-17T10:30:00" endTimeUtc="2024-11-17T11:00:00" adjustedstartTime="2024-11-17T10:30:00" adjustedEndTime="2024-11-17T11:00:00" duration="PT30M" eventId="379623063" programId="8900612" parentProgramId="8011925" year="2022" originalAirDate="2022-01-01">
+      <Title lang="eng">Ron Carpenter</Title>
+      <Description lang="eng">Ron Carpenter is the Pastor for Redemption Bay Area in San Jose California. He is also the host of Ron Carpenter Television which airs weekly both nationally and internationally worldwide via television, internet and various satellites.</Description>
+      <Description lang="eng">Ron Carpenter is the Pastor for Redemption Bay Area in San Jose California. He is also the host of Ron Carpenter Television which airs weekly.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Ron Carpenter">https://daystar.com/ron-carpenter</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8n-bB5Rj4Tudr94ZuOC2hj94Bu718pcIeU.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T11:00:00" endTimeUtc="2024-11-17T11:30:00" adjustedstartTime="2024-11-17T11:00:00" adjustedEndTime="2024-11-17T11:30:00" duration="PT30M" eventId="379623051" programId="8763168" parentProgramId="5839511" year="2019" originalAirDate="2019-05-27">
+      <Title lang="eng">The Lance Wallnau Show</Title>
+      <Description lang="eng">Dr. Lance Wallnau walks through his logic and the underlying message of the stories of the day, applying his unique prophetic perspective to an upbeat conclusion.</Description>
+      <Description lang="eng">Dr. Lance Wallnau applyies his unique prophetic perspective to an upbeat conclusion concerning the major news stories of the day.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Lance Wallnau">https://daystar.com/lance-wallnau</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8n-bB5Rj4TudsZI28dWiuW9gY39sYFgKxk.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T11:30:00" endTimeUtc="2024-11-17T12:00:00" adjustedstartTime="2024-11-17T11:30:00" adjustedEndTime="2024-11-17T12:00:00" duration="PT30M" eventId="380701093" programId="9606255" parentProgramId="6832749" year="2024" originalAirDate="2024-11-10">
+      <Title lang="eng">Glorious Moments with Prophet Jerome Fernando</Title>
+      <EpisodeTitle lang="eng">How to Become a Giant of Faith</EpisodeTitle>
+      <Description lang="eng">The man of God uses selected passages of the Word to exemplify the ways that someone can be successful and transform into a giant of faith.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Jerome Fernando">https://daystar.com/jerome-fernando</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6NxxchzZ2j8H8qM4DNIB_FfEbLU.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T12:00:00" endTimeUtc="2024-11-17T13:00:00" adjustedstartTime="2024-11-17T12:00:00" adjustedEndTime="2024-11-17T13:00:00" duration="PT1H" eventId="381476350" programId="9657662" parentProgramId="2487731" isHd="true" year="2024" originalAirDate="2024-11-16">
+      <Title lang="eng">In Touch with Dr. Charles Stanley</Title>
+      <EpisodeTitle lang="eng">Making Him Known</EpisodeTitle>
+      <Description lang="eng">In Touch Ministries is the broadcast teaching ministry of Dr. Charles Stanley.</Description>
+      <ShowType>Series</ShowType>
+      <Cast role="Host">Dr. Charles Stanley</Cast>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Category lang="eng" type="TitanTV">Topical</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Dr. Charles Stanley">https://daystar.com/charles-stanley</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6NxxcvcpMTy6lmBm9rW-YwJbuLM.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T13:00:00" endTimeUtc="2024-11-17T14:00:00" adjustedstartTime="2024-11-17T13:00:00" adjustedEndTime="2024-11-17T14:00:00" duration="PT1H" eventId="379622860" programId="8804401" parentProgramId="3597635" year="2011" originalAirDate="2011-03-01">
+      <Title lang="eng">Reflections</Title>
+      <Description lang="eng">A program for daily devotion featuring scenic and lush landscapes from all throughout around the world that are accompanied by popular hymns and powerful songs of praise and worship along with scripture from the Holy Bible.</Description>
+      <Description lang="eng">Daily devotion featuring scenic landscapes from around the world, accompanied by hymns and songs of worship along with scripture from the Holy Bible.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Reflections">https://daystar.com/reflections</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8n-bB5Rj4TudryxqqYckxMkJo2O_hwCFWQ.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T14:00:00" endTimeUtc="2024-11-17T14:30:00" adjustedstartTime="2024-11-17T14:00:00" adjustedEndTime="2024-11-17T14:30:00" duration="PT30M" eventId="379622997" programId="8878521" parentProgramId="3898439">
+      <Title lang="eng">Jerusalem Dateline</Title>
+      <Description lang="eng">Jerusalem Bureau Chief Chris Mitchell reports from the Holy Land and Middle East and provides first-hand coverage of news and events in the State of Israel from a biblical perspective.</Description>
+      <Description lang="eng">Jerusalem Bureau Chief Chris Mitchell provides first-hand coverage of news and events in the State of Israel from a biblical perspective.</Description>
+      <ShowType>Series</ShowType>
+      <Cast role="Anchor">Chris Mitchell</Cast>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Category lang="eng" type="A65">News</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Jerusalem Dateline">https://daystar.com/jerusalem-dateline</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8n-bB5Rj4TudkuFQycqsJvZHQCy__v6Z6c.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T14:30:00" endTimeUtc="2024-11-17T15:00:00" adjustedstartTime="2024-11-17T14:30:00" adjustedEndTime="2024-11-17T15:00:00" duration="PT30M" eventId="379623005" programId="8878522" parentProgramId="3790072" year="2011" originalAirDate="2011-11-13">
+      <Title lang="eng">Israel Now News</Title>
+      <Description lang="eng">The team of correspondents highlights a series of in-depth news segments surrounding the nation of Israel, as they cover everything from the Holy Land's current events and politics to social issues, foreign affairs and much more.</Description>
+      <Description lang="eng">The correspondents highlight news surrounding the nation of Israel, covering everything from current events and politics to social issues and much more.</Description>
+      <ShowType>Series</ShowType>
+      <Cast role="Anchor">Erin Viner</Cast>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="A65">News</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Israel NOW News">https://daystar.com/israel-now-news</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8n-bB5Rj4TudmnND-sHEC2qcAmO5DjLUtk.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+    <Show startTimeUtc="2024-11-17T15:00:00" endTimeUtc="2024-11-17T15:30:00" adjustedstartTime="2024-11-17T15:00:00" adjustedEndTime="2024-11-17T15:30:00" duration="PT30M" eventId="379623490" programId="9360803" parentProgramId="6365074">
+      <Title lang="eng">Touching Lives with James Merritt</Title>
+      <Description lang="eng">Touching Lives with Dr. James Merritt is a global, Bible-based preaching ministry dedicated to touching the lives of the lost and enriching the faith of the found.</Description>
+      <Description lang="eng">Touching Lives with Dr. James Merritt is a global, Bible-based preaching ministry dedicated to touching the lives of the lost and enrich the faith of the found.</Description>
+      <ShowType>Series</ShowType>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Rating />
+      <WebLink category="Program Info" linkText="James Merritt">https://daystar.com/james-merritt</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6NxxcmU68T00U3qsJUJSss3FZjA.png</Image>
+    </Show>
+    <Show startTimeUtc="2024-11-17T15:30:00" endTimeUtc="2024-11-17T16:00:00" adjustedstartTime="2024-11-17T15:30:00" adjustedEndTime="2024-11-17T16:00:00" duration="PT30M" eventId="381476322" programId="9667997" parentProgramId="2530677" year="2024" originalAirDate="2024-11-17">
+      <Title lang="eng">Enjoying Everyday Life with Joyce Meyer</Title>
+      <EpisodeTitle lang="eng">The Upside-Down Kingdom</EpisodeTitle>
+      <Description lang="eng">Key principles from His Word that will make life more fulfilling and faith more effective.</Description>
+      <ShowType>Series</ShowType>
+      <Cast role="Host">Joyce Meyer</Cast>
+      <DisplayGenre>Religious</DisplayGenre>
+      <Category lang="eng" type="TitanTV">Religion</Category>
+      <Category lang="eng" type="A65">Family</Category>
+      <Category lang="eng" type="TitanTV">Topical</Category>
+      <Rating tv="TV-G" />
+      <WebLink category="Program Info" linkText="Joyce Meyer">https://daystar.com/joyce-meyer</WebLink>
+      <Image description="Primary Show Card">https://cdn.titantv.com/kicUJIzA_8nC6BWH6NxxcpLPM2oUHkcrS77fVwiTQWw.png</Image>
+      <ParentalRating regionNumber="1" dimensionId="0" ratingDimension="Entire Audience" ratingValue="TV-G" contentAdvisory="" />
+    </Show>
+  </Channel>
+</TitanTV>

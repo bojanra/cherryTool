@@ -4,7 +4,7 @@ use 5.024;
 use utf8;
 use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 66;
+use Test::More tests => 68;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -32,7 +32,7 @@ subtest "copy sample schedule data" => sub {
 
   ok( $rsync->exec(), "copy sample schedule data" );
   done_testing();
-};
+}; ## end "copy sample schedule data" => sub
 
 my $scheme = new_ok( 'cherryEpg::Scheme' => [ verbose => 0 ], "cherryEpg::Scheme" );
 

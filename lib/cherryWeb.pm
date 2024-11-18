@@ -30,7 +30,7 @@ hook before_template_render => sub {
   $tokens->{user}        = $user;
   $tokens->{hostname}    = hostname;
   $tokens->{description} = setting('description');
-};
+}; ## end before_template_render => sub
 
 sub loginPageHandler {
   my $return_url = params->{return_url} // '';
@@ -96,7 +96,7 @@ get '/report.:format' => sub {
   } else {
     return "The [$format] format is not yet supported. ";
   }
-};
+}; ## end '/report.:format' => sub
 
 # get events for single, group or all channels in xmltv format
 get '/export/:id.xml' => sub {
@@ -118,7 +118,7 @@ get '/export/:id.xml' => sub {
 
   response_header( 'Content-Type' => 'application/xml' );
   return $cherry->epg->export2XMLTV( $list, $cherry->config->{core}{exportIP} );
-};
+}; ## end '/export/:id.xml' => sub
 
 # get events for single channel in standard or custom csv format
 get '/export/:id.csv' => sub {
@@ -131,7 +131,7 @@ get '/export/:id.csv' => sub {
 
   response_header( 'Content-Type' => 'text/csv; charset=UTF-8' );
   return $cherry->epg->export2CSV( $channel, $custom );
-};
+}; ## end '/export/:id.csv' => sub
 
 # download scheme by target
 get '/scheme/:target' => require_role cherryweb => sub {
@@ -145,7 +145,7 @@ get '/scheme/:target' => require_role cherryweb => sub {
   } else {
     send_error( "Sorry, requested scheme not found!", 404 );
   }
-};
+}; ## end cherryweb => sub
 
 # download chunk by target
 get '/carousel/:target' => require_role cherryweb => sub {
@@ -160,7 +160,7 @@ get '/carousel/:target' => require_role cherryweb => sub {
   } else {
     send_error( "Sorry, requested chunk not found!", 404 );
   }
-};
+}; ## end cherryweb => sub
 
 # run chunk through dvbsnoop and return result
 get '/dump/:target' => require_role cherryweb => sub {
@@ -170,7 +170,7 @@ get '/dump/:target' => require_role cherryweb => sub {
   my $dump   = $player->dump( '/', $target );
 
   send_file( $dump, filename => $target . '.txt', content_type => 'text/plain; charset=UTF-8' );
-};
+}; ## end cherryweb => sub
 
 # from here on there are the 'AJAX' handlers
 # status
@@ -184,7 +184,7 @@ post '/status' => require_role cherryweb => sub {
   $report->{systemStart} = $systemStart->datetime();
 
   send_as( JSON => $report );
-};
+}; ## end cherryweb => sub
 
 post '/announce' => require_role cherryweb => sub {
 
@@ -225,7 +225,7 @@ post '/announce' => require_role cherryweb => sub {
       }
     );
   } ## end else [ if ($config) ]
-};
+}; ## end cherryweb => sub
 
 post '/carousel/browse' => require_role cherryweb => sub {
 
@@ -237,7 +237,7 @@ post '/carousel/browse' => require_role cherryweb => sub {
   }
 
   send_as( JSON => $list );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/delete' => require_role cherryweb => sub {
   my $target = params->{target};
@@ -247,7 +247,7 @@ post '/carousel/delete' => require_role cherryweb => sub {
   my $report = $player->delete( '/', $target );
 
   send_as( JSON => { success => $report // 0, target => $target } );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/pause' => require_role cherryweb => sub {
   my $target = params->{target};
@@ -259,7 +259,7 @@ post '/carousel/pause' => require_role cherryweb => sub {
   }
 
   send_as( JSON => { success => 0 } );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/play' => require_role cherryweb => sub {
   my $target = params->{target};
@@ -276,7 +276,7 @@ post '/carousel/play' => require_role cherryweb => sub {
   } ## end if ( $player->arm( '/'...))
 
   send_as( JSON => { success => 0 } );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/upload' => require_role cherryweb => sub {
   my $upload = request->upload('file');
@@ -317,7 +317,7 @@ post '/carousel/upload' => require_role cherryweb => sub {
     $report->{source} = $filename;
   } ## end else [ if ( !@raw ) ]
   send_as( JSON => $report );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/save' => require_role cherryweb => sub {
   my $md5 = params->{md5};
@@ -339,7 +339,7 @@ post '/carousel/save' => require_role cherryweb => sub {
   } ## end if ( -e $file )
 
   send_as( JSON => { success => 0 } );
-};
+}; ## end cherryweb => sub
 
 post '/carousel/upnsave' => require_role cherryweb => sub {
   my @multi = request->upload('file');
@@ -360,7 +360,7 @@ post '/carousel/upnsave' => require_role cherryweb => sub {
   } ## end foreach my $upload (@multi)
 
   send_as( JSON => \@report );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/upload' => require_role cherryweb => sub {
   my $upload = request->upload('file');
@@ -409,7 +409,7 @@ post '/scheme/upload' => require_role cherryweb => sub {
     };
   } ## end else [ if ( !$raw ) ]
   send_as( JSON => $report );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/browse' => require_role cherryweb => sub {
 
@@ -421,7 +421,7 @@ post '/scheme/browse' => require_role cherryweb => sub {
   }
 
   send_as( JSON => $list );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/validate' => require_role cherryweb => sub {
   my $description = params->{description};
@@ -447,7 +447,7 @@ post '/scheme/validate' => require_role cherryweb => sub {
     unlink($file) if -e $file;
   } ## end if ( -e $file )
   send_as( JSON => { success => 0 } );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/prepare' => require_role cherryweb => sub {
   my $target = params->{target};
@@ -484,7 +484,7 @@ post '/scheme/prepare' => require_role cherryweb => sub {
     };
   } ## end else [ if ( !$raw ) ]
   send_as( JSON => $report );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/action' => require_role cherryweb => sub {
   my $action = params->{action};
@@ -572,7 +572,7 @@ post '/scheme/action' => require_role cherryweb => sub {
   }
 
   send_as( JSON => \@report );
-};
+}; ## end cherryweb => sub
 
 post '/scheme/delete' => require_role cherryweb => sub {
   my $target = params->{target};
@@ -582,7 +582,7 @@ post '/scheme/delete' => require_role cherryweb => sub {
   my $report = $scheme->delete($target);
 
   send_as( JSON => { success => $report // 0, target => $target } );
-};
+}; ## end cherryweb => sub
 
 # current configuration
 post '/scheme' => require_role cherryweb => sub {
@@ -593,7 +593,7 @@ post '/scheme' => require_role cherryweb => sub {
   }
 
   send_as( JSON => $active );
-};
+}; ## end cherryweb => sub
 
 # show event budget for future/past
 post '/ebudget' => require_role cherryweb => sub {
@@ -643,7 +643,7 @@ post '/ebudget' => require_role cherryweb => sub {
       }
     );
   } ## end else [ if ( $cherry->isLinger...)]
-};
+}; ## end cherryweb => sub
 
 # ingest service eventdata file
 post '/ingest/:hash/:id' => sub {
@@ -703,7 +703,7 @@ post '/ingest/:hash/:id' => sub {
     $response->{message} = "Incorrect hash or channel_id";
   }
   send_as( JSON => $response );
-};
+}; ## end '/ingest/:hash/:id' => sub
 
 # return service info
 post '/service/info' => require_role cherryweb => sub {
@@ -762,7 +762,7 @@ post '/service/info' => require_role cherryweb => sub {
   $channel->{events} = $eventList;
 
   send_as( JSON => $channel );
-};
+}; ## end cherryweb => sub
 
 # show ringelspiel statistics
 post '/carousel' => require_role cherryweb => sub {
@@ -800,7 +800,7 @@ post '/log' => require_role cherryweb => sub {
       timestamp       => $t->strftime()
     }
   );
-};
+}; ## end cherryweb => sub
 
 # working with the repo
 post '/git' => require_role cherryweb => sub {
@@ -899,7 +899,7 @@ post '/git' => require_role cherryweb => sub {
       }
     );
   } ## end else [ if ( $status == 0 ) ]
-};
+}; ## end cherryweb => sub
 
 # working with the repo
 post '/maintenance' => require_role cherryweb => sub {
@@ -939,7 +939,7 @@ post '/maintenance' => require_role cherryweb => sub {
       message => "Loading failed!",
     }
   );
-};
+}; ## end cherryweb => sub
 
 # read single log entry
 get '/log/:id.json' => require_role cherryweb => sub {
@@ -962,7 +962,7 @@ get '/log/:id.json' => require_role cherryweb => sub {
   # manual conversion to JSON allows to have canonical format
   response_header( 'Content-Type' => 'application/json' );
   return JSON::XS->new->utf8->canonical(1)->encode( $row->{info} );
-};
+}; ## end cherryweb => sub
 
 # default route
 any qr{.*} => sub {

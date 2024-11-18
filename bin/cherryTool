@@ -23,6 +23,9 @@ cherryTool - tool for managing cherryEpg environment
  -j package apply maintenance package to system
  -J script  convert script to maintenance package
 
+ -e         list all logevents in database
+ -E num     lisr logevent num in JSON format
+
  -L scheme  initialize EPG database and load scheme
  -l scheme  load scheme to existing database (do not remove existing services and events)
             every imported scheme is copied to archive
@@ -103,7 +106,10 @@ use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:CdfFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:U:vVwWxyYZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:U:vVwWxyYZ:", \%args );
+
+# get rid off first line for further JSON processing
+$args{E} && listLog();
 
 say("cherryTool - $cherryEpg::VERSION Copyright 2024 Bojan Ramšak");
 
@@ -120,6 +126,7 @@ my $multiCommand;
 
 $args{y}                 && do { $yes     = 1 };
 $args{v}                 && do { $verbose = 1 };
+$args{e}                 && listLog();
 $args{A}                 && cleanStockDirectory();
 $args{O}                 && cleanupDatabase();
 $args{f}                 && resetSectionVersionTable();
@@ -170,7 +177,7 @@ Flags Chunk           Title                         PID  Destination          [b
 .
 
   format PLAYER_END =
-=============================================================================================
+---------------------------------------------------------------------------------------------
  @>>> active chunks
 @item
 .
@@ -728,3 +735,57 @@ sub applyDescription {
   say("Description modification failed!");
   exit 1;
 } ## end sub applyDescription
+
+
+sub listLog {
+  my $num = @_;
+
+  my $cherry = cherryEpg->instance( verbose => $verbose );
+
+  if ( $args{E} ) {
+    my $id = $args{E};
+
+    my $row = $cherry->epg->getLogEntry($id);
+
+    if ( !$row ) {
+      say "No entry found!";
+      exit 1;
+    }
+
+    try {
+      delete $row->{info}{source}{blob};
+    };
+
+    # manual conversion to JSON allows to have canonical format
+    my $msg = JSON::XS->new->utf8->canonical(1)->pretty()->encode($row);
+    utf8::decode($msg);
+
+    say $msg;
+    exit 0;
+  } else {
+    say("Content of cherryEPG lo table:");
+
+    my ( $total, $filtered, $listRef ) = $cherry->epg->getLogList( undef, undef, undef, 9999 );
+    my @item;
+
+    format LOG_TOP =
+Id     Timestamp           Category Level Text                                  Channel   
+---------------------------------------------------------------------------------------------
+.
+    format LOG =
+@>>>>@ @<<<<<<<<<<<<<<<<<< @<<<<<<< @<<<< @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< @<<<<<<<<<<<<
+@item
+.
+    $~ = "LOG";
+    $^ = "LOG_TOP";
+    $= = 60;
+
+    foreach ( reverse @$listRef ) {
+      $_->{channel} = $_->{channel} // '-';
+
+      @item = @{$_}{qw| id timestamp category level text channel |};
+      splice( @item, 1, 0, $_->{hasinfo} ? '*' : '' );
+      write;
+    } ## end foreach ( reverse @$listRef)
+  } ## end else [ if ( $args{E} ) ]
+} ## end sub listLog
