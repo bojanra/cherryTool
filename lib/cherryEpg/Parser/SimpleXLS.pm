@@ -3,14 +3,14 @@ package cherryEpg::Parser::SimpleXLS;
 use 5.024;
 use utf8;
 use Moo;
-use Spreadsheet::Read qw( row ReadData);
+use Spreadsheet::Read;
 use Time::Piece;
 use Time::Seconds;
 use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.26';
+our $VERSION = '0.27';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -31,7 +31,7 @@ sub parse {
   my $report = $self->{report};
 
   my $eBook = try {
-    ReadData( $self->source );
+    Spreadsheet::Read::ReadData( $self->source );
   };
 
   if ( !$eBook ) {
@@ -45,6 +45,14 @@ sub parse {
     $self->error("No sheet found!");
     return $report;
   }
+
+  if ( $option =~ m/MS/ ) {
+
+    # use microsoft date and time notation
+    # date number since 1.1.1900
+    # time decimal
+    $self->{MS} = 1;
+  } ## end if ( $option =~ m/MS/ )
 
   $report->{linecount} = $sheet->{maxrow};
 
@@ -64,7 +72,15 @@ sub parse {
 sub rowHandler {
   my ( $self, $sheet, $rowCounter ) = @_;
 
-  my @cell = Spreadsheet::Read::row( $sheet, $rowCounter );
+  my @cell;
+
+  if ( $self->{MS} ) {
+
+    # the MS trick
+    @cell = Spreadsheet::Read::cellrow( $sheet, $rowCounter );
+  } else {
+    @cell = Spreadsheet::Read::row( $sheet, $rowCounter );
+  }
 
   # there must be at least 6 columns
   return unless ( scalar @cell >= 6 );
@@ -104,7 +120,17 @@ sub rowHandler {
   $synopsis //= '';
 
   my $start;
-  if ( $date =~ m|^(\d+)\.(\d+)\.(\d\d)$| ) {
+
+  if ( $date =~ m|^(\d+)$| && $self->{MS} ) {
+
+    # integer
+    $start = try {
+      localtime->strptime( ( $date - 25569 ) * 24 * 60 * 60, "%s" );
+    } catch {
+      $self->error( "date not in MS format days since 1.1.1900 in row %i [%s]", $rowCounter, $date );
+    };
+
+  } elsif ( $date =~ m|^(\d+)\.(\d+)\.(\d\d)$| ) {
 
     # dd.mm.yy
     $start = try {
@@ -143,7 +169,11 @@ sub rowHandler {
     return;
   }
 
-  if ( $time =~ m/^(\d+)[:\.](\d+)$/ ) {
+  if ( $time =~ m/^(\d+)\.(\d+)$/ && $self->{MS} ) {
+
+    # convert MS Excel decimal time format to seconds since midnight
+    $start += ONE_MINUTE * sprintf( "%.0f", $time * 24 * 60 );
+  } elsif ( $time =~ m/^(\d+)[:\.](\d+)$/ ) {
 
     # hh:mm
     # hh.mm
@@ -163,7 +193,11 @@ sub rowHandler {
     return;
   }
 
-  if ( $duration =~ m/^(\d+):(\d+):(\d+)$/ ) {
+  if ( $duration =~ m/^(\d+)\.(\d+)$/ && $self->{MS} ) {
+
+    # convert MS Excel decimal time format to seconds since midnight
+    $duration = sprintf( "%.0f", $duration * 24 * 60 * 60 );
+  } elsif ( $duration =~ m/^(\d+):(\d+):(\d+)$/ ) {
     $duration = ( $1 * 60 + $2 ) * 60 + $3;
   } elsif ( $duration =~ m/^(\d+)$/ ) {
     $duration = $1;
@@ -188,7 +222,7 @@ sub rowHandler {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2022 by Bojan Ramšak
+This software is copyright (c) 2022-2024 by Bojan Ramšak
 
 =head1 LICENSE
 

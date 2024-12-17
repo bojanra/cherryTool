@@ -119,12 +119,12 @@ sub parse {
     if ( defined $synopsis && $synopsis ne "" ) {
       $synopsis =~ s/\n/ /gs;
       $event->{synopsis} = $synopsis;
-    } ## end if ( defined $synopsis...)
+    }
 
     if ( defined $synopsis2 && $synopsis2 ne "" ) {
       $synopsis2 =~ s/\n/ /gs;
       $event->{synopsis} .= ' ' . $synopsis2;
-    } ## end if ( defined $synopsis2...)
+    }
 
     if ( defined $year && $year > 1900 ) {
       $event->{synopsis} .= ' ' . $year;
