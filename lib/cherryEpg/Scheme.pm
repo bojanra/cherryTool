@@ -881,8 +881,9 @@ sub build {
     # check if service by ID exists
     # check if output EIT_ID exists
     # verify for uniq rules
-    my $ruleById = {};
-    my $eitInUse = {};
+    my $ruleById      = {};
+    my $eitInUse      = {};
+    my $outputService = {};
 
     if ( !exists $raw->{rule} || scalar( $raw->{rule}->@* ) == 0 ) {
       $self->error("NOAUTORULE is set but no RULES defined");
@@ -891,6 +892,9 @@ sub build {
     foreach my $in ( $raw->{rule}->@* ) {
       my $id     = $in->{channel_id};
       my $eit_id = $in->{eit_id};
+      my $tsid   = $in->{transport_stream_id};
+      my $onid   = $in->{original_network_id};
+      my $sid    = $in->{service_id};
 
       if ( !exists $serviceHash->{$id} ) {
         $self->error("Service for ID (SID) [$id] not defined");
@@ -902,13 +906,16 @@ sub build {
         $eitInUse->{$eit_id} = 1;
       }
 
-      if ( !exists $ruleById->{$id} ) {
-        $ruleById->{$id} = {};
-      }
-      if ( exists $ruleById->{$id}{$eit_id} ) {
+      if ( $ruleById->{$id}{$eit_id} ) {
         $self->error("Service is mapped to same EIT more than once [$id->$eit_id]");
       }
       $ruleById->{$id}{$eit_id} = 1;
+
+      if ( $outputService->{$eit_id}{$tsid}{$onid}{$sid} ) {
+        my $t = $outputService->{$eit_id}{$tsid}{$onid}{$sid} - 1;
+        $self->error("Multiple IDs mapped to same EIT/TSID/SID/ONID: ($id & $t) -> $eit_id/$tsid/$sid/$onid");
+      }
+      $outputService->{$eit_id}{$tsid}{$onid}{$sid} = $id + 1;
 
       my $rule = {%$in};
 
