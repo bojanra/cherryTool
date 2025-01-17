@@ -42,6 +42,8 @@ Do the file processing and return a reference to hash with keys
 
 $parserOption are currently ignored.
 
+Time/date is parsed and ingested with reference local timezone of the linux system.
+
 =cut
 
 sub parse {
@@ -95,7 +97,7 @@ sub parse {
     }
 
     $event->{start} = try {
-      gmtime->strptime( $date . ' ' . $time, "%d/%m/%Y %H:%M" )->epoch;
+      localtime->strptime( $date . ' ' . $time, "%d/%m/%Y %H:%M" )->epoch;
     } catch {
       $self->error( "date/time parsing error in row %i [%s]", $row + 1, $date . ' ' . $time );
       next;
