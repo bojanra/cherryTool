@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -63,11 +63,11 @@ sub parse {
         $self->error("start_time not valid format [$item->{start_time}]");
       };
     } ## end if ( $item->{start_time...})
-    $event->{duration} = $item->{duration}  if $item->{duration};
-    $event->{title}    = $item->{title}     if $item->{title};
-    $event->{subtitle} = $item->{ep_name}   if $item->{ep_name};
-    $event->{synopsis} = $item->{live_desc} if $item->{live_desc};
-    $event->{id}       = $item->{id}        if $item->{id};
+    $event->{duration} = $item->{duration} if $item->{duration};
+    $event->{title}    = $item->{program}  if $item->{program};
+    $event->{subtitle} = $item->{ep_name}  if $item->{ep_name};
+    $event->{synopsis} = $item->{host}     if $item->{host};
+    $event->{id}       = $item->{id}       if $item->{id};
 
     push( @{ $report->{eventList} }, $event );
   } ## end foreach my $item ( @{$data})
