@@ -4,7 +4,7 @@ use 5.024;
 use utf8;
 use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 69;
+use Test::More tests => 70;
 
 BEGIN {
   use_ok("cherryEpg");
