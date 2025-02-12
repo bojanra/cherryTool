@@ -133,7 +133,7 @@ sub initdb {
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE event ( event_id INTEGER,
             channel_id INTEGER,
             start INTEGER UNSIGNED,
@@ -144,7 +144,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE eit ( eit_id INTEGER,
             pid INTEGER,
             info BLOB,
@@ -152,7 +152,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE rule ( eit_id INTEGER NOT NULL,
             service_id INTEGER,
             original_network_id INTEGER,
@@ -164,7 +164,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE version ( service_id INTEGER,
             original_network_id INTEGER,
             transport_stream_id INTEGER,
@@ -175,7 +175,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE section (
             service_id INTEGER,
             original_network_id INTEGER,
@@ -187,7 +187,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE dictionary (
             id VARCHAR(16),
             value VARCHAR(60),
@@ -195,7 +195,7 @@ SQL
             ENGINE=MyISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE linger ( linger_id VARCHAR(40),
             public_key TEXT,
             info BLOB,
@@ -203,7 +203,7 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TABLE log ( id INTEGER NOT NULL AUTO_INCREMENT,
             timestamp TIMESTAMP DEFAULT UTC_TIMESTAMP,
             level TINYINT,
@@ -218,31 +218,31 @@ SQL
             ENGINE = MYISAM;
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TRIGGER event_timestamp_insert BEFORE INSERT ON event
             FOR EACH ROW
                 SET NEW.timestamp = UNIX_TIMESTAMP();
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TRIGGER event_timestamp_update BEFORE UPDATE ON event
             FOR EACH ROW
                 SET NEW.timestamp = UNIX_TIMESTAMP();
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TRIGGER rule_delete AFTER DELETE ON rule
             FOR EACH ROW BEGIN
-                DELETE FROM version WHERE version.service_id = old.service_id
+                DELETE FROM version WHERE version.service_id = ((old.eit_id << 16) + old.service_id)
                     AND version.original_network_id = old.original_network_id
                     AND version.transport_stream_id = old.transport_stream_id;
-                DELETE FROM section WHERE section.service_id = old.service_id
+                DELETE FROM section WHERE section.service_id = ((old.eit_id << 16) + old.service_id)
                     AND section.original_network_id = old.original_network_id
                     AND section.transport_stream_id = old.transport_stream_id;
             END
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TRIGGER eit_delete BEFORE DELETE ON eit
             FOR EACH ROW BEGIN
                 DELETE FROM rule WHERE rule.eit_id = old.eit_id;
@@ -250,7 +250,7 @@ SQL
             END
 SQL
 
-  $dbh->do( <<"SQL");
+  $dbh->do(<<"SQL");
         CREATE TRIGGER channel_delete BEFORE DELETE ON channel
             FOR EACH ROW BEGIN
                 DELETE FROM event WHERE event.channel_id = old.channel_id;
@@ -408,7 +408,7 @@ sub healthCheck {
   my $dbh = $self->dbh;
   return unless $dbh;
 
-  return $self->dbh->selectall_arrayref( <<"SQL");
+  return $self->dbh->selectall_arrayref(<<"SQL");
         SELECT table_name,Engine,table_rows,Data_length,Create_time,Update_time,Check_time,table_collation
             FROM information_schema.tables
         WHERE table_schema = 'cherry_db'
@@ -813,7 +813,7 @@ sub addRule {
 
   $comment //= "";
 
-  return $dbh->do( <<"SQL");
+  return $dbh->do(<<"SQL");
         REPLACE INTO rule VALUES
         ((SELECT eit_id FROM eit WHERE eit_id = $eit_id),
         $service_id, $original_network_id, $transport_stream_id,
@@ -1006,6 +1006,8 @@ eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual
 
 Update sections only if there are changes in event table of schedule since last update.
 
+!!!! the service_id in section and version tables are mapped by combining ( eit_id << 16) + service_id
+
 Return undef if failed.
 Return 0 if sections are already uptodate.
 Return 1 after updating sections.
@@ -1022,10 +1024,12 @@ sub updateEitPresent {
 
   my $present_following = cherryEpg::EIT->new( rule => $rule );
 
+  my $combined = ( $rule->{eit_id} << 16 ) + $rule->{service_id};
+
   # lookup version_number used at last generation of eit and timestamp
   my $select = $dbh->prepare(
     "SELECT version_number, timestamp FROM version
-        WHERE service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
+        WHERE service_id=$combined AND original_network_id=$rule->{original_network_id}
         AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}"
   );
   $select->execute();
@@ -1123,15 +1127,15 @@ sub updateEitPresent {
   $self->_lockdb();
 
   # Remove all section of this table
-  $dbh->do( <<"SQL");
-        DELETE FROM section WHERE service_id=$rule->{service_id}
+  $dbh->do(<<"SQL");
+        DELETE FROM section WHERE service_id=$combined
               AND original_network_id=$rule->{original_network_id}
               AND transport_stream_id=$rule->{transport_stream_id}
               AND table_id=$rule->{table_id}
 SQL
 
   my $insert = $dbh->prepare(
-    "INSERT INTO section VALUES ( $rule->{service_id},
+    "INSERT INTO section VALUES ( $combined,
         $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id}, ?, ?)"
   );
 
@@ -1142,7 +1146,7 @@ SQL
   }
 
   $dbh->do(
-    "REPLACE INTO version VALUES ( $rule->{service_id},
+    "REPLACE INTO version VALUES ( $combined,
         $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id},
         $last_version_number, $currentTime)"
   );
@@ -1158,6 +1162,8 @@ $rule is reference to hash containing keys:
 eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual, maxsegments
 
 Update sections only if there are changes in event table of schedule since last update.
+
+!!!! the service_id in section and version tables are mapped by combining ( eit_id << 16) + service_id
 
 =cut
 
@@ -1179,10 +1185,12 @@ sub updateEitSchedule {
 
     my $schedule = cherryEpg::EIT->new( rule => $rule );
 
+    my $combined = ( $rule->{eit_id} << 16 ) + $rule->{service_id};
+
     # lookup version_number used at last generation of eit and timestamp
     my $select = $dbh->prepare(
       "SELECT version_number, timestamp FROM version
-            WHERE service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
+            WHERE service_id=$combined AND original_network_id=$rule->{original_network_id}
             AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}"
     );
 
@@ -1298,14 +1306,14 @@ sub updateEitSchedule {
     $self->_lockdb();
 
     # Remove all section of this table
-    $dbh->do( <<"SQL");
+    $dbh->do(<<"SQL");
             DELETE FROM section WHERE
-            service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
+            service_id=$combined AND original_network_id=$rule->{original_network_id}
             AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}
 SQL
 
     my $insert = $dbh->prepare(
-      "INSERT INTO section VALUES ( $rule->{service_id},
+      "INSERT INTO section VALUES ( $combined,
             $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id}, ?, ?)"
     );
 
@@ -1317,8 +1325,8 @@ SQL
       $insert->execute();
     }
 
-    $dbh->do( <<"SQL");
-            REPLACE INTO version VALUES ( $rule->{service_id},
+    $dbh->do(<<"SQL");
+            REPLACE INTO version VALUES ( $combined,
             $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id},
             $last_version_number, $currentTime)
 SQL
@@ -1357,8 +1365,8 @@ sub getEit {
 
   # fetch all sections from database
   my $sel = $dbh->prepare(
-    "SELECT table_id, section.service_id, section_number, dump FROM section JOIN rule ON (
-        section.service_id = rule.service_id AND section.original_network_id = rule.original_network_id
+    "SELECT table_id, (section.service_id & 0xffff) AS service_id, section_number, dump FROM section JOIN rule ON (
+        section.service_id = ((rule.eit_id << 16) + rule.service_id) AND section.original_network_id = rule.original_network_id
         AND section.transport_stream_id = rule.transport_stream_id ) WHERE rule.eit_id = $eit_id AND
         ((rule.actual = 1 AND (section.table_id = 78 OR section.table_id & 240 = 80)) OR
         (rule.actual = 0 AND (section.table_id = 79 OR section.table_id & 240 = 96))) ORDER BY OCTET_LENGTH(dump) DESC"
@@ -1781,7 +1789,7 @@ sub _unfreezeEvent {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2024 by Bojan Ramšak
+This software is copyright (c) 2025 by Bojan Ramšak
 
 =head1 LICENSE
 
