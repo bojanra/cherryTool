@@ -49,7 +49,6 @@ cherryTool - tool for managing cherryEpg environment
 
  -f         reset section and version table (force next build)
  -A         delete ALL from stock directory
- -P         reset rule table
  -O         cleanup database - delete old events and log entries
  -T         reset all tables in database to empty state (drop+init)
 
@@ -59,7 +58,6 @@ cherryTool - tool for managing cherryEpg environment
  -i id      parse/ingest files for service
  -I id      parse/ingest files for service and dump event data (debugging of parser)
  -r id      reset ingest state (delete *.md5.parsed)
- -w id      wipe/remove service definition and data
  -x id      export events for service in XMLTV format to file {service_id.xml}
 
  -W         run the web server
@@ -76,7 +74,7 @@ line parameters. The default location is C<$USER_HOME/config.yml>.
 
 =encoding utf8
 
-This software is copyright (c) 2023 by Bojan Ramšak
+This software is copyright (c) 2025 by Bojan Ramšak
 
 =head1 LICENSE
 
@@ -106,7 +104,7 @@ use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:M:nNOp:PQrRs:STu:U:vVwWxyYZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:M:nNOp:QrRs:STu:U:vVWxyYZ:", \%args );
 
 # get rid off first line for further JSON processing
 $args{E} && listLog();
@@ -130,7 +128,6 @@ $args{e}                 && listLog();
 $args{A}                 && cleanStockDirectory();
 $args{O}                 && cleanupDatabase();
 $args{f}                 && resetSectionVersionTable();
-$args{P}                 && resetRules();
 $args{T}                 && resetDatabase();
 $args{j}                 && applyMaintainerPackage();
 $args{J}                 && convertMaintainerPackage( $args{J} );
@@ -154,7 +151,7 @@ $args{W}                 && webServer();
 $args{K}                 && applyDescription( $args{K} );
 $args{U}                 && composeCarousel( $args{U} );
 
-( $args{g} || $args{i} || $args{I} || $args{r} || $args{w} || $args{d} || $args{x} ) && do { $multiCommand = 1 };
+( $args{g} || $args{i} || $args{I} || $args{r} || $args{d} || $args{x} ) && do { $multiCommand = 1 };
 
 serviceManipulator() if $multiCommand;
 
@@ -457,13 +454,6 @@ sub resetDatabase {
   $cherry->resetDatabase();
 } ## end sub resetDatabase
 
-sub resetRules {
-  say("Delete all output rules");
-  exit 2 unless confirmed();
-  my $cherry = cherryEpg->instance( verbose => $verbose );
-  $cherry->deleteRule();
-} ## end sub resetRules
-
 sub resetSectionVersionTable {
   say("Clean section and version tables");
   my $cherry = cherryEpg->instance( verbose => $verbose );
@@ -631,12 +621,8 @@ sub serviceManipulator {
     } ## end foreach my $channel_id (@ARGV)
     exit 1 if $errorFlag;
   } else {
-    if ( $args{w} ) {
-      say("You are going to wipe all services from the system!");
-      exit 2 unless confirmed();
-    }
     $myChannelList = $cherry->epg->listChannel();
-  } ## end else [ if ( scalar(@ARGV) > 0)]
+  }
 
   # walk over all channels
   foreach my $channel (@$myChannelList) {
@@ -661,13 +647,6 @@ sub serviceManipulator {
       close($file);
       say("  $filename");
     } ## end if ( $args{x} )
-
-    if ( $args{w} ) {
-      say(" wipe (All service data will be lost):");
-      if ( confirmed() ) {
-        $cherry->deleteChannel($channel_id);
-      }
-    } ## end if ( $args{w} )
   } ## end foreach my $channel (@$myChannelList)
 } ## end sub serviceManipulator
 

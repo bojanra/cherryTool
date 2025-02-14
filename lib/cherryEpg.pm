@@ -1,4 +1,4 @@
-package cherryEpg v2.5.26;
+package cherryEpg v2.5.27;
 
 use 5.024;
 use utf8;
@@ -205,23 +205,6 @@ sub deleteIngest {
   return remove_tree( $dir, { keep_root => 1 } );
 } ## end sub deleteIngest
 
-=head3 deleteRule( )
-
-Delete all rules in database.
-
-=cut
-
-sub deleteRule {
-  my ($self) = @_;
-
-  my $logger = Log::Log4perl->get_logger("system");
-
-  my $count = $self->epg->deleteRule();
-
-  $logger->info("delete rules from database [$count]");
-  return $count;
-} ## end sub deleteRule
-
 =head3 deleteSection( )
 
 Delete all entries from section and version table.
@@ -238,27 +221,6 @@ sub deleteSection {
   $logger->info("reset section and version table");
   return $count;
 } ## end sub deleteSection
-
-=head3 deleteChannel( $channel_id)
-
-Delete/wipe channel with $channel_id from database.
-
-=cut
-
-sub deleteChannel {
-  my ( $self, $channel_id ) = @_;
-
-  my $logger = Log::Log4perl->get_logger("system");
-
-  my $dir = dir( $self->config->{core}{ingest}, $channel_id );
-
-  remove_tree( $dir, { keep_root => 0 } );
-
-  my $result = $self->epg->deleteChannel($channel_id);
-
-  $logger->info( "wipe service from database and disk", $channel_id );
-  return $result;
-} ## end sub deleteChannel
 
 =head3 resetDatabase( )
 

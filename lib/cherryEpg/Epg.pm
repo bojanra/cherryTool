@@ -230,35 +230,6 @@ SQL
                 SET NEW.timestamp = UNIX_TIMESTAMP();
 SQL
 
-  $dbh->do(<<"SQL");
-        CREATE TRIGGER rule_delete AFTER DELETE ON rule
-            FOR EACH ROW BEGIN
-                DELETE FROM version WHERE version.service_id = ((old.eit_id << 16) + old.service_id)
-                    AND version.original_network_id = old.original_network_id
-                    AND version.transport_stream_id = old.transport_stream_id;
-                DELETE FROM section WHERE section.service_id = ((old.eit_id << 16) + old.service_id)
-                    AND section.original_network_id = old.original_network_id
-                    AND section.transport_stream_id = old.transport_stream_id;
-            END
-SQL
-
-  $dbh->do(<<"SQL");
-        CREATE TRIGGER eit_delete BEFORE DELETE ON eit
-            FOR EACH ROW BEGIN
-                DELETE FROM rule WHERE rule.eit_id = old.eit_id;
-                DELETE FROM log WHERE log.eit_id = old.eit_id;
-            END
-SQL
-
-  $dbh->do(<<"SQL");
-        CREATE TRIGGER channel_delete BEFORE DELETE ON channel
-            FOR EACH ROW BEGIN
-                DELETE FROM event WHERE event.channel_id = old.channel_id;
-                DELETE FROM rule WHERE rule.channel_id = old.channel_id;
-                DELETE FROM log WHERE log.channel_id = old.channel_id;
-            END
-SQL
-
   $self->_unlockdb();
 
   return 1;
@@ -570,27 +541,6 @@ sub listChannelEventCount {
   );
 } ## end sub listChannelEventCount
 
-
-=head3 deleteChannel( $channel_id)
-
-Delete channel with $channel_id.
-
-Remove all channels, if $channel_id not defined.
-
-All events of the according channel are automatically removed.
-
-Return 1 on success.
-
-=cut
-
-sub deleteChannel {
-  my ( $self, $channel_id ) = @_;
-  my $dbh = $self->dbh;
-  return 0 unless $dbh;
-
-  return $dbh->do( "DELETE FROM channel WHERE 1" . ( defined $channel_id ? " AND channel_id=$channel_id" : "" ) );
-} ## end sub deleteChannel
-
 =head3 addEvent( $event)
 
 Add an $event to event table.
@@ -840,29 +790,6 @@ sub listRule {
     { Slice => {} } );
 } ## end sub listRule
 
-=head3 deleteRule( $eit_id, $service_id, $original_network_id, $transport_stream_id)
-
-Delete eit generator rule.
-Parameters are optional.
-
-Return number of deleted rules.
-
-=cut
-
-sub deleteRule {
-  my ( $self, $eit_id, $service_id, $original_network_id, $transport_stream_id ) = @_;
-  my $dbh = $self->dbh;
-  return unless $dbh;
-
-  my $ret =
-      $dbh->do( "DELETE FROM rule WHERE 1"
-        . ( defined $eit_id              ? " AND eit_id=$eit_id"                           : "" )
-        . ( defined $service_id          ? " AND service_id=$service_id"                   : "" )
-        . ( defined $original_network_id ? " AND original_network_id=$original_network_id" : "" )
-        . ( defined $transport_stream_id ? " AND transport_stream_id=$transport_stream_id" : "" ) );
-  return $ret eq "0E0" ? 0 : $ret;
-} ## end sub deleteRule
-
 =head3 addEit( $eit_id, $pid)
 =head3 addEit( $hash)
 
@@ -922,24 +849,6 @@ sub listEit {
   } ## end foreach my $eit (@$list)
   return $list;
 } ## end sub listEit
-
-=head3 deleteEit( $eit_id)
-
-Delete EIT with $eit_id.
-Remove all destinations, if $eit_id not defined.
-All rules with destination $eit_id are automatically removed.
-
-Return 1 on success.
-
-=cut
-
-sub deleteEit {
-  my ( $self, $eit_id ) = @_;
-  my $dbh = $self->dbh;
-  return unless $dbh;
-
-  return $dbh->do( "DELETE FROM eit WHERE 1" . ( defined $eit_id ? " AND eit_id=$eit_id" : "" ) );
-} ## end sub deleteEit
 
 =head3 updateEit( $eit_id)
 
@@ -1006,8 +915,6 @@ eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual
 
 Update sections only if there are changes in event table of schedule since last update.
 
-!!!! the service_id in section and version tables are mapped by combining ( eit_id << 16) + service_id
-
 Return undef if failed.
 Return 0 if sections are already uptodate.
 Return 1 after updating sections.
@@ -1024,12 +931,10 @@ sub updateEitPresent {
 
   my $present_following = cherryEpg::EIT->new( rule => $rule );
 
-  my $combined = ( $rule->{eit_id} << 16 ) + $rule->{service_id};
-
   # lookup version_number used at last generation of eit and timestamp
   my $select = $dbh->prepare(
     "SELECT version_number, timestamp FROM version
-        WHERE service_id=$combined AND original_network_id=$rule->{original_network_id}
+        WHERE service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
         AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}"
   );
   $select->execute();
@@ -1128,14 +1033,14 @@ sub updateEitPresent {
 
   # Remove all section of this table
   $dbh->do(<<"SQL");
-        DELETE FROM section WHERE service_id=$combined
+        DELETE FROM section WHERE service_id=$rule->{service_id}
               AND original_network_id=$rule->{original_network_id}
               AND transport_stream_id=$rule->{transport_stream_id}
               AND table_id=$rule->{table_id}
 SQL
 
   my $insert = $dbh->prepare(
-    "INSERT INTO section VALUES ( $combined,
+    "INSERT INTO section VALUES ( $rule->{service_id},
         $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id}, ?, ?)"
   );
 
@@ -1146,7 +1051,7 @@ SQL
   }
 
   $dbh->do(
-    "REPLACE INTO version VALUES ( $combined,
+    "REPLACE INTO version VALUES ( $rule->{service_id},
         $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id},
         $last_version_number, $currentTime)"
   );
@@ -1162,8 +1067,6 @@ $rule is reference to hash containing keys:
 eit_id, channel_id, original_network_id, transport_stream_id, service_id, actual, maxsegments
 
 Update sections only if there are changes in event table of schedule since last update.
-
-!!!! the service_id in section and version tables are mapped by combining ( eit_id << 16) + service_id
 
 =cut
 
@@ -1185,12 +1088,10 @@ sub updateEitSchedule {
 
     my $schedule = cherryEpg::EIT->new( rule => $rule );
 
-    my $combined = ( $rule->{eit_id} << 16 ) + $rule->{service_id};
-
     # lookup version_number used at last generation of eit and timestamp
     my $select = $dbh->prepare(
       "SELECT version_number, timestamp FROM version
-            WHERE service_id=$combined AND original_network_id=$rule->{original_network_id}
+            WHERE service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
             AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}"
     );
 
@@ -1308,12 +1209,12 @@ sub updateEitSchedule {
     # Remove all section of this table
     $dbh->do(<<"SQL");
             DELETE FROM section WHERE
-            service_id=$combined AND original_network_id=$rule->{original_network_id}
+            service_id=$rule->{service_id} AND original_network_id=$rule->{original_network_id}
             AND transport_stream_id=$rule->{transport_stream_id} AND table_id=$rule->{table_id}
 SQL
 
     my $insert = $dbh->prepare(
-      "INSERT INTO section VALUES ( $combined,
+      "INSERT INTO section VALUES ( $rule->{service_id},
             $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id}, ?, ?)"
     );
 
@@ -1326,7 +1227,7 @@ SQL
     }
 
     $dbh->do(<<"SQL");
-            REPLACE INTO version VALUES ( $combined,
+            REPLACE INTO version VALUES ( $rule->{service_id},
             $rule->{original_network_id}, $rule->{transport_stream_id}, $rule->{table_id},
             $last_version_number, $currentTime)
 SQL
@@ -1365,8 +1266,8 @@ sub getEit {
 
   # fetch all sections from database
   my $sel = $dbh->prepare(
-    "SELECT table_id, (section.service_id & 0xffff) AS service_id, section_number, dump FROM section JOIN rule ON (
-        section.service_id = ((rule.eit_id << 16) + rule.service_id) AND section.original_network_id = rule.original_network_id
+    "SELECT table_id, section.service_id, section_number, dump FROM section JOIN rule ON (
+        section.service_id = rule.service_id AND section.original_network_id = rule.original_network_id
         AND section.transport_stream_id = rule.transport_stream_id ) WHERE rule.eit_id = $eit_id AND
         ((rule.actual = 1 AND (section.table_id = 78 OR section.table_id & 240 = 80)) OR
         (rule.actual = 0 AND (section.table_id = 79 OR section.table_id & 240 = 96))) ORDER BY OCTET_LENGTH(dump) DESC"

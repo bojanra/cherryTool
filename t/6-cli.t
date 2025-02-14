@@ -6,7 +6,7 @@ use File::Basename;
 use File::Path qw(remove_tree);
 use File::Temp qw(tempfile);
 use Test::Cmd;
-use Test::More tests => 39;
+use Test::More tests => 38;
 
 BEGIN {
   `generateSampleScheduleData`;
@@ -45,9 +45,6 @@ like( $test->stdout, qr/$sut/, "last scheme" );
 
 $test->run( args => '-Q' );
 ok( ( my $count = () = $test->stdout =~ m/MyISAM/g ) >= 4, "list scheme archive" );
-
-$test->run( args => '-P', stdin => "yes\n" );
-is( $?, 0, "delete rules" );
 
 $test->run( args => "-l $sut.yaml", stdin => "yes\n", chdir => '.' );
 ok( $test->stdout =~ m/import \[$sut.xls\]/ && $test->stdout =~ /backup/, "load scheme" );

@@ -650,6 +650,14 @@ sub parseConf {
     }
   } ## end foreach my $rowCounter ( 1 ...)
 
+  if ( $raw->{extendedSID} && $raw->{noautorule} ) {
+    $self->error("XSID and NOAUTORULE cannot be used together");
+  }
+
+  if ( $raw->{noautorule} && $raw->{nomesh} ) {
+    $self->error("NOMESH has no meaning if NOAUTORULE");
+  }
+
   if ( !$salt ) {
     $salt = $raw->{description} // '';
   }
@@ -918,6 +926,10 @@ sub build {
       $outputService->{$eit_id}{$tsid}{$onid}{$sid} = $id + 1;
 
       my $rule = {%$in};
+
+      # simple trick to allow having same TSID/SID/ONID in different EIT
+      # similar trick is use for XSID therefore NOAUTORULE and XSID cannot be used together
+      $rule->{service_id} = ( $in->{eit_id} << 16 ) + $in->{service_id};
 
       push( $scheme->{rule}->@*, $rule );
     } ## end foreach my $in ( $raw->{rule...})
