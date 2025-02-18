@@ -794,7 +794,7 @@ sub build {
 
     # check for duplicate
     if ( exists $serviceHash->{ $service->{sid} } ) {
-      $self->error("Duplicate SID [$service->{sid}]");
+      $self->error( "Duplicate SID [" . ( $service->{sid} & 0xffff ) . "]" );
       next;
     } else {
       $serviceHash->{ $service->{sid} } = 1;
