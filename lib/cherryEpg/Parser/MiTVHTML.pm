@@ -73,7 +73,7 @@ sub parse {
   if ( $self->{source} =~ /(\d{4}-\d{2}-\d{2})(_[+-]?\d+)?$/ ) {
     $parser->{date} = $1;
   } else {
-    $report->{errorList} = ["Filename contains no date"];
+    $self->error("filename contains no date");
     return $report;
   }
 
@@ -92,7 +92,7 @@ sub parse {
     $report->{eventList} = $parser->{eventList};
     $report->{errorList} = $parser->{errorList};
   } else {
-    $report->{errorList} = ["Error opening file: $!"];
+    $self->error("error opening file: $!");
   }
 
   return $report;

@@ -52,7 +52,7 @@ sub parse {
       $report->{option}    = $option;
       delete $report->{channel};
     } else {
-      push( @{ $report->{errorList} }, "incorrect channel selection" );
+      $self->error("incorrect channel selection");
     }
   } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 1 ) {
 
@@ -61,9 +61,9 @@ sub parse {
     $report->{eventList} = $channel->{eventList};
     delete $report->{channel};
   } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 0 ) {
-    push( @{ $report->{errorList} }, "no valid events" );
+    $self->error("no valid events");
   } else {
-    push( @{ $report->{errorList} }, "missing channel selection after parser" );
+    $self->error("missing channel selection after parser");
   }
 
   return $report;

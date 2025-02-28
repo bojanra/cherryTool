@@ -3,6 +3,7 @@ package cherryEpg::Parser::YAXML;
 use 5.024;
 use utf8;
 use Moo;
+use Try::Tiny;
 use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
@@ -33,7 +34,16 @@ sub parse {
     output  => $report
   );
 
-  $parser->parse( Source => { SystemId => $self->{source} } );
+  try {
+    $parser->parse( Source => { SystemId => $self->{source} } );
+  } catch {
+    my ($error) = @_;
+    if ( $error =~ m|(.+) at /| ) {
+      $self->error($1);
+    } else {
+      $self->error($error);
+    }
+  };
 
   if ($parserOption) {
     my ($offset) = split( /[\|,]/, $parserOption );
@@ -57,7 +67,7 @@ sub parse {
       $offset *= ( $+{pm} // 0 eq '-' ? -1 : 1 );
     } else {
       $offset = undef;
-      push( $report->{errorList}->@*, "Parser option not valid: $parserOption" );
+      $self->error("parser option not valid: $parserOption");
     }
 
     if ($offset) {

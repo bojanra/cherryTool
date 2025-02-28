@@ -3,6 +3,7 @@ package cherryEpg::Parser::Nova24XML;
 use 5.024;
 use utf8;
 use Moo;
+use Try::Tiny;
 use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
@@ -32,7 +33,7 @@ If there is only a single programmee defined in the file no channel option is re
 =cut
 
 sub parse {
-  my ( $self, $option ) = @_;
+  my ( $self, $channel ) = @_;
   my $report = $self->{report};
 
   my $handler = Nova24XML->new();
@@ -41,18 +42,27 @@ sub parse {
     output  => $report
   );
 
-  $parser->parse( Source => { SystemId => $self->{source} } );
+  try {
+    $parser->parse( Source => { SystemId => $self->{source} } );
+  } catch {
+    my ($error) = @_;
+    if ( $error =~ m|(.+) at /| ) {
+      $self->error($1);
+    } else {
+      $self->error($error);
+    }
+  };
 
   # now we have multiple channels, let's select the requested one
-  if ( defined $option ) {
+  if ( defined $channel ) {
 
     # select by parser option
-    if ( exists $report->{channel}{$option} ) {
-      $report->{eventList} = $report->{channel}{$option}{eventList};
-      $report->{option}    = $option;
+    if ( $report->{channel}{$channel} ) {
+      $report->{eventList} = $report->{channel}{$channel}{eventList};
+      $report->{option}    = $channel;
       delete $report->{channel};
     } else {
-      push( @{ $report->{errorList} }, "Incorrect channel selection" );
+      $self->error("incorrect channel selection");
     }
   } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 1 ) {
 
@@ -60,8 +70,10 @@ sub parse {
     my $channel = ( values( %{ $report->{channel} } ) )[0];
     $report->{eventList} = $channel->{eventList};
     delete $report->{channel};
+  } elsif ( scalar( keys( %{ $report->{channel} } ) ) == 0 ) {
+    $self->error("no valid events");
   } else {
-    push( @{ $report->{errorList} }, "Missing channel selection after parser" );
+    $self->error("missing channel selection after parser");
   }
 
   return $report;

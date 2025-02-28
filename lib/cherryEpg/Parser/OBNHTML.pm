@@ -56,7 +56,7 @@ sub parse {
     $report->{eventList} = $r->{eventList};
     $report->{errorList} = $r->{errorList};
   } else {
-    $report->{errorList} = ["Error opening file: $!"];
+    $self->error("error opening file: $!");
   }
 
   return $report;

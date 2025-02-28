@@ -51,7 +51,7 @@ sub parse {
   if ( $self->{source} =~ /(\d{4}-\d{2}-\d{2})$/ ) {
     $parser->{date} = gmtime->strptime( $1, "%Y-%m-%d" );
   } else {
-    push( @{ $report->{errorList} }, "Filename contains no date" );
+    $self->error("filename contains no date");
     return $report;
   }
 
@@ -70,7 +70,7 @@ sub parse {
     $report->{eventList} = $r->{eventList};
     $report->{errorList} = $r->{errorList};
   } else {
-    $report->{errorList} = ["Error opening file: $!"];
+    $self->error("error opening file: $!");
   }
 
   return $report;

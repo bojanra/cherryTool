@@ -18,7 +18,7 @@ cherryTool - tool for managing cherryEpg environment
  -R         systemcheck and report
  -N         systemcheck and notify to log
  -Q         show detailed database statistics
- -M chunk   inspect chunk and generate mosaic.png
+ -M files   inspect chunk file(s), show statistics and generate mosaic
  -Z message send ERROR with message to logging engine for testing
  -j package apply maintenance package to system
  -J script  convert script to maintenance package
@@ -104,7 +104,7 @@ use open qw ( :std :encoding(UTF-8));
 
 my %args;
 
-my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:M:nNOp:QrRs:STu:U:vVWxyYZ:", \%args );
+my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:MnNOp:QrRs:STu:U:vVWxyYZ:", \%args );
 
 # get rid off first line for further JSON processing
 $args{E} && listLog();
@@ -139,7 +139,7 @@ $args{G}                 && parallelGrabIngest( $args{G} );
 $args{B}                 && parallelUpdate();
 $args{Q}                 && getDatabaseInfo();
 $args{V}                 && getEnvInfo();
-$args{M}                 && inspect( $args{M} );
+$args{M}                 && inspect(@ARGV);
 $args{Z}                 && testLogger( $args{Z} );
 ( $args{R} or $args{N} ) && checkSystem();
 $args{Y}                 && cleanCarousel();
@@ -370,21 +370,28 @@ Table    Engine  Rows    Size         Create      Update      Check       Collat
 } ## end sub getDatabaseInfo
 
 sub inspect {
-  my ($chunk) = @_;
+  my (@list) = @_;
 
-  my $cherry    = cherryEpg->instance( verbose => $verbose );
-  my $inspector = cherryEpg::Inspector->new( verbose => $verbose );
-  $inspector->timeFrame = $cherry->config->{core}{timeFrame} if $cherry->config->{core}{timeFrame};
+  my $cherry = cherryEpg->instance( verbose => $verbose );
 
-  foreach my $file ( $chunk, $cherry->config->{core}{carousel} . $chunk, $cherry->config->{core}{carousel} . $chunk . ".cts" ) {
+  foreach my $chunk (@list) {
 
-    next unless -e $file;
-    $inspector->load($file);
+    my $inspector = cherryEpg::Inspector->new( verbose => $verbose );
+    $inspector->timeFrame = $cherry->config->{core}{timeFrame} if $cherry->config->{core}{timeFrame};
+
+    if ( -e $chunk ) {
+      $inspector->load($chunk);
+    } elsif ( -e $cherry->config->{core}{carousel} . $chunk ) {
+      $inspector->load( $cherry->config->{core}{carousel} . $chunk );
+    } elsif ( -e $cherry->config->{core}{carousel} . $chunk . ".cts" ) {
+      $inspector->load( $cherry->config->{core}{carousel} . $chunk . ".cts" );
+    } else {
+      say("File not found!");
+      next;
+    }
     say $inspector->report;
-    exit 0;
-  } ## end foreach my $file ( $chunk, ...)
-  say("File not found!");
-  exit 1;
+  } ## end foreach my $chunk (@list)
+  exit 0;
 } ## end sub inspect
 
 sub testLogger {

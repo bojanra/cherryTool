@@ -59,13 +59,13 @@ sub parse {
   if ( open( my $fh, "<:utf8", $self->{source} ) ) {
     $self->logger->trace( "parse " . $self->{source} );
 
-    $parser->parse_file($fh);
+    my $r = $parser->parse_file($fh);
     close($fh);
 
-    $report->{eventList} = $parser->{eventList};
-    $report->{errorList} = $parser->{errorList};
+    $report->{eventList} = $r->{eventList};
+    $report->{errorList} = $r->{errorList};
   } else {
-    $report->{errorList} = ["Error opening file: $!"];
+    $self->error("error opening file: $!");
   }
 
   return $report;
