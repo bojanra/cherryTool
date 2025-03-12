@@ -68,7 +68,8 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
   # delte last uploaded scheme
   $t->post_ok( "/scheme/delete" => form => { target => $list[0]->{target} } )->json_is( '/success', 1, "Delete scheme 1" );
 
-  $t->post_ok( "/scheme/validate" => form => { mtime => $mtime, description => 'test from WEB' } )->status_is(200)
+  $t->post_ok( "/scheme/validate" => form => { mtime => $mtime, description => 'test from WEB' } )
+      ->status_is(200)
       ->json_is( '/success', 1 );
 
   $t->post_ok(
@@ -223,7 +224,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
     }
     pass("Done");
     done_testing();
-  };
+  }; ## end 'Delete chunks' => sub
 
   $content = do {
     local $/;
@@ -255,7 +256,7 @@ ok( scalar(@$success) && !scalar(@$error), "prepare scheme in db" );
     }
     pass("Done");
     done_testing();
-  };
+  }; ## end 'Delete chunks' => sub
 
   $t->get_ok('/logout')->status_is(200);
   $t->get_ok('/report.json')->status_is(200)->json_has('/timestamp');

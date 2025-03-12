@@ -21,7 +21,7 @@ after 'parse' => sub {
   foreach my $event ( @{$report} ) {
     $event->{parental_rating} = 18;
   }
-};
+}; ## end 'parse' => sub
 
 =head1 AUTHOR
 

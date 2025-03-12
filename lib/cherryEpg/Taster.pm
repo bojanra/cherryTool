@@ -38,7 +38,7 @@ after BUILD => sub {
   # check internet connection
   $taster->{internet}{url}     //= "https://getsamplefiles.com/download/jpg/sample-4.jpg";
   $taster->{internet}{timeout} //= 5;
-};    ## end sub BUILD
+}; ## end BUILD => sub
 
 =head3 eventBudget ( )
 

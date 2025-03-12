@@ -264,6 +264,8 @@ sub _curl {
     my $curl = Net::Curl::Easy->new();
     $curl->setopt( CURLOPT_URL,            $urlEscaped );
     $curl->setopt( CURLOPT_TIMEOUT,        $CURLOPT_TIMEOUT );
+    $curl->setopt( CURLOPT_SSL_VERIFYPEER, 0 );                                 # same as the command line option --insecure
+    $curl->setopt( CURLOPT_SSL_VERIFYHOST, 0 );
     $curl->setopt( CURLOPT_FOLLOWLOCATION, 3 );
     $curl->setopt( CURLOPT_MAXREDIRS,      5 );
     $curl->setopt( CURLOPT_WRITEDATA,      \$response_body );

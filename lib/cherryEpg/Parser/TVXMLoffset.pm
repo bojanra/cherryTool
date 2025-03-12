@@ -35,7 +35,7 @@ around 'parse' => sub {
     $event->{stop}  += $offset * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
   }
   return $report;
-};
+}; ## end 'parse' => sub
 
 =head1 AUTHOR
 

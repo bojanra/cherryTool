@@ -22,7 +22,7 @@ after 'parse' => sub {
     $event->{start} += 2 * 60 * 60;
     $event->{stop}  += 2 * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
   }
-};
+}; ## end 'parse' => sub
 
 =head1 AUTHOR
 

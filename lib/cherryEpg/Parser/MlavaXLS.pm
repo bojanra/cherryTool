@@ -40,7 +40,7 @@ around 'parse' => sub {
   } ## end foreach my $event ( @{$eventList...})
 
   return $report;
-};
+}; ## end 'parse' => sub
 
 =head1 AUTHOR
 
