@@ -20,7 +20,7 @@ has 'pid' => (
 );
 
 has 'timeFrame' => (
-  is      => 'ro',
+  is      => 'rw',
   default => 29,     # default length of chunk is 30s
 );
 
@@ -57,7 +57,7 @@ has 'verbose' => (
 #                                                                                   ->{maxFirstDay}
 #                                                                                   ->{maxOtherDay}
 #                                                                                   ->{min}
-#                                                                                   ->{repetition}->{max}
+#       ->{repetition}->{max}
 #                                                                                                   {min}
 #                                                                                   ->{section}->{0}
 #                                                                                                {1}
@@ -141,9 +141,23 @@ sub packetParse {
   $pidData->{packetCount} += 1;
 
   # stuffing
-  if ( $pid == 8191 ) {
+  if ( $pid == 0x1fff ) {
+    if ( $continuity_counter == 0x10 && $payload =~ /^ringelspiel (\{.+\})/ ) {
+      my $decoded = try {
+        JSON::XS->new->utf8->decode($1);
+      };
+      if ($decoded) {
+        $self->{timeFrame} = $decoded->{interval} / 1000;
+        $self->{target}    = $decoded->{dst};
+        $self->{title}     = $decoded->{title};
+        my @flag;
+        push( @flag, 'PCR' ) if $decoded->{pcr};
+        push( @flag, 'TDT' ) if $decoded->{tdt};
+        $self->{flags} = join( ' ', @flag );
+      } ## end if ($decoded)
+    } ## end if ( $continuity_counter...)
     return;
-  }
+  } ## end if ( $pid == 0x1fff )
 
   # save start position of NEW chunk
   if ( !$pidData->{stackCount} ) {
@@ -302,7 +316,7 @@ sub distanceMinMax {
     my $gap = $section->{start} - $g->{last};
     if ( $section->{sid} == 117 && $section->{table_id} == 0x50 && $section->{section_number} <= 64 ) {
 
-      #  printf( "[%i] %.1f +\n",$section->{section_number}, $gap/$self->{packetCount} * $self->{timeFrame});
+      #  printf( "[%i] %.1f +\n",$section->{section_number}, $gap/$self->{packetCount} * $self->timeFrame);
     }
 
     $g->{max} = max( $gap, $g->{max} // $gap );
@@ -416,11 +430,11 @@ sub inspect {
               } elsif ( $table_id == 0x50 && $id <= 64 ) {
 
                 # for first day
-                # printf( "[%i] %.1f\n",$id,$s->{max}/$self->{packetCount} * $self->{timeFrame}) if $sid == 117;
+                # printf( "[%i] %.1f\n",$id,$s->{max}/$self->{packetCount} * $self->timeFrame) if $sid == 117;
                 $t->{maxFirstDay} = max( $t->{maxFirstDay} // 0, $s->{max} );
               } else {
 
-                # printf( "[%i] %.1f\n",$id,$s->{max}/$self->{packetCount} * $self->{timeFrame}) if $sid == 121;
+                # printf( "[%i] %.1f\n",$id,$s->{max}/$self->{packetCount} * $self->timeFrame) if $sid == 121;
                 # and all other
                 $t->{maxOtherDay} = max( $t->{maxOtherDay} // 0, $s->{max} );
               } ## end else [ if ( $table_id == 0x4e...)]
@@ -434,34 +448,34 @@ sub inspect {
             my @report;
 
             # min
-            push( @report, ceil( $t->{min} / $self->{packetCount} * $self->{timeFrame} * 1000 ) );
+            push( @report, ceil( $t->{min} / $self->{packetCount} * $self->timeFrame * 1000 ) );
 
             if ( $table_id == 0x4e && exists( $t->{maxPF} ) ) {
-              push( @report, sprintf( "%.1f", $t->{maxPF} / $self->{packetCount} * $self->{timeFrame} ) );
+              push( @report, sprintf( "%.1f", $t->{maxPF} / $self->{packetCount} * $self->timeFrame ) );
             } else {
               push( @report, undef );
             }
 
             if ( $table_id == 0x50 && exists( $t->{maxFirstDay} ) ) {
-              push( @report, sprintf( "%.1f", $t->{maxFirstDay} / $self->{packetCount} * $self->{timeFrame} ) );
+              push( @report, sprintf( "%.1f", $t->{maxFirstDay} / $self->{packetCount} * $self->timeFrame ) );
             } else {
               push( @report, undef );
             }
 
             if ( $table_id > 0x50 && $table_id < 0x60 && exists( $t->{maxOtherDay} ) ) {
-              push( @report, sprintf( "%.1f", $t->{maxOtherDay} / $self->{packetCount} * $self->{timeFrame} ) );
+              push( @report, sprintf( "%.1f", $t->{maxOtherDay} / $self->{packetCount} * $self->timeFrame ) );
             } else {
               push( @report, undef );
             }
 
             if ( $table_id == 0x4f && exists( $t->{maxPF} ) ) {
-              push( @report, sprintf( "%.1f", $t->{maxPF} / $self->{packetCount} * $self->{timeFrame} ) );
+              push( @report, sprintf( "%.1f", $t->{maxPF} / $self->{packetCount} * $self->timeFrame ) );
             } else {
               push( @report, undef );
             }
 
             if ( $table_id >= 0x60 && exists( $t->{maxOtherDay} ) ) {
-              push( @report, sprintf( "%.1f", $t->{maxOtherDay} / $self->{packetCount} * $self->{timeFrame} ) );
+              push( @report, sprintf( "%.1f", $t->{maxOtherDay} / $self->{packetCount} * $self->timeFrame ) );
             } else {
               push( @report, undef );
             }
@@ -553,18 +567,20 @@ sub reportBuild {
   } ## end sub preformat
 
   # number of packets between same table and service to achieve 25ms requirement
-  my $requiredGap = ceil( $self->{packetCount} * 25 / 1000 / $self->{timeFrame} );
+  my $requiredGap = ceil( $self->{packetCount} * 25 / 1000 / $self->timeFrame );
 
   format HEAD =
 -- cherryEPG Inspector - Copyright 2024 Bojan Ramsak ----------------------------------------
 Source: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   Date: @>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 $self->{source}, localtime->strftime()
+Target: @<<<<<<<<<<<<<<<<<<<<<  Title: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Flags: @<<<<<<<<<
+$self->{target} // 'undefined', $self->{title} // '-', $self->{flags} // '-'
 Sections total: @>>>>>>>   Timeframe: @>>>>s     Min. required actual p/f section gap is 25ms
-$pidData->{sectionCount}, $self->{timeFrame}
+$pidData->{sectionCount}, $self->timeFrame
      not valid: @>>>>>>>   Packets: @>>>>>
 $pidData->{invalidCount}, $pidData->{packetCount},
      CRC error: @>>>>>>>   Bitrate: @>>>>>>> kb/s                                  PID: @>>>>
-$pidData->{crcErrorCount},  sprintf( "%.1f", $pidData->{packetCount}*188*8/($self->{timeFrame}*1000)), $pid
+$pidData->{crcErrorCount},  sprintf( "%.1f", $pidData->{packetCount}*188*8/($self->timeFrame*1000)), $pid
                                        [ms]    |  actual max. rep [s]    | other max. rep [s]
    onid   tsid   sid  table sections min. gap  |  p/f     today    next  |   p/f       sch
 ---------------------------------------------------------------------------------------------
@@ -664,7 +680,7 @@ $pidData->{crcErrorCount},  sprintf( "%.1f", $pidData->{packetCount}*188*8/($sel
     say( '=' x 93 );
     say( "Other detected PID: ", join( ',', sort keys $foundPID->%* ) );
     say( "     Total packets: ", $self->{packetCount} );
-    say( "           Bitrate: ", sprintf( "%.4f Mbps", $self->{packetCount} * 188 * 8 / $self->{timeFrame} / 1E6 ) );
+    say( "           Bitrate: ", sprintf( "%.4f Mbps", $self->{packetCount} * 188 * 8 / $self->timeFrame / 1E6 ) );
   } ## end if ( $foundPID->%* )
   select(STDOUT);
 
@@ -673,7 +689,7 @@ $pidData->{crcErrorCount},  sprintf( "%.1f", $pidData->{packetCount}*188*8/($sel
 
 =head1 AUTHOR
 
-This software is copyright (c) 2024 by Bojan Ramšak
+This software is copyright (c) 2025 by Bojan Ramšak
 
 =head1 LICENSE
 

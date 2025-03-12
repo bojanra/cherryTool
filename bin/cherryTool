@@ -109,7 +109,7 @@ my $getoptsSuccess = getopts( "ABc:CdeE:fFgG:hH:ij:J:IK:l:L:MnNOp:QrRs:STu:U:vVW
 # get rid off first line for further JSON processing
 $args{E} && listLog();
 
-say("cherryTool - $cherryEpg::VERSION Copyright 2024 Bojan Ramšak");
+say("cherryTool - $cherryEpg::VERSION Copyright 2025 Bojan Ramšak");
 
 pod2usage(
   -verbose  => 99,
