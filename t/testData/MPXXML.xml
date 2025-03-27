@@ -1,0 +1,4402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPXmlListing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0.3">
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631474</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-26T23:30:00+01:00</StartTime>
+      <EndTime>2025-03-26T23:45:00+01:00</EndTime>
+      <Vps>23:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1580</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T01:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T01:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507508</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631499</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-26T23:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T00:00:00+01:00</EndTime>
+      <Vps>23:45:00</Vps>
+      <Title lang="ara">مجلة المراسل</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>CORRESPONDANTS / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>سلسلة من التقارير يقدمها مراسلو فرانس24 حول العالم تتناول موضوعات متنوعة مثل الصحة والتعليم والسياحة وغيرها في دول مختلفة.</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T01:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T02:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507533</ContentId>
+      <BaseContentId>301279921</BaseContentId>
+      <Title lang="ara">مجلة المراسل</Title>
+      <OriginalTitle>مجلة المراسل</OriginalTitle>
+      <OriginalTitle>Correspondants</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631405</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T00:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T00:15:00+01:00</EndTime>
+      <Vps>00:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1581</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T02:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T02:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507440</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631419</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T00:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T01:00:00+01:00</EndTime>
+      <Vps>00:15:00</Vps>
+      <Title lang="ara">النقاش</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>31</EpisodeNumber>
+      </Numeration>
+      <Duration>00:45:00</Duration>
+      <Genre>LE DEBAT / Talk Show</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>يطرح توفيق مجيدد مع ضيوفه نقاشا مفتوحا حول قضية الساعة لتحليل أبعادها.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>يطرح توفيق مجيدد مع ضيوفه نقاشا مفتوحا حول قضية الساعة لتحليل أبعادها.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/14397488_887C640BA8AC056080AEDC74F85C18C6.jpg</Url>
+          <Caption>Camera in studio are broadcasting journalists</Caption>
+          <Copyright>©shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T02:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T03:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507454</ContentId>
+      <BaseContentId>301540391</BaseContentId>
+      <Title lang="ara">النقاش</Title>
+      <OriginalTitle>النقاش</OriginalTitle>
+      <OriginalTitle>Le débat</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Talks</MpForm>
+      <MpType>Debate</MpType>
+      <MpSType>Discussion</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631385</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T01:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T01:15:00+01:00</EndTime>
+      <Vps>01:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1582</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T03:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T03:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507421</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631456</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T01:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T01:30:00+01:00</EndTime>
+      <Vps>01:15:00</Vps>
+      <Title lang="ara">ثقافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>47</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>CULTURE / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يستضيف فنانين من كل الدول العربية إضافة إلى بث تقارير ثقافية تسبر أغوار الفن والثقافة في جميع أنحاء العالم</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35130683_B836187F7AFD01969F612648D199A1F4.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35130682_21FD1BD184EDC8493D4DAB61B083D5B6.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/20807730_7F97BE242947B7749B29CD9A913CAEDC.jpg</Url>
+          <Caption>studio, magazine, info, illustration</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2018 architect9/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/15820162_3105188E8E50DF31F34E5B6566AA4F71.jpg</Url>
+          <Caption>Camera, magazine</Caption>
+          <Copyright>© Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com/</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T03:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T03:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507491</ContentId>
+      <BaseContentId>233055292</BaseContentId>
+      <Title lang="ara">ثقافة</Title>
+      <OriginalTitle>Culture</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Culture</MpType>
+      <MpSType>Art + Culture</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631406</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T01:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T01:33:00+01:00</EndTime>
+      <Vps>01:30:00</Vps>
+      <Title lang="ara">موجز بالأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>31</EpisodeNumber>
+      </Numeration>
+      <Duration>00:03:00</Duration>
+      <Genre>FLASH / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تذكير بأهم عناوين الأخبار</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تذكير بأهم عناوين الأخبار</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T03:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T03:33:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507441</ContentId>
+      <BaseContentId>301935891</BaseContentId>
+      <Title lang="ara">موجز بالأخبار</Title>
+      <OriginalTitle>موجز بالأخبار</OriginalTitle>
+      <OriginalTitle>Flash</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631457</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T01:33:00+01:00</StartTime>
+      <EndTime>2025-03-27T01:56:00+01:00</EndTime>
+      <Vps>01:33:00</Vps>
+      <Title lang="ara">وجها لوجه</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>31</EpisodeNumber>
+      </Numeration>
+      <Duration>00:23:00</Duration>
+      <Genre>FACE A FACE MAGHREB / Talk Show</Genre>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42914850_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Face à Face Maghreb</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42914849_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Face à Face Maghreb</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/38154994_A02883E05EAC60D2EE2121A5AE6DA3CD.jpg</Url>
+          <Caption>Kameramann filmt im Studio einer Fernseh-Talkshow.</Caption>
+          <Copyright>Copyright (c) 2021 LeStudio/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com/</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T03:33:00+03:00</StartTime>
+          <EndTime>2025-03-27T03:56:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507492</ContentId>
+      <BaseContentId>289403271</BaseContentId>
+      <Title lang="ara">وجها لوجه</Title>
+      <OriginalTitle>وجها لوجه</OriginalTitle>
+      <OriginalTitle>Face à Face Maghreb</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Talks</MpForm>
+      <MpType>Debate</MpType>
+      <MpSType>Political actualities</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631475</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T01:56:00+01:00</StartTime>
+      <EndTime>2025-03-27T02:00:00+01:00</EndTime>
+      <Vps>01:56:00</Vps>
+      <Title lang="ara">ريبورتاج</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>29</EpisodeNumber>
+      </Numeration>
+      <Duration>00:04:00</Duration>
+      <Genre>REPORTAGES / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تحقيقات حول مواضيع الساعة، الوطنية منها والدولية.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تحقيقات حول مواضيع الساعة، الوطنية منها والدولية.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924973_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Reportages</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924972_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Reportages</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T03:56:00+03:00</StartTime>
+          <EndTime>2025-03-27T04:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507509</ContentId>
+      <BaseContentId>302062410</BaseContentId>
+      <Title lang="ara">ريبورتاج</Title>
+      <OriginalTitle>ريبورتاج</OriginalTitle>
+      <OriginalTitle>Reportages</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Social issues</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631476</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T02:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T02:15:00+01:00</EndTime>
+      <Vps>02:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1583</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T04:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T04:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507510</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631420</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T02:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T02:22:00+01:00</EndTime>
+      <Vps>02:15:00</Vps>
+      <Title lang="ara">رياضة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>124</EpisodeNumber>
+      </Numeration>
+      <Duration>00:07:00</Duration>
+      <Genre>CHRONIQUE SPORTS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>أهم أحداث الرياضة العالمية والاطلاع على نتائجها وتحليلاتها بإيجاز وعبر الصور.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>أهم أحداث الرياضة العالمية والاطلاع على نتائجها وتحليلاتها بإيجاز وعبر الصور.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925196_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Sports</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925197_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Sports</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/41018895_9ABA80123C319C4CFE830C8A88C807F3.jpg</Url>
+          <Caption>Caméra de vidéo sur fond flou</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2021 suriyachan/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T04:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T04:22:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507455</ContentId>
+      <BaseContentId>301284118</BaseContentId>
+      <Title lang="ara">رياضة</Title>
+      <OriginalTitle>رياضة</OriginalTitle>
+      <OriginalTitle>Sports</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Sport</MpForm>
+      <MpType>Magazine</MpType>
+      <MpSType>Magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631386</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T02:22:00+01:00</StartTime>
+      <EndTime>2025-03-27T02:30:00+01:00</EndTime>
+      <Vps>02:22:00</Vps>
+      <Title lang="ara">في عمق الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>59</EpisodeNumber>
+      </Numeration>
+      <Duration>00:08:00</Duration>
+      <Genre>FOCUS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/12793507_59A719AF91AD17BD55E93B5E78DE5444.jpg</Url>
+          <Caption>Werbung genre</Caption>
+          <Copyright>(c) Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T04:22:00+03:00</StartTime>
+          <EndTime>2025-03-27T04:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507422</ContentId>
+      <BaseContentId>301280352</BaseContentId>
+      <Title lang="ara">في عمق الحدث</Title>
+      <OriginalTitle>في عمق الحدث</OriginalTitle>
+      <OriginalTitle>Focus</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+      <Links>
+        <Link>
+          <Source>Home Page</Source>
+          <Url>https://www.france24.com/es/programas/en-foco</Url>
+        </Link>
+      </Links>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631477</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T02:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T02:45:00+01:00</EndTime>
+      <Vps>02:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>566</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T04:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T04:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507511</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631500</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T02:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T03:00:00+01:00</EndTime>
+      <Vps>02:45:00</Vps>
+      <Title lang="ara">ثقافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>47</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>CULTURE / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يستضيف فنانين من كل الدول العربية إضافة إلى بث تقارير ثقافية تسبر أغوار الفن والثقافة في جميع أنحاء العالم</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T04:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T05:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507534</ContentId>
+      <BaseContentId>233055292</BaseContentId>
+      <Title lang="ara">ثقافة</Title>
+      <OriginalTitle>Culture</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Culture</MpType>
+      <MpSType>Art + Culture</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631458</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T03:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T03:15:00+01:00</EndTime>
+      <Vps>03:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1584</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T05:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T05:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507493</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631444</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T03:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T04:00:00+01:00</EndTime>
+      <Vps>03:15:00</Vps>
+      <Title lang="ara">النقاش</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>31</EpisodeNumber>
+      </Numeration>
+      <Duration>00:45:00</Duration>
+      <Genre>LE DEBAT / Talk Show</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>يطرح توفيق مجيدد مع ضيوفه نقاشا مفتوحا حول قضية الساعة لتحليل أبعادها.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>يطرح توفيق مجيدد مع ضيوفه نقاشا مفتوحا حول قضية الساعة لتحليل أبعادها.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/14397488_887C640BA8AC056080AEDC74F85C18C6.jpg</Url>
+          <Caption>Camera in studio are broadcasting journalists</Caption>
+          <Copyright>©shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T05:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T06:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507479</ContentId>
+      <BaseContentId>301540391</BaseContentId>
+      <Title lang="ara">النقاش</Title>
+      <OriginalTitle>النقاش</OriginalTitle>
+      <OriginalTitle>Le débat</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Talks</MpForm>
+      <MpType>Debate</MpType>
+      <MpSType>Discussion</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631478</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T04:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T04:15:00+01:00</EndTime>
+      <Vps>04:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1585</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T06:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T06:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507512</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631459</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T04:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T04:30:00+01:00</EndTime>
+      <Vps>04:15:00</Vps>
+      <Title lang="ara">مجلة المراسل</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>CORRESPONDANTS / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>سلسلة من التقارير يقدمها مراسلو فرانس24 حول العالم تتناول موضوعات متنوعة مثل الصحة والتعليم والسياحة وغيرها في دول مختلفة.</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924580_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Correspondants</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924579_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Correspondants</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/12793507_59A719AF91AD17BD55E93B5E78DE5444.jpg</Url>
+          <Caption>Werbung genre</Caption>
+          <Copyright>(c) Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T06:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T06:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507494</ContentId>
+      <BaseContentId>301279921</BaseContentId>
+      <Title lang="ara">مجلة المراسل</Title>
+      <OriginalTitle>مجلة المراسل</OriginalTitle>
+      <OriginalTitle>Correspondants</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631460</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T04:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T04:45:00+01:00</EndTime>
+      <Vps>04:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>567</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T06:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T06:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507495</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714631421</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-26</AirDate>
+      <StartTime>2025-03-27T04:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T05:00:00+01:00</EndTime>
+      <Vps>04:45:00</Vps>
+      <Title lang="ara">الصحة أولا!</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LA SANTE D'ABORD / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامح يتناول مواضيع طبية بشكل عصري، برفقة خبراء ومتخصصين يجيبون على أسئلتكم.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>"الصحة أولا! برنامج يقدمه صونيتا ناضر يتناول مواضيع شتى مثل داء السرطان والأمراض الوراثية والأمراض ذات الصلة بالبيئة وكذلك الاضطرابات النفسية والاضطرابات في وظائف الأعضاء والتغذية وجراحة التجميل... تستقبل صونيتا ناضر في يوم خميس كل أسبوعين طبيبا متخصصا ليقدم النصح والمشورة إلى المشاهدين في سبيل الحصول على علاج ورعاية أفضل" </Value>
+          <Type>Medium</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامح يتناول مواضيع طبية بشكل عصري، برفقة خبراء ومتخصصين يجيبون على أسئلتكم.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42907215_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>La santé d'abord</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42907214_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>La santé d'abord</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/12793507_59A719AF91AD17BD55E93B5E78DE5444.jpg</Url>
+          <Caption>Werbung genre</Caption>
+          <Copyright>(c) Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T06:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T07:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412507456</ContentId>
+      <BaseContentId>301278828</BaseContentId>
+      <Title lang="ara">الصحة أولا!</Title>
+      <OriginalTitle>الصحة أولا!</OriginalTitle>
+      <OriginalTitle>La santé d'abord</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Health</MpType>
+      <MpSType>Magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636986</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T05:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T05:15:00+01:00</EndTime>
+      <Vps>05:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1586</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T07:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T07:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509224</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636973</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T05:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:00:00+01:00</EndTime>
+      <Vps>05:15:00</Vps>
+      <Title lang="ara">منتدى الصحافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1</EpisodeNumber>
+      </Numeration>
+      <Duration>00:45:00</Duration>
+      <Genre>CLUB PRESSE / Talk Show</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج تغطية الصحافة والإعلام للحدث في العالم مع الصحفيين والمراسلين العرب في فرنسا وفي العالم.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج تغطية الصحافة والإعلام للحدث في العالم مع الصحفيين والمراسلين العرب في فرنسا وفي العالم.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T07:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509212</ContentId>
+      <BaseContentId>239730295</BaseContentId>
+      <Title lang="ara">منتدى الصحافة</Title>
+      <OriginalTitle>منتدى الصحافة</OriginalTitle>
+      <OriginalTitle>Club Presse</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Media</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637000</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:14:00+01:00</EndTime>
+      <Vps>06:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1587</EpisodeNumber>
+      </Numeration>
+      <Duration>00:14:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:14:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509238</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636934</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:14:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:15:00+01:00</EndTime>
+      <Vps>06:14:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>821</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:14:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509174</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636909</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:30:00+01:00</EndTime>
+      <Vps>06:15:00</Vps>
+      <Title lang="ara">أسرار باريس</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>PARIS SECRET / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>فرانس24 تصطحبكم في أرجاء العاصمة الفرنسية لاكتشاف أماكنها الغامضة والفريدة</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>فرانس24 تصطحبكم في أرجاء العاصمة الفرنسية لاكتشاف أماكنها الغامضة والفريدة</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509149</ContentId>
+      <BaseContentId>301296316</BaseContentId>
+      <Title lang="ara">أسرار باريس</Title>
+      <OriginalTitle>أسرار باريس</OriginalTitle>
+      <OriginalTitle>Paris secret</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Regional magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637001</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:44:00+01:00</EndTime>
+      <Vps>06:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>568</EpisodeNumber>
+      </Numeration>
+      <Duration>00:14:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:44:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509239</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637002</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:44:00+01:00</StartTime>
+      <EndTime>2025-03-27T06:45:00+01:00</EndTime>
+      <Vps>06:44:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>822</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:44:00+03:00</StartTime>
+          <EndTime>2025-03-27T08:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509240</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637003</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T06:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:00:00+01:00</EndTime>
+      <Vps>06:45:00</Vps>
+      <Title lang="ara">ثقافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>47</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>CULTURE / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يستضيف فنانين من كل الدول العربية إضافة إلى بث تقارير ثقافية تسبر أغوار الفن والثقافة في جميع أنحاء العالم</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T08:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509241</ContentId>
+      <BaseContentId>233055292</BaseContentId>
+      <Title lang="ara">ثقافة</Title>
+      <OriginalTitle>Culture</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Culture</MpType>
+      <MpSType>Art + Culture</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636935</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:13:00+01:00</EndTime>
+      <Vps>07:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1588</EpisodeNumber>
+      </Numeration>
+      <Duration>00:13:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:13:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509175</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637023</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:13:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:14:00+01:00</EndTime>
+      <Vps>07:13:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>823</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:13:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:14:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509260</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636919</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:14:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:20:00+01:00</EndTime>
+      <Vps>07:14:00</Vps>
+      <Title lang="ara">باب الويب</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>39</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>BAB EL WEB / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>أبرز المواضيع تداولاً على وسائل التواصل الاجتماعي في العالم العربي وأهم الهاشتاغات والتغريدات التي أثارت ردود فعل الجمهور الرقمي.</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129485_B836187F7AFD01969F612648D199A1F4.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129484_21FD1BD184EDC8493D4DAB61B083D5B6.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:14:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:20:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509159</ContentId>
+      <BaseContentId>156751365</BaseContentId>
+      <Title lang="ara">باب الويب</Title>
+      <OriginalTitle>باب الويب</OriginalTitle>
+      <OriginalTitle>Bab El Web</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636910</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:20:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:26:00+01:00</EndTime>
+      <Vps>07:20:00</Vps>
+      <Title lang="ara">في عمق الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>59</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>FOCUS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/12793507_59A719AF91AD17BD55E93B5E78DE5444.jpg</Url>
+          <Caption>Werbung genre</Caption>
+          <Copyright>(c) Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:20:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:26:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509150</ContentId>
+      <BaseContentId>301280352</BaseContentId>
+      <Title lang="ara">في عمق الحدث</Title>
+      <OriginalTitle>في عمق الحدث</OriginalTitle>
+      <OriginalTitle>Focus</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+      <Links>
+        <Link>
+          <Source>Home Page</Source>
+          <Url>https://www.france24.com/es/programas/en-foco</Url>
+        </Link>
+      </Links>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637004</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:26:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:30:00+01:00</EndTime>
+      <Vps>07:26:00</Vps>
+      <Title lang="ara">نافذة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>124</EpisodeNumber>
+      </Numeration>
+      <Duration>00:04:00</Duration>
+      <Genre>L'INSTANT MOBILE / Magazine</Genre>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:26:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509242</ContentId>
+      <BaseContentId>302061329</BaseContentId>
+      <Title lang="ara">نافذة</Title>
+      <OriginalTitle>نافذة</OriginalTitle>
+      <OriginalTitle>L'instant mobile</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Media</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637024</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:43:00+01:00</EndTime>
+      <Vps>07:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>569</EpisodeNumber>
+      </Numeration>
+      <Duration>00:13:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:43:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509261</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636987</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:43:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:44:00+01:00</EndTime>
+      <Vps>07:43:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>824</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:43:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:44:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509225</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637005</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:44:00+01:00</StartTime>
+      <EndTime>2025-03-27T07:50:00+01:00</EndTime>
+      <Vps>07:44:00</Vps>
+      <Title lang="ara">مراقبون</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>LES OBSERVATEURS / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>يتناول الأحداث من خلال شهادات مباشرة لأشخاص عايشوا الحدث، ويستعين بصور وأشرطة فيديو وتسجيلات أرسلها مراقبون هواة وتأكد صحافيو فرانس24 من صحتها.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>فريق برنامج "مراقبون" يقدم برنامجا تشاركيا أنجز انطلاقا من مضامين الهواة وقد تحول من منبر على الإنترنت إلى برنامج تلفزيوني أسبوعي. ويعرض البرنامج صورا وفيديوهات وشهادات يتحقق قسم التحرير من صحة كل المعلومات المعروضة التي نستخدمها لإثراء أخبارنا ويعتمد شبكة من المراقبين يزودون صحافيي القناة بالمعلومات الخاصة. البعد الإنساني والتفاعلي وهو ما جعل البرنامج رمزيا في فرانس24 </Value>
+          <Type>Medium</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924765_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Les Observateurs</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924764_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Les Observateurs</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:44:00+03:00</StartTime>
+          <EndTime>2025-03-27T09:50:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509243</ContentId>
+      <BaseContentId>301283221</BaseContentId>
+      <Title lang="ara">مراقبون</Title>
+      <OriginalTitle>مراقبون</OriginalTitle>
+      <OriginalTitle>Les Observateurs</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637006</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T07:50:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:00:00+01:00</EndTime>
+      <Vps>07:50:00</Vps>
+      <Title lang="ara">أنتم هنا</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:10:00</Duration>
+      <Genre>VOUS ETES ICI / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يمكن من اكتشاف العبقرية الفرنسية عبر مبدعيها والتي تجلت في ميادين كثيرة كفن الطبخ والهندسة والفنون والمحميات الطبيعية</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925752_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Vous êtes ici</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925750_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Vous êtes ici</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T09:50:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509244</ContentId>
+      <BaseContentId>301297438</BaseContentId>
+      <Title lang="ara">أنتم هنا</Title>
+      <OriginalTitle>أنتم هنا</OriginalTitle>
+      <OriginalTitle>Vous êtes ici</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636920</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:15:00+01:00</EndTime>
+      <Vps>08:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1589</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509160</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636921</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:21:00+01:00</EndTime>
+      <Vps>08:15:00</Vps>
+      <Title lang="ara">وقفة مع الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>198</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>CHRONIQUE INTERNATIONALE / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value> يحلل البرنامج واحدا من الأحداث الدولية </Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42911566_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Chronique internationale</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42911565_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Chronique internationale</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/15820162_3105188E8E50DF31F34E5B6566AA4F71.jpg</Url>
+          <Caption>Camera, magazine</Caption>
+          <Copyright>© Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com/</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:21:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509161</ContentId>
+      <BaseContentId>301941947</BaseContentId>
+      <Title lang="ara">وقفة مع الحدث</Title>
+      <OriginalTitle>وقفة مع الحدث</OriginalTitle>
+      <OriginalTitle>Chronique internationale</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636936</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:21:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:30:00+01:00</EndTime>
+      <Vps>08:21:00</Vps>
+      <Title lang="ara">قراءة في الصحف</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>70</EpisodeNumber>
+      </Numeration>
+      <Duration>00:09:00</Duration>
+      <Genre>REVUE DE PRESSE / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>قراءة يومية لأبرز عناوين الصحف الدولية ووقفة مع أهم المقالات المثيرة للجدل</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>قراءة يومية لأبرز عناوين الصحف الدولية ووقفة مع أهم المقالات المثيرة للجدل</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925183_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Revue de presse</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925182_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Revue de presse</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/20807730_7F97BE242947B7749B29CD9A913CAEDC.jpg</Url>
+          <Caption>studio, magazine, info, illustration</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2018 architect9/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:21:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509176</ContentId>
+      <BaseContentId>301933356</BaseContentId>
+      <Title lang="ara">قراءة في الصحف</Title>
+      <OriginalTitle>قراءة في الصحف</OriginalTitle>
+      <OriginalTitle>Revue de presse</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636954</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:40:00+01:00</EndTime>
+      <Vps>08:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1590</EpisodeNumber>
+      </Numeration>
+      <Duration>00:10:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:40:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509194</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637025</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:40:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:45:00+01:00</EndTime>
+      <Vps>08:40:00</Vps>
+      <Title lang="ara">إقتصاد</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>163</EpisodeNumber>
+      </Numeration>
+      <Duration>00:05:00</Duration>
+      <Genre>ECONOMIE / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>للاطلاع على الأحداث الاقتصادية لليوم وأسعار أهم العملات العالمية وكل أخبار عالم المال</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:40:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509262</ContentId>
+      <BaseContentId>365965585</BaseContentId>
+      <Title lang="ara">إقتصاد</Title>
+      <OriginalTitle>إقتصاد</OriginalTitle>
+      <OriginalTitle>Economie</OriginalTitle>
+      <OriginalTitle>Chronique eco</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Economy</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636922</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:51:00+01:00</EndTime>
+      <Vps>08:45:00</Vps>
+      <Title lang="ara">باب الويب</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>39</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>BAB EL WEB / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>أبرز المواضيع تداولاً على وسائل التواصل الاجتماعي في العالم العربي وأهم الهاشتاغات والتغريدات التي أثارت ردود فعل الجمهور الرقمي.</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129485_B836187F7AFD01969F612648D199A1F4.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129484_21FD1BD184EDC8493D4DAB61B083D5B6.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:51:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509162</ContentId>
+      <BaseContentId>156751365</BaseContentId>
+      <Title lang="ara">باب الويب</Title>
+      <OriginalTitle>باب الويب</OriginalTitle>
+      <OriginalTitle>Bab El Web</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636911</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:51:00+01:00</StartTime>
+      <EndTime>2025-03-27T08:57:00+01:00</EndTime>
+      <Vps>08:51:00</Vps>
+      <Title lang="ara">في عمق الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>59</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>FOCUS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/12793507_59A719AF91AD17BD55E93B5E78DE5444.jpg</Url>
+          <Caption>Werbung genre</Caption>
+          <Copyright>(c) Shutterstock</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>https://www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:51:00+03:00</StartTime>
+          <EndTime>2025-03-27T10:57:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509151</ContentId>
+      <BaseContentId>301280352</BaseContentId>
+      <Title lang="ara">في عمق الحدث</Title>
+      <OriginalTitle>في عمق الحدث</OriginalTitle>
+      <OriginalTitle>Focus</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+      <Links>
+        <Link>
+          <Source>Home Page</Source>
+          <Url>https://www.france24.com/es/programas/en-foco</Url>
+        </Link>
+      </Links>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637026</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T08:57:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:00:00+01:00</EndTime>
+      <Vps>08:57:00</Vps>
+      <Title lang="ara">العناوين</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>94</EpisodeNumber>
+      </Numeration>
+      <Duration>00:03:00</Duration>
+      <Genre>RAPPEL DES TITRES / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تذكير بأهم عناوين الأخبار</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تذكير بأهم عناوين الأخبار</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35136512_B836187F7AFD01969F612648D199A1F4.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35136513_21FD1BD184EDC8493D4DAB61B083D5B6.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/20807672_7F97BE242947B7749B29CD9A913CAEDC.jpg</Url>
+          <Caption>studio, magazine, info, illustration</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2019 architect9/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T10:57:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509263</ContentId>
+      <BaseContentId>301540565</BaseContentId>
+      <Title lang="ara">العناوين</Title>
+      <OriginalTitle>العناوين</OriginalTitle>
+      <OriginalTitle>Rappel des titres</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636937</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:15:00+01:00</EndTime>
+      <Vps>09:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1591</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509177</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636988</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:21:00+01:00</EndTime>
+      <Vps>09:15:00</Vps>
+      <Title lang="ara">وقفة مع الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>199</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>CHRONIQUE INTERNATIONALE / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value> يحلل البرنامج واحدا من الأحداث الدولية </Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:21:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509226</ContentId>
+      <BaseContentId>301941947</BaseContentId>
+      <Title lang="ara">وقفة مع الحدث</Title>
+      <OriginalTitle>وقفة مع الحدث</OriginalTitle>
+      <OriginalTitle>Chronique internationale</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636989</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:21:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:30:00+01:00</EndTime>
+      <Vps>09:21:00</Vps>
+      <Title lang="ara">رياضة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>53</EpisodeNumber>
+      </Numeration>
+      <Duration>00:09:00</Duration>
+      <Genre>SPORTS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>كل الأخبار الرياضية لليوم مع صحافيينا ضمن برنامج يلخص الأخبار الرياضية في الملاعب وخارجها</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>كل الأخبار الرياضية لليوم مع صحافيينا ضمن برنامج يلخص الأخبار الرياضية في الملاعب وخارجها</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:21:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509227</ContentId>
+      <BaseContentId>301284118</BaseContentId>
+      <Title lang="ara">رياضة</Title>
+      <OriginalTitle>رياضة</OriginalTitle>
+      <OriginalTitle>Sports</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Sport</MpForm>
+      <MpType>Magazine</MpType>
+      <MpSType>Magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637027</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:40:00+01:00</EndTime>
+      <Vps>09:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1592</EpisodeNumber>
+      </Numeration>
+      <Duration>00:10:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:40:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509264</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637007</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:40:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:45:00+01:00</EndTime>
+      <Vps>09:40:00</Vps>
+      <Title lang="ara">قراءة في الصحف</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>71</EpisodeNumber>
+      </Numeration>
+      <Duration>00:05:00</Duration>
+      <Genre>REVUE DE PRESSE / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>قراءة يومية لأبرز عناوين الصحف الدولية ووقفة مع أهم المقالات المثيرة للجدل</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>قراءة يومية لأبرز عناوين الصحف الدولية ووقفة مع أهم المقالات المثيرة للجدل</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925183_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Revue de presse</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42925182_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Revue de presse</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/20807730_7F97BE242947B7749B29CD9A913CAEDC.jpg</Url>
+          <Caption>studio, magazine, info, illustration</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2018 architect9/Shutterstock.  No use without permission.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:40:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509245</ContentId>
+      <BaseContentId>301933356</BaseContentId>
+      <Title lang="ara">قراءة في الصحف</Title>
+      <OriginalTitle>قراءة في الصحف</OriginalTitle>
+      <OriginalTitle>Revue de presse</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637008</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:51:00+01:00</EndTime>
+      <Vps>09:45:00</Vps>
+      <Title lang="ara">باب الويب</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>39</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>BAB EL WEB / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>أبرز المواضيع تداولاً على وسائل التواصل الاجتماعي في العالم العربي وأهم الهاشتاغات والتغريدات التي أثارت ردود فعل الجمهور الرقمي.</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129485_B836187F7AFD01969F612648D199A1F4.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/35129484_21FD1BD184EDC8493D4DAB61B083D5B6.jpg</Url>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>Sarah.Michel@france24.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:51:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509246</ContentId>
+      <BaseContentId>156751365</BaseContentId>
+      <Title lang="ara">باب الويب</Title>
+      <OriginalTitle>باب الويب</OriginalTitle>
+      <OriginalTitle>Bab El Web</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636955</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:51:00+01:00</StartTime>
+      <EndTime>2025-03-27T09:55:00+01:00</EndTime>
+      <Vps>09:51:00</Vps>
+      <Title lang="ara">العالم في صور</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>39</EpisodeNumber>
+      </Numeration>
+      <Duration>00:04:00</Duration>
+      <Genre>LE MONDE EN IMAGES / Divers News</Genre>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924624_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Le monde en images</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924623_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Le monde en images</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:51:00+03:00</StartTime>
+          <EndTime>2025-03-27T11:55:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509195</ContentId>
+      <BaseContentId>243505044</BaseContentId>
+      <Title lang="ara">العالم في صور</Title>
+      <OriginalTitle>العالم في صور</OriginalTitle>
+      <OriginalTitle>Le monde en images</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636990</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T09:55:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:00:00+01:00</EndTime>
+      <Vps>09:55:00</Vps>
+      <Title lang="ara">ريبورتاج</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>212</EpisodeNumber>
+      </Numeration>
+      <Duration>00:05:00</Duration>
+      <Genre>REPORTAGES / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تحقيقات حول مواضيع الساعة، الوطنية منها والدولية.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تحقيقات حول مواضيع الساعة، الوطنية منها والدولية.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924973_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Reportages</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924972_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Reportages</Caption>
+          <Copyright>France 24 </Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T11:55:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509228</ContentId>
+      <BaseContentId>302062410</BaseContentId>
+      <Title lang="ara">ريبورتاج</Title>
+      <OriginalTitle>ريبورتاج</OriginalTitle>
+      <OriginalTitle>Reportages</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Social issues</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636956</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:14:00+01:00</EndTime>
+      <Vps>10:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1593</EpisodeNumber>
+      </Numeration>
+      <Duration>00:14:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:14:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509196</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636938</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:14:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:15:00+01:00</EndTime>
+      <Vps>10:14:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>825</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:14:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509178</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636974</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:21:00+01:00</EndTime>
+      <Vps>10:15:00</Vps>
+      <Title lang="ara">في عمق الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>59</EpisodeNumber>
+      </Numeration>
+      <Duration>00:06:00</Duration>
+      <Genre>FOCUS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>تقرير مطول يليه تحليل مع أحد الخبراء</Value>
+          <Type>VeryShort_50</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:21:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509213</ContentId>
+      <BaseContentId>301280352</BaseContentId>
+      <Title lang="ara">في عمق الحدث</Title>
+      <OriginalTitle>في عمق الحدث</OriginalTitle>
+      <OriginalTitle>Focus</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+      <Links>
+        <Link>
+          <Source>Home Page</Source>
+          <Url>https://www.france24.com/es/programas/en-foco</Url>
+        </Link>
+      </Links>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637028</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:21:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:30:00+01:00</EndTime>
+      <Vps>10:21:00</Vps>
+      <Title lang="ara">رياضة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>53</EpisodeNumber>
+      </Numeration>
+      <Duration>00:09:00</Duration>
+      <Genre>SPORTS / Divers News</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>كل الأخبار الرياضية لليوم مع صحافيينا ضمن برنامج يلخص الأخبار الرياضية في الملاعب وخارجها</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>كل الأخبار الرياضية لليوم مع صحافيينا ضمن برنامج يلخص الأخبار الرياضية في الملاعب وخارجها</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:21:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509265</ContentId>
+      <BaseContentId>301284118</BaseContentId>
+      <Title lang="ara">رياضة</Title>
+      <OriginalTitle>رياضة</OriginalTitle>
+      <OriginalTitle>Sports</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Sport</MpForm>
+      <MpType>Magazine</MpType>
+      <MpSType>Magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636939</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:44:00+01:00</EndTime>
+      <Vps>10:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>570</EpisodeNumber>
+      </Numeration>
+      <Duration>00:14:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:44:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509179</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636957</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:44:00+01:00</StartTime>
+      <EndTime>2025-03-27T10:45:00+01:00</EndTime>
+      <Vps>10:44:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>826</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:44:00+03:00</StartTime>
+          <EndTime>2025-03-27T12:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509197</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636991</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T10:45:00+01:00</StartTime>
+      <EndTime>2025-03-27T11:00:00+01:00</EndTime>
+      <Vps>10:45:00</Vps>
+      <Title lang="ara">هي الحدث</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>8</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>ACTUELLES / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج أخبار المرأة والقضايا التي تهمها عربيا ودوليا.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج أخبار المرأة والقضايا التي تهمها عربيا ودوليا، ويسلط الضوء على الممارسات المجحفة بحقها ويركز على المبادرات المختلفة لتمكين المرأة كما ينقل قصص نجاحها حول العالم </Value>
+          <Type>Medium</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج أخبار المرأة والقضايا التي تهمها عربيا ودوليا.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42907218_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Actuelles</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42907219_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Actuelles</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source>charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/43166584_1DC856ABB2EDC65F388FAE1B23439BC8.jpg</Url>
+          <Caption>
+le magazine</Caption>
+          <Copyright>Shutterstock / Shutterstock / Copyright (c) 2014 Federico Rostagno/Shutterstock.</Copyright>
+          <Agency>shutterstock</Agency>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source>www.shutterstock.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T12:45:00+03:00</StartTime>
+          <EndTime>2025-03-27T13:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509229</ContentId>
+      <BaseContentId>301280801</BaseContentId>
+      <Title lang="ara">هي الحدث</Title>
+      <OriginalTitle>هي الحدث</OriginalTitle>
+      <OriginalTitle>Actuelles</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Information magazine</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637029</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T11:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T11:13:00+01:00</EndTime>
+      <Vps>11:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1594</EpisodeNumber>
+      </Numeration>
+      <Duration>00:13:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T13:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T13:13:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509266</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636923</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T11:13:00+01:00</StartTime>
+      <EndTime>2025-03-27T12:00:00+01:00</EndTime>
+      <Vps>11:13:00</Vps>
+      <Title lang="ara">منتدى الصحافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1</EpisodeNumber>
+      </Numeration>
+      <Duration>00:47:00</Duration>
+      <Genre>CLUB PRESSE / Talk Show</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج تغطية الصحافة والإعلام للحدث في العالم مع الصحفيين والمراسلين العرب في فرنسا وفي العالم.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يعالج تغطية الصحافة والإعلام للحدث في العالم مع الصحفيين والمراسلين العرب في فرنسا وفي العالم.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T13:13:00+03:00</StartTime>
+          <EndTime>2025-03-27T14:00:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509163</ContentId>
+      <BaseContentId>239730295</BaseContentId>
+      <Title lang="ara">منتدى الصحافة</Title>
+      <OriginalTitle>منتدى الصحافة</OriginalTitle>
+      <OriginalTitle>Club Presse</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Info</MpType>
+      <MpSType>Media</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636912</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T12:00:00+01:00</StartTime>
+      <EndTime>2025-03-27T12:15:00+01:00</EndTime>
+      <Vps>12:00:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>1595</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T14:00:00+03:00</StartTime>
+          <EndTime>2025-03-27T14:15:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509152</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636958</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T12:15:00+01:00</StartTime>
+      <EndTime>2025-03-27T12:16:00+01:00</EndTime>
+      <Vps>12:15:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>827</EpisodeNumber>
+      </Numeration>
+      <Duration>00:01:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T14:15:00+03:00</StartTime>
+          <EndTime>2025-03-27T14:16:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509198</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714637009</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T12:16:00+01:00</StartTime>
+      <EndTime>2025-03-27T12:30:00+01:00</EndTime>
+      <Vps>12:16:00</Vps>
+      <Title lang="ara">ثقافة</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>48</EpisodeNumber>
+      </Numeration>
+      <Duration>00:14:00</Duration>
+      <Genre>CULTURE / Magazine</Genre>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>برنامج يستضيف فنانين من كل الدول العربية إضافة إلى بث تقارير ثقافية تسبر أغوار الفن والثقافة في جميع أنحاء العالم</Value>
+          <Type>Short</Type>
+        </Text>
+      </Texts>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T14:16:00+03:00</StartTime>
+          <EndTime>2025-03-27T14:30:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509247</ContentId>
+      <BaseContentId>233055292</BaseContentId>
+      <Title lang="ara">ثقافة</Title>
+      <OriginalTitle>Culture</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>Culture</MpType>
+      <MpSType>Art + Culture</MpSType>
+    </Content>
+  </Broadcast>
+  <Broadcast type="Linear" lang="ara">
+    <Event>
+      <EventId>1714636940</EventId>
+      <ChannelId>F24A</ChannelId>
+      <ChannelCustomerId>FR24ARar</ChannelCustomerId>
+      <ChannelName>France24 Arabic in Arabic</ChannelName>
+      <AirDate>2025-03-27</AirDate>
+      <StartTime>2025-03-27T12:30:00+01:00</StartTime>
+      <EndTime>2025-03-27T12:45:00+01:00</EndTime>
+      <Vps>12:30:00</Vps>
+      <Title lang="ara">الأخبار</Title>
+      <Numeration>
+        <Type>AbsoluteNumbering</Type>
+        <Source>Sender</Source>
+        <EpisodeNumber>571</EpisodeNumber>
+      </Numeration>
+      <Duration>00:15:00</Duration>
+      <Genre>LE JOURNAL / Live News</Genre>
+      <IsLive>true</IsLive>
+      <Texts>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>Short</Type>
+        </Text>
+        <Text lang="ara">
+          <Copyright>Sender</Copyright>
+          <Channel>FR24ARar</Channel>
+          <Value>الأخبار الأساسيّة المتعلّقة بالبورصة وبأهمّ المؤشّرات.</Value>
+          <Type>VeryShort</Type>
+        </Text>
+      </Texts>
+      <Photos>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924561_99B2540A3FAE5170FE18A720DE99D886.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Landscape</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+        <Photo>
+          <Url>https://mp-photos-cdn.azureedge.net/container75afc598def84923b56b42f63e639d5f/original/42924560_4E047F147A7C80A69E16E9638F4E5C5D.jpg</Url>
+          <Caption>Journal</Caption>
+          <Copyright>France 24</Copyright>
+          <Orientation>Portrait</Orientation>
+          <Level>Serie</Level>
+          <Source> charlotte.edwards@francemm.com</Source>
+        </Photo>
+      </Photos>
+      <ExtraTime>
+        <ExtraTime>
+          <TimeZone>Arab Standard Time</TimeZone>
+          <StartTime>2025-03-27T14:30:00+03:00</StartTime>
+          <EndTime>2025-03-27T14:45:00+03:00</EndTime>
+        </ExtraTime>
+      </ExtraTime>
+    </Event>
+    <Content>
+      <ContentId>412509180</ContentId>
+      <BaseContentId>301273832</BaseContentId>
+      <Title lang="ara">الأخبار</Title>
+      <OriginalTitle>الأخبار</OriginalTitle>
+      <OriginalTitle>Journal</OriginalTitle>
+      <Country>F</Country>
+      <Year>2025</Year>
+      <MpForm>Other</MpForm>
+      <MpType>News</MpType>
+      <MpSType>News</MpSType>
+    </Content>
+  </Broadcast>
+  <ChannelDetails>
+    <ChannelDetail>
+      <ChannelId>F24A</ChannelId>
+      <PpsId>FR24ARar</PpsId>
+      <Name>France24 Arabic in Arabic</Name>
+    </ChannelDetail>
+  </ChannelDetails>
+</MPXmlListing>
