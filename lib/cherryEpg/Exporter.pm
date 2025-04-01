@@ -9,12 +9,13 @@ use Time::Local;
 
 Export schedule data for $list of channels in xml format.
 Use $url as source and $language for descriptors.
+By $flavor we can change the output of various parameters. Default is undefined.
 Return xml serialized string.
 
 =cut
 
 sub export2XMLTV {
-  my ( $self, $list, $url ) = @_;
+  my ( $self, $list, $url, $flavor ) = @_;
   $url //= "127.0.0.1";
 
   # make a correct header
@@ -29,6 +30,12 @@ sub export2XMLTV {
     }
   };
 
+  if ( $flavor && $flavor =~ 'stn' ) {
+    delete $xml->{'tv'}{'generator-info-name'};
+    delete $xml->{'tv'}{'generator-info-url'};
+    delete $xml->{'tv'}{'channel'};
+  }
+
   foreach my $channel ( sort { $a->{channel_id} <=> $b->{channel_id} } @$list ) {
     my $channel_id = $channel->{channel_id};
 
@@ -36,41 +43,63 @@ sub export2XMLTV {
 
     foreach my $event ( $self->listEvent( $channel->{channel_id} )->@* ) {
 
-      # define the channel with the first event
-      if ($channelNotDefined) {
-        my $channelDefinition = {
-          'id'           => $channel_id & 0xffff,
-          'display-name' => { 'lang' => $event->{language}, 'content' => $channel->{name} }
-        };
-        push( $xml->{tv}{channel}->@*, $channelDefinition );
-        $channelNotDefined = 0;
-      } ## end if ($channelNotDefined)
-
       # add events
-      my $eventDescription = {
-        'title' => {
-          'lang'    => $event->{language},
-          'content' => $event->{title},
-        },
-        'channel' => $channel->{channel_id} & 0xffff,
-        'start'   => Time::Piece->new( $event->{start} )->strftime("%Y%m%d%H%M%S %z"),
-        'stop'    => Time::Piece->new( $event->{stop} )->strftime("%Y%m%d%H%M%S %z"),
-      };
+      my $eventDescription;
 
-      $eventDescription->{'sub-title'}{lang}    = $event->{language};
-      $eventDescription->{'sub-title'}{content} = $event->{subtitle};
+      if ( $flavor && $flavor =~ 'stn' ) {
 
-      $eventDescription->{desc}{lang}    = $event->{language};
-      $eventDescription->{desc}{content} = $event->{synopsis};
+        # some flavored XMLTV outputL
+        local $ENV{TZ} = 'UTC';
+        $eventDescription = {
+          'start' => Time::Piece->new( $event->{start} )->strftime("%Y%m%d%H%M%S %z"),
+          'stop'  => Time::Piece->new( $event->{stop} )->strftime("%Y%m%d%H%M%S %z"),
+          'title' => {
+            content => $event->{title},
+          },
+          'desc' => {
+            content => $event->{synopsis},
+          }
+        };
+      } else {
 
-      foreach my $descriptor ( $event->{descriptors}->@* ) {
-        next unless $descriptor->{descriptor_tag} == 85;
-        my $item = shift( $descriptor->{list}->@* );
-        if ($item) {
-          $eventDescription->{parentalrating}{lang}    = $event->{language};
-          $eventDescription->{parentalrating}{content} = $item->{rating};
-        }
-      } ## end foreach my $descriptor ( $event...)
+        # standard XMLTV
+
+        # define the channel with the first event
+        if ($channelNotDefined) {
+          my $channelDefinition = {
+            'id'           => $channel_id & 0xffff,
+            'display-name' => { 'lang' => $event->{language}, 'content' => $channel->{name} }
+          };
+          push( $xml->{tv}{channel}->@*, $channelDefinition );
+          $channelNotDefined = 0;
+        } ## end if ($channelNotDefined)
+
+        $eventDescription = {
+          'title' => {
+            'lang'    => $event->{language},
+            'content' => $event->{title},
+          },
+          'channel' => $channel->{channel_id} & 0xffff,
+          'start'   => Time::Piece->new( $event->{start} )->strftime("%Y%m%d%H%M%S %z"),
+          'stop'    => Time::Piece->new( $event->{stop} )->strftime("%Y%m%d%H%M%S %z"),
+        };
+
+        $eventDescription->{'sub-title'}{lang}    = $event->{language};
+        $eventDescription->{'sub-title'}{content} = $event->{subtitle};
+
+        $eventDescription->{desc}{lang}    = $event->{language};
+        $eventDescription->{desc}{content} = $event->{synopsis};
+
+        foreach my $descriptor ( $event->{descriptors}->@* ) {
+          next unless $descriptor->{descriptor_tag} == 85;
+          my $item = shift( $descriptor->{list}->@* );
+          if ($item) {
+            $eventDescription->{parentalrating}{lang}    = $event->{language};
+            $eventDescription->{parentalrating}{content} = $item->{rating};
+          }
+        } ## end foreach my $descriptor ( $event...)
+
+      } ## end else [ if ( $flavor && $flavor...)]
 
       $eventDescription->{image}{content} = $event->{image} if exists $event->{image};
 
@@ -201,24 +230,29 @@ sub export2CSV {
 package MyXMLSimple;
 use base 'XML::Simple';
 
-# Overriding the method here
+# This is a sorting hack to have title, sub-title and desc on first order
 sub sorted_keys {
   my ( $self, $name, $hashref ) = @_;
-  if ( $name eq 'programme' )    # only this tag I care about the order;
-  {
-    my @ordered      = ( 'title', 'sub-title', 'desc' );
-    my %ordered_hash = map { $_ => 1 } @ordered;
 
-    #set ordered tags in front of others
-    return @ordered, grep { not $ordered_hash{$_} } $self->SUPER::sorted_keys( $name, $hashref );
-  } ## end if ( $name eq 'programme'...)
-  return $self->SUPER::sorted_keys( $name, $hashref );    # for the rest, I don't care!
+  my @origin = ( $self->SUPER::sorted_keys( $name, $hashref ) );
+
+  if ( $name eq 'programme' ) {
+
+    # only this tag I care about the order;
+    my @wish  = ( 'title', 'sub-title', 'desc' );
+    my %order = map { $wish[$_] => $_ } 0 .. $#wish;
+
+    #set wish tags in front of others
+    return
+        sort { ( exists $order{$a} ? $order{$a} : scalar @wish ) <=> ( exists $order{$b} ? $order{$b} : scalar @wish ) } @origin;
+  } ## end if ( $name eq 'programme')
+  return @origin;
 
 } ## end sub sorted_keys
 
 =head1 AUTHOR
 
-This software is copyright (c) 2019 by Bojan Ramšak
+This software is copyright (c) 2019-2025 by Bojan Ramšak
 
 =head1 LICENSE
 

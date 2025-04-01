@@ -101,6 +101,7 @@ get '/report.:format' => sub {
 # get events for single, group or all channels in xmltv format
 get '/export/:id.xml' => sub {
   my $channel_id = params->{id};
+  my $custom     = params->{custom};
 
   my $cherry = cherryEpg->instance();
 
@@ -117,7 +118,7 @@ get '/export/:id.xml' => sub {
   return "" unless $list;
 
   response_header( 'Content-Type' => 'application/xml' );
-  return $cherry->epg->export2XMLTV( $list, $cherry->config->{core}{exportIP} );
+  return $cherry->epg->export2XMLTV( $list, $cherry->config->{core}{exportIP}, $custom );
 }; ## end '/export/:id.xml' => sub
 
 # get events for single channel in standard or custom csv format

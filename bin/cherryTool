@@ -645,7 +645,7 @@ sub serviceManipulator {
 
     if ( $args{x} ) {
       my $content =
-          $cherry->epg->export2XMLTV( [$channel], $cherry->config->{core}{exportIP}, $cherry->config->{core}{lang} );
+          $cherry->epg->export2XMLTV( [$channel], $cherry->config->{core}{exportIP} );
       my $filename = "service_" . $channel_id . ".xml";
 
       utf8::decode($content);

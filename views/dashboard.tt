@@ -87,9 +87,14 @@
           </div>
           <div class="col-md-2">
             <h4>Export</h4>
-            <a class="btn btn-primary" id="exportXML"><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
             <div class="input-group">
-              <input id="exportParam" type="text" class="form-control" aria-describedby="export parameter" placeholder="default">
+              <input id="exportXMLgrp" type="text" class="form-control" aria-describedby="export parameter" placeholder="default">
+              <span class="input-group-btn">
+                <a class="btn btn-primary" id="exportXML"><i class="glyphicon glyphicon-download-alt"></i> XMLTV</a>
+              </span>
+            </div><!-- /input-group -->
+            <div class="input-group">
+              <input id="exportCSVgrp" type="text" class="form-control" aria-describedby="export parameter" placeholder="default">
               <span class="input-group-btn">
                 <a class="btn btn-primary" id="exportCSV"><i class="glyphicon glyphicon-download-alt"></i> CSV</a>
               </span>

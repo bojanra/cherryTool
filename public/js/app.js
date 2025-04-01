@@ -166,7 +166,7 @@ function ServiceMatrix(log) {
         'curl -F file=@schedule1.xml -F file=@schedule2.xml ' + fullURL
       );
 
-      $('#exportParam').on('keyup change', (e) => {
+      $('#exportCSVgrp').on('keyup change', (e) => {
         const p = e.currentTarget.value;
         let url = '/export/' + data.channel_id + '.csv';
 
@@ -176,9 +176,19 @@ function ServiceMatrix(log) {
         $('#exportCSV').prop('href', url);
       });
 
-      $('#exportParam').trigger("change");
+      $('#exportXMLgrp').on('keyup change', (e) => {
+        const p = e.currentTarget.value;
+        let url = '/export/' + data.channel_id + '.xml';
 
-      $('#exportXML').prop('href', '/export/' + data.channel_id + '.xml');
+        if (p != '') {
+          url += '?custom=' + p;
+        }
+        $('#exportXML').prop('href', url);
+      });
+
+      $('#exportCSVgrp').trigger("change");
+      $('#exportXMLgrp').trigger("change");
+
       $('#exportXML').prop('target', '_' + data.channel_id);
       $('#exportCSV').prop('target', '_' + data.channel_id);
       $('#exportALL').prop('href', '/export/all.xml');
@@ -538,7 +548,7 @@ function RingelSpiel() {
       var bar = stream.bitrate / maxBitrate;
       var tdtOffset = '';
       if ('tdt' in stream && (stream.tdt > 1 || stream.tdt < 0)) {
-        tdtOffset = `<span class="badge">${stream.tdt > 1 ? '+' : '-'}${stream.tdt-1}</span>`;
+        tdtOffset = `<span class="badge">${stream.tdt > 1 ? '+' : '-'}${stream.tdt - 1}</span>`;
       }
       var block = `<div class="container-fluid"><a data-toggle="collapse" data-parent="#streamAccordion" href="#chunkList${i}">
       <div class="row"><div class="col-md-4">
@@ -547,16 +557,16 @@ function RingelSpiel() {
         <div class="progress"> <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="${bar}" aria-valuemin="0" aria-valuemax="100" style="width: ${bar}%"></div></div>
       </div>
       <div class="col-md-1 text-right">${tdtOffset}&nbsp;${stream.tdt ? '<i class="glyphicon glyphicon glyphicon-calendar"></i>' : ''}
-      ${ stream.pcr ? '<i class="glyphicon glyphicon-time glyphicon-time"></i>' : ''}</div>
+      ${stream.pcr ? '<i class="glyphicon glyphicon-time glyphicon-time"></i>' : ''}</div>
       <div class="col-md-2 text-right">${stream.bitrate} bps</div>
       <div class="col-md-1 text-right"><time class="timeago" datetime="${stream.last}"></time></div></a></div></div>`;
 
       $('#stream' + i).html(block);
 
       $.each(stream.files, function(j, file) {
-        var flags = `${file.tdt ? '<i class="glyphicon glyphicon glyphicon-calendar"></i>' : ''}${ file.pcr ? '<i class="glyphicon glyphicon-time glyphicon-time"></i>' : ''}`;
+        var flags = `${file.tdt ? '<i class="glyphicon glyphicon glyphicon-calendar"></i>' : ''}${file.pcr ? '<i class="glyphicon glyphicon-time glyphicon-time"></i>' : ''}`;
         block = `<div class="col-md-6">${file.title.trim() ? file.title : '<i>-</i>'}</div>
-          <div class="col-md-1 text-right">${'pid' in file ? flags+' '+file.pid : '?'}</div>
+          <div class="col-md-1 text-right">${'pid' in file ? flags + ' ' + file.pid : '?'}</div>
           <div class="col-md-2 text-right">${file.size} pkt</div>
           <div class="col-md-2 text-right">${file.bitrate} bps</div>
           <div class="col-md-1 text-right"><time class="timeago" datetime="${file.last}"></time></div>`;
