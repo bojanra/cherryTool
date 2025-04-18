@@ -8,7 +8,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.38';
+our $VERSION = '0.41';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -22,13 +22,21 @@ Do the file processing and return a reference to hash with keys
 - errorList => array with troubles during parsing
 - eventList => array of events found
 
+The $parserOption is used to set the working mode:
+undefined or 0 - classic mode   Short Text -> subtitle
+1              - alternate mode Short Text -> synopsis
+2              - combi mode     Short Text -> synopsis
+                           Very Short Text -> subtitle
 =cut
 
 sub parse {
-  my ( $self, $option ) = @_;
+  my ( $self, $parserOption ) = @_;
   my $report = $self->{report};
 
-  my $handler = MPXXMLHandler->new();
+  # get mode
+  my ($mode) = $parserOption // 0;
+
+  my $handler = MPXXMLHandler->new( mode => $mode );
   my $parser  = XML::Parser::PerlSAX->new(
     Handler => $handler,
     output  => $report
@@ -60,6 +68,7 @@ has currentData  => ( is => 'rw' );
 has rawText      => ( is => 'rw' );
 has linecount    => ( is => 'rw' );
 has _parser      => ( is => 'rw' );
+has mode         => ( is => 'ro', default => sub {0} );
 
 sub start_document {
   my ($self) = @_;
@@ -117,8 +126,15 @@ sub end_element {
     "Type"      => sub { $self->{rawText}{type}  = $value },
     "Value"     => sub { $self->{rawText}{value} = $value },
     "Text"      => sub {
-      $event->{subtitle} = $self->{rawText}{value}
-          if $self->{rawText}{type} eq "Short";
+      if ( $self->{rawText}{type} eq "Short" ) {
+        if ( $self->mode == 1 || $self->mode == 2 ) {
+          $event->{synopsis} = $self->{rawText}{value};
+        } else {
+          $event->{subtitle} = $self->{rawText}{value};
+        }
+      } elsif ( $self->{rawText}{type} eq "VeryShort" && $self->mode == 2 ) {
+        $event->{subtitle} = $self->{rawText}{value};
+      }
     },
     "ExtraTime" => sub { $event->{ExtraTime} = 0 },
     "Broadcast" => sub {
