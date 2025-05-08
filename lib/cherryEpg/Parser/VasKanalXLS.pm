@@ -60,6 +60,10 @@ sub rowHandler {
   $voditelji //= '';
 
   my $start;
+
+  #remove spaces
+  $date =~ s/\s//g;
+
   if ( $date =~ m|^(\d+)\.(\d+)\.(\d\d)$| ) {
 
     # dd.mm.yy
