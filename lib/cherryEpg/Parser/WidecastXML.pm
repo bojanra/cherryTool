@@ -130,7 +130,7 @@ sub start_element {
 
     $self->{currentEvent}{nibble} = try {
       if ( exists $element->{Attributes}{nibble1}
-        && exists $element->{Attributes}{nibble1} ) {
+        && exists $element->{Attributes}{nibble2} ) {
         return $element->{Attributes}{nibble1} << 4 | $element->{Attributes}{nibble2};
       }
       return;
