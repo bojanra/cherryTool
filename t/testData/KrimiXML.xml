@@ -1,0 +1,231 @@
+<?xml version="1.0" standalone="yes"?>
+<epg channel_name="Krimi">
+  <event>
+    <id event_id="1035234">
+      <info>
+        <start_time>2025-07-24T19:00:00Z</start_time>
+        <real_time>2025-07-24T19:00:00Z</real_time>
+        <end_time>2025-07-24T19:40:21Z</end_time>
+        <duration>2420</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>NCIS - Námorný vyšetrovací úrad XII.</title>
+        <epi_title>Úder z minulosti</epi_title>
+      </description>
+      <anotation>XII. 16 - Úder z minulosti: Gibbs a jeho tím narazia pri vyšetrovaní vraždy na to, že obeť mala vytvorenú skrytú identitu. Zarážajúce na tom je, že táto identita bola pôvodne vytvorená pre Gibbsa pre misiu v utajení spred 20 rokov. </anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>1</sightless_record>
+      <id_title_library>66122</id_title_library>
+      <ICR>15/520/00107/0016</ICR>
+      <continuity>seriál</continuity>
+      <season>12</season>
+      <epi_number>16</epi_number>
+      <epi_count/>
+      <country>Spojené štáty americké</country>
+      <programme_year>2014</programme_year>
+      <genres>Kriminálny / Detektívny</genres>
+      <actors>Mark Harmon, Michael Weatherly, Pauley Perretteová</actors>
+      <directors/>
+      <notice>Kriminálny seriál, USA, 2014-2015.
+Hrajú: M. Harmon, M. Weatherly, P. Perretteová,
+S. Murray.</notice>
+      <audio_format>2xStereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+  <event>
+    <id event_id="1253205">
+      <info>
+        <start_time>2025-07-24T19:55:00Z</start_time>
+        <real_time>2025-07-24T19:57:41Z</real_time>
+        <end_time>2025-07-24T20:35:56Z</end_time>
+        <duration>2456</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>NCIS - Námorný vyšetrovací úrad XII.</title>
+        <epi_title>Lišiak</epi_title>
+      </description>
+      <anotation>XII. 17 - Lišiak: Gibbsov tím vyšetruje vraždu asistenta viceadmirála. Dôkazy ich privedú k čiernemu trhu s umením. V kancelárii obete totiž pôvodne visel originál starej maľby, ktorú vrah vymenil za falzifikát. S vyšetrovaním ochotne pomáha DiNozzov otec, ktorý má na čiernom trhu kontakty. </anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>1</sightless_record>
+      <id_title_library>66122</id_title_library>
+      <ICR>15/520/00107/0017</ICR>
+      <continuity>seriál</continuity>
+      <season>12</season>
+      <epi_number>17</epi_number>
+      <epi_count/>
+      <country>Spojené štáty americké</country>
+      <programme_year>2014</programme_year>
+      <genres>Kriminálny / Detektívny</genres>
+      <actors>Mark Harmon, Michael Weatherly, Pauley Perretteová</actors>
+      <directors/>
+      <notice>Kriminálny seriál, USA, 2014-2015.
+Hrajú: M. Harmon, M. Weatherly, P. Perretteová,
+S. Murray.</notice>
+      <audio_format>2xStereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+  <event>
+    <id event_id="1185922">
+      <info>
+        <start_time>2025-07-24T20:55:00Z</start_time>
+        <real_time>2025-07-24T20:55:07Z</real_time>
+        <end_time>2025-07-24T21:46:21Z</end_time>
+        <duration>3080</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>Vraždy v raji: Návrat domov II.</title>
+        <epi_title/>
+      </description>
+      <anotation>II. 1 - Keď sa parný vlak preháňa devonským vidiekom, Humphrey a Esther sa pridajú k miestnemu ochotníckemu súboru na skúške detektívneho predstavenia. Hoci Humphrey hrá len fiktívneho detektíva, situácia sa rýchlo zmení na reálny zločin – herec stvárňujúci obeť je totiž nájdený mŕtvy so skutočným nožom v chrbte.</anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>1</sightless_record>
+      <id_title_library>94929</id_title_library>
+      <ICR>24/520/00356/0001</ICR>
+      <continuity>seriál</continuity>
+      <season>2</season>
+      <epi_number>1</epi_number>
+      <epi_count/>
+      <country>Veľká Británia</country>
+      <programme_year>2024</programme_year>
+      <genres>Kriminálny / Detektívny,Mysteriózny</genres>
+      <actors>Kris Marshall, Sally Brettonová</actors>
+      <directors/>
+      <notice>Kriminálny seriál, VB, 2024.
+Hrajú: K. Marshall, Z. Ahmadiová, S. Brettonová, 
+D. Llewellyn.</notice>
+      <audio_format>2xStereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+  <event>
+    <id event_id="1185925">
+      <info>
+        <start_time>2025-07-24T22:05:00Z</start_time>
+        <real_time>2025-07-24T22:04:57Z</real_time>
+        <end_time>2025-07-24T22:55:51Z</end_time>
+        <duration>3051</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>Vraždy v raji: Návrat domov II.</title>
+        <epi_title/>
+      </description>
+      <anotation>II. 2 - Miestna veštica predpovie sériu nezvyčajných udalostí, ktoré sa začnú diať v živote nedávno ovdovenej ženy. Tím začne mať podozrenie, že jej schopnosti sú až príliš dobré na to, aby boli pravdivé, najmä keď sa žena opakovane ocitá v čoraz nebezpečnejších situáciách. Prípad zároveň bolestivo zasiahne jedného z členov tímu. Medzitým Martha a Humphrey čelia novej výzve – absolvujú pohovor ako potenciálni adoptívni rodičia.</anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>1</sightless_record>
+      <id_title_library>94929</id_title_library>
+      <ICR>24/520/00356/0002</ICR>
+      <continuity>seriál</continuity>
+      <season>2</season>
+      <epi_number>2</epi_number>
+      <epi_count/>
+      <country>Veľká Británia</country>
+      <programme_year>2024</programme_year>
+      <genres>Kriminálny / Detektívny,Mysteriózny</genres>
+      <actors>Kris Marshall, Sally Brettonová</actors>
+      <directors/>
+      <notice>Kriminálny seriál, VB, 2024.
+Hrajú: K. Marshall, Z. Ahmadiová, S. Brettonová, 
+D. Llewellyn.</notice>
+      <audio_format>2xStereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+  <event>
+    <id event_id="1186205">
+      <info>
+        <start_time>2025-07-24T23:10:00Z</start_time>
+        <real_time>2025-07-24T23:11:57Z</real_time>
+        <end_time>2025-07-24T23:50:56Z</end_time>
+        <duration>2456</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>Sherlock a Watsonová III.</title>
+        <epi_title/>
+      </description>
+      <anotation>III. 10 - Pri prehliadke domu, v ktorom zomrel starý manželský pár, objaví polícia telo pestovateľov marihuany. Vrah napodobnil štýl zabíjania drogového kartelu, ale urobil jednu chybu ...</anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>0</sightless_record>
+      <id_title_library>69743</id_title_library>
+      <ICR>16/500/00020/0010</ICR>
+      <continuity>seriál</continuity>
+      <season>3</season>
+      <epi_number>10</epi_number>
+      <epi_count/>
+      <country>Spojené štáty americké,Veľká Británia</country>
+      <programme_year>2014</programme_year>
+      <genres>Kriminálny / Detektívny</genres>
+      <actors>Jonny Lee Miller, Lucy Liuová, Aidan Quinn</actors>
+      <directors/>
+      <notice>Kriminálny seriál, USA, 2014-2015.
+Hrajú: J. L. Miller, L. Liuová, A. Quinn.</notice>
+      <audio_format>2xStereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+  <event>
+    <id event_id="1200309">
+      <info>
+        <start_time>2025-07-24T24:10:00Z</start_time>
+        <real_time>2025-07-24T24:11:15Z</real_time>
+        <end_time>2025-07-24T24:50:25Z</end_time>
+        <duration>2425</duration>
+      </info>
+      <description>
+        <language_code>SK</language_code>
+        <title>Kosti VIII.</title>
+        <epi_title>Duch v stroji</epi_title>
+      </description>
+      <anotation>VIII. 9 - Jeffersonský tím vyšetruje smrť mladého chlapca, ktorého duša sa s nimi rozpráva, akoby bol stále nažive. Navštívi ich Angelina psychotronička a médium Avalon Harmoniaová a tvrdí, že obeť si ju zavolala, aby pomohla s vyšetrovaním. Pokúsi sa pomôcť duši zosnulého prejsť na druhú stranu. Každý z tímu začne pochybovať o svojej viere a uvažovať o živote po smrti...</anotation>
+      <synopsis/>
+      <rating country_code="SK" rating="*12"/>
+      <hidden_subtitles>0</hidden_subtitles>
+      <sightless_record>0</sightless_record>
+      <id_title_library>85283</id_title_library>
+      <ICR>21/520/00978/0009</ICR>
+      <continuity>seriál</continuity>
+      <season>8</season>
+      <epi_number>9</epi_number>
+      <epi_count/>
+      <country>Spojené štáty americké</country>
+      <programme_year>2012</programme_year>
+      <genres>Dráma</genres>
+      <actors>Emily Deschanelová, David Boreanaz, Michaela Conlinová</actors>
+      <directors/>
+      <notice>Kriminálny seriál, USA, 2012-2013.
+Hrajú: E. Deschanelová, D. Boreanaz, 
+M. Conlinová, T. J. Thyne, J. F. Daley, 
+T. Taylorová.</notice>
+      <audio_format>Stereo</audio_format>
+      <video_format>HD</video_format>
+      <premiere>1</premiere>
+      <product_placement>0</product_placement>
+    </id>
+  </event>
+</epg>
