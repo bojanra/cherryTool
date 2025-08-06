@@ -11,7 +11,7 @@ guideSplitter - tool for splitting multichannel TVXML files into multiple single
 =head1 OPTIONS
 
  -h         show this help
- -l         list channels
+ -l         list channels in csv format
  -e         export schedule data to STDOUT
 
 =head1 DESCRIPTION
@@ -21,7 +21,7 @@ By default multiple files are created.
 
 =head1 AUTHOR
 
-This software is copyright (c) 2021 by Bojan Ramšak
+This software is copyright (c) 2021-2025 by Bojan Ramšak
 
 =head1 LICENSE
 
@@ -40,7 +40,7 @@ use Pod::Usage;
 use Try::Tiny;
 use open qw ( :std :encoding(UTF-8));
 
-our $VERSION = '1.06';
+our $VERSION = '1.10';
 
 has 'source' => ( is => 'ro' );
 has 'stdout' => ( is => 'ro', default => 0 );
@@ -113,10 +113,11 @@ sub list {
 
   my $header = join( '', @{ $self->{header} } );
 
+  say '"ID";"Channel";"EventCount"';
   foreach my $id ( sort keys %{ $self->{channel} } ) {
     my $size = length( $header . join( '', @{ $self->{channel}{$id} } ) );
     my $name = $self->{name}{$id};
-    say $self->formatTitle( $id, $name, $size );
+    say "$id;\"$name\";$size";
   }
 } ## end sub list
 

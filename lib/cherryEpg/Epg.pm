@@ -1281,7 +1281,7 @@ sub getEit {
     present   => { packetCount => 0, mts => '' },
     following => { packetCount => 0, mts => '' }
   );
-  my $pfFrequency = ceil( $timeFrame / 1.8 );    # DON'T CHANGE THIS, IT IS THE BASIC CYCLE
+  my $pfFrequency = ceil( $timeFrame / 1.9 );    # DON'T CHANGE THIS, IT IS THE BASIC CYCLE
                                                  # the repetition period must be at least 2s by
 
   my @otherSections;

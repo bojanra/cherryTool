@@ -1,4 +1,4 @@
-package cherryEpg v2.5.35;
+package cherryEpg v2.5.40;
 
 use 5.024;
 use utf8;

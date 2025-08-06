@@ -3,6 +3,7 @@ package cherryWeb;
 use 5.024;
 use cherryEpg::Git;
 use cherryEpg::Maintainer;
+use cherryEpg::Inspector;
 use cherryEpg::Scheme;
 use cherryEpg;
 use Dancer2;
@@ -153,11 +154,13 @@ get '/carousel/:target' => require_role cherryweb => sub {
   my $target = params->{target};
 
   my $player = cherryEpg::Player->new();
-  my ( $a, undef, undef, undef, undef, $serialized ) = $player->load( '/', $target );
+  my ( $a, undef, $ts, undef, undef, $serialized ) = $player->load( '/', $target );
 
-  if ($$serialized) {
+  if ( $serialized && $$serialized ) {
     my $gzipped = gzip($$serialized);
     send_file( \$gzipped, filename => $target . '.ets.gz', content_type => 'application/octet-stream' );
+  } elsif ( $ts && $$ts ) {
+    send_file( $$ts, filename => $target . '.ts', content_type => 'video/MP2T' );
   } else {
     send_error( "Sorry, requested chunk not found!", 404 );
   }
@@ -171,6 +174,29 @@ get '/dump/:target' => require_role cherryweb => sub {
   my $dump   = $player->dump( '/', $target );
 
   send_file( $dump, filename => $target . '.txt', content_type => 'text/plain; charset=UTF-8' );
+}; ## end cherryweb => sub
+
+# run the inspector and return output as text
+get '/inspect/:target' => require_role cherryweb => sub {
+  my $target = params->{target};
+
+  my $inspector = cherryEpg::Inspector->new();
+  $inspector->timeFrame = $cherry->config->{core}{timeFrame} if $cherry->config->{core}{timeFrame};
+
+  if ( -e $cherry->config->{core}{carousel} . $target . ".cts" ) {
+    $inspector->load( $cherry->config->{core}{carousel} . $target . ".cts" );
+    my $dump = $inspector->report;
+    send_file( \$dump, filename => $target . '.txt', content_type => 'text/plain; charset=UTF-8' );
+  } else {
+    status('not_found');
+    template(
+      '404.tt',
+      {
+        title => "Sorry, requested chunk not found!",
+        path  => request->path,
+      }
+    );
+  } ## end else [ if ( -e $cherry->config...)]
 }; ## end cherryweb => sub
 
 # from here on there are the 'AJAX' handlers
@@ -967,8 +993,8 @@ get '/log/:id.json' => require_role cherryweb => sub {
 
 # default route
 any qr{.*} => sub {
-  status 'not_found';
-  template '404', { path => request->path };
+  status('not_found');
+  template( '404', { path => request->path, title => "Error 404 - Not Found" } );
 };
 
 =head1 AUTHOR

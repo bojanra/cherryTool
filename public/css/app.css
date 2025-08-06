@@ -223,7 +223,7 @@ a:hover {
   text-align: left;
   vertical-align: middle;
   width: auto;
-  max-width: 768px;
+  max-width: 800px;
 }
 
 .modal pre {
@@ -345,6 +345,10 @@ div.panel-body {
 .btn-group span {
   margin-left: 2px;
   margin-right: 2px;
+}
+
+.btn-sm {
+  padding: 5px 10px 0px 10px;
 }
 
 .panel-collapse div.panel-body {

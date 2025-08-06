@@ -153,6 +153,9 @@ sub stop {
 Read $target .ets file from carousel or $file from anywhere else.
 return $target, $meta, \$pes, undef, $source, \$serialized
 
+Try to return $target .cts file from carousel if .ets above not found.
+return undef, undef, \$pes
+
 =cut
 
 sub load {
@@ -206,7 +209,13 @@ sub load {
     my $ts     = delete $enhanced->{ts};
 
     return ( $target, $enhanced, \$ts, undef, $source, \$serialized );
-  } ## end if ( -r $zipFile )
+  } else {
+
+    # is it a EIT file?
+    my ( undef, $ts ) = $self->decode( $subdir, $target );
+    return ( undef, undef, \$ts ) if $ts;
+
+  } ## end else [ if ( -r $zipFile ) ]
   $logger->error("file not found [$zipFile]");
   return;
 } ## end sub load

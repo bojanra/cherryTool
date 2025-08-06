@@ -911,9 +911,9 @@ function CarouselPanel() {
             }
           }
 
-          if (item.ets) {
-            // when we have source we can download
-            $row.find('button[name=download]').prop('disabled', false).removeClass('btn-default').addClass('btn-primary');
+          $row.find('button[name=download]').prop('disabled', false).removeClass('btn-default').addClass('btn-primary');
+          if (!item.ets) {
+            $row.find('button[name=play]').prop('disabled', false).removeClass('btn-default').addClass('btn-warning').attr('name', 'inspect').html('<span class="glyphicon glyphicon-search"></span>');
           }
           $('#browseReport table').append($row);
         });
@@ -967,6 +967,17 @@ function CarouselPanel() {
     });
   };
 
+  this.inspect = () => {
+    $.ajax({
+      url: '/inspect/' + this.target,
+      type: 'GET',
+      timeout: 2000
+    }).done((data) => {
+      $('#preview').html(data);
+      $('#modPreview').modal();
+    });
+  };
+
   this.play = () => {
     $.ajax({
       url: "/carousel/play",
@@ -1002,6 +1013,8 @@ function CarouselPanel() {
       this.stop();
     } else if (button === 'download') {
       window.location.href = '/carousel/' + this.target;
+    } else if (button === 'inspect') {
+      this.inspect();
     }
   });
 
