@@ -632,6 +632,45 @@ sub announcerReport {
   }
 } ## end sub announcerReport
 
+=head3 srtReport ( )
+
+Report srt-relay
+
+=cut
+
+sub srtReport {
+  my ($self) = @_;
+
+  my $status;
+  my $message = "-";
+
+  # check user daemon status
+  my $srt = try {
+    `systemctl --user status srt-relay.service 2>&1`;
+  };
+
+  my $exitStatus = $? >> 8;
+
+  if ( $exitStatus == 4 ) {
+    $status  = $UNKNOWN;
+    $message = "Not configured";
+  } elsif ( $exitStatus == 3 ) {
+    $status  = $WARNING;
+    $message = "Not running";
+  } elsif ( $exitStatus == 0 ) {
+    $status  = $OK;
+    $message = "Active";
+  } else {
+    $status  = $CRITICAL;
+    $message = "Failed";
+  }
+
+  return {
+    status  => $status,
+    message => $message,
+  };
+} ## end sub srtReport
+
 =head3 report ( )
 
 Generate sysinfo overall report hash.
@@ -671,6 +710,12 @@ sub report {
       message => "Disabled",
     };
   } ## end else [ if ( $self->isLinger )]
+
+  # add srt only if unit exists
+  my $srt = $self->srtReport();
+  if ( $srt->{status} != $UNKNOWN ) {
+    $report->{modules}{srt} = $srt;
+  }
 
   my $announcer = $self->announcerReport();
   $report->{modules}{announcer} = $announcer if $announcer;
@@ -970,6 +1015,15 @@ $fields[1]
     } ## end foreach my $key ( sort keys...)
   } ## end if ( exists $modules->...)
 
+  if ( exists $modules->{srt} ) {
+    $group = "srt";
+    $errorCount += 1 if $modules->{$group}->{status} != 0;
+    $status = $modules->{$group}->{status};
+    $msg    = $modules->{$group}->{message};
+    $~      = "REPORT_GROUP";
+    write;
+  } ## end if ( exists $modules->...)
+
   $~ = "REPORT_BOTTOM";
   if ( $errorCount == 1 ) {
     $msg = "1 error found";
@@ -987,7 +1041,7 @@ $fields[1]
 
 =head1 AUTHOR
 
-This software is copyright (c) 2024 by Bojan Ramšak
+This software is copyright (c) 2025 by Bojan Ramšak
 
 =head1 LICENSE
 

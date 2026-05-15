@@ -734,6 +734,7 @@ function SystemInfo() {
       $('#systemInternet').html('');
       $('#systemWebgrab').html('');
       $('#systemAnnouncer').html('');
+      $('#systemSRT').html('');
     });
   };
 
@@ -760,6 +761,12 @@ function SystemInfo() {
     $('#systemInternet').html(this.generateBlock(report.modules.internet, true));
     $('#systemDatabase').html(this.generateBlock(report.modules.database, false));
     $('#systemLinger').html(this.generateBlock(report.modules.linger, true));
+    if (report.modules.srt) {
+      $('#systemSRT').html(this.generateBlock(report.modules.srt, true));
+      $('#systemSRT').parent().removeClass('hidden');
+    } else {
+      $('#systemSRT').parent().addClass('hidden');
+    }
     if (report.modules.announcer) {
       $('#systemAnnouncer').html(this.generateBlock(report.modules.announcer, false));
       $('#systemAnnouncer').parent().removeClass('hidden');

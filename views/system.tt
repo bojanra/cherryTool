@@ -92,6 +92,16 @@
       </li>
       <li class="list-group-item">
         <h4 class="list-group-item-heading">
+          SRT Relay
+          <a href="#" data-toggle="tooltip" title="Relay stream using SRT protocol">
+            <i class="glyphicon glyphicon-question-sign"></i>
+          </a>
+        </h4>
+        <p id="systemSRT" class="list-group-item-text">
+        </p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">
           Announcement
           <a href="#" data-toggle="tooltip" title="Announcements are activated.">
             <i class="glyphicon glyphicon-question-sign"></i>
