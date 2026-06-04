@@ -8,7 +8,7 @@ use XML::Parser::PerlSAX;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.21';
+our $VERSION = '0.26';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -26,6 +26,7 @@ The "dirty" in the parsername means, that the parser is less strict and has more
 e.g. Time format is less strict therefore also 
    start="20210220023000 +00:00" or
    start="20210220023000 00:00" or 
+   start="2026-06-15T05:45:00"
    start="1729546200" epoch in seconds
    start="1729546200401" epoch in seconds or milliseconds
    is accepted
@@ -152,7 +153,10 @@ sub decode_timestamp {
   return $t        if $t =~ m/^\d{10}$/;    # epoch in seconds
   return $t / 1000 if $t =~ m/^\d{13}$/;    # epoch in milliseconds
 
-  $t =~ s/://;                              # remove colon from timezone
+  $t =~ s/://g;                             # remove colon from timezone
+  $t =~ s/-//g;                             # remove dash
+  $t =~ s/T//;                              # remove T between date and time
+  $t .= " +0000" if $t =~ m/^\d{14}$/;      # add timezone UTC if missing
   $t =~ s/(\d)\s?(\d{4})$/$1+$2/;           # insert missing plus in front of timezone
 
   try {
