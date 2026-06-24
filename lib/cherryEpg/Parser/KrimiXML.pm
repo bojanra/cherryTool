@@ -8,7 +8,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.41';
+our $VERSION = '0.46';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -22,7 +22,8 @@ Do the file processing and return a reference to hash with keys
 - errorList => array with troubles during parsing
 - eventList => array of events found
 
-The $parserOption is used for setting the country_code for parental_rating_descriptor.
+The $parserOption is used for setting timeshift and country_code for parental_rating_descriptor.
+The options are separated by "," or "|". The first option is used for timeshift and the second for country_code.
 Slovakia is detected from the XML source.
 =cut
 
@@ -30,7 +31,9 @@ sub parse {
   my ( $self, $parserOption ) = @_;
   my $report = $self->{report};
 
-  my ($country_code) = split( /,/, $parserOption // '' );
+  my ( $offset, $country_code ) = split( /[\|,]/, $parserOption // '' );
+
+  $offset //= 0;
 
   my $handler = KrimiXMLHandler->new($country_code);
   my $parser  = XML::Parser::PerlSAX->new(
@@ -48,6 +51,13 @@ sub parse {
       $self->error($error);
     }
   };
+
+  my $eventList = $report->{eventList};
+
+  foreach my $event ( @{$eventList} ) {
+    $event->{start} += $offset * 60 * 60;
+    $event->{stop}  += $offset * 60 * 60 if $event->{stop} && $event->{stop} =~ /^\d+$/;
+  }
 
   return $report;
 } ## end sub parse
@@ -205,7 +215,7 @@ sub _error {
 
 =head1 AUTHOR
 
-This software is copyright (c) 2025 by Bojan Ramšak
+This software is copyright (c) 2026 by Bojan Ramšak
 
 =head1 LICENSE
 
