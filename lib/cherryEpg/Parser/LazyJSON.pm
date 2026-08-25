@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.14';
+our $VERSION = '0.24';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -52,22 +52,43 @@ sub parse {
     my $event;
 
     if ( $item->{start_time} ) {
-      $event->{start} = try {
 
-        # convert 2025-01-21T20:29:28.000-05:00
-        #      to 2025-01-21T20:29:28-0500
-        $item->{start_time} =~ m/(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)\.?\d*([+-])(\d{2}):?(\d{2})$/;
-        my $t = "$1-$2-$3T$4:$5:$6$7$8$9";
-        gmtime->strptime( $t, "%Y-%m-%dT%H:%M:%S %z" )->epoch;
-      } catch {
+
+      if ( $item->{start_time} =~ m/(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)\.?\d*([+-])(\d{2}):?(\d{2})$/ ) {
+
+        # 2025-01-21T20:29:28.000-05:00
+        $event->{start} = try {
+          my $t = "$1-$2-$3T$4:$5:$6$7$8$9";
+          gmtime->strptime( $t, "%Y-%m-%dT%H:%M:%S %z" )->epoch;
+        };
+      } elsif ( $item->{start_time} =~ m/(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)\.\d{3}Z$/ ) {
+
+        # 2026-08-25T05:00:00.000Z
+        $event->{start} = try {
+          my $t = "$1-$2-$3T$4:$5:$6";
+          gmtime->strptime( $t, "%Y-%m-%dT%H:%M:%S %z" )->epoch;
+        };
+      } else {
         $self->error("start_time not valid format [$item->{start_time}]");
-      };
+
+      }
     } ## end if ( $item->{start_time...})
+
     $event->{duration} = $item->{duration} if $item->{duration};
     $event->{title}    = $item->{program}  if $item->{program};
     $event->{subtitle} = $item->{ep_name}  if $item->{ep_name};
     $event->{synopsis} = $item->{host}     if $item->{host};
     $event->{id}       = $item->{id}       if $item->{id};
+
+    # check if all event data is complete and valid
+    my @missing;
+    push( @missing, "start" ) unless $event->{start};
+    push( @missing, "title" ) unless defined $event->{title};
+
+    if ( scalar @missing > 0 ) {
+      $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "]" );
+      next;
+    }
 
     push( @{ $report->{eventList} }, $event );
   } ## end foreach my $item ( @{$data})

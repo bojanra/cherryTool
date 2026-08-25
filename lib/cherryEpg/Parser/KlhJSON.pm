@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.13';
+our $VERSION = '0.23';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -69,6 +69,16 @@ sub parse {
     $event->{subtitle} = $item->{sub_title} if $item->{sub_title};
     $event->{synopsis} = $item->{live_desc} if $item->{live_desc};
     $event->{id}       = $1                 if $item->{id_code} =~ m/(\d+)/;
+
+    # check if essential event data exist
+    my @missing;
+    push( @missing, "start" ) unless $event->{start};
+    push( @missing, "title" ) unless defined $event->{title};
+
+    if ( scalar @missing > 0 ) {
+      $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "]" );
+      next;
+    }
 
     push( @{ $report->{eventList} }, $event );
   } ## end foreach my $item ( @{$data})

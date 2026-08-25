@@ -151,5 +151,50 @@
       "program" : "Line Upon Line",
       "start_time" : "2025-01-22T09:59:26.000-05:00",
       "title" : "LUL07"
+   },
+   {
+      "duration" : 1710,
+      "ep_name" : "Great Chapters of the Bible, Psalm 119",
+      "host" : "John Bradshaw",
+      "id" : 78168,
+      "program" : "It Is Written",
+      "start_time" : "2026-08-28T00:30:35.000Z",
+      "title" : "IIW19186 - Great Chapters of the Bible - Psalm 119"
+   },
+   {
+      "duration" : 540,
+      "ep_name" : "Luke - Jubilee",
+      "host" : "Elizabeth Talbot",
+      "id" : 78169,
+      "program" : "Jesus 101",
+      "start_time" : "2026-08-28T01:00:35.000Z",
+      "title" : "J101_003_The Four Gospels - Luke - Jubilee(Part 1)"
+   },
+   {
+      "duration" : 1710,
+      "ep_name" : "Brexit When Dreams Collide",
+      "host" : "Gary Kent",
+      "id" : 78170,
+      "program" : "The Incredible Journey",
+      "start_time" : "2026-08-28T01:30:06.000Z",
+      "title" : "TIJ024_BREXIT WHEN DREAMS COLLIDE"
+   },
+   {
+      "duration" : 3513,
+      "ep_name" : "August 2026",
+      "host" : "",
+      "id" : 78171,
+      "program" : "IIW LIVE",
+      "start_time" : "2026-08-28T01:59:37.000Z",
+      "title" : "IIWL2608 - August 19 - IIW Live with John Bradshaw"
+   },
+   {
+      "duration" : 3510,
+      "ep_name" : "The Most Sought After Secret in the Bible",
+      "host" : "Brian McMahon",
+      "id" : 78172,
+      "program" : "Brian McMahon",
+      "start_time" : "2026-08-28T03:00:00.000Z",
+      "title" : "BMPU22_The Most Sought After Secret in the Bible"
    }
 ]

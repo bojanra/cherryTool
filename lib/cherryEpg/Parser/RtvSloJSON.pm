@@ -10,7 +10,7 @@ use Try::Tiny;
 
 extends 'cherryEpg::Parser';
 
-our $VERSION = '0.28';
+our $VERSION = '0.29';
 
 sub BUILD {
   my ( $self, $arg ) = @_;
@@ -115,6 +115,16 @@ sub parse {
     } ## end else [ if ( !$t ) ]
 
     $self->smartCorrect($event);
+
+    # check if essential event data exist
+    my @missing;
+    push( @missing, "start" ) unless $event->{start};
+    push( @missing, "title" ) unless defined $event->{title};
+
+    if ( scalar @missing > 0 ) {
+      $self->_error( "missing or incorrect input data [" . join( ' ', @missing ) . "]" );
+      next;
+    }
 
     push( @{ $report->{eventList} }, $event );
   } ## end foreach my $e ( @{ $json->{...}})
