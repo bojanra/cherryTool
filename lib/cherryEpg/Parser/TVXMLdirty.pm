@@ -16,6 +16,8 @@ sub BUILD {
   $self->{report}{parser} = __PACKAGE__;
 }
 
+sub _handler_class {'TVXMLdirtyHandler'}
+
 =head3 parse( $parserOption)
 
 Do the file processing and return a reference to hash with keys
@@ -61,8 +63,9 @@ sub parse {
   # get values
   my ( $channel, $language_code, $country_code ) = split( /,/, $parserOption // '' );
 
-  my $handler = TVXMLdirtyHandler->new( $language_code, $country_code );
-  my $parser  = XML::Parser::PerlSAX->new(
+  my $handlerClass = $self->_handler_class;
+  my $handler      = $handlerClass->new( $language_code, $country_code );
+  my $parser       = XML::Parser::PerlSAX->new(
     Handler => $handler,
     output  => $report
   );
@@ -105,25 +108,23 @@ sub parse {
 } ## end sub parse
 
 package TVXMLdirtyHandler;
-use strict;
-use warnings;
+use Moo;
 use Time::Piece;
 use Try::Tiny;
 use Carp qw( croak );
 
-sub new {
-  my ( $this, $language_code, $country_code ) = @_;
-  my $class = ref($this) || $this;
+has language_code => ( is => 'rw', default => 'en' );
+has country_code  => ( is => 'rw' );
 
-  # set primary language_code od default
-  my $self = {
-    language_code => $language_code // 'en',
+sub BUILDARGS {
+  my ( $self, $language_code, $country_code ) = @_;
+
+  # set primary language_code
+  return {
+    language_code => $language_code,
     country_code  => $country_code,
   };
-
-  bless( $self, $class );
-  return $self;
-} ## end sub new
+} ## end sub BUILDARGS
 
 sub start_document {
   my ($self) = @_;

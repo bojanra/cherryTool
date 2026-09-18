@@ -4,7 +4,7 @@ use 5.024;
 use utf8;
 use File::Path qw(remove_tree);
 use File::Rsync;
-use Test::More tests => 73;
+use Test::More tests => 74;
 
 BEGIN {
   use_ok("cherryEpg");
@@ -58,7 +58,14 @@ foreach my $channel ( $cherry->epg->listChannel()->@* ) {
     "$parser test with channel $channel->{channel_id}" );
 } ## end foreach my $channel ( $cherry...)
 
-ok( $scheme->delete($backup),                                                     "delete scheme from archive" );
-ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
-ok( $cherry->deleteStock(),                                                       "clean stock dir" );
-ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );
+note("skip this with setting env DEVEL=1");
+
+SKIP: {
+  skip "skip cleanup for parser development", 4 if $ENV{DEVEL};
+
+  ok( $scheme->delete($backup),                                                     "delete scheme from archive" );
+  ok( $cherry->deleteIngest(),                                                      "clean ingest dir" );
+  ok( $cherry->deleteStock(),                                                       "clean stock dir" );
+  ok( remove_tree( $scheme->cherry->config->{core}{carousel}, { keep_root => 1 } ), "clean carousel", );
+} ## end SKIP:
+
