@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XML>
+  <channel name="HD TCM Spain" startDate="2026-09-29" endDate="2026-11-29" timeZone="CET">
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>85</duration>
+      <eventID>14237967</eventID>
+      <scheduleDate>2026-10-02</scheduleDate>
+      <broadcastDate>2026-10-02 22:00:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Secuestradores de cuerpos</title>
+      <synopsis>Una adolescente y su padre descubren que unos clones alienígenas están sustituyendo a los humanos en una remota base militar de Alabama.</synopsis>
+      <directors>Abel Ferrara,Phil Neilson,</directors>
+      <producers>Robert Solo,</producers>
+      <actors>Gabrielle Anwar, Kathleen Doyle, Terry Kinney, Sylvia Small, Forest Whitaker, Allen Perada</actors>
+      <yearOfProduction>1993</yearOfProduction>
+      <certification>12</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Drama,Fantasy,Horror,Mystery,Science Fiction,Thriller</genres>
+      <audioType>Dual Mono,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>442450</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>117</duration>
+      <eventID>14237968</eventID>
+      <scheduleDate>2026-10-02</scheduleDate>
+      <broadcastDate>2026-10-02 23:25:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Madre!</title>
+      <synopsis>Una pareja ve puesta a prueba su relación cuando unos invitados no deseados llegan a su casa, perturbando su tranquila vida.</synopsis>
+      <directors>Darren Aronofsky</directors>
+      <actors>Jennifer Lawrence, Javier Bardem, Ed Harris, Michelle Pfeiffer, Brian Gleeson, Domhnall Gleeson</actors>
+      <yearOfProduction>2017</yearOfProduction>
+      <certification>16</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Drama,Horror,Mystery,Thriller</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>FF_MOTHER2017</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>127</duration>
+      <eventID>14237969</eventID>
+      <scheduleDate>2026-10-02</scheduleDate>
+      <broadcastDate>2026-10-03 01:22:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Eclipse total (Dolores Claiborne)</title>
+      <synopsis>Una madre y su hija deben revivir sus recuerdos más oscuros cuando a una de ellas la acusan de asesinato… por segunda vez.</synopsis>
+      <directors>Taylor Hackford,</directors>
+      <producers>Stuart McAra,Taylor Hackford,Charles Mulvehill,Janet Yale,</producers>
+      <actors>Kathy Bates, Jennifer Jason Leigh, Judy Parfitt, Christopher Plummer, David Strathairn, Eric Bogosian</actors>
+      <yearOfProduction>1995</yearOfProduction>
+      <certification>18</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Drama,Mystery,Thriller</genres>
+      <audioType>Stereo,Dolby E5.1,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>413540</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>200</duration>
+      <eventID>14237970</eventID>
+      <scheduleDate>2026-10-02</scheduleDate>
+      <broadcastDate>2026-10-03 03:29:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Rojos</title>
+      <synopsis>El periodista John Reed -activista que luchó por defender sus ideales en la tumultuosa América de 1915- es el único americano enterrado en el Kremlin.</synopsis>
+      <directors>Warren Beatty,Craig R. Baxley,Nigel Wooll,</directors>
+      <producers>Warren Beatty</producers>
+      <actors>Warren Beatty, Diane Keaton, Jack Nicholson, M. Emmet Walsh, Edward Herrmann, Rebecca West</actors>
+      <yearOfProduction>1981</yearOfProduction>
+      <certification>16</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Biography,Drama,Romance,War</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>575018</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>5</duration>
+      <eventID>14237971</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 06:49:00</broadcastDate>
+      <programType>SN</programType>
+      <episodeNb>2</episodeNb>
+      <seasonNb>2</seasonNb>
+      <episodeCount>9</episodeCount>
+      <title>Selección TCM</title>
+      <episodeTitle>Selección TCM: Roald Dahl</episodeTitle>
+      <synopsis> Piezas de producción propia que repasan las carreras de los mejores artistas del mundo cinematográfico.</synopsis>
+      <episodeSynopsis>Pieza de producción propia que homenajea en su centenario al clásico de la literatura infantil Roald Dahl.</episodeSynopsis>
+      <directors>Pedro Glez. Bermúdez</directors>
+      <actors>Roald Dahl, </actors>
+      <yearOfProduction>2016</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Documentary</genres>
+      <audioType>Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>SN_SLCCNT0202</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>77</duration>
+      <eventID>14237972</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 06:54:00</broadcastDate>
+      <programType>S#</programType>
+      <title>El último adiós de Bette Davis</title>
+      <synopsis>Producción de TCM España que reconstruye los días de la actriz en el Festival de San Sebastián del año 1989 donde acudió a recibir el premio Donostia</synopsis>
+      <yearOfProduction>2014</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Documentary</genres>
+      <audioType>Dolby E5.1,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>1042702</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>114</duration>
+      <eventID>14237973</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 08:11:00</broadcastDate>
+      <programType>S#</programType>
+      <title>Nostromo: el sueño imposible de David Lean</title>
+      <synopsis>Documental producido por TCM que reconstruye el sueño de David Lean por poner en marcha Nostromo, proyecto al que dedicó los últimos años de su vida</synopsis>
+      <directors>Pedro Gonzalez Bermudez,</directors>
+      <yearOfProduction>2017</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Documentary</genres>
+      <audioType>Dolby E5.1,Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>1404153</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>117</duration>
+      <eventID>14237974</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 10:05:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Evasión o victoria</title>
+      <synopsis>John Huston dirige esta película en la que un comandante nazi organiza un partido de fútbol entre alemanes y prisioneros de la Segunda Guerra Mundial.</synopsis>
+      <directors>John Huston,</directors>
+      <producers>Freddie Fields,Michael Caine,John Colby,Max von Sydow,Major Karl Von Steiner,</producers>
+      <actors>Sylvester Stallone, Michael Caine, Max von Sydow, Pele, Bobby Moore, Carole Laure</actors>
+      <yearOfProduction>1981</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Action,Drama,War</genres>
+      <audioType>Dual Mono,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>249590</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>85</duration>
+      <eventID>14237975</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 12:02:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Laura</title>
+      <synopsis>Clásico del cine negro donde un detective se enamora de la mujer asesinada del caso que está investigando.</synopsis>
+      <directors>Otto Preminger,</directors>
+      <producers>Otto Preminger</producers>
+      <actors>Lee Tung Foo, Dorothy Adams, Clifton Webb, Clyde Fillmore, Judith Anderson, Grant Mitchell</actors>
+      <yearOfProduction>1944</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Drama,Film Noir,Mystery</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>263335</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>117</duration>
+      <eventID>14237976</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 13:27:00</broadcastDate>
+      <programType>FF</programType>
+      <title>La red social</title>
+      <synopsis>En otoño de 2003, el universitario Mark Zuckerberg comienza a desarrollar una nueva idea: Facebook.</synopsis>
+      <directors>David Fincher,</directors>
+      <producers>Scott Rudin,Michael De Luca,Dana Brunetti,Ceán Chaffin,</producers>
+      <actors>Jesse Eisenberg, Brenda Song, Rooney Mara, Andrew Garfield, Rashida Jones, </actors>
+      <yearOfProduction>2010</yearOfProduction>
+      <certification>7</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Comedy,Drama</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>1347475</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>100</duration>
+      <eventID>14237977</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 15:24:00</broadcastDate>
+      <programType>FF</programType>
+      <title>El club de las primeras esposas</title>
+      <synopsis>Tres mujeres divorciadas se reencuentran en un funeral y deciden formar un club para vengarse de los maridos que las abandonaron por mujeres jóvenes.</synopsis>
+      <directors>Hugh Wilson,</directors>
+      <actors>Goldie Hawn, Bette Midler, Diane Keaton, Maggie Smith, Sarah Jessica Parker, Dan Hedaya</actors>
+      <yearOfProduction>1996</yearOfProduction>
+      <certification>7</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Comedy</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>FF_THFRST1996</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>107</duration>
+      <eventID>14237978</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 17:04:00</broadcastDate>
+      <programType>FF</programType>
+      <title>El crepúsculo de los dioses</title>
+      <synopsis>Magistral obra del cine negro escrita y dirigida por el magnífico Billy Wilder, retrata con ironía los propios excesos del mundo de Hollywood.</synopsis>
+      <directors>Billy Wilder,</directors>
+      <producers>Charles Brackett</producers>
+      <actors>William Holden, Gloria Swanson, Hedda Hopper, Erich Von Stroheim, Nancy Olson, Fred Clark</actors>
+      <yearOfProduction>1950</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Drama</genres>
+      <audioType>Dual Mono,Dolby E5.1,Dual Mono</audioType>
+      <HD>true</HD>
+      <programRefId>434301</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>189</duration>
+      <eventID>14237979</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 18:51:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Rojos</title>
+      <synopsis>El periodista John Reed -activista que luchó por defender sus ideales en la tumultuosa América de 1915- es el único americano enterrado en el Kremlin.</synopsis>
+      <directors>Warren Beatty,Craig R. Baxley,Nigel Wooll,</directors>
+      <producers>Warren Beatty</producers>
+      <actors>Warren Beatty, Diane Keaton, Jack Nicholson, M. Emmet Walsh, Edward Herrmann, Rebecca West</actors>
+      <yearOfProduction>1981</yearOfProduction>
+      <certification>16</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Biography,Drama,Romance,War</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>575018</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>103</duration>
+      <eventID>14237980</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 22:00:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Enamorarse</title>
+      <synopsis>Drama sobre la infidelidad conyugal protagonizado por los magníficos Meryl Streep y Robert De Niro.</synopsis>
+      <directors>Ulu Grosbard,</directors>
+      <producers>Marvin Worth</producers>
+      <actors>Meryl Streep, Robert De Niro, Chevi Colton, Dianne Wiest, Richard Giza, George Martin</actors>
+      <yearOfProduction>1984</yearOfProduction>
+      <certification>12</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Drama,Romance</genres>
+      <audioType>Dual Mono,Dolby E5.1,Dual Mono</audioType>
+      <HD>true</HD>
+      <programRefId>364606</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>100</duration>
+      <eventID>14237981</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-03 23:43:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Sorry We Missed You</title>
+      <synopsis>Ricky y su familia han estado luchando contra las deudas. Afortunadamente para ellos se presenta una gran oportunidad gracias a una nueva furgoneta.</synopsis>
+      <directors>Ken Loach,</directors>
+      <actors>Kris Hitchen, Debbie Honeywood, Rhys Stone, Katie Proctor, Ross Brewster, </actors>
+      <yearOfProduction>2019</yearOfProduction>
+      <certification>12</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Drama</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>FF_SRRWMS2019</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>104</duration>
+      <eventID>14237982</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-04 01:23:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Ruta suicida</title>
+      <synopsis>Un policía algo mediocre escolta a una prostituta desde Las Vegas hasta Phoenix para testificar en un juicio. Con Clint Eastwood como director y actor principal.</synopsis>
+      <directors>Clint Eastwood,</directors>
+      <producers>Robert Daley</producers>
+      <actors>Mildred Brion, Clint Eastwood, Sondra Locke, Michael Cavanaugh, Robert Barrett, Pat Hingle</actors>
+      <yearOfProduction>1977</yearOfProduction>
+      <certification>18</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Action,Crime,Family,Thriller</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>260615</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>139</duration>
+      <eventID>14237983</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-04 03:07:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Million Dollar Baby</title>
+      <synopsis>Frankie Dunn es un entrenador que a pesar de su carácter arisco y su norma de no entrenar a chicas, acepta instruir a Maggie Fitzgerald.</synopsis>
+      <directors>Clint Eastwood,</directors>
+      <producers>Albert S Ruddy,Tom Rosenberg,Paul Haggis,Clint Eastwood,Albert S. Ruddy,</producers>
+      <actors>Clint Eastwood, Hilary Swank, Morgan Freeman, Anthony Mackie, Jay Baruchel, Mike Colter</actors>
+      <yearOfProduction>2004</yearOfProduction>
+      <certification>16</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Drama,Sport</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>1001039</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>65</duration>
+      <eventID>14237984</eventID>
+      <scheduleDate>2026-10-03</scheduleDate>
+      <broadcastDate>2026-10-04 05:26:00</broadcastDate>
+      <programType>S#</programType>
+      <title>Africa En Cinecicleta</title>
+      <synopsis>Documental de producción propia que acompaña en un viaje por África al proyecto Cinecicleta, encargados de proyectar películas en aldeas a donde el cine nunca antes ha llegado.</synopsis>
+      <directors>Juan Zavala,</directors>
+      <yearOfProduction>2019</yearOfProduction>
+      <certification>TP</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <blackWhite>C</blackWhite>
+      <genres>Documentary</genres>
+      <audioType>Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>1568662</programRefId>
+    </listing>
+    <listing>
+      <turnerChannelName>TMES</turnerChannelName>
+      <duration>189</duration>
+      <eventID>14237985</eventID>
+      <scheduleDate>2026-10-04</scheduleDate>
+      <broadcastDate>2026-10-04 06:31:00</broadcastDate>
+      <programType>FF</programType>
+      <title>Rojos</title>
+      <synopsis>El periodista John Reed -activista que luchó por defender sus ideales en la tumultuosa América de 1915- es el único americano enterrado en el Kremlin.</synopsis>
+      <directors>Warren Beatty,Craig R. Baxley,Nigel Wooll,</directors>
+      <producers>Warren Beatty</producers>
+      <actors>Warren Beatty, Diane Keaton, Jack Nicholson, M. Emmet Walsh, Edward Herrmann, Rebecca West</actors>
+      <yearOfProduction>1981</yearOfProduction>
+      <certification>16</certification>
+      <language>SPA</language>
+      <sixteenNine>true</sixteenNine>
+      <genres>Biography,Drama,Romance,War</genres>
+      <audioType>Stereo,Stereo</audioType>
+      <HD>true</HD>
+      <programRefId>575018</programRefId>
+    </listing>
+  </channel>
+</XML>
